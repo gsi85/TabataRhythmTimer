@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#000000">
+
+    <!-- Header -->
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentTop="true"
+        android:baselineAligned="false"
+        android:gravity="left"
+        android:orientation="horizontal"
+        android:layout_margin="0dp"
+        android:background="#CCC"
+        android:paddingBottom="1dp">
+
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/headerFrame"
+            android:background="#000000">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/form_workout_new_action_text"
+                android:id="@+id/workoutEditAction"
+                android:layout_gravity="center"
+                android:textColor="#ff77beff"
+                android:textSize="20sp" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <!-- Footer -->
+    <LinearLayout
+        android:id="@+id/footerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_alignParentBottom="true"
+        android:baselineAligned="false"
+        android:gravity="left"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <!-- Cancel button -->
+        <FrameLayout
+            android:id="@+id/resetFrame"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:layout_margin="1dp">
+
+            <ImageButton
+                android:id="@+id/cancelButton"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:tag="cancel_action"
+                android:src="@android:drawable/ic_menu_close_clear_cancel"
+                android:background="@drawable/bg_pause_button" />
+        </FrameLayout>
+
+        <!-- Save button -->
+        <FrameLayout
+            android:id="@+id/playFrame"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:layout_margin="1dp">
+
+            <ImageButton
+                android:id="@+id/saveButton"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:tag="save_action"
+                android:src="@android:drawable/ic_menu_save"
+                android:background="@drawable/bg_play_button" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <!-- Main content -->
+    <RelativeLayout
+        android:id="@+id/mainContentLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/footerLayout"
+        android:layout_below="@id/headerLayout"
+        android:gravity="top|center">
+
+        <!-- Workout name edit -->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:id="@+id/workout_name_layout"
+            android:layout_marginTop="0dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:descendantFocusability="beforeDescendants"
+            android:focusableInTouchMode="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/form_workout_name_label"
+                android:id="@+id/workoutNameTextView"
+                android:textColor="#CCCCCC"
+                android:textSize="18sp"
+                android:layout_marginLeft="5dp" />
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="30dp"
+                android:id="@+id/workoutNameTextEditor"
+                android:background="#333333"
+                android:textSize="18sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:singleLine="true"
+                android:maxLength="30"/>
+        </LinearLayout>
+
+        <!-- Sections list -->
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/sectionsScrollView"
+            android:layout_below="@+id/workout_name_layout"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:paddingTop="5dp"
+            android:layout_marginTop="0dp" >
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sectionsScrollViewLayout">
+
+                <!-- Sections label -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/form_workout_sections_label"
+                    android:id="@+id/sectionsHeader"
+                    android:textSize="18sp"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginLeft="5dp" />
+
+                <!-- Existing sections container layout -->
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/existingSectionsLayout">
+                </LinearLayout>
+
+                <!-- New section view -->
+                <TextView
+                    style="@style/workoutSectionList"
+                    android:text="@string/form_workout_add_new_section"
+                    android:id="@+id/newSectionTextView"
+                    android:textSize="40sp"
+                    android:fontFamily="sans-serif-thin"
+                    android:gravity="center"
+                    android:clickable="true" />
+
+            </LinearLayout>
+        </ScrollView>
+
+    </RelativeLayout>
+
+</RelativeLayout>

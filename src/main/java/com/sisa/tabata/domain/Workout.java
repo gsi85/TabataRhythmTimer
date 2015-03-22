@@ -1,0 +1,48 @@
+package com.sisa.tabata.domain;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+/**
+ * Created by Laca on 2015.02.27..
+ */
+public class Workout {
+
+    private int id;
+    private String name;
+    private List<WorkoutSection> workoutSections;
+    private TimeUnit timeUnit;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<WorkoutSection> getWorkoutSections() {
+        return workoutSections;
+    }
+
+    public void setWorkoutSections(List<WorkoutSection> workoutSections) {
+        this.workoutSections = workoutSections;
+    }
+
+    public TimeUnit getTimeUnit() {
+        return timeUnit;
+    }
+
+    public void setTimeUnit(TimeUnit timeUnit) {
+        this.timeUnit = timeUnit;
+    }
+
+}

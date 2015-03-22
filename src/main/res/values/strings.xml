@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Tabata Rhythm Timer</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="main_workout_progress">Workout progress</string>
+    <string name="main_default_section_text">SECTION 1 of 1</string>
+    <string name="main_default_current_round_timer_text">00:00.0</string>
+    <string name="main_default_workout_type">WORK</string>
+    <string name="main_default_round_counter_text">ROUND 1 of 1</string>
+    <string name="main_default_total_remaining_text">00:00:00</string>
+
+    <string name="form_workout_name_label">WORKOUT NAME</string>
+    <string name="form_workout_sections_label">SECTIONS</string>
+    <string name="form_workout_add_new_section">+</string>
+    <string name="form_workout_new_action_text">CREATE NEW WORKOUT</string>
+
+    <string name="form_section_total_time_label">Total time</string>
+    <string name="form_section_new_action_text">CREATE NEW SECTION</string>
+    <string name="form_section_edit_action_text">EDIT SECTION</string>
+    <string name="form_section_warm_up_label">WARM UP</string>
+    <string name="form_section_round_count_label">ROUNDS</string>
+    <string name="form_section_work_label">WORK</string>
+    <string name="form_section_rest_label">REST</string>
+    <string name="form_section_cool_down_label">COOL DOWN</string>
+    <string name="form_section_default_time_value">00:00</string>
+    <string name="form_section_default_long_time_value">00:00:00</string>
+    <string name="form_section_default_round_value">0</string>
+    <string name="form_section_picker_divider">:</string>
+
+    <string-array name="main_menu_items">
+        <item>EDIT</item>
+        <item>LOAD</item>
+        <item>NEW</item>
+    </string-array>
+
+    <integer name="database_version">1</integer>
+    <string name="database_name">tabatarhytm.db</string>
+
+</resources>

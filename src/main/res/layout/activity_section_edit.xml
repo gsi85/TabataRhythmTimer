@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#000000">
+
+    <!-- Header -->
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentTop="true"
+        android:baselineAligned="false"
+        android:gravity="left"
+        android:orientation="horizontal"
+        android:layout_margin="0dp"
+        android:background="#CCC"
+        android:paddingBottom="1dp">
+
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/headerFrame"
+            android:background="#000000">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/form_section_new_action_text"
+                android:id="@+id/sectionEditAction"
+                android:layout_gravity="center"
+                android:textColor="#ff77beff"
+                android:textSize="20sp" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <!-- Footer -->
+    <LinearLayout
+        android:id="@+id/footerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_alignParentBottom="true"
+        android:baselineAligned="false"
+        android:gravity="left"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <!-- Cancel button -->
+        <FrameLayout
+            android:id="@+id/resetFrame"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:layout_margin="1dp">
+
+            <ImageButton
+                android:id="@+id/cancelSectionButton"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:tag="cancel_action"
+                android:src="@android:drawable/ic_menu_close_clear_cancel"
+                android:background="@drawable/bg_pause_button" />
+        </FrameLayout>
+
+        <!-- Save button -->
+        <FrameLayout
+            android:id="@+id/playFrame"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:layout_margin="1dp">
+
+            <ImageButton
+                android:id="@+id/saveSectionButton"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:tag="save_action"
+                android:src="@android:drawable/ic_menu_save"
+                android:background="@drawable/bg_play_button" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <!-- Main content -->
+    <RelativeLayout
+        android:id="@+id/mainContentLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@id/footerLayout"
+        android:layout_below="@id/headerLayout"
+        android:gravity="top|center">
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/sectionsScrollView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:paddingTop="5dp"
+            android:layout_marginTop="0dp" >
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sectionsScrollViewLayout">
+
+                <!--Total time -->
+                <LinearLayout
+                    style="@style/sectionEditBlockLayout"
+                    android:id="@+id/totalTimeLayout"
+                    android:tag="warmUpLayout"
+                    android:background="#000000">
+
+                    <TextView
+                        style="@style/sectionEditBlockText"
+                        android:text="@string/form_section_total_time_label"
+                        android:id="@+id/totalTimeLabel" />
+
+                    <TextView
+                        style="@style/sectionEditBlockText"
+                        android:id="@+id/totalTimeValue"
+                        android:text="@string/form_section_default_long_time_value"
+                        android:gravity="right" />
+                </LinearLayout>
+
+                <!--Warm up -->
+                <LinearLayout
+                    style="@style/sectionEditBlockLayout"
+                    android:id="@+id/warmUpLayout"
+                    android:tag="warmUpLayout"
+                    android:background="#FF444444">
+
+                    <TextView
+                        style="@style/sectionEditBlockText"
+                        android:text="@string/form_section_warm_up_label"
+                        android:id="@+id/warmUpLabel" />
+
+                    <TextView
+                        style="@style/sectionEditBlockText"
+                        android:id="@+id/warmUpValue"
+                        android:text="@string/form_section_default_time_value"
+                        android:gravity="right" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:tag="warmUpLayout"
+                    android:id="@+id/warmUpPickerLayout">
+                    <com.sisa.tabata.ui.numberpicker.TabataNumberPicker
+                        style="@style/sectionNumberPicker"
+                        android:id="@+id/warmUpMinutePicker"
+                        android:tag="minute"
+                        minValue="0"
+                        maxValue="59" />
+                    <TextView
+                        style="@style/sectionPickerDivider" />
+                    <com.sisa.tabata.ui.numberpicker.TabataNumberPicker
+                        style="@style/sectionNumberPicker"
+                        android:id="@+id/warmUpSecondPicker"
+                        android:tag="second"
+                        minValue="0"
+                        maxValue="59"/>
+                </LinearLayout>
+
+                <!--Round count -->
+                <LinearLayout
+                    style="@style/sectionEditBlockLayout"
+                    android:id="@+id/roundCountLayout"
+                    android:tag="roundCountLayout"
+                    android:background="#FF444444">
+
+                    <TextView
+                        style="@style/sectionEditBlockText"
+                        android:text="@string/form_section_round_count_label"
+                        android:id="@+id/roundCountLabel" />
+
+                    <TextView
+                        style="@style/sectionEditBlockText"
+                        android:id="@+id/roundCountValue"
+                        android:text="@string/form_section_default_round_value"
+                        android:gravity="right" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:tag="roundCountLayout"
+                    android:id="@+id/roundCountPickerLayout">
+                    <com.sisa.tabata.ui.numberpicker.TabataNumberPicker
+                        style="@style/sectionNumberPicker"
+                        android:id="@+id/roundCountPicker"
+                        minValue="0"
+                        maxValue="100"/>
+                </LinearLayout>
+
+                <!--Work -->
+                <LinearLayout
+                    style="@style/sectionEditBlockLayout"
+                    android:id="@+id/workLayout"
+                    android:tag="workLayout"
+                    android:background="#FFFF0000">
+
+                    <TextView
+                        style="@style/sectionEditBlockText"
+                        android:text="@string/form_section_work_label"
+                        android:id="@+id/workLabel" />
+
+                    <TextView
+                        style="@style/sectionEditBlockText"
+                        android:text="@string/form_section_default_time_value"
+                        android:id="@+id/workValue"
+                        android:gravity="right" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:tag="workLayout"
+                    android:id="@+id/workPickerLayout">
+                    <com.sisa.tabata.ui.numberpicker.TabataNumberPicker
+                        style="@style/sectionNumberPicker"
+                        android:id="@+id/workMinutePicker"
+                        android:tag="minute"
+                        minValue="0"
+                        maxValue="59"/>
+                    <TextView
+                        style="@style/sectionPickerDivider" />
+                    <com.sisa.tabata.ui.numberpicker.TabataNumberPicker
+                        style="@style/sectionNumberPicker"
+                        android:id="@+id/workSecondPicker"
+                        android:tag="second"
+                        minValue="0"
+                        maxValue="59"/>
+                </LinearLayout>
+
+                <!--Rest -->
+                <LinearLayout
+                    style="@style/sectionEditBlockLayout"
+                    android:id="@+id/restLayout"
+                    android:tag="restLayout"
+                    android:background="#005200">
+
+                    <TextView
+                        style="@style/sectionEditBlockText"
+                        android:text="@string/form_section_rest_label"
+                        android:id="@+id/restLabel" />
+
+                    <TextView
+                        style="@style/sectionEditBlockText"
+                        android:text="@string/form_section_default_time_value"
+                        android:id="@+id/restValue"
+                        android:gravity="right" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:tag="restLayout"
+                    android:id="@+id/restPickerLayout">
+                    <com.sisa.tabata.ui.numberpicker.TabataNumberPicker
+                        style="@style/sectionNumberPicker"
+                        android:id="@+id/restMinutePicker"
+                        android:tag="minute"
+                        minValue="0"
+                        maxValue="59"/>
+                    <TextView
+                        style="@style/sectionPickerDivider" />
+                    <com.sisa.tabata.ui.numberpicker.TabataNumberPicker
+                        style="@style/sectionNumberPicker"
+                        android:id="@+id/restSecondPicker"
+                        android:tag="second"
+                        minValue="0"
+                        maxValue="59"/>
+                </LinearLayout>
+
+                <!--Cool down -->
+                <LinearLayout
+                    style="@style/sectionEditBlockLayout"
+                    android:id="@+id/coolDownLayout"
+                    android:tag="coolDownLayout"
+                    android:background="#FF444444">
+
+                    <TextView
+                        style="@style/sectionEditBlockText"
+                        android:text="@string/form_section_cool_down_label"
+                        android:id="@+id/coolDownLabel" />
+
+                    <TextView
+                        style="@style/sectionEditBlockText"
+                        android:text="@string/form_section_default_time_value"
+                        android:id="@+id/coolDownValue"
+                        android:gravity="right" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:tag="coolDownLayout"
+                    android:id="@+id/coolDownPickerLayout">
+                    <com.sisa.tabata.ui.numberpicker.TabataNumberPicker
+                        style="@style/sectionNumberPicker"
+                        android:id="@+id/coolDownMinutePicker"
+                        android:tag="minute"
+                        minValue="0"
+                        maxValue="59"/>
+                    <TextView
+                        style="@style/sectionPickerDivider" />
+                    <com.sisa.tabata.ui.numberpicker.TabataNumberPicker
+                        style="@style/sectionNumberPicker"
+                        android:id="@+id/coolDownSecondPicker"
+                        android:tag="second"
+                        minValue="0"
+                        maxValue="59"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+    </RelativeLayout>
+
+</RelativeLayout>
