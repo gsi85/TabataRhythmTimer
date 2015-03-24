@@ -36,7 +36,7 @@ public class WorkoutCountDownTimer extends CountDownTimerWithPause {
         this.totalWorkoutProgressBar = totalWorkoutProgressBar;
         this.playButton = playButton;
         timeUnit = serializedWorkout.getTimeUnit();
-        maxSectionIndex = serializedWorkout.getWorkoutSections().size() - 1;
+        maxSectionIndex = Math.max(0, serializedWorkout.getWorkoutSections().size() - 1);
         resetProgressBars();
         RoboGuice.injectMembers(TabataApplication.getAppContext(), this);
     }

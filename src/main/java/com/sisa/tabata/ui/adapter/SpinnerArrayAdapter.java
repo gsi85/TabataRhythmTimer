@@ -7,17 +7,21 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.sisa.tabata.R;
+import com.sisa.tabata.ui.listener.workout.MainMenuOnClickListener;
 
 /**
  * Created by Laca on 2015.03.04..
  */
 public class SpinnerArrayAdapter<T> extends ArrayAdapter<T> {
 
-    private final CharSequence titleText;
 
-    public SpinnerArrayAdapter(Context context, T[] objects, CharSequence titleText) {
+    private final CharSequence titleText;
+    private final MainMenuOnClickListener mainMenuOnClickListener;
+
+    public SpinnerArrayAdapter(Context context, T[] objects, CharSequence titleText, MainMenuOnClickListener mainMenuOnClickListener) {
         super(context, R.layout.spinner_item_layout, objects);
         this.titleText = titleText;
+        this.mainMenuOnClickListener = mainMenuOnClickListener;
     }
 
     @Override
@@ -33,11 +37,16 @@ public class SpinnerArrayAdapter<T> extends ArrayAdapter<T> {
         View view = super.getView(position, convertView, parent);
         TextView text = getTextView(view);
         text.setBackgroundResource(R.drawable.bg_header_buttons);
+        view.setClickable(true);
+        view.setTag(text.getText());
+        view.setOnClickListener(mainMenuOnClickListener);
         return view;
     }
 
     private TextView getTextView(View view) {
         return (TextView) view.findViewById(android.R.id.text1);
     }
+
+
 
 }
