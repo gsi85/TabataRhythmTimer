@@ -21,7 +21,6 @@ public class TotalWorkoutProgressBar {
     @Inject
     private TimeFormatter timeFormatter;
     private TextView totalRemainingTimeCounter;
-    private TextView workoutSummaryText;
     private ProgressBar workoutProgressBar;
 
     private long remainingTimeInMillis;
@@ -38,7 +37,6 @@ public class TotalWorkoutProgressBar {
     }
 
     public void setUp(long totalTimeInMilliSeconds, String workoutSummary) {
-        workoutSummaryText.setText(workoutSummary);
         totalTimeInMillis = totalTimeInMilliSeconds;
         update(totalTimeInMilliSeconds);
     }
@@ -56,13 +54,8 @@ public class TotalWorkoutProgressBar {
         return Math.round((float) (elapsedTimeInMillis) / totalTimeInMillis * MAX_PROGRESS_BAR_VALUE);
     }
 
-
     public void setWorkoutProgressBar(ProgressBar workoutProgressBar) {
         this.workoutProgressBar = workoutProgressBar;
-    }
-
-    public void setWorkoutSummaryText(TextView workoutSummaryText) {
-        this.workoutSummaryText = workoutSummaryText;
     }
 
 

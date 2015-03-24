@@ -20,6 +20,7 @@ import roboguice.RoboGuice;
 public class SectionTextViewClickListener implements View.OnClickListener {
 
     private static final int NEW_SECTION_INDEX = -1;
+    private static final String NEW_WORKOUT_NAME = "newWorkout";
 
     @Inject
     private WorkoutSectionFactory workoutSectionFactory;
@@ -36,6 +37,7 @@ public class SectionTextViewClickListener implements View.OnClickListener {
         WorkoutSection workoutSection = getWorkoutSection(sectionIndex);
         sectionEditIntent.putExtra("workoutSection", workoutSection);
         sectionEditIntent.putExtra("workoutSectionId", sectionIndex);
+        sectionEditIntent.putExtra(NEW_WORKOUT_NAME, workoutEditActivity.getIntent().getBooleanExtra(NEW_WORKOUT_NAME, false));
         workoutEditActivity.startActivity(sectionEditIntent);
     }
 

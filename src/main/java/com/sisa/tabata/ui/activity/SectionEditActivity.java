@@ -121,6 +121,11 @@ public class SectionEditActivity extends RoboActivity {
         setUpListeners();
     }
 
+    @Override
+    public void onBackPressed() {
+        cancelSectionButton.performClick();
+    }
+
     private void setUpWorkoutSection() {
         int sectionIndex = getIntent().getIntExtra("workoutSectionId", -1);
         workoutSection = getIntent().getParcelableExtra("workoutSection");

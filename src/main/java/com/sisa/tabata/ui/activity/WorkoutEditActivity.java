@@ -25,7 +25,8 @@ import roboguice.inject.InjectView;
  */
 public class WorkoutEditActivity extends RoboActivity {
 
-    private static final int NEW_SECTION_INDEX = -1;
+    private static final int NEW_WORKOUT_ID = -1;
+    private static final String NEW_WORKOUT_NAME = "newWorkout";
 
     @InjectView(R.id.existingSectionsLayout)
     private LinearLayout existingSectionsLayout;
@@ -35,6 +36,10 @@ public class WorkoutEditActivity extends RoboActivity {
     private EditText workoutNameTextEditor;
     @InjectView(R.id.saveButton)
     private ImageButton saveButton;
+    @InjectView(R.id.cancelButton)
+    private ImageButton cancelButton;
+    @InjectView(R.id.workoutEditAction)
+    private TextView workoutEditAction;
 
     @Inject
     private SectionTextViewClickListener sectionTextViewClickListener;
@@ -61,7 +66,14 @@ public class WorkoutEditActivity extends RoboActivity {
         setUpListeners();
     }
 
+    @Override
+    public void onBackPressed() {
+        cancelButton.performClick();
+    }
+
     private void setUpEditedWorkout() {
+        boolean newWorkout = getIntent().getBooleanExtra(NEW_WORKOUT_NAME, false);
+        workoutEditAction.setText(newWorkout ? R.string.form_workout_new_action_text : R.string.form_workout_edit_action_text);
         editedWorkout = editedWorkoutHolder.getEditedWorkout();
         workoutSectionsUpdateProvider.updateWorkoutWithEditedSection(editedWorkout, getIntent());
         workoutSectionsTextViewProvider.createSectionTextViews(editedWorkout, this, getApplicationContext(), existingSectionsLayout);
@@ -70,7 +82,7 @@ public class WorkoutEditActivity extends RoboActivity {
 
     private void setUpViewDependencies() {
         sectionTextViewClickListener.setWorkoutEditActivity(this);
-        newSectionTextView.setTag(NEW_SECTION_INDEX);
+        newSectionTextView.setTag(NEW_WORKOUT_ID);
         workoutNameTextEditorTextWatcher.setWorkout(editedWorkout);
         sectionTextViewLongClickListener.setWorkout(editedWorkout);
         sectionTextViewLongClickListener.setExistingSectionsLayout(existingSectionsLayout);
@@ -82,6 +94,7 @@ public class WorkoutEditActivity extends RoboActivity {
         newSectionTextView.setOnClickListener(sectionTextViewClickListener);
         workoutNameTextEditor.addTextChangedListener(workoutNameTextEditorTextWatcher);
         saveButton.setOnClickListener(workoutEditActionButtonClickListener);
+        cancelButton.setOnClickListener(workoutEditActionButtonClickListener);
     }
 
     public Workout getEditedWorkout() {
