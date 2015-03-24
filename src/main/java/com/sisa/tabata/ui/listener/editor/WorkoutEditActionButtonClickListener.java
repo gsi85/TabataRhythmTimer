@@ -5,7 +5,7 @@ import android.view.View;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.sisa.tabata.dao.helper.DatabaseHelper;
+import com.sisa.tabata.dao.service.DatabaseDataService;
 import com.sisa.tabata.dao.loader.LoadedWorkoutProvider;
 import com.sisa.tabata.domain.Workout;
 import com.sisa.tabata.ui.activity.WorkoutActivity;
@@ -20,7 +20,7 @@ public class WorkoutEditActionButtonClickListener implements View.OnClickListene
     private static final String SAVE_ACTION = "save_action";
 
     @Inject
-    private DatabaseHelper databaseHelper;
+    private DatabaseDataService databaseDataService;
     @Inject
     private LoadedWorkoutProvider loadedWorkoutProvider;
     private Workout workout;
@@ -46,7 +46,7 @@ public class WorkoutEditActionButtonClickListener implements View.OnClickListene
     }
 
     private long saveWorkoutToDb() {
-        return databaseHelper.insertUpdateWorkout(workout);
+        return databaseDataService.insertUpdateWorkout(workout);
     }
 
     private void setLoadedWorkout(long workoutId) {
