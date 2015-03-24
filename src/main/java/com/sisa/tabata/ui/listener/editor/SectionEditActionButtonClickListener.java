@@ -13,6 +13,7 @@ import com.sisa.tabata.ui.activity.WorkoutEditActivity;
 @Singleton
 public class SectionEditActionButtonClickListener implements View.OnClickListener {
 
+    private static final String NEW_WORKOUT_NAME = "newWorkout";
     private static final String SAVE_ACTION = "save_action";
     private SectionEditActivity sectionEditActivity;
 
@@ -23,6 +24,7 @@ public class SectionEditActionButtonClickListener implements View.OnClickListene
             addWorkoutSectionToIntent(workoutEditIntent);
         }
         sectionEditActivity.startActivity(workoutEditIntent);
+        sectionEditActivity.finish();
     }
 
     private Intent createIntent() {
@@ -36,6 +38,7 @@ public class SectionEditActionButtonClickListener implements View.OnClickListene
     private void addWorkoutSectionToIntent(Intent workoutEditIntent) {
         workoutEditIntent.putExtra("workoutSection", sectionEditActivity.getWorkoutSection());
         workoutEditIntent.putExtra("workoutSectionId", sectionEditActivity.getIntent().getIntExtra("workoutSectionId", -1));
+        workoutEditIntent.putExtra(NEW_WORKOUT_NAME, sectionEditActivity.getIntent().getBooleanExtra(NEW_WORKOUT_NAME, false));
     }
 
     public void setSectionEditActivity(SectionEditActivity sectionEditActivity) {

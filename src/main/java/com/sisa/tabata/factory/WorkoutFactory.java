@@ -13,10 +13,13 @@ import java.util.concurrent.TimeUnit;
 @Singleton
 public class WorkoutFactory {
 
+    private static final int NEW_WORKOUT_ID = -1;
+
     public Workout createWithTimeUnit(TimeUnit timeUnit) {
         Workout workout = new Workout();
         workout.setWorkoutSections(new ArrayList<WorkoutSection>());
         workout.setTimeUnit(timeUnit);
+        workout.setId(NEW_WORKOUT_ID);
         return workout;
     }
 

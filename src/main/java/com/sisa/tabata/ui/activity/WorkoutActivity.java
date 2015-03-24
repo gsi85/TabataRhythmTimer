@@ -10,8 +10,10 @@ import android.widget.TextView;
 
 import com.google.inject.Inject;
 import com.sisa.tabata.R;
+import com.sisa.tabata.dao.loader.LoadedWorkoutProvider;
 import com.sisa.tabata.ui.adapter.SpinnerArrayAdapter;
-import com.sisa.tabata.ui.listener.workout.MainMenuOnSelectedListener;
+import com.sisa.tabata.ui.listener.workout.BackButtonClickListener;
+import com.sisa.tabata.ui.listener.workout.MainMenuOnClickListener;
 import com.sisa.tabata.ui.listener.workout.PlayButtonClickListener;
 import com.sisa.tabata.ui.listener.workout.ResetButtonClickListener;
 import com.sisa.tabata.ui.listener.workout.ResetButtonLongClickListener;
@@ -43,8 +45,6 @@ public class WorkoutActivity extends RoboActivity {
     private TextView sectionCounter;
     @InjectView(R.id.workoutTypeText)
     private TextView workoutTypeText;
-    @InjectView(R.id.workoutSummaryText)
-    private TextView workoutSummaryText;
     @InjectView(R.id.mainMenuSpinner)
     private Spinner mainMenu;
     @Inject
@@ -60,7 +60,11 @@ public class WorkoutActivity extends RoboActivity {
     @Inject
     private TotalWorkoutProgressBar totalWorkoutProgressBar;
     @Inject
-    private MainMenuOnSelectedListener menuSpinnerItemSelectedListener;
+    private MainMenuOnClickListener mainMenuOnClickListener;
+    @Inject
+    private BackButtonClickListener backButtonClickListener;
+    @Inject
+    private LoadedWorkoutProvider loadedWorkoutProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +75,21 @@ public class WorkoutActivity extends RoboActivity {
         setUpListeners();
         setUpViewDependencies();
         initProgressBars();
+    }
+
+    @Override
+    public void onBackPressed() {
+        backButtonClickListener.onClick(this);
+    }
+
+    private void setUpMainMenu() {
+        CharSequence titleText = loadedWorkoutProvider.getLoadedWorkout().getName();
+        mainMenuOnClickListener.setWorkoutActivity(this);
+        String[] menuItems = getResources().getStringArray(R.array.main_menu_items);
+        SpinnerArrayAdapter<String> adapter = new SpinnerArrayAdapter<>(this, menuItems, titleText, mainMenuOnClickListener);
+        adapter.setDropDownViewResource(R.layout.spinner_item_layout);
+        mainMenu.setAdapter(adapter);
+        mainMenu.setSelection(0);
     }
 
     private void setUpListeners() {
@@ -84,7 +103,6 @@ public class WorkoutActivity extends RoboActivity {
     private void setUpViewDependencies() {
         totalWorkoutProgressBar.setTotalRemainingTimeCounter(totalRemainingTimeCounter);
         totalWorkoutProgressBar.setWorkoutProgressBar(workoutProgressBar);
-        totalWorkoutProgressBar.setWorkoutSummaryText(workoutSummaryText);
         currentRoundProgressBar.setCurrentBlockCounter(currentBlockCounter);
         currentRoundProgressBar.setRoundCounter(roundCounter);
         currentRoundProgressBar.setSectionCounter(sectionCounter);
@@ -94,16 +112,6 @@ public class WorkoutActivity extends RoboActivity {
 
     private void initProgressBars() {
         playButtonClickListener.resetWorkout();
-    }
-
-    private void setUpMainMenu() {
-        CharSequence titleText = workoutSummaryText.getText();
-        menuSpinnerItemSelectedListener.setWorkoutActivity(this);
-        String[] menuItems = getResources().getStringArray(R.array.main_menu_items);
-        SpinnerArrayAdapter<String> adapter = new SpinnerArrayAdapter<>(this, menuItems, titleText);
-        adapter.setDropDownViewResource(R.layout.spinner_item_layout);
-        mainMenu.setAdapter(adapter);
-        mainMenu.setOnItemSelectedListener(menuSpinnerItemSelectedListener);
     }
 
 }

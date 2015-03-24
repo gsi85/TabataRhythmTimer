@@ -27,6 +27,7 @@ import roboguice.RoboGuice;
 @Singleton
 public class DatabaseHelper extends SQLiteAssetHelper {
 
+    private static final int NEW_WORKOUT_ID = -1;
     private static final int DATABASE_VERSION = TabataApplication.getAppContext().getResources().getInteger(R.integer.database_version);
     private static final String DATABASE_NAME = TabataApplication.getAppContext().getString(R.string.database_name);
     private static final String TABLE_WORKOUT = "tbl_workout";
@@ -54,14 +55,24 @@ public class DatabaseHelper extends SQLiteAssetHelper {
         RoboGuice.injectMembers(TabataApplication.getAppContext(), this);
     }
 
-    public long insertWorkout(Workout workout) {
+    public long insertUpdateWorkout(Workout workout) {
         SQLiteDatabase database = getWritableDatabase();
 
         ContentValues workoutValues = new ContentValues();
         //TODO: get safe name (check for null and duplicate)
         workoutValues.put(COLUMN_NAME, workout.getName());
         workoutValues.put(COLUMN_TIME_UNIT, workout.getTimeUnit().name());
-        long workoutId = database.insert(TABLE_WORKOUT, null, workoutValues);
+
+        long workoutId = workout.getId();
+        if (workoutId == NEW_WORKOUT_ID) {
+            workoutId = database.insert(TABLE_WORKOUT, null, workoutValues);
+        } else {
+            workoutValues.put(COLUMN_ID, workoutId);
+            String whereClause = WHERE_ID_EQUALS + workoutId;
+            database.update(TABLE_WORKOUT, workoutValues, whereClause, null);
+        }
+
+        database.delete(TABLE_WORKOUT_SECTIONS, WHERE_WORKOUT_ID_EQUALS + workoutId, null);
 
         for (int i = 0; i < workout.getWorkoutSections().size(); i++) {
             WorkoutSection currentWorkoutSection = workout.getWorkoutSections().get(i);

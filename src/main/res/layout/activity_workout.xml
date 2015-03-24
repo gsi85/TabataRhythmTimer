@@ -45,25 +45,13 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp" />
 
-            <TextView
-                android:id="@+id/workoutSummaryText"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/iconImage"
-                android:layout_toRightOf="@+id/iconImage"
-                android:text="Workout summary"
-                android:textSize="16sp"
-                android:textColor="#ff77beff"
-                android:visibility="invisible" />
-
             <Spinner
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:id="@+id/mainMenuSpinner"
                 android:layout_alignTop="@+id/iconImage"
-                android:layout_toRightOf="@+id/workoutSummaryText"
-                android:layout_toEndOf="@+id/workoutSummaryText"
+                android:layout_toRightOf="@+id/iconImage"
+                android:layout_toEndOf="@+id/iconImage"
                 android:spinnerMode="dropdown"
                 android:popupBackground="#000000"
                 android:background="@drawable/bg_spinner_menu_header"

@@ -16,6 +16,7 @@
     <string name="form_workout_sections_label">SECTIONS</string>
     <string name="form_workout_add_new_section">+</string>
     <string name="form_workout_new_action_text">CREATE NEW WORKOUT</string>
+    <string name="form_workout_edit_action_text">EDIT WORKOUT</string>
 
     <string name="form_section_total_time_label">Total time</string>
     <string name="form_section_new_action_text">CREATE NEW SECTION</string>

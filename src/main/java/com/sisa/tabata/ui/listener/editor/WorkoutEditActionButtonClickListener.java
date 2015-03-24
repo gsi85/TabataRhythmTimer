@@ -34,6 +34,7 @@ public class WorkoutEditActionButtonClickListener implements View.OnClickListene
             setLoadedWorkout(workoutId);
         }
         workoutEditActivity.startActivity(workoutIntent);
+        workoutEditActivity.finish();
     }
 
     private Intent createIntent() {
@@ -45,7 +46,7 @@ public class WorkoutEditActionButtonClickListener implements View.OnClickListene
     }
 
     private long saveWorkoutToDb() {
-        return databaseHelper.insertWorkout(workout);
+        return databaseHelper.insertUpdateWorkout(workout);
     }
 
     private void setLoadedWorkout(long workoutId) {

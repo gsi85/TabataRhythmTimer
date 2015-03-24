@@ -26,12 +26,19 @@ public class LoadedWorkoutProvider {
     private DatabaseHelper databaseHelper;
     private Workout workout;
 
-    public LoadedWorkoutProvider(){
+    public LoadedWorkoutProvider() {
         RoboGuice.injectMembers(TabataApplication.getAppContext(), this);
     }
 
     public void setLoadedWorkoutById(long id) {
         workout = databaseHelper.getWorkoutById(id);
+    }
+
+    public Workout getLoadedWorkout() {
+        if (workout == null) {
+            loadLastUsedWorkout();
+        }
+        return workout;
     }
 
     public SerializedWorkout getLoadedSerializedWorkout() {
