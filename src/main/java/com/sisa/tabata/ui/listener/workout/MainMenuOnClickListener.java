@@ -10,6 +10,7 @@ import com.sisa.tabata.dao.loader.EditedWorkoutHolder;
 import com.sisa.tabata.dao.loader.LoadedWorkoutProvider;
 import com.sisa.tabata.ui.activity.WorkoutActivity;
 import com.sisa.tabata.ui.activity.WorkoutEditActivity;
+import com.sisa.tabata.ui.activity.WorkoutLoadActivity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -51,6 +52,7 @@ public class MainMenuOnClickListener implements View.OnClickListener {
         Map<String, Intent> activitiesMap = new HashMap<>();
         activitiesMap.put("EDIT", createWorkoutEditIntent(loadedWorkoutProvider.getLoadedWorkout().getId(), false));
         activitiesMap.put("NEW", createWorkoutEditIntent(NEW_WORKOUT_ID, true));
+        activitiesMap.put("LOAD", createWorkoutLoadIntent());
         return activitiesMap;
     }
 
@@ -59,6 +61,10 @@ public class MainMenuOnClickListener implements View.OnClickListener {
         workoutEditIntent.putExtra(NEW_WORKOUT_NAME, newWorkout);
         workoutEditIntent.putExtra(WORKOUT_ID_NAME, workoutId);
         return workoutEditIntent;
+    }
+
+    private Intent createWorkoutLoadIntent() {
+        return new Intent(workoutActivity, WorkoutLoadActivity.class);
     }
 
 

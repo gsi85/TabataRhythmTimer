@@ -31,6 +31,8 @@
     <string name="form_section_default_round_value">0</string>
     <string name="form_section_picker_divider">:</string>
 
+    <string name="load_workout_header_label">LOAD WORKOUT</string>
+
     <string-array name="main_menu_items">
         <item>EDIT</item>
         <item>LOAD</item>
