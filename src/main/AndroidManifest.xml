@@ -27,7 +27,11 @@
             android:name=".ui.activity.SectionEditActivity"
             android:screenOrientation="portrait"
             android:label="Edit section" />
-
+        <activity
+            android:name=".ui.activity.WorkoutLoadActivity"
+            android:screenOrientation="portrait"
+            android:label="Load workout" />
+        <activity android:name=".dao.debug.AndroidDatabaseManager" />
     </application>
 
 </manifest>

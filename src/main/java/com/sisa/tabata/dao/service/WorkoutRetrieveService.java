@@ -21,33 +21,44 @@ import roboguice.RoboGuice;
  * Created by Laca on 2015.03.24..
  */
 @Singleton
-public class WorkoutRetrieveServiceBase extends AbstractBaseDatabaseService {
+public class WorkoutRetrieveService extends AbstractBaseDatabaseService {
 
     @Inject
     private WorkoutFactory workoutFactory;
     @Inject
     private WorkoutSectionFactory workoutSectionFactory;
 
-    public WorkoutRetrieveServiceBase() {
+    public WorkoutRetrieveService() {
         super(TabataApplication.getAppContext(), DATABASE_NAME, null, DATABASE_VERSION);
         RoboGuice.injectMembers(TabataApplication.getAppContext(), this);
     }
 
     protected Workout getWorkoutById(long id) {
-        Workout workout = null;
-        String[] columns = {COLUMN_ID, COLUMN_NAME, COLUMN_TIME_UNIT};
-        Cursor resultCursor = executeQuery(TABLE_WORKOUT, columns, WHERE_ID_EQUALS + id, null);
+        String whereClause = WHERE_ID_EQUALS + id;
+        return getWorkoutWithSpecifiedCondition(whereClause).get(0);
+    }
 
-        if (resultCursor.moveToFirst()) {
+    protected List<Workout> getAllWorkoutsSortedList() {
+        return getWorkoutWithSpecifiedCondition(null);
+    }
+
+    private List<Workout> getWorkoutWithSpecifiedCondition(String whereClause) {
+        List<Workout> resultWorkoutList = new ArrayList<>();
+
+        String[] columns = {COLUMN_ID, COLUMN_NAME, COLUMN_TIME_UNIT};
+        Cursor resultCursor = executeQuery(TABLE_WORKOUT, columns, whereClause, COLUMN_NAME);
+
+        while (resultCursor.moveToNext()) {
+            Workout workout = workoutFactory.createWithTimeUnit(null);
             int workoutId = resultCursor.getInt(0);
-            workout = workoutFactory.createWithTimeUnit(null);
             workout.setId(workoutId);
             workout.setName(resultCursor.getString(1));
             workout.setTimeUnit(TimeUnit.valueOf(resultCursor.getString(2)));
             workout.setWorkoutSections(getWorkoutSectionsByWorkoutId(workoutId));
+            resultWorkoutList.add(workout);
         }
 
-        return workout;
+        return resultWorkoutList;
     }
 
     private List<WorkoutSection> getWorkoutSectionsByWorkoutId(int workoutId) {
@@ -71,7 +82,7 @@ public class WorkoutRetrieveServiceBase extends AbstractBaseDatabaseService {
     private Cursor executeQuery(String tableName, String[] columnsToSelect, String whereClause, String sortOrder) {
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
         queryBuilder.setTables(tableName);
-        queryBuilder.appendWhere(whereClause);
+        if (whereClause != null) queryBuilder.appendWhere(whereClause);
         return queryBuilder.query(getDatabase(), columnsToSelect, null, null, null, null, sortOrder);
     }
 }

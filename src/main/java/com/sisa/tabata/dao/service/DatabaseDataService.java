@@ -5,6 +5,8 @@ import com.google.inject.Singleton;
 import com.sisa.tabata.TabataApplication;
 import com.sisa.tabata.domain.Workout;
 
+import java.util.List;
+
 import roboguice.RoboGuice;
 
 /**
@@ -16,7 +18,9 @@ public class DatabaseDataService {
     @Inject
     private WorkoutInsertService workoutInsertService;
     @Inject
-    private WorkoutRetrieveServiceBase workoutRetrieveService;
+    private WorkoutRetrieveService workoutRetrieveService;
+    @Inject
+    private WorkoutDeleteService workoutDeleteService;
 
     public DatabaseDataService() {
         RoboGuice.injectMembers(TabataApplication.getAppContext(), this);
@@ -28,6 +32,14 @@ public class DatabaseDataService {
 
     public Workout getWorkoutById(long id) {
         return workoutRetrieveService.getWorkoutById(id);
+    }
+
+    public List<Workout> getAllWorkoutsSortedList() {
+        return workoutRetrieveService.getAllWorkoutsSortedList();
+    }
+
+    public void deleteWorkoutById(long id){
+        workoutDeleteService.deleteWorkoutById(id);
     }
 
 
