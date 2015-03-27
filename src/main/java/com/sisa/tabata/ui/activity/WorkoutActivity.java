@@ -18,14 +18,14 @@ import com.sisa.tabata.ui.listener.workout.PlayButtonClickListener;
 import com.sisa.tabata.ui.listener.workout.ResetButtonClickListener;
 import com.sisa.tabata.ui.listener.workout.ResetButtonLongClickListener;
 import com.sisa.tabata.ui.listener.workout.TimerLayoutListener;
+import com.sisa.tabata.ui.listener.workout.VolumeButtonClickListener;
 import com.sisa.tabata.ui.progressbar.CurrentRoundProgressBar;
 import com.sisa.tabata.ui.progressbar.TotalWorkoutProgressBar;
 
-import roboguice.activity.RoboActivity;
+import roboguice.activity.RoboFragmentActivity;
 import roboguice.inject.InjectView;
 
-
-public class WorkoutActivity extends RoboActivity {
+public class WorkoutActivity extends RoboFragmentActivity {
 
     @InjectView(R.id.timerLayout)
     private RelativeLayout timerLayout;
@@ -47,6 +47,8 @@ public class WorkoutActivity extends RoboActivity {
     private TextView workoutTypeText;
     @InjectView(R.id.mainMenuSpinner)
     private Spinner mainMenu;
+    @InjectView(R.id.volumeButton)
+    private ImageButton volumeButton;
     @Inject
     private PlayButtonClickListener playButtonClickListener;
     @Inject
@@ -63,6 +65,8 @@ public class WorkoutActivity extends RoboActivity {
     private MainMenuOnClickListener mainMenuOnClickListener;
     @Inject
     private BackButtonClickListener backButtonClickListener;
+    @Inject
+    private VolumeButtonClickListener volumeButtonClickListener;
     @Inject
     private LoadedWorkoutProvider loadedWorkoutProvider;
 
@@ -98,6 +102,7 @@ public class WorkoutActivity extends RoboActivity {
         playButton.setOnClickListener(playButtonClickListener);
         resetButton.setOnClickListener(resetButtonClickListener);
         resetButton.setOnLongClickListener(resetButtonLongClickListener);
+        volumeButton.setOnClickListener(volumeButtonClickListener);
     }
 
     private void setUpViewDependencies() {
@@ -108,6 +113,7 @@ public class WorkoutActivity extends RoboActivity {
         currentRoundProgressBar.setSectionCounter(sectionCounter);
         currentRoundProgressBar.setWorkoutTypeText(workoutTypeText);
         timerLayoutListener.setTimerLayout(timerLayout);
+        volumeButtonClickListener.setWorkoutActivity(this);
     }
 
     private void initProgressBars() {
