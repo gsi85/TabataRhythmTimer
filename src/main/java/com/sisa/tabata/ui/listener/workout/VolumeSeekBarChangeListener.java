@@ -31,5 +31,5 @@ public class VolumeSeekBarChangeListener implements SeekBar.OnSeekBarChangeListe
     public void setAudioManager(AudioManager audioManager) {
         this.audioManager = audioManager;
     }
-    
+
 }
