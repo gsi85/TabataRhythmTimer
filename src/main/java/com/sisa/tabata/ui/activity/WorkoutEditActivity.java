@@ -30,7 +30,7 @@ public class WorkoutEditActivity extends RoboActivity {
     private static final int NEW_WORKOUT_ID = -1;
     private static final String NEW_WORKOUT_NAME = "newWorkout";
     private static final String TOTAL_TIME = TabataApplication.getAppContext().getResources().getString(R.string.form_workout_total_time_label);
-    private static final String TOTAL_TIME_PATTERN = "%s - %s";
+    private static final String TOTAL_TIME_PATTERN = "%s: %s";
 
     @InjectView(R.id.existingSectionsLayout)
     private LinearLayout existingSectionsLayout;

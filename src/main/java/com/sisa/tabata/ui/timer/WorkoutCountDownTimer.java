@@ -64,7 +64,7 @@ public class WorkoutCountDownTimer extends CountDownTimerWithPause {
 
     private void resetProgressBars() {
         sectionCounter = 0;
-        totalWorkoutProgressBar.setUp(timeUnit.toMillis(serializedWorkout.getWorkoutDuration()), serializedWorkout.getWorkoutName());
+        totalWorkoutProgressBar.setUp(timeUnit.toMillis(serializedWorkout.getWorkoutDuration()));
         setUpCurrentRoundProgressBar(sectionCounter);
     }
 

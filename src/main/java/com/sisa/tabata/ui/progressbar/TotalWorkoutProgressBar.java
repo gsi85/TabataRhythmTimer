@@ -36,7 +36,7 @@ public class TotalWorkoutProgressBar {
         updateWorkOutProgressBar();
     }
 
-    public void setUp(long totalTimeInMilliSeconds, String workoutSummary) {
+    public void setUp(long totalTimeInMilliSeconds) {
         totalTimeInMillis = totalTimeInMilliSeconds;
         update(totalTimeInMilliSeconds);
     }
