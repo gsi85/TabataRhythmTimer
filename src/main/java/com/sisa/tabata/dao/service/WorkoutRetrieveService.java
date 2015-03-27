@@ -45,7 +45,7 @@ public class WorkoutRetrieveService extends AbstractBaseDatabaseService {
     private List<Workout> getWorkoutWithSpecifiedCondition(String whereClause) {
         List<Workout> resultWorkoutList = new ArrayList<>();
 
-        String[] columns = {COLUMN_ID, COLUMN_NAME, COLUMN_TIME_UNIT};
+        String[] columns = {COLUMN_ID, COLUMN_NAME, COLUMN_TIME_UNIT, COLUMN_DESCRIPTION};
         Cursor resultCursor = executeQuery(TABLE_WORKOUT, columns, whereClause, COLUMN_NAME);
 
         while (resultCursor.moveToNext()) {
@@ -54,6 +54,7 @@ public class WorkoutRetrieveService extends AbstractBaseDatabaseService {
             workout.setId(workoutId);
             workout.setName(resultCursor.getString(1));
             workout.setTimeUnit(TimeUnit.valueOf(resultCursor.getString(2)));
+            workout.setDescription(resultCursor.getString(3));
             workout.setWorkoutSections(getWorkoutSectionsByWorkoutId(workoutId));
             resultWorkoutList.add(workout);
         }

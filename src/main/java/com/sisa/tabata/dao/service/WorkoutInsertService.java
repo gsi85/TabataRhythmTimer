@@ -58,6 +58,7 @@ public class WorkoutInsertService extends AbstractBaseDatabaseService {
         ContentValues workoutValues = new ContentValues();
         workoutValues.put(COLUMN_NAME, getNullSafeWorkoutName(workout.getName()));
         workoutValues.put(COLUMN_TIME_UNIT, workout.getTimeUnit().name());
+        workoutValues.put(COLUMN_DESCRIPTION, workout.getDescription());
         return workoutValues;
     }
 

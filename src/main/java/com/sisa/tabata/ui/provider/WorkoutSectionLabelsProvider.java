@@ -19,7 +19,7 @@ import roboguice.RoboGuice;
 public class WorkoutSectionLabelsProvider {
 
     @Inject
-    private WorkoutSectionTotalTimeProvider workoutSectionTotalTimeProvider;
+    private WorkoutTotalTimeProvider workoutTotalTimeProvider;
 
     public WorkoutSectionLabelsProvider(){
         RoboGuice.injectMembers(TabataApplication.getAppContext(), this);
@@ -27,7 +27,7 @@ public class WorkoutSectionLabelsProvider {
 
     public Map<Integer, String> getTextViewLabels(WorkoutSection workoutSection){
         Map<Integer, String> textViewLabels = new HashMap<>();
-        textViewLabels.put(R.id.totalTimeValue, workoutSectionTotalTimeProvider.getFormattedTotalTime(workoutSection));
+        textViewLabels.put(R.id.totalTimeValue, workoutTotalTimeProvider.getFormattedSectionTotalTime(workoutSection));
         textViewLabels.put(R.id.warmUpValue, TimeFormatter.formatSecondsToMinuteSecond(workoutSection.getWarmUp()));
         textViewLabels.put(R.id.roundCountValue, Integer.toString(workoutSection.getRounds()));
         textViewLabels.put(R.id.workValue, TimeFormatter.formatSecondsToMinuteSecond(workoutSection.getWork()));

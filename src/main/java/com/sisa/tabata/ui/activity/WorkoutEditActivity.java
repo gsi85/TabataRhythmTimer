@@ -8,14 +8,16 @@ import android.widget.TextView;
 
 import com.google.inject.Inject;
 import com.sisa.tabata.R;
+import com.sisa.tabata.TabataApplication;
 import com.sisa.tabata.dao.loader.EditedWorkoutHolder;
 import com.sisa.tabata.domain.Workout;
 import com.sisa.tabata.ui.listener.editor.SectionTextViewClickListener;
 import com.sisa.tabata.ui.listener.editor.SectionTextViewLongClickListener;
 import com.sisa.tabata.ui.listener.editor.WorkoutEditActionButtonClickListener;
-import com.sisa.tabata.ui.listener.editor.WorkoutNameTextEditorTextWatcher;
+import com.sisa.tabata.ui.listener.editor.WorkoutEditTextEditorTextWatcher;
 import com.sisa.tabata.ui.provider.WorkoutSectionsTextViewProvider;
 import com.sisa.tabata.ui.provider.WorkoutSectionsUpdateProvider;
+import com.sisa.tabata.ui.provider.WorkoutTotalTimeProvider;
 
 import roboguice.activity.RoboActivity;
 import roboguice.inject.InjectView;
@@ -27,13 +29,19 @@ public class WorkoutEditActivity extends RoboActivity {
 
     private static final int NEW_WORKOUT_ID = -1;
     private static final String NEW_WORKOUT_NAME = "newWorkout";
+    private static final String TOTAL_TIME = TabataApplication.getAppContext().getResources().getString(R.string.form_workout_total_time_label);
+    private static final String TOTAL_TIME_PATTERN = "%s - %s";
 
     @InjectView(R.id.existingSectionsLayout)
     private LinearLayout existingSectionsLayout;
     @InjectView(R.id.newSectionTextView)
     private TextView newSectionTextView;
+    @InjectView(R.id.totalTimeHeader)
+    private TextView totalTimeHeader;
     @InjectView(R.id.workoutNameTextEditor)
     private EditText workoutNameTextEditor;
+    @InjectView(R.id.workoutDescriptionTextEditor)
+    private EditText workoutDescriptionTextEditor;
     @InjectView(R.id.saveButton)
     private ImageButton saveButton;
     @InjectView(R.id.cancelButton)
@@ -48,11 +56,11 @@ public class WorkoutEditActivity extends RoboActivity {
     @Inject
     private WorkoutSectionsTextViewProvider workoutSectionsTextViewProvider;
     @Inject
-    private WorkoutNameTextEditorTextWatcher workoutNameTextEditorTextWatcher;
-    @Inject
     private SectionTextViewLongClickListener sectionTextViewLongClickListener;
     @Inject
     private WorkoutEditActionButtonClickListener workoutEditActionButtonClickListener;
+    @Inject
+    private WorkoutTotalTimeProvider workoutTotalTimeProvider;
     @Inject
     private EditedWorkoutHolder editedWorkoutHolder;
     private Workout editedWorkout;
@@ -78,12 +86,13 @@ public class WorkoutEditActivity extends RoboActivity {
         workoutSectionsUpdateProvider.updateWorkoutWithEditedSection(editedWorkout, getIntent());
         workoutSectionsTextViewProvider.createSectionTextViews(editedWorkout, this, getApplicationContext(), existingSectionsLayout);
         workoutNameTextEditor.setText(editedWorkout.getName());
+        workoutDescriptionTextEditor.setText(editedWorkout.getDescription());
+        totalTimeHeader.setText(String.format(TOTAL_TIME_PATTERN, TOTAL_TIME, workoutTotalTimeProvider.getFormattedWorkoutTotalTime(editedWorkout)));
     }
 
     private void setUpViewDependencies() {
         sectionTextViewClickListener.setWorkoutEditActivity(this);
         newSectionTextView.setTag(NEW_WORKOUT_ID);
-        workoutNameTextEditorTextWatcher.setWorkout(editedWorkout);
         sectionTextViewLongClickListener.setWorkout(editedWorkout);
         sectionTextViewLongClickListener.setExistingSectionsLayout(existingSectionsLayout);
         workoutEditActionButtonClickListener.setWorkout(editedWorkout);
@@ -92,7 +101,8 @@ public class WorkoutEditActivity extends RoboActivity {
 
     private void setUpListeners() {
         newSectionTextView.setOnClickListener(sectionTextViewClickListener);
-        workoutNameTextEditor.addTextChangedListener(workoutNameTextEditorTextWatcher);
+        workoutNameTextEditor.addTextChangedListener(new WorkoutEditTextEditorTextWatcher(editedWorkout, workoutNameTextEditor));
+        workoutDescriptionTextEditor.addTextChangedListener(new WorkoutEditTextEditorTextWatcher(editedWorkout, workoutDescriptionTextEditor));
         saveButton.setOnClickListener(workoutEditActionButtonClickListener);
         cancelButton.setOnClickListener(workoutEditActionButtonClickListener);
     }

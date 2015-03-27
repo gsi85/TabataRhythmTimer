@@ -28,7 +28,7 @@ public class WorkoutSectionsTextViewProvider extends AbstractTextViewProvider {
 
 
     @Inject
-    private WorkoutSectionTotalTimeProvider workoutSectionTotalTimeProvider;
+    private WorkoutTotalTimeProvider workoutTotalTimeProvider;
     @Inject
     private SectionTextViewClickListener sectionTextViewClickListener;
     @Inject
@@ -54,7 +54,7 @@ public class WorkoutSectionsTextViewProvider extends AbstractTextViewProvider {
         int rounds = currentSection.getRounds();
         long work = currentSection.getWork();
         long rest = currentSection.getRest();
-        String totalTime = workoutSectionTotalTimeProvider.getFormattedTotalTime(currentSection);
+        String totalTime = workoutTotalTimeProvider.getFormattedSectionTotalTime(currentSection);
         return Html.fromHtml(String.format(TEXT_PATTERN, rounds, work, rest, totalTime));
     }
 

@@ -27,6 +27,7 @@ public abstract class AbstractBaseDatabaseService extends SQLiteAssetHelper {
     protected static final String COLUMN_REST = "rest";
     protected static final String COLUMN_COOL_DOWN = "coolDown";
     protected static final String COLUMN_ID = "id";
+    protected static final String COLUMN_DESCRIPTION = "description";
     protected static final String WHERE_ID_EQUALS = "id=";
     protected static final String WHERE_WORKOUT_ID_EQUALS = "workoutId=";
     protected static final String DEFAULT_WORKOUT_NAME = "Untitled-";

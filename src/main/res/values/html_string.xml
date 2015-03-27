@@ -7,6 +7,13 @@
             Total time: <big><strong>%s</strong></big>
         ]]>
     </string>
+    <string formatted="false" name="workout_text_view_pattern">
+        <![CDATA[
+            <big><strong>%s</strong></big><br>
+            <font color="yellow"><small>%s</small></font><br>
+            Total time: <big><strong>%s</strong></big>
+        ]]>
+    </string>
     <string formatted="false" name="minutes_down_to_hundreds_sec_pattern">
         <![CDATA[
             <big>%02d:%02d</big><small>.%01d</small>
