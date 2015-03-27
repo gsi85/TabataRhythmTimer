@@ -7,7 +7,7 @@ import com.google.inject.Singleton;
 import com.sisa.tabata.TabataApplication;
 import com.sisa.tabata.domain.WorkoutSection;
 import com.sisa.tabata.ui.domain.WorkoutType;
-import com.sisa.tabata.ui.provider.WorkoutSectionTotalTimeProvider;
+import com.sisa.tabata.ui.provider.WorkoutTotalTimeProvider;
 
 import roboguice.RoboGuice;
 
@@ -18,7 +18,7 @@ import roboguice.RoboGuice;
 public class SectionTotalTimeChangeListener {
 
     @Inject
-    private WorkoutSectionTotalTimeProvider workoutSectionTotalTimeProvider;
+    private WorkoutTotalTimeProvider workoutTotalTimeProvider;
     private TextView totalTimeValue;
     private WorkoutSection workoutSection;
 
@@ -48,7 +48,7 @@ public class SectionTotalTimeChangeListener {
     }
 
     private void updateTotalTimeView() {
-        totalTimeValue.setText(workoutSectionTotalTimeProvider.getFormattedTotalTime(workoutSection));
+        totalTimeValue.setText(workoutTotalTimeProvider.getFormattedSectionTotalTime(workoutSection));
     }
 
 

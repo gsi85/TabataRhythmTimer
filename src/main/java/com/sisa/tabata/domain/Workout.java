@@ -12,6 +12,7 @@ public class Workout {
     private String name;
     private List<WorkoutSection> workoutSections;
     private TimeUnit timeUnit;
+    private String description;
 
     public int getId() {
         return id;
@@ -43,6 +44,14 @@ public class Workout {
 
     public void setTimeUnit(TimeUnit timeUnit) {
         this.timeUnit = timeUnit;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 }

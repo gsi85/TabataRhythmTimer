@@ -23,6 +23,7 @@ public class WorkoutInsertService extends AbstractBaseDatabaseService {
     private static final String DEFAULT_WORKOUT_NAME_PATTERN = "%s%d";
     private static final String WHERE_DEFAULT_WORKOUT_NAME_PATTERN = "%s LIKE '%s%%'";
     private static final String WHERE_DEFAULT_WORKOUT_NAME_CLAUSE = String.format(WHERE_DEFAULT_WORKOUT_NAME_PATTERN, COLUMN_NAME, DEFAULT_WORKOUT_NAME);
+    private static final String EMPTY_STRING = "";
 
     @Inject
     private WorkoutSectionFactory workoutSectionFactory;
@@ -58,6 +59,7 @@ public class WorkoutInsertService extends AbstractBaseDatabaseService {
         ContentValues workoutValues = new ContentValues();
         workoutValues.put(COLUMN_NAME, getNullSafeWorkoutName(workout.getName()));
         workoutValues.put(COLUMN_TIME_UNIT, workout.getTimeUnit().name());
+        workoutValues.put(COLUMN_DESCRIPTION, workout.getDescription() == null ? EMPTY_STRING : workout.getDescription());
         return workoutValues;
     }
 

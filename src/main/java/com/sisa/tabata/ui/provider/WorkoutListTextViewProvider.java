@@ -1,11 +1,14 @@
 package com.sisa.tabata.ui.provider;
 
 import android.content.Context;
+import android.text.Html;
+import android.text.Spanned;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.sisa.tabata.R;
 import com.sisa.tabata.TabataApplication;
 import com.sisa.tabata.dao.service.DatabaseDataService;
 import com.sisa.tabata.domain.Workout;
@@ -21,8 +24,12 @@ import roboguice.RoboGuice;
 @Singleton
 public class WorkoutListTextViewProvider extends AbstractTextViewProvider {
 
+    private static final String TEXT_PATTERN = TabataApplication.getAppContext().getString(R.string.workout_text_view_pattern);
+
     @Inject
     private DatabaseDataService databaseDataService;
+    @Inject
+    private WorkoutTotalTimeProvider workoutTotalTimeProvider;
     @Inject
     private WorkoutTextViewClickListener workoutTextViewClickListener;
     @Inject
@@ -37,10 +44,18 @@ public class WorkoutListTextViewProvider extends AbstractTextViewProvider {
             TextView sectionTextView = createTextView(workoutLoadActivity);
             setStyle(workoutLoadActivity, context, sectionTextView);
             sectionTextView.setTag(workout.getId());
-            sectionTextView.setText(workout.getName());
+            sectionTextView.setText(getFormattedText(workout));
             sectionTextView.setOnClickListener(workoutTextViewClickListener);
             sectionTextView.setOnLongClickListener(workoutTextViewLongClickListener);
             existingWorkoutsLayout.addView(sectionTextView);
         }
     }
+
+    private Spanned getFormattedText(Workout workout) {
+        String name = workout.getName();
+        String description = workout.getDescription();
+        String totalTime = workoutTotalTimeProvider.getFormattedWorkoutTotalTime(workout);
+        return Html.fromHtml(String.format(TEXT_PATTERN, name, description, totalTime));
+    }
+
 }

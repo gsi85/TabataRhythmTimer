@@ -40,14 +40,14 @@ public class LoadedWorkoutProvider {
         workout = databaseDataService.getWorkoutById(id);
     }
 
-    private void checkLoadWorkout() {
-        if (workout == null) {
-            loadLastUsedWorkout();
-        }
+    public void loadFirstWorkoutInList() {
+        workout = databaseDataService.getAllWorkoutsSortedList().get(0);
     }
 
-    private void loadLastUsedWorkout() {
-        workout = databaseDataService.getWorkoutById(0);
+    private void checkLoadWorkout() {
+        if (workout == null) {
+            loadFirstWorkoutInList();
+        }
     }
 
 }
