@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#000000">
+    android:background="#000000"
+    android:orientation="vertical">
 
     <!-- Header -->
     <LinearLayout
@@ -11,26 +11,26 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_alignParentTop="true"
+        android:layout_margin="0dp"
+        android:background="#CCC"
         android:baselineAligned="false"
         android:gravity="left"
         android:orientation="horizontal"
-        android:layout_margin="0dp"
-        android:background="#CCC"
         android:paddingBottom="1dp">
 
 
         <FrameLayout
+            android:id="@+id/headerFrame"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/headerFrame"
             android:background="#000000">
 
             <TextView
+                android:id="@+id/workoutEditAction"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/form_workout_new_action_text"
-                android:id="@+id/workoutEditAction"
                 android:layout_gravity="center"
+                android:text="@string/form_workout_new_action_text"
                 android:textColor="#ff77beff"
                 android:textSize="20sp" />
         </FrameLayout>
@@ -53,17 +53,17 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_gravity="center"
-            android:layout_weight="1"
-            android:layout_margin="1dp">
+            android:layout_margin="1dp"
+            android:layout_weight="1">
 
             <ImageButton
                 android:id="@+id/cancelButton"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center"
-                android:tag="cancel_action"
+                android:background="@drawable/bg_pause_button"
                 android:src="@android:drawable/ic_menu_close_clear_cancel"
-                android:background="@drawable/bg_pause_button" />
+                android:tag="cancel_action" />
         </FrameLayout>
 
         <!-- Save button -->
@@ -72,17 +72,17 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_gravity="center"
-            android:layout_weight="1"
-            android:layout_margin="1dp">
+            android:layout_margin="1dp"
+            android:layout_weight="1">
 
             <ImageButton
                 android:id="@+id/saveButton"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center"
-                android:tag="save_action"
+                android:background="@drawable/bg_play_button"
                 android:src="@android:drawable/ic_menu_save"
-                android:background="@drawable/bg_play_button" />
+                android:tag="save_action" />
         </FrameLayout>
 
     </LinearLayout>
@@ -98,128 +98,143 @@
 
         <!-- Workout name & description edit -->
         <LinearLayout
-            android:orientation="vertical"
+            android:id="@+id/workout_name_layout"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:id="@+id/workout_name_layout"
+            android:layout_alignParentTop="true"
             android:layout_marginTop="0dp"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
             android:descendantFocusability="beforeDescendants"
-            android:focusableInTouchMode="true">
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp">
 
             <TextView
+                android:id="@+id/workoutNameTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:text="@string/form_workout_name_label"
-                android:id="@+id/workoutNameTextView"
                 android:textColor="#CCCCCC"
-                android:textSize="16sp"
-                android:layout_marginLeft="5dp" />
+                android:textSize="16sp" />
 
             <EditText
+                android:id="@+id/workoutNameTextEditor"
                 android:layout_width="fill_parent"
                 android:layout_height="32dp"
-                android:id="@+id/workoutNameTextEditor"
-                android:textSize="15sp"
-                android:textColor="#FFFFFF"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
+                android:maxLength="30"
                 android:singleLine="true"
                 android:tag="name"
-                android:maxLength="30" />
+                android:textColor="#FFFFFF"
+                android:textSize="15sp" />
 
             <TextView
+                android:id="@+id/workoutDescriptionTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:text="@string/form_workout_description_label"
-                android:id="@+id/workoutDescriptionTextView"
                 android:textColor="#CCCCCC"
-                android:textSize="16sp"
-                android:layout_marginLeft="5dp" />
+                android:textSize="16sp" />
 
             <EditText
+                android:id="@+id/workoutDescriptionTextEditor"
                 android:layout_width="fill_parent"
                 android:layout_height="32dp"
-                android:id="@+id/workoutDescriptionTextEditor"
-                android:textSize="15sp"
-                android:textColor="#ffffab08"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
+                android:maxLength="100"
                 android:singleLine="true"
                 android:tag="description"
-                android:maxLength="100"/>
+                android:textColor="#ffffab08"
+                android:textSize="15sp"
+                android:inputType="text" />
+
+            <LinearLayout
+                android:id="@+id/workoutEditNotificationContainer"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Notification text view -->
+                <TextView
+                    android:id="@+id/workoutEditNotificationView"
+                    style="@style/notificationTextView"
+                    android:text="@string/notification_cant_delete_last_workout"
+                    android:visibility="visible" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
         <!-- Sections list -->
         <ScrollView
+            android:id="@+id/sectionsScrollView"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:id="@+id/sectionsScrollView"
-            android:layout_below="@+id/workout_name_layout"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:paddingTop="5dp"
-            android:layout_marginTop="0dp" >
+            android:layout_below="@+id/workout_name_layout"
+            android:layout_marginTop="0dp"
+            android:paddingTop="5dp">
 
             <LinearLayout
-                android:orientation="vertical"
+                android:id="@+id/sectionsScrollViewLayout"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/sectionsScrollViewLayout">
+                android:orientation="vertical">
 
                 <!-- Sections label -->
                 <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
                     android:id="@+id/workoutTotalTimeLabelContainerLayout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     android:weightSum="2">
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/form_workout_sections_label"
                         android:id="@+id/sectionsHeader"
-                        android:textSize="16sp"
-                        android:textColor="#FFFFFF"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="1"/>
-
-                    <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/form_workout_total_time_label"
-                        android:id="@+id/totalTimeHeader"
-                        android:textSize="16sp"
-                        android:textColor="#FFFFFF"
                         android:layout_marginLeft="5dp"
                         android:layout_weight="1"
-                        android:gravity="right" />
+                        android:text="@string/form_workout_sections_label"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/totalTimeHeader"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:text="@string/form_workout_total_time_label"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
                 <!-- Existing sections container layout -->
                 <LinearLayout
-                    android:orientation="vertical"
+                    android:id="@+id/existingSectionsLayout"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/existingSectionsLayout">
-                </LinearLayout>
+                    android:orientation="vertical"></LinearLayout>
 
                 <!-- New section view -->
                 <TextView
-                    style="@style/workoutSectionList"
-                    android:text="@string/form_workout_add_new_section"
                     android:id="@+id/newSectionTextView"
-                    android:textSize="40sp"
+                    style="@style/workoutSectionList"
+                    android:clickable="true"
                     android:fontFamily="sans-serif-thin"
                     android:gravity="center"
-                    android:clickable="true" />
+                    android:text="@string/form_workout_add_new_section"
+                    android:textSize="40sp" />
 
             </LinearLayout>
         </ScrollView>

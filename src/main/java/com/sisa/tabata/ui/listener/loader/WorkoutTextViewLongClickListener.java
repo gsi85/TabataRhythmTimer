@@ -2,13 +2,15 @@ package com.sisa.tabata.ui.listener.loader;
 
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.sisa.tabata.R;
 import com.sisa.tabata.TabataApplication;
 import com.sisa.tabata.dao.loader.LoadedWorkoutProvider;
 import com.sisa.tabata.dao.service.DatabaseDataService;
+import com.sisa.tabata.ui.timer.NotificationDisplayTimer;
 
 import roboguice.RoboGuice;
 
@@ -18,12 +20,15 @@ import roboguice.RoboGuice;
 @Singleton
 public class WorkoutTextViewLongClickListener implements View.OnLongClickListener {
 
-    public static final int MINIMUM_REMAINING_WORKOUTS_COUNT = 1;
+    private static final int MINIMUM_REMAINING_WORKOUTS_COUNT = 1;
+    private static final int DISPLAY_TIME_IN_MILLIS = 2000;
+
     @Inject
     private DatabaseDataService databaseDataService;
     @Inject
     private LoadedWorkoutProvider loadedWorkoutProvider;
     private LinearLayout existingWorkoutLayout;
+    private TextView workoutLoadNotificationView;
 
     public WorkoutTextViewLongClickListener() {
         RoboGuice.injectMembers(TabataApplication.getAppContext(), this);
@@ -47,7 +52,8 @@ public class WorkoutTextViewLongClickListener implements View.OnLongClickListene
     }
 
     private void showCantDeleteMessage() {
-        Toast.makeText(TabataApplication.getAppContext(), "Can't delete last workout", Toast.LENGTH_SHORT).show();
+        String notificationString = TabataApplication.getAppContext().getString(R.string.notification_cant_delete_last_workout);
+        new NotificationDisplayTimer(workoutLoadNotificationView, notificationString, DISPLAY_TIME_IN_MILLIS).start();
     }
 
     private void refreshWorkoutTextView(View view) {
@@ -55,7 +61,7 @@ public class WorkoutTextViewLongClickListener implements View.OnLongClickListene
     }
 
     private void refreshLoadedWorkout(int id) {
-        if (loadedWorkoutProvider.getLoadedWorkout().getId() == id){
+        if (loadedWorkoutProvider.getLoadedWorkout().getId() == id) {
             loadedWorkoutProvider.loadFirstWorkoutInList();
         }
     }
@@ -66,5 +72,9 @@ public class WorkoutTextViewLongClickListener implements View.OnLongClickListene
 
     public void setExistingWorkoutLayout(LinearLayout existingWorkoutLayout) {
         this.existingWorkoutLayout = existingWorkoutLayout;
+    }
+
+    public void setWorkoutLoadNotificationView(TextView workoutLoadNotificationView) {
+        this.workoutLoadNotificationView = workoutLoadNotificationView;
     }
 }

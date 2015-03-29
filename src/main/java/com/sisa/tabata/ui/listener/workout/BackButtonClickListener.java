@@ -1,22 +1,27 @@
 package com.sisa.tabata.ui.listener.workout;
 
 import android.content.Intent;
-import android.widget.Toast;
+import android.widget.TextView;
 
+import com.sisa.tabata.R;
+import com.sisa.tabata.TabataApplication;
 import com.sisa.tabata.ui.activity.WorkoutActivity;
+import com.sisa.tabata.ui.timer.NotificationDisplayTimer;
 
 /**
  * Created by Laca on 2015.03.23..
  */
 public class BackButtonClickListener {
 
+    private static final int NOTIFICATION_TIME_IN_MILLIS = 2000;
     private int backButtonCount;
+    private TextView workoutNotificationView;
 
     public void onClick(WorkoutActivity workoutActivity) {
         if (isPressedTwice()) {
             exitApp(workoutActivity);
         } else {
-            showFirstPressNotification(workoutActivity);
+            showFirstPressNotification();
         }
     }
 
@@ -32,10 +37,13 @@ public class BackButtonClickListener {
         workoutActivity.startActivity(intent);
     }
 
-    private void showFirstPressNotification(WorkoutActivity workoutActivity) {
-        Toast.makeText(workoutActivity, "Press the back button once again to close the application.", Toast.LENGTH_SHORT).show();
+    private void showFirstPressNotification() {
+        String notificationString = TabataApplication.getAppContext().getString(R.string.notification_press_again_to_exit);
+        new NotificationDisplayTimer(workoutNotificationView, notificationString, NOTIFICATION_TIME_IN_MILLIS).start();
         backButtonCount++;
     }
 
-
+    public void setWorkoutNotificationView(TextView notificationPressAgainToExit) {
+        this.workoutNotificationView = notificationPressAgainToExit;
+    }
 }
