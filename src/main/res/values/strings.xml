@@ -35,6 +35,12 @@
 
     <string name="load_workout_header_label">LOAD WORKOUT</string>
 
+    <string name="notification_press_again_to_exit">"Press the back button once again to exit.</string>
+    <string name="notification_cant_delete_last_workout">"Can't delete last workout.</string>
+    <string name="notification_long_press_to_delete_workout">"Long press on a workout to delete.</string>
+    <string name="notification_long_press_to_delete_section">"Long press on a section to delete.</string>
+    <string name="notification_hold_to_reset">"Hold to reset.</string>
+
     <string-array name="main_menu_items">
         <item>EDIT</item>
         <item>LOAD</item>

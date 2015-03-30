@@ -43,12 +43,27 @@
         android:layout_below="@id/headerLayout"
         android:gravity="top|center">
 
+        <LinearLayout
+            android:id="@+id/notificationContainer"
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:orientation="vertical">
+
+            <!-- Notification text view -->
+            <TextView
+                android:id="@+id/workoutLoadNotificationView"
+                style="@style/notificationTextView"
+                android:text="@string/notification_cant_delete_last_workout" />
+
+        </LinearLayout>
+
 
         <!-- Workout list -->
         <ScrollView
             android:id="@+id/workoutScrollView"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
+            android:layout_below="@id/notificationContainer"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_marginTop="0dp"

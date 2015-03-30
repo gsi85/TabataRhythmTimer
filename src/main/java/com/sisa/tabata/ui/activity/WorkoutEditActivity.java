@@ -18,6 +18,7 @@ import com.sisa.tabata.ui.listener.editor.WorkoutEditTextEditorTextWatcher;
 import com.sisa.tabata.ui.provider.WorkoutSectionsTextViewProvider;
 import com.sisa.tabata.ui.provider.WorkoutSectionsUpdateProvider;
 import com.sisa.tabata.ui.provider.WorkoutTotalTimeProvider;
+import com.sisa.tabata.ui.timer.NotificationDisplayTimer;
 
 import roboguice.activity.RoboActivity;
 import roboguice.inject.InjectView;
@@ -27,6 +28,7 @@ import roboguice.inject.InjectView;
  */
 public class WorkoutEditActivity extends RoboActivity {
 
+    private static final int DISPLAY_TIME_IN_MILLIS = 3000;
     private static final int NEW_WORKOUT_ID = -1;
     private static final String NEW_WORKOUT_NAME = "newWorkout";
     private static final String TOTAL_TIME = TabataApplication.getAppContext().getResources().getString(R.string.form_workout_total_time_label);
@@ -48,6 +50,8 @@ public class WorkoutEditActivity extends RoboActivity {
     private ImageButton cancelButton;
     @InjectView(R.id.workoutEditAction)
     private TextView workoutEditAction;
+    @InjectView(R.id.workoutEditNotificationView)
+    private TextView workoutEditNotificationView;
 
     @Inject
     private SectionTextViewClickListener sectionTextViewClickListener;
@@ -77,6 +81,13 @@ public class WorkoutEditActivity extends RoboActivity {
     @Override
     public void onBackPressed() {
         cancelButton.performClick();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onStart();
+        String notificationText = getString(R.string.notification_long_press_to_delete_section);
+        new NotificationDisplayTimer(workoutEditNotificationView, notificationText, DISPLAY_TIME_IN_MILLIS).start();
     }
 
     private void setUpEditedWorkout() {

@@ -49,6 +49,8 @@ public class WorkoutActivity extends RoboFragmentActivity {
     private Spinner mainMenu;
     @InjectView(R.id.volumeButton)
     private ImageButton volumeButton;
+    @InjectView(R.id.workoutNotificationView)
+    private TextView workoutNotificationView;
     @Inject
     private PlayButtonClickListener playButtonClickListener;
     @Inject
@@ -114,6 +116,8 @@ public class WorkoutActivity extends RoboFragmentActivity {
         currentRoundProgressBar.setWorkoutTypeText(workoutTypeText);
         timerLayoutListener.setTimerLayout(timerLayout);
         volumeButtonClickListener.setWorkoutActivity(this);
+        backButtonClickListener.setWorkoutNotificationView(workoutNotificationView);
+        resetButtonClickListener.setNotificationView(workoutNotificationView);
     }
 
     private void initProgressBars() {
