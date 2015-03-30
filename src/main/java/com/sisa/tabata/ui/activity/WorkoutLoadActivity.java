@@ -59,6 +59,7 @@ public class WorkoutLoadActivity extends RoboActivity {
         workoutTextViewClickListener.setWorkoutLoadActivity(this);
         workoutTextViewLongClickListener.setExistingWorkoutLayout(existingWorkoutLayout);
         workoutTextViewLongClickListener.setWorkoutLoadNotificationView(workoutLoadNotificationView);
+        workoutTextViewLongClickListener.setWorkoutLoadActivity(this);
     }
 
     private void createWorkoutList() {

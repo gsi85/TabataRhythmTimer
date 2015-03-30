@@ -3,8 +3,14 @@ package com.sisa.tabata.ui.listener.editor;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.sisa.tabata.TabataApplication;
 import com.sisa.tabata.domain.Workout;
+import com.sisa.tabata.ui.activity.WorkoutEditActivity;
+import com.sisa.tabata.ui.dialog.DeleteWorkoutSectionDialog;
+
+import roboguice.RoboGuice;
 
 /**
  * Created by Laca on 2015.03.18..
@@ -12,25 +18,20 @@ import com.sisa.tabata.domain.Workout;
 @Singleton
 public class SectionTextViewLongClickListener implements View.OnLongClickListener {
 
+    @Inject
+    private DeleteWorkoutSectionDialog deleteWorkoutSectionDialog;
     private Workout workout;
     private LinearLayout existingSectionsLayout;
+    private WorkoutEditActivity workoutEditActivity;
+
+    public SectionTextViewLongClickListener() {
+        RoboGuice.injectMembers(TabataApplication.getAppContext(), this);
+    }
 
     @Override
     public boolean onLongClick(View view) {
-        removeWorkoutSection(view);
-        updateTextViewTags(view);
+        deleteWorkoutSectionDialog.showDeleteWorkoutsectionDialog(workoutEditActivity, workout, view, existingSectionsLayout);
         return true;
-    }
-
-    private void removeWorkoutSection(View view) {
-        workout.getWorkoutSections().remove((int) view.getTag());
-    }
-
-    private void updateTextViewTags(View view) {
-        existingSectionsLayout.removeView(view);
-        for (int i = 0; i < existingSectionsLayout.getChildCount(); i++) {
-            existingSectionsLayout.getChildAt(i).setTag(i);
-        }
     }
 
     public void setWorkout(Workout workout) {
@@ -40,4 +41,9 @@ public class SectionTextViewLongClickListener implements View.OnLongClickListene
     public void setExistingSectionsLayout(LinearLayout existingSectionsLayout) {
         this.existingSectionsLayout = existingSectionsLayout;
     }
+
+    public void setWorkoutEditActivity(WorkoutEditActivity workoutEditActivity) {
+        this.workoutEditActivity = workoutEditActivity;
+    }
+
 }

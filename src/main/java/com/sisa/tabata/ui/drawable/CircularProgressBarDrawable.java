@@ -55,7 +55,7 @@ public class CircularProgressBarDrawable extends Drawable {
         containerViewWidth = containerSize.getWidth();
         containerViewHeight = containerSize.getHeight();
         int strokeWidth = Math.round((float) containerViewWidth / 100 * STROKE_WIDTH_PERCENTAGE);
-        int padding = Double.valueOf(Math.min(containerViewWidth, containerViewHeight) * 0.05).intValue();
+        int padding = Double.valueOf(Math.min(containerViewWidth, containerViewHeight) * 0.04).intValue();
         int halfWidth = containerViewWidth / 2;
         int halfHeight = containerViewHeight / 2;
         int radius = Math.min(containerViewWidth, containerViewHeight) / 2;
