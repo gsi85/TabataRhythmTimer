@@ -36,9 +36,9 @@ public class PlayButtonClickListener implements View.OnClickListener {
         RoboGuice.injectMembers(TabataApplication.getAppContext(), this);
     }
 
-    public void resetWorkout() {
+    public void resetWorkout(View view) {
         if (workoutCountDownTimer != null) {
-            pauseTimer();
+            pauseTimer(view);
             workoutCountDownTimer.setFinished(true);
             workoutCountDownTimer = null;
         }
@@ -46,10 +46,10 @@ public class PlayButtonClickListener implements View.OnClickListener {
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View view) {
         checkFinished();
         checkCreateTimer();
-        pauseResumeTimer();
+        pauseResumeTimer(view);
     }
 
     private void checkFinished() {
@@ -65,23 +65,25 @@ public class PlayButtonClickListener implements View.OnClickListener {
         }
     }
 
-    private void pauseResumeTimer() {
+    private void pauseResumeTimer(View view) {
         if (workoutCountDownTimer.isPaused()) {
-            resumeTimer();
+            resumeTimer(view);
         } else {
-            pauseTimer();
+            pauseTimer(view);
         }
     }
 
-    private void resumeTimer() {
+    private void resumeTimer(View view) {
         playButton.setImageResource(android.R.drawable.ic_media_pause);
         playButton.setBackgroundResource(R.drawable.bg_pause_button);
+        view.setKeepScreenOn(true);
         workoutCountDownTimer.resume();
     }
 
-    private void pauseTimer() {
+    private void pauseTimer(View view) {
         playButton.setImageResource(android.R.drawable.ic_media_play);
         playButton.setBackgroundResource(R.drawable.bg_play_button);
+        view.setKeepScreenOn(false);
         workoutCountDownTimer.pause();
     }
 

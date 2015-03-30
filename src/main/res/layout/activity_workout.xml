@@ -182,7 +182,7 @@
         <LinearLayout
             android:id="@+id/innerFooterLayout"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="#CCC"
             android:gravity="left"
@@ -206,7 +206,8 @@
                     <TextView
                         android:id="@+id/workoutProgressLabel"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:gravity="bottom"
                         android:layout_marginLeft="5dp"
                         android:text="@string/main_workout_progress"
                         android:textColor="#EEE"
@@ -228,7 +229,7 @@
                         android:layout_marginRight="5dp"
                         android:text="@string/main_default_total_remaining_text"
                         android:textColor="#EEE"
-                        android:textSize="20sp" />
+                        android:textSize="35sp" />
 
                 </FrameLayout>
             </LinearLayout>

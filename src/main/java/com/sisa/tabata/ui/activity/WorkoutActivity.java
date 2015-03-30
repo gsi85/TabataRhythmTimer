@@ -118,10 +118,11 @@ public class WorkoutActivity extends RoboFragmentActivity {
         volumeButtonClickListener.setWorkoutActivity(this);
         backButtonClickListener.setWorkoutNotificationView(workoutNotificationView);
         resetButtonClickListener.setNotificationView(workoutNotificationView);
+        resetButtonLongClickListener.setPlayButton(playButton);
     }
 
     private void initProgressBars() {
-        playButtonClickListener.resetWorkout();
+        playButtonClickListener.resetWorkout(playButton);
     }
 
 }

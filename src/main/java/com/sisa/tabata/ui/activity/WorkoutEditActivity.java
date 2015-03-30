@@ -106,6 +106,7 @@ public class WorkoutEditActivity extends RoboActivity {
         newSectionTextView.setTag(NEW_WORKOUT_ID);
         sectionTextViewLongClickListener.setWorkout(editedWorkout);
         sectionTextViewLongClickListener.setExistingSectionsLayout(existingSectionsLayout);
+        sectionTextViewLongClickListener.setWorkoutEditActivity(this);
         workoutEditActionButtonClickListener.setWorkout(editedWorkout);
         workoutEditActionButtonClickListener.setWorkoutEditActivity(this);
     }
