@@ -14,13 +14,13 @@ import com.sisa.tabata.ui.timer.NotificationDisplayTimer;
 @Singleton
 public class ResetButtonClickListener implements View.OnClickListener {
 
-    private static final int DISPLAY_DURRATION_MILLIS = 2000;
+    private static final int DISPLAY_DURATION_MILLIS = 2000;
     private TextView notificationView;
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View view) {
         String notificationText = TabataApplication.getAppContext().getString(R.string.notification_hold_to_reset);
-        new NotificationDisplayTimer(notificationView, notificationText, DISPLAY_DURRATION_MILLIS);
+        new NotificationDisplayTimer(notificationView, notificationText, DISPLAY_DURATION_MILLIS).start();
     }
 
     public void setNotificationView(TextView notificationView) {

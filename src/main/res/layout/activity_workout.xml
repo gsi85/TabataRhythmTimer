@@ -156,33 +156,25 @@
         <RelativeLayout
             android:id="@+id/innerHeaderLayout"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="60dp"
             android:layout_alignParentTop="true"
             android:gravity="left">
 
-            <LinearLayout
-                android:id="@+id/notificationContainer"
+            <!-- Notification text view -->
+            <TextView
+                android:id="@+id/sectionCounter"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:orientation="vertical">
+                android:layout_height="30dp"
+                android:background="#000000"
+                android:gravity="left|center_horizontal"
+                android:text="@string/main_default_section_text"
+                android:textColor="#EEE"
+                android:textSize="18sp" />
 
-                <!-- Notification text view -->
-                <TextView
-                    android:id="@+id/workoutNotificationView"
-                    style="@style/notificationTextView"
-                    android:text="@string/notification_press_again_to_exit" />
-
-                <TextView
-                    android:id="@+id/sectionCounter"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:background="#000000"
-                    android:gravity="left|center_horizontal"
-                    android:text="@string/main_default_section_text"
-                    android:textColor="#EEE"
-                    android:textSize="18sp" />
-
-            </LinearLayout>
+            <TextView
+                android:id="@+id/workoutNotificationView"
+                style="@style/notificationTextView"
+                android:layout_below="@id/sectionCounter"/>
 
         </RelativeLayout>
 

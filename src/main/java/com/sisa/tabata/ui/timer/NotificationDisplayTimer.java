@@ -1,9 +1,8 @@
 package com.sisa.tabata.ui.timer;
 
 import android.os.CountDownTimer;
+import android.view.View;
 import android.widget.TextView;
-
-import com.sisa.tabata.util.DropDownAnim;
 
 /**
  * Created by Laca on 2015.03.29..
@@ -16,7 +15,7 @@ public class NotificationDisplayTimer extends CountDownTimer {
         super(durationMillis, durationMillis);
         this.notificationView = notificationView;
         this.notificationView.setText(textToDisplay);
-        DropDownAnim.expand(notificationView);
+        notificationView.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -26,6 +25,6 @@ public class NotificationDisplayTimer extends CountDownTimer {
 
     @Override
     public void onFinish() {
-        DropDownAnim.collapse(notificationView);
+        notificationView.setVisibility(View.GONE);
     }
 }
