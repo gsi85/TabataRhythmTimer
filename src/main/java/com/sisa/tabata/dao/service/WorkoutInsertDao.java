@@ -17,7 +17,7 @@ import roboguice.RoboGuice;
  * Created by Laca on 2015.03.24..
  */
 @Singleton
-public class WorkoutInsertService extends AbstractBaseDatabaseService {
+public class WorkoutInsertDao extends AbstractBaseDao {
 
     private static final int EMPTY_SECTIONS_SIZE = 0;
     private static final String DEFAULT_WORKOUT_NAME_PATTERN = "%s%d";
@@ -28,9 +28,8 @@ public class WorkoutInsertService extends AbstractBaseDatabaseService {
     @Inject
     private WorkoutSectionFactory workoutSectionFactory;
 
-    public WorkoutInsertService() {
+    public WorkoutInsertDao() {
         super(TabataApplication.getAppContext(), DATABASE_NAME, null, DATABASE_VERSION);
-        RoboGuice.injectMembers(TabataApplication.getAppContext(), this);
     }
 
     protected long insertUpdateWorkout(Workout workout) {

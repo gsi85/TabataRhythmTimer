@@ -7,14 +7,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.sisa.tabata.TabataApplication;
-import com.sisa.tabata.dao.service.AbstractBaseDatabaseService;
+import com.sisa.tabata.dao.service.AbstractBaseDao;
 
 import java.util.ArrayList;
 
 /**
  * Created by Laca on 2015.03.25..
  */
-public class AndroidManagerHelper extends AbstractBaseDatabaseService {
+public class AndroidManagerHelper extends AbstractBaseDao {
 
     private AndroidDatabaseManager androidDatabaseManager;
 

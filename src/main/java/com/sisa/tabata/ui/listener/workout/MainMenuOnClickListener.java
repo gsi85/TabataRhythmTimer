@@ -6,7 +6,7 @@ import android.view.View;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.sisa.tabata.TabataApplication;
-import com.sisa.tabata.dao.loader.EditedWorkoutHolder;
+import com.sisa.tabata.dao.loader.EditedWorkoutProvider;
 import com.sisa.tabata.dao.loader.LoadedWorkoutProvider;
 import com.sisa.tabata.ui.activity.WorkoutActivity;
 import com.sisa.tabata.ui.activity.WorkoutEditActivity;
@@ -30,7 +30,7 @@ public class MainMenuOnClickListener implements View.OnClickListener {
     @Inject
     private LoadedWorkoutProvider loadedWorkoutProvider;
     @Inject
-    private EditedWorkoutHolder editedWorkoutHolder;
+    private EditedWorkoutProvider editedWorkoutProvider;
     private WorkoutActivity workoutActivity;
 
     public MainMenuOnClickListener() {
@@ -42,7 +42,7 @@ public class MainMenuOnClickListener implements View.OnClickListener {
         String menuAction = view.getTag().toString();
         Intent activityToStart = getActivitiesMAp().get(menuAction);
         if (activityToStart != null) {
-            editedWorkoutHolder.setEditedWorkout(activityToStart.getIntExtra(WORKOUT_ID_NAME, NEW_WORKOUT_ID));
+            editedWorkoutProvider.setEditedWorkout(activityToStart.getIntExtra(WORKOUT_ID_NAME, NEW_WORKOUT_ID));
             workoutActivity.startActivity(activityToStart);
             workoutActivity.finish();
         }

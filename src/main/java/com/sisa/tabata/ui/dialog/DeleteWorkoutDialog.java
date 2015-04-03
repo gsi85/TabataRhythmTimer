@@ -11,7 +11,7 @@ import com.google.inject.Singleton;
 import com.sisa.tabata.R;
 import com.sisa.tabata.TabataApplication;
 import com.sisa.tabata.dao.loader.LoadedWorkoutProvider;
-import com.sisa.tabata.dao.service.DatabaseDataService;
+import com.sisa.tabata.dao.service.WorkoutDao;
 
 import roboguice.RoboGuice;
 
@@ -22,7 +22,7 @@ import roboguice.RoboGuice;
 public class DeleteWorkoutDialog {
 
     @Inject
-    private DatabaseDataService databaseDataService;
+    private WorkoutDao workoutDao;
     @Inject
     private LoadedWorkoutProvider loadedWorkoutProvider;
 
@@ -65,7 +65,7 @@ public class DeleteWorkoutDialog {
         @Override
         public void onClick(DialogInterface dialog, int which) {
             int id = (int) selectedWorkoutView.getTag();
-            databaseDataService.deleteWorkoutById(id);
+            workoutDao.deleteWorkoutById(id);
             refreshLoadedWorkout(id);
             refreshWorkoutTextView(existingWorkoutLayout, selectedWorkoutView);
             dialog.cancel();

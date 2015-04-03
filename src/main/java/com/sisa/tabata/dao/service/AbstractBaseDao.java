@@ -8,9 +8,11 @@ import com.sisa.tabata.R;
 import com.sisa.tabata.TabataApplication;
 
 /**
- * Created by Laca on 2015.03.24..
+ * Base class for DAO classes, holding writeable {@link SQLiteDatabase} and commonly used constants.
+ *
+ * @author Laszlo Sisa
  */
-public abstract class AbstractBaseDatabaseService extends SQLiteAssetHelper {
+public abstract class AbstractBaseDao extends SQLiteAssetHelper {
 
     protected static final int NEW_WORKOUT_ID = -1;
     protected static final int DATABASE_VERSION = TabataApplication.getAppContext().getResources().getInteger(R.integer.database_version);
@@ -34,12 +36,26 @@ public abstract class AbstractBaseDatabaseService extends SQLiteAssetHelper {
 
     private final SQLiteDatabase database;
 
-    public AbstractBaseDatabaseService(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+    /**
+     * DI constructor.
+     *
+     * @param context {@link Context}
+     * @param name {@link String}
+     * @param factory {@link SQLiteDatabase.CursorFactory}
+     * @param version database version
+     */
+    public AbstractBaseDao(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
         database = getWritableDatabase();
     }
 
+    /**
+     * Returns writable {@link SQLiteDatabase}.
+     *
+     * @return {@link SQLiteDatabase}
+     */
     protected SQLiteDatabase getDatabase() {
         return database;
     }
+
 }

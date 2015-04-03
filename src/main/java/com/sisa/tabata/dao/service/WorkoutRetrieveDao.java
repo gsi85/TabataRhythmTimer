@@ -21,16 +21,15 @@ import roboguice.RoboGuice;
  * Created by Laca on 2015.03.24..
  */
 @Singleton
-public class WorkoutRetrieveService extends AbstractBaseDatabaseService {
+public class WorkoutRetrieveDao extends AbstractBaseDao {
 
     @Inject
     private WorkoutFactory workoutFactory;
     @Inject
     private WorkoutSectionFactory workoutSectionFactory;
 
-    public WorkoutRetrieveService() {
+    public WorkoutRetrieveDao() {
         super(TabataApplication.getAppContext(), DATABASE_NAME, null, DATABASE_VERSION);
-        RoboGuice.injectMembers(TabataApplication.getAppContext(), this);
     }
 
     protected Workout getWorkoutById(long id) {

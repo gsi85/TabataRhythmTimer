@@ -4,10 +4,13 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Created by Laca on 2015.02.27..
+ * {@link Parcelable} domain object describing a workout section.
+ *
+ * @author Laszlo Sisa
  */
 public class WorkoutSection implements Parcelable {
 
+    //TODO: check if can be extracted.
     public static final Parcelable.Creator<WorkoutSection> CREATOR = new Parcelable.Creator<WorkoutSection>() {
         public WorkoutSection createFromParcel(Parcel input) {
             return new WorkoutSection(input);
@@ -24,9 +27,17 @@ public class WorkoutSection implements Parcelable {
     private long rest;
     private long coolDown;
 
+    /**
+     * Default constructor.
+     */
     public WorkoutSection() {
     }
 
+    /**
+     * Constructor for inflating the objects from {@link Parcel}.
+     *
+     * @param input {@link Parcel} the data source
+     */
     public WorkoutSection(Parcel input) {
         rounds = input.readInt();
         warmUp = input.readLong();

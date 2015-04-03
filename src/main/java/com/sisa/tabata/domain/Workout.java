@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by Laca on 2015.02.27..
+ * Domain objects describing a workout.
+ *
+ * @author Laszlo Sisa
  */
 public class Workout {
 

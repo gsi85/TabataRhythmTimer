@@ -10,7 +10,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.sisa.tabata.R;
 import com.sisa.tabata.TabataApplication;
-import com.sisa.tabata.dao.service.DatabaseDataService;
+import com.sisa.tabata.dao.service.WorkoutDao;
 import com.sisa.tabata.domain.Workout;
 import com.sisa.tabata.ui.activity.WorkoutLoadActivity;
 import com.sisa.tabata.ui.listener.loader.WorkoutTextViewClickListener;
@@ -27,7 +27,7 @@ public class WorkoutListTextViewProvider extends AbstractTextViewProvider {
     private static final String TEXT_PATTERN = TabataApplication.getAppContext().getString(R.string.workout_text_view_pattern);
 
     @Inject
-    private DatabaseDataService databaseDataService;
+    private WorkoutDao workoutDao;
     @Inject
     private WorkoutTotalTimeProvider workoutTotalTimeProvider;
     @Inject
@@ -40,7 +40,7 @@ public class WorkoutListTextViewProvider extends AbstractTextViewProvider {
     }
 
     public void createWorkoutTextViews(WorkoutLoadActivity workoutLoadActivity, Context context, LinearLayout existingWorkoutsLayout) {
-        for (Workout workout : databaseDataService.getAllWorkoutsSortedList()) {
+        for (Workout workout : workoutDao.getAllWorkoutsSortedList()) {
             TextView sectionTextView = createTextView(workoutLoadActivity);
             setStyle(workoutLoadActivity, context, sectionTextView);
             sectionTextView.setTag(workout.getId());

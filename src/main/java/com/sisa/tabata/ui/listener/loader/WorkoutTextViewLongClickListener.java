@@ -8,7 +8,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.sisa.tabata.R;
 import com.sisa.tabata.TabataApplication;
-import com.sisa.tabata.dao.service.DatabaseDataService;
+import com.sisa.tabata.dao.service.WorkoutDao;
 import com.sisa.tabata.ui.activity.WorkoutLoadActivity;
 import com.sisa.tabata.ui.dialog.DeleteWorkoutDialog;
 import com.sisa.tabata.ui.timer.NotificationDisplayTimer;
@@ -25,7 +25,7 @@ public class WorkoutTextViewLongClickListener implements View.OnLongClickListene
     private static final int DISPLAY_TIME_IN_MILLIS = 2000;
 
     @Inject
-    private DatabaseDataService databaseDataService;
+    private WorkoutDao workoutDao;
     @Inject
     private DeleteWorkoutDialog deleteWorkoutDialog;
     private LinearLayout existingWorkoutLayout;
@@ -56,7 +56,7 @@ public class WorkoutTextViewLongClickListener implements View.OnLongClickListene
     }
 
     private boolean hasWorkoutLeftAfterDelete() {
-        return databaseDataService.getAllWorkoutsSortedList().size() > MINIMUM_REMAINING_WORKOUTS_COUNT;
+        return workoutDao.getAllWorkoutsSortedList().size() > MINIMUM_REMAINING_WORKOUTS_COUNT;
     }
 
     public void setExistingWorkoutLayout(LinearLayout existingWorkoutLayout) {

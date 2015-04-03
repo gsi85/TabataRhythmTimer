@@ -2,16 +2,15 @@ package com.sisa.tabata.dao.loader;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.sisa.tabata.TabataApplication;
-import com.sisa.tabata.dao.service.DatabaseDataService;
+import com.sisa.tabata.dao.service.WorkoutDao;
 import com.sisa.tabata.domain.Workout;
 import com.sisa.tabata.ui.domain.SerializedWorkout;
 import com.sisa.tabata.workout.transformer.SerializedWorkoutTransformer;
 
-import roboguice.RoboGuice;
-
 /**
- * Created by Laca on 2015.03.01..
+ * Provider of the currently loaded {@link Workout} instance.
+ *
+ * @author Laszlo Sisa
  */
 @Singleton
 public class LoadedWorkoutProvider {
@@ -19,32 +18,49 @@ public class LoadedWorkoutProvider {
     @Inject
     private SerializedWorkoutTransformer serializedWorkoutTransformer;
     @Inject
-    private DatabaseDataService databaseDataService;
+    private WorkoutDao workoutDao;
     private Workout workout;
 
-    public LoadedWorkoutProvider() {
-        RoboGuice.injectMembers(TabataApplication.getAppContext(), this);
-    }
-
+    /**
+     * Returns the currently loaded {@link Workout}.
+     * By default the workout is the first workout returned by {@link WorkoutDao}.
+     *
+     * @return the currently loaded {@link Workout}
+     */
     public Workout getLoadedWorkout() {
         checkLoadWorkout();
         return workout;
     }
 
+    /**
+     * Returns the currently loaded {@link Workout} transformed to {@link SerializedWorkout}.
+     * By default the workout is the first workout returned by {@link WorkoutDao}.
+     *
+     * @return the currently loaded {@link Workout}
+     */
     public SerializedWorkout getLoadedSerializedWorkout() {
         checkLoadWorkout();
         return serializedWorkoutTransformer.transform(workout);
     }
 
-    public void setLoadedWorkoutById(long id) {
-        workout = databaseDataService.getWorkoutById(id);
+    /**
+     * Loads and sets the first {@link Workout} returned by {@link WorkoutDao}.
+     */
+    public void loadFirstWorkoutInList() {
+        workout = workoutDao.getAllWorkoutsSortedList().get(0);
     }
 
-    public void loadFirstWorkoutInList() {
-        workout = databaseDataService.getAllWorkoutsSortedList().get(0);
+    /**
+     * Set currently loaded {@link Workout} by it's id.
+     *
+     * @param id the id of the workout to be loaded
+     */
+    public void setLoadedWorkoutById(long id) {
+        workout = workoutDao.getWorkoutById(id);
     }
 
     private void checkLoadWorkout() {
+        //TODO: replace with validation
         if (workout == null) {
             loadFirstWorkoutInList();
         }
