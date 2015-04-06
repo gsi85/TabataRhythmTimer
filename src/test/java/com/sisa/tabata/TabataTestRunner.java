@@ -4,8 +4,7 @@ import org.junit.runners.model.InitializationError;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.manifest.AndroidManifest;
-import org.robolectric.res.FileFsFile;
-import org.robolectric.res.FsFile;
+import org.robolectric.res.Fs;
 
 /**
  * Custom test runner using {@link RobolectricTestRunner}.
@@ -27,21 +26,11 @@ public class TabataTestRunner extends RobolectricTestRunner {
 
     @Override
     protected AndroidManifest getAppManifest(Config config) {
-        AndroidManifest appManifest = super.getAppManifest(config);
-        FsFile androidManifestFile = appManifest.getAndroidManifestFile();
-        if (!androidManifestFile.exists()) {
-            String moduleRoot = getModuleRootPath(config);
-            androidManifestFile = FileFsFile.from(moduleRoot, appManifest.getAndroidManifestFile().getPath().replace("bundles", "manifests/full"));
-            FsFile resDirectory = FileFsFile.from(moduleRoot, appManifest.getResDirectory().getPath());
-            FsFile assetsDirectory = FileFsFile.from(moduleRoot, appManifest.getAssetsDirectory().getPath());
-            appManifest = new AndroidManifest(androidManifestFile, resDirectory, assetsDirectory);
-        }
-        return appManifest;
-    }
-
-    private String getModuleRootPath(Config config) {
-        String moduleRoot = config.constants().getResource("").toString().replace("file:", "");
-        return moduleRoot.substring(0, moduleRoot.indexOf("/build"));
+        String myAppPath = TabataTestRunner.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+        String manifestPath = myAppPath + "../../../src/main/AndroidManifest.xml";
+        String resPath = myAppPath + "../../../src/main/res";
+        String assetPath = myAppPath + "../../../src/main/assets";
+        return createAppManifest(Fs.fileFromPath(manifestPath), Fs.fileFromPath(resPath), Fs.fileFromPath(assetPath));
     }
 
 }

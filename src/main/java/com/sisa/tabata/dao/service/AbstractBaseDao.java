@@ -1,22 +1,18 @@
 package com.sisa.tabata.dao.service;
 
-import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
+import com.sisa.tabata.ApplicationContextProvider;
 import com.sisa.tabata.R;
-import com.sisa.tabata.TabataApplication;
 
 /**
- * Base class for DAO classes, holding writeable {@link SQLiteDatabase} and commonly used constants.
+ * Base class for DAO classes, holding writable {@link SQLiteDatabase} and commonly used constants.
  *
  * @author Laszlo Sisa
  */
 public abstract class AbstractBaseDao extends SQLiteAssetHelper {
 
-    protected static final int NEW_WORKOUT_ID = -1;
-    protected static final int DATABASE_VERSION = TabataApplication.getAppContext().getResources().getInteger(R.integer.database_version);
-    protected static final String DATABASE_NAME = TabataApplication.getAppContext().getString(R.string.database_name);
     protected static final String TABLE_WORKOUT = "tbl_workout";
     protected static final String TABLE_WORKOUT_SECTIONS = "tbl_workout_sections";
     protected static final String COLUMN_NAME = "name";
@@ -39,13 +35,11 @@ public abstract class AbstractBaseDao extends SQLiteAssetHelper {
     /**
      * DI constructor.
      *
-     * @param context {@link Context}
-     * @param name {@link String}
-     * @param factory {@link SQLiteDatabase.CursorFactory}
-     * @param version database version
+     * @param applicationContextProvider {@link ApplicationContextProvider}
      */
-    public AbstractBaseDao(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+    public AbstractBaseDao(ApplicationContextProvider applicationContextProvider) {
+        super(applicationContextProvider.getContext(), applicationContextProvider.getStringResource(R.string.database_name), null,
+                applicationContextProvider.getIntResource(R.integer.database_version));
         database = getWritableDatabase();
     }
 

@@ -1,10 +1,12 @@
 package com.sisa.tabata.dao.service;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.sisa.tabata.TabataApplication;
+import com.sisa.tabata.ApplicationContextProvider;
+import com.sisa.tabata.domain.Workout;
 
 /**
- * DAO class resposible for deleting workout records from database.
+ * DAO class responsible for deleting {@link Workout} records from database.
  *
  * @author Laszlo sisa
  */
@@ -13,9 +15,12 @@ public class WorkoutDeleteDao extends AbstractBaseDao {
 
     /**
      * DI constructor.
+     *
+     * @param applicationContextProvider {@link ApplicationContextProvider}
      */
-    public WorkoutDeleteDao() {
-        super(TabataApplication.getAppContext(), DATABASE_NAME, null, DATABASE_VERSION);
+    @Inject
+    public WorkoutDeleteDao(ApplicationContextProvider applicationContextProvider) {
+        super(applicationContextProvider);
     }
 
     /**

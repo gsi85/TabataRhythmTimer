@@ -7,12 +7,10 @@ import java.util.Collections;
 
 import junit.framework.Assert;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import com.sisa.tabata.dao.service.WorkoutDao;
@@ -39,11 +37,6 @@ public class LoadedWorkoutProviderTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-    }
-
-    @After
-    public void teardown() {
-        Mockito.reset();
     }
 
     @Test
