@@ -25,7 +25,6 @@ public class WorkoutRetrieveDao extends AbstractBaseDao {
 
     private final WorkoutFactory workoutFactory;
     private final WorkoutSectionFactory workoutSectionFactory;
-    private final SQLiteQueryBuilder queryBuilder;
 
     /**
      * DI constructor.
@@ -33,15 +32,13 @@ public class WorkoutRetrieveDao extends AbstractBaseDao {
      * @param applicationContextProvider {@link ApplicationContextProvider}
      * @param workoutFactory {@link WorkoutFactory}
      * @param workoutSectionFactory {@link WorkoutSectionFactory}
-     * @param queryBuilder {@link SQLiteQueryBuilder}
      */
     @Inject
     public WorkoutRetrieveDao(final ApplicationContextProvider applicationContextProvider, final WorkoutFactory workoutFactory,
-            final WorkoutSectionFactory workoutSectionFactory, final SQLiteQueryBuilder queryBuilder) {
+            final WorkoutSectionFactory workoutSectionFactory) {
         super(applicationContextProvider);
         this.workoutFactory = workoutFactory;
         this.workoutSectionFactory = workoutSectionFactory;
-        this.queryBuilder = queryBuilder;
     }
 
     /**
@@ -105,6 +102,7 @@ public class WorkoutRetrieveDao extends AbstractBaseDao {
     }
 
     private Cursor executeQuery(final String tableName, final String[] columnsToSelect, final String whereClause, final String sortOrder) {
+        SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
         queryBuilder.setTables(tableName);
         if (whereClause != null)
             queryBuilder.appendWhere(whereClause);

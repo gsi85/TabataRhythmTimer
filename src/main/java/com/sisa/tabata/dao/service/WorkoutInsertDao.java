@@ -29,22 +29,18 @@ public class WorkoutInsertDao extends AbstractBaseDao {
 
     private final ApplicationContextProvider applicationContextProvider;
     private final WorkoutSectionFactory workoutSectionFactory;
-    private final SQLiteQueryBuilder queryBuilder;
 
     /**
      * DI constructor.
      *
      * @param applicationContextProvider {@link ApplicationContextProvider}
      * @param workoutSectionFactory {@link WorkoutSectionFactory}
-     * @param queryBuilder {@link SQLiteQueryBuilder}
      */
     @Inject
-    public WorkoutInsertDao(final ApplicationContextProvider applicationContextProvider, final WorkoutSectionFactory workoutSectionFactory,
-            final SQLiteQueryBuilder queryBuilder) {
+    public WorkoutInsertDao(final ApplicationContextProvider applicationContextProvider, final WorkoutSectionFactory workoutSectionFactory) {
         super(applicationContextProvider);
         this.applicationContextProvider = applicationContextProvider;
         this.workoutSectionFactory = workoutSectionFactory;
-        this.queryBuilder = queryBuilder;
     }
 
     /**
@@ -87,6 +83,7 @@ public class WorkoutInsertDao extends AbstractBaseDao {
         String workoutName = currentWorkoutName;
         //TODO: replace with validation
         if (workoutName == null) {
+            SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
             queryBuilder.setTables(TABLE_WORKOUT);
             queryBuilder.appendWhere(WHERE_DEFAULT_WORKOUT_NAME_CLAUSE);
             Cursor resultCursor = queryBuilder.query(getDatabase(), null, null, null, null, null, null);
@@ -100,9 +97,7 @@ public class WorkoutInsertDao extends AbstractBaseDao {
     }
 
     private long insertNewWorkout(final ContentValues workoutValues) {
-        long workoutId;
-        workoutId = getDatabase().insert(TABLE_WORKOUT, null, workoutValues);
-        return workoutId;
+        return getDatabase().insert(TABLE_WORKOUT, null, workoutValues);
     }
 
     private void updateExistingWorkout(final ContentValues workoutValues, final long workoutId) {

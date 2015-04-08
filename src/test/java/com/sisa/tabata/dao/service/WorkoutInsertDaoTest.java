@@ -71,7 +71,7 @@ public class WorkoutInsertDaoTest {
         when(applicationContextProvider.getStringResource(R.string.database_name)).thenReturn(TEST_DATABASE_NAME);
         when(applicationContextProvider.getContext()).thenReturn(context);
         when(context.getApplicationInfo()).thenReturn(applicationInfo);
-        underTest = new ExtendedWorkoutInsertDao(applicationContextProvider, workoutSectionFactory, queryBuilder);
+        underTest = new ExtendedWorkoutInsertDao(applicationContextProvider, workoutSectionFactory);
     }
 
     @Test
@@ -107,7 +107,7 @@ public class WorkoutInsertDaoTest {
         workout.setId(NEW_WORKOUT_ID);
 
         when(applicationContextProvider.getIntResource(R.integer.new_workout_id)).thenReturn(NEW_WORKOUT_ID);
-        when(queryBuilder.query(sqLiteDatabase, null, null, null, null, null, null)).thenReturn(cursor);
+        when(sqLiteDatabase.rawQueryWithFactory(null, "SELECT * FROM tbl_workout WHERE (name LIKE 'Untitled-%')", null, "tbl_workout", null)).thenReturn(cursor);
         when(cursor.getCount()).thenReturn(TEST_RECORD_COUNT);
         when(sqLiteDatabase.insert(eq(WorkoutInsertDao.TABLE_WORKOUT), any(String.class), any(ContentValues.class))).thenReturn(
                 (long) TEST_WORKOUT_ID);
@@ -117,7 +117,7 @@ public class WorkoutInsertDaoTest {
 
         //THEN
         verify(applicationContextProvider).getIntResource(R.integer.new_workout_id);
-        verify(queryBuilder).query(sqLiteDatabase, null, null, null, null, null, null);
+        verify(sqLiteDatabase).rawQueryWithFactory(null, "SELECT * FROM tbl_workout WHERE (name LIKE 'Untitled-%')", null, "tbl_workout", null);
         verify(cursor).getCount();
         verify(sqLiteDatabase).insert(eq(WorkoutInsertDao.TABLE_WORKOUT), any(String.class), any(ContentValues.class));
         verify(sqLiteDatabase).delete(WorkoutInsertDao.TABLE_WORKOUT_SECTIONS, WorkoutInsertDao.WHERE_WORKOUT_ID_EQUALS + TEST_WORKOUT_ID, null);
@@ -135,8 +135,8 @@ public class WorkoutInsertDaoTest {
     private class ExtendedWorkoutInsertDao extends WorkoutInsertDao {
 
         private ExtendedWorkoutInsertDao(final ApplicationContextProvider applicationContextProvider,
-                final WorkoutSectionFactory workoutSectionFactory, final SQLiteQueryBuilder queryBuilder) {
-            super(applicationContextProvider, workoutSectionFactory, queryBuilder);
+                final WorkoutSectionFactory workoutSectionFactory) {
+            super(applicationContextProvider, workoutSectionFactory);
         }
 
         @Override
