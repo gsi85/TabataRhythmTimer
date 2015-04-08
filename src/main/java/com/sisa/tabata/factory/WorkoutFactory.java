@@ -36,7 +36,7 @@ public class WorkoutFactory {
      * @param timeUnit {@link TimeUnit}
      * @return {@link Workout}
      */
-    public Workout createWithTimeUnit(TimeUnit timeUnit) {
+    public Workout createWithTimeUnit(final TimeUnit timeUnit) {
         Workout workout = new Workout();
         workout.setWorkoutSections(new ArrayList<WorkoutSection>());
         workout.setTimeUnit(timeUnit);
