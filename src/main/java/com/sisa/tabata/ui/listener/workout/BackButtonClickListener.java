@@ -7,6 +7,7 @@ import com.sisa.tabata.R;
 import com.sisa.tabata.TabataApplication;
 import com.sisa.tabata.ui.activity.WorkoutActivity;
 import com.sisa.tabata.ui.timer.NotificationDisplayTimer;
+import roboguice.inject.InjectView;
 
 /**
  * Created by Laca on 2015.03.23..
@@ -14,8 +15,9 @@ import com.sisa.tabata.ui.timer.NotificationDisplayTimer;
 public class BackButtonClickListener {
 
     private static final int NOTIFICATION_TIME_IN_MILLIS = 2000;
-    private int backButtonCount;
+    @InjectView(R.id.workoutNotificationView)
     private TextView workoutNotificationView;
+    private int backButtonCount;
 
     public void onClick(WorkoutActivity workoutActivity) {
         if (isPressedTwice()) {
@@ -43,7 +45,4 @@ public class BackButtonClickListener {
         backButtonCount++;
     }
 
-    public void setWorkoutNotificationView(TextView notificationPressAgainToExit) {
-        this.workoutNotificationView = notificationPressAgainToExit;
-    }
 }

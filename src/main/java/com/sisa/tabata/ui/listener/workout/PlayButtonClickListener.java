@@ -4,22 +4,19 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import com.sisa.tabata.R;
-import com.sisa.tabata.TabataApplication;
+import com.sisa.tabata.dao.loader.LoadedWorkoutProvider;
 import com.sisa.tabata.ui.domain.SerializedWorkout;
 import com.sisa.tabata.ui.progressbar.CurrentRoundProgressBar;
 import com.sisa.tabata.ui.progressbar.TotalWorkoutProgressBar;
 import com.sisa.tabata.ui.timer.CountDownTimerWithPause;
 import com.sisa.tabata.ui.timer.WorkoutCountDownTimer;
-import com.sisa.tabata.dao.loader.LoadedWorkoutProvider;
 
-import roboguice.RoboGuice;
+import roboguice.inject.InjectView;
 
 /**
  * Created by Laca on 2015.02.22..
  */
-@Singleton
 public class PlayButtonClickListener implements View.OnClickListener {
 
     @Inject
@@ -28,17 +25,14 @@ public class PlayButtonClickListener implements View.OnClickListener {
     private TotalWorkoutProgressBar totalWorkoutProgressBar;
     @Inject
     private LoadedWorkoutProvider loadedWorkoutProvider;
-
-    private CountDownTimerWithPause workoutCountDownTimer;
+    @InjectView(R.id.playButton)
     private ImageButton playButton;
 
-    public PlayButtonClickListener() {
-        RoboGuice.injectMembers(TabataApplication.getAppContext(), this);
-    }
+    private CountDownTimerWithPause workoutCountDownTimer;
 
-    public void resetWorkout(View view) {
+    public void resetWorkout() {
         if (workoutCountDownTimer != null) {
-            pauseTimer(view);
+            pauseTimer();
             workoutCountDownTimer.setFinished(true);
             workoutCountDownTimer = null;
         }
@@ -49,7 +43,7 @@ public class PlayButtonClickListener implements View.OnClickListener {
     public void onClick(View view) {
         checkFinished();
         checkCreateTimer();
-        pauseResumeTimer(view);
+        pauseResumeTimer();
     }
 
     private void checkFinished() {
@@ -61,33 +55,31 @@ public class PlayButtonClickListener implements View.OnClickListener {
     private void checkCreateTimer() {
         if (workoutCountDownTimer == null) {
             SerializedWorkout serializedWorkout = loadedWorkoutProvider.getLoadedSerializedWorkout();
-            workoutCountDownTimer = new WorkoutCountDownTimer(serializedWorkout, currentRoundProgressBar, totalWorkoutProgressBar, playButton).create();
+            workoutCountDownTimer = new WorkoutCountDownTimer(serializedWorkout, currentRoundProgressBar, totalWorkoutProgressBar, playButton)
+                    .create();
         }
     }
 
-    private void pauseResumeTimer(View view) {
+    private void pauseResumeTimer() {
         if (workoutCountDownTimer.isPaused()) {
-            resumeTimer(view);
+            resumeTimer();
         } else {
-            pauseTimer(view);
+            pauseTimer();
         }
     }
 
-    private void resumeTimer(View view) {
+    private void resumeTimer() {
         playButton.setImageResource(android.R.drawable.ic_media_pause);
         playButton.setBackgroundResource(R.drawable.bg_pause_button);
-        view.setKeepScreenOn(true);
+        playButton.setKeepScreenOn(true);
         workoutCountDownTimer.resume();
     }
 
-    private void pauseTimer(View view) {
+    private void pauseTimer() {
         playButton.setImageResource(android.R.drawable.ic_media_play);
         playButton.setBackgroundResource(R.drawable.bg_play_button);
-        view.setKeepScreenOn(false);
+        playButton.setKeepScreenOn(false);
         workoutCountDownTimer.pause();
     }
 
-    public void setPlayButton(ImageButton playButton) {
-        this.playButton = playButton;
-    }
 }

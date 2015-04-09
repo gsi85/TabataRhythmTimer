@@ -1,22 +1,18 @@
 package com.sisa.tabata.ui.progressbar;
 
 import android.widget.TextView;
-
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
-import com.sisa.tabata.TabataApplication;
+import com.sisa.tabata.R;
 import com.sisa.tabata.media.service.EffectPlayerService;
 import com.sisa.tabata.ui.domain.SerializedWorkoutSection;
 import com.sisa.tabata.ui.domain.WorkoutType;
 import com.sisa.tabata.ui.drawable.CircularProgressBarDrawable;
 import com.sisa.tabata.util.TimeFormatter;
-
-import roboguice.RoboGuice;
+import roboguice.inject.InjectView;
 
 /**
  * Created by Laca on 2015.02.22..
  */
-@Singleton
 public class CurrentRoundProgressBar {
 
     private static final String SECTION_TEXT_PATTERN = "SECTION %d of %d";
@@ -25,19 +21,20 @@ public class CurrentRoundProgressBar {
     private static final int BEEP_INTERVAL_MILLIS = 1000;
     private static final int LAST_BEEP_IN_MILLIS = 40;
 
+    @InjectView(R.id.currentBlockCounter)
+    private TextView currentBlockCounter;
+    @InjectView(R.id.roundCounter)
+    private TextView roundCounter;
+    @InjectView(R.id.sectionCounter)
+    private TextView sectionCounter;
+    @InjectView(R.id.workoutTypeText)
+    private TextView workoutTypeText;
+
     @Inject
     private CircularProgressBarDrawable circularProgressBar;
     @Inject
     private EffectPlayerService effectPlayerService;
-    private TextView currentBlockCounter;
-    private TextView roundCounter;
-    private TextView sectionCounter;
-    private TextView workoutTypeText;
     private int nextBeepNotification;
-
-    public CurrentRoundProgressBar() {
-        RoboGuice.injectMembers(TabataApplication.getAppContext(), this);
-    }
 
     public void setUp(long maxMilliSeconds, int numberOfTotalSections, SerializedWorkoutSection serializedWorkoutSection) {
         int currentSection = serializedWorkoutSection.getSectionCount();

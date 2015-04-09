@@ -32,8 +32,6 @@ import roboguice.inject.InjectView;
  */
 public class SectionEditActivity extends RoboActivity {
 
-    private static final int NEW_SECTION_INDEX = -1;
-
     @InjectView(R.id.warmUpLayout)
     private LinearLayout warmUpLayout;
     @InjectView(R.id.roundCountLayout)
@@ -127,9 +125,10 @@ public class SectionEditActivity extends RoboActivity {
     }
 
     private void setUpWorkoutSection() {
-        int sectionIndex = getIntent().getIntExtra("workoutSectionId", -1);
+        int newWorkoutId = getApplicationContext().getResources().getInteger(R.integer.new_workout_id);
+        int sectionIndex = getIntent().getIntExtra("workoutSectionId", newWorkoutId);
         workoutSection = getIntent().getParcelableExtra("workoutSection");
-        sectionEditAction.setText(NEW_SECTION_INDEX == sectionIndex ? R.string.form_section_new_action_text : R.string.form_section_edit_action_text);
+        sectionEditAction.setText(newWorkoutId == sectionIndex ? R.string.form_section_new_action_text : R.string.form_section_edit_action_text);
         setTextViewValues();
         setNumberPickerValues();
     }

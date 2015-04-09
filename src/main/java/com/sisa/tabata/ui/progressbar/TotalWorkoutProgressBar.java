@@ -5,10 +5,12 @@ import android.widget.TextView;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.sisa.tabata.R;
 import com.sisa.tabata.TabataApplication;
 import com.sisa.tabata.util.TimeFormatter;
 
 import roboguice.RoboGuice;
+import roboguice.inject.InjectView;
 
 /**
  * Created by Laca on 2015.02.23..
@@ -20,15 +22,13 @@ public class TotalWorkoutProgressBar {
 
     @Inject
     private TimeFormatter timeFormatter;
+    @InjectView(R.id.totalRemainingTimeCounter)
     private TextView totalRemainingTimeCounter;
+    @InjectView(R.id.workoutProgressBar)
     private ProgressBar workoutProgressBar;
 
     private long remainingTimeInMillis;
     private long totalTimeInMillis;
-
-    public TotalWorkoutProgressBar() {
-        RoboGuice.injectMembers(TabataApplication.getAppContext(), this);
-    }
 
     public void update(long millisRemaining) {
         remainingTimeInMillis = millisRemaining;
@@ -58,8 +58,4 @@ public class TotalWorkoutProgressBar {
         this.workoutProgressBar = workoutProgressBar;
     }
 
-
-    public void setTotalRemainingTimeCounter(TextView totalRemainingTimeCounter) {
-        this.totalRemainingTimeCounter = totalRemainingTimeCounter;
-    }
 }
