@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import com.google.inject.Singleton;
 import com.sisa.tabata.R;
 import com.sisa.tabata.domain.Workout;
+import roboguice.inject.ContextSingleton;
 
 /**
  * Created by Laca on 2015.03.30..
@@ -21,7 +22,7 @@ public class DeleteWorkoutSectionDialog {
         dialogBuilder.setTitle(context.getString(R.string.dialog_delete_workout_section_title));
         dialogBuilder.setMessage(context.getString(R.string.dialog_delete_workout_section_message));
         dialogBuilder.setNegativeButton(R.string.dialog_button_no, getNegativeButtonListener());
-        dialogBuilder.setPositiveButton(R.string.dialog_button_yes, getPositiveButtonListener(workout ,selectedSectionView, existingSectionsLayout));
+        dialogBuilder.setPositiveButton(R.string.dialog_button_yes, getPositiveButtonListener(workout, selectedSectionView, existingSectionsLayout));
         dialogBuilder.show();
     }
 

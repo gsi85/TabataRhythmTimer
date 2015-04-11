@@ -8,7 +8,6 @@ import android.widget.Spinner;
 
 import com.google.inject.Inject;
 import com.sisa.tabata.R;
-import com.sisa.tabata.dao.loader.LoadedWorkoutProvider;
 import com.sisa.tabata.ui.adapter.SpinnerArrayAdapterFactory;
 import com.sisa.tabata.ui.listener.workout.BackButtonClickListener;
 import com.sisa.tabata.ui.listener.workout.PlayButtonClickListener;
@@ -20,6 +19,11 @@ import com.sisa.tabata.ui.listener.workout.VolumeButtonClickListener;
 import roboguice.activity.RoboFragmentActivity;
 import roboguice.inject.InjectView;
 
+/**
+ * Workout activity.
+ *
+ * @author Laszlo Sisa
+ */
 public class WorkoutActivity extends RoboFragmentActivity {
 
     @InjectView(R.id.timerLayout)
@@ -45,11 +49,9 @@ public class WorkoutActivity extends RoboFragmentActivity {
     @Inject
     private SpinnerArrayAdapterFactory spinnerArrayAdapterFactory;
     @Inject
-    private BackButtonClickListener backButtonClickListener;
-    @Inject
     private VolumeButtonClickListener volumeButtonClickListener;
     @Inject
-    private LoadedWorkoutProvider loadedWorkoutProvider;
+    private BackButtonClickListener backButtonClickListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

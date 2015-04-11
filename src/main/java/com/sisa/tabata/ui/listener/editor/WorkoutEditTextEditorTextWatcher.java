@@ -3,7 +3,6 @@ package com.sisa.tabata.ui.listener.editor;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-
 import com.sisa.tabata.R;
 import com.sisa.tabata.domain.Workout;
 

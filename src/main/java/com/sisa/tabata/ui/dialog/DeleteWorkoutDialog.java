@@ -2,6 +2,7 @@ package com.sisa.tabata.ui.dialog;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -14,6 +15,7 @@ import com.sisa.tabata.dao.loader.LoadedWorkoutProvider;
 import com.sisa.tabata.dao.service.WorkoutDao;
 
 import roboguice.RoboGuice;
+import roboguice.inject.ContextSingleton;
 
 /**
  * Created by Laca on 2015.03.30..
@@ -26,11 +28,7 @@ public class DeleteWorkoutDialog {
     @Inject
     private LoadedWorkoutProvider loadedWorkoutProvider;
 
-    public DeleteWorkoutDialog() {
-        RoboGuice.injectMembers(TabataApplication.getAppContext(), this);
-    }
-
-    public void showDeleteWorkoutDialog(Activity context, View selectedWorkoutView, LinearLayout existingWorkoutLayout) {
+    public void showDeleteWorkoutDialog(Context context, View selectedWorkoutView, LinearLayout existingWorkoutLayout) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context, AlertDialog.THEME_HOLO_DARK);
         dialogBuilder.setTitle(context.getString(R.string.dialog_delete_workout_title));
         dialogBuilder.setMessage(context.getString(R.string.dialog_delete_workout_message));
@@ -79,6 +77,7 @@ public class DeleteWorkoutDialog {
 
         private void refreshWorkoutTextView(LinearLayout existingWorkoutLayout, View view) {
             existingWorkoutLayout.removeView(view);
+            existingWorkoutLayout.invalidate();
         }
     }
 

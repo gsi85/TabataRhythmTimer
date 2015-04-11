@@ -2,16 +2,17 @@ package com.sisa.tabata.ui.listener.workout;
 
 import android.content.Intent;
 import android.widget.TextView;
-
 import com.sisa.tabata.R;
 import com.sisa.tabata.TabataApplication;
 import com.sisa.tabata.ui.activity.WorkoutActivity;
 import com.sisa.tabata.ui.timer.NotificationDisplayTimer;
+import roboguice.inject.ContextSingleton;
 import roboguice.inject.InjectView;
 
 /**
  * Created by Laca on 2015.03.23..
  */
+@ContextSingleton
 public class BackButtonClickListener {
 
     private static final int NOTIFICATION_TIME_IN_MILLIS = 2000;

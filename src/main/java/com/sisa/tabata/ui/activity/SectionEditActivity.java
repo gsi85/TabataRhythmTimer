@@ -1,5 +1,7 @@
 package com.sisa.tabata.ui.activity;
 
+import java.util.Map;
+
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -18,19 +20,18 @@ import com.sisa.tabata.ui.numberpicker.TabataNumberPicker;
 import com.sisa.tabata.ui.provider.WorkoutSectionLabelsProvider;
 import com.sisa.tabata.ui.provider.WorkoutSectionNumberPickersValueProvider;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import roboguice.activity.RoboActivity;
 import roboguice.inject.InjectView;
 
 /**
- * Created by Laca on 2015.03.08..
+ * Workout section edit form activity.
+ *
+ * @author Laszlo Sisa
  */
 public class SectionEditActivity extends RoboActivity {
+
+    private static final String WORKOUT_SECTION_ID = "workoutSectionId";
+    private static final String WORKOUT_SECTION = "workoutSection";
 
     @InjectView(R.id.warmUpLayout)
     private LinearLayout warmUpLayout;
@@ -42,17 +43,6 @@ public class SectionEditActivity extends RoboActivity {
     private LinearLayout restLayout;
     @InjectView(R.id.coolDownLayout)
     private LinearLayout coolDownLayout;
-
-    @InjectView(R.id.warmUpPickerLayout)
-    private LinearLayout warmUpPickerLayout;
-    @InjectView(R.id.roundCountPickerLayout)
-    private LinearLayout roundCountPickerLayout;
-    @InjectView(R.id.workPickerLayout)
-    private LinearLayout workPickerLayout;
-    @InjectView(R.id.restPickerLayout)
-    private LinearLayout restPickerLayout;
-    @InjectView(R.id.coolDownPickerLayout)
-    private LinearLayout coolDownPickerLayout;
 
     @InjectView(R.id.totalTimeValue)
     private TextView totalTimeValue;
@@ -115,7 +105,6 @@ public class SectionEditActivity extends RoboActivity {
         setContentView(R.layout.activity_section_edit);
         setUpWorkoutSection();
         setUpTags();
-        setViewDependencies();
         setUpListeners();
     }
 
@@ -126,8 +115,8 @@ public class SectionEditActivity extends RoboActivity {
 
     private void setUpWorkoutSection() {
         int newWorkoutId = getApplicationContext().getResources().getInteger(R.integer.new_workout_id);
-        int sectionIndex = getIntent().getIntExtra("workoutSectionId", newWorkoutId);
-        workoutSection = getIntent().getParcelableExtra("workoutSection");
+        int sectionIndex = getIntent().getIntExtra(WORKOUT_SECTION_ID, newWorkoutId);
+        workoutSection = getIntent().getParcelableExtra(WORKOUT_SECTION);
         sectionEditAction.setText(newWorkoutId == sectionIndex ? R.string.form_section_new_action_text : R.string.form_section_edit_action_text);
         setTextViewValues();
         setNumberPickerValues();
@@ -163,15 +152,6 @@ public class SectionEditActivity extends RoboActivity {
         coolDownValue.setTag(WorkoutType.COOL_DOWN);
     }
 
-    private void setViewDependencies() {
-        sectionItemClickListener.setPickerLayouts(buildPickerLayoutList());
-        timeNumberPickerValueChangeListener.setTextViewMap(buildTextViewMap());
-        roundNumberPickerValueChangeListener.setRoundCountValue(roundCountValue);
-        sectionTotalTimeChangeListener.setWorkoutSection(workoutSection);
-        sectionTotalTimeChangeListener.setTotalTimeValue(totalTimeValue);
-        sectionEditActionButtonClickListener.setSectionEditActivity(this);
-    }
-
     private void setUpListeners() {
         warmUpLayout.setOnClickListener(sectionItemClickListener);
         roundCountLayout.setOnClickListener(sectionItemClickListener);
@@ -189,25 +169,6 @@ public class SectionEditActivity extends RoboActivity {
         roundCountPicker.setOnValueChangedListener(roundNumberPickerValueChangeListener);
         saveSectionButton.setOnClickListener(sectionEditActionButtonClickListener);
         cancelSectionButton.setOnClickListener(sectionEditActionButtonClickListener);
-    }
-
-    private List<LinearLayout> buildPickerLayoutList() {
-        List<LinearLayout> pickerList = new ArrayList<>();
-        pickerList.addAll(Arrays.asList(warmUpPickerLayout, roundCountPickerLayout, workPickerLayout, restPickerLayout, coolDownPickerLayout));
-        return pickerList;
-    }
-
-    private Map<Integer, TextView> buildTextViewMap() {
-        Map<Integer, TextView> textViewMap = new HashMap<>();
-        textViewMap.put(R.id.warmUpMinutePicker, warmUpValue);
-        textViewMap.put(R.id.warmUpSecondPicker, warmUpValue);
-        textViewMap.put(R.id.workMinutePicker, workValue);
-        textViewMap.put(R.id.workSecondPicker, workValue);
-        textViewMap.put(R.id.restMinutePicker, restValue);
-        textViewMap.put(R.id.restSecondPicker, restValue);
-        textViewMap.put(R.id.coolDownMinutePicker, coolDownValue);
-        textViewMap.put(R.id.coolDownSecondPicker, coolDownValue);
-        return textViewMap;
     }
 
     public WorkoutSection getWorkoutSection() {

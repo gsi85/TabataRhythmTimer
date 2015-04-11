@@ -10,12 +10,13 @@ import com.sisa.tabata.TabataApplication;
 import com.sisa.tabata.util.TimeFormatter;
 
 import roboguice.RoboGuice;
+import roboguice.inject.ContextSingleton;
 import roboguice.inject.InjectView;
 
 /**
  * Created by Laca on 2015.02.23..
  */
-@Singleton
+@ContextSingleton
 public class TotalWorkoutProgressBar {
 
     public static final int MAX_PROGRESS_BAR_VALUE = 1000;

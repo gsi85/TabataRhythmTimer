@@ -8,11 +8,13 @@ import com.sisa.tabata.ui.domain.SerializedWorkoutSection;
 import com.sisa.tabata.ui.domain.WorkoutType;
 import com.sisa.tabata.ui.drawable.CircularProgressBarDrawable;
 import com.sisa.tabata.util.TimeFormatter;
+import roboguice.inject.ContextSingleton;
 import roboguice.inject.InjectView;
 
 /**
  * Created by Laca on 2015.02.22..
  */
+@ContextSingleton
 public class CurrentRoundProgressBar {
 
     private static final String SECTION_TEXT_PATTERN = "SECTION %d of %d";

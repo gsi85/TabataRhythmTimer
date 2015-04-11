@@ -4,15 +4,14 @@ import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
-
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import com.sisa.tabata.ui.dialog.VolumeControlDialog;
+import roboguice.inject.ContextSingleton;
 
 /**
  * Created by Laca on 2015.03.26..
  */
-@Singleton
+@ContextSingleton
 public class VolumeButtonClickListener implements View.OnClickListener {
 
     @Inject

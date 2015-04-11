@@ -1,42 +1,40 @@
 package com.sisa.tabata.ui.listener.editor;
 
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
-import com.sisa.tabata.TabataApplication;
 import com.sisa.tabata.domain.WorkoutSection;
+import com.sisa.tabata.ui.activity.SectionEditActivity;
 import com.sisa.tabata.ui.domain.WorkoutType;
 import com.sisa.tabata.ui.provider.WorkoutTotalTimeProvider;
 
-import roboguice.RoboGuice;
+import roboguice.inject.ContextSingleton;
 
 /**
  * Created by Laca on 2015.03.17..
  */
-@Singleton
+@ContextSingleton
 public class SectionTotalTimeChangeListener {
 
     @Inject
     private WorkoutTotalTimeProvider workoutTotalTimeProvider;
-    private TextView totalTimeValue;
-    private WorkoutSection workoutSection;
 
-    public SectionTotalTimeChangeListener(){
-        RoboGuice.injectMembers(TabataApplication.getAppContext(), this);
-    }
-
-    public void setRounds(int rounds) {
+    public void setRounds(final TextView totalTimeValue, final int rounds) {
+        SectionEditActivity sectionEditActivity = getCheckedContext(totalTimeValue);
+        WorkoutSection workoutSection = sectionEditActivity.getWorkoutSection();
         workoutSection.setRounds(rounds);
-        updateTotalTimeView();
+        updateTotalTimeView(workoutSection, totalTimeValue);
     }
 
-    public void setTimeSection(WorkoutType workoutType, long duration) {
-        updateWorkoutSection(workoutType, duration);
-        updateTotalTimeView();
+    public void setTimeSection(final TextView totalTimeValue, WorkoutType workoutType, long duration) {
+        SectionEditActivity sectionEditActivity = getCheckedContext(totalTimeValue);
+        WorkoutSection workoutSection = sectionEditActivity.getWorkoutSection();
+        updateWorkoutSection(workoutSection, workoutType, duration);
+        updateTotalTimeView(workoutSection, totalTimeValue);
     }
 
-    private void updateWorkoutSection(WorkoutType workoutType, long duration) {
+    private void updateWorkoutSection(final WorkoutSection workoutSection, WorkoutType workoutType, long duration) {
         if (WorkoutType.WARM_UP == workoutType)
             workoutSection.setWarmUp(duration);
         else if (WorkoutType.WORK == workoutType)
@@ -47,16 +45,16 @@ public class SectionTotalTimeChangeListener {
             workoutSection.setCoolDown(duration);
     }
 
-    private void updateTotalTimeView() {
+    private void updateTotalTimeView(final WorkoutSection workoutSection, final TextView totalTimeValue) {
         totalTimeValue.setText(workoutTotalTimeProvider.getFormattedSectionTotalTime(workoutSection));
     }
 
-
-    public void setTotalTimeValue(TextView totalTimeValue) {
-        this.totalTimeValue = totalTimeValue;
+    private SectionEditActivity getCheckedContext(final View view) {
+        //TODO: assert
+        if (!(view.getContext() instanceof SectionEditActivity)) {
+            throw new IllegalArgumentException("View context is not a WorkoutEditActivity");
+        }
+        return (SectionEditActivity) view.getContext();
     }
 
-    public void setWorkoutSection(WorkoutSection workoutSection) {
-        this.workoutSection = workoutSection;
-    }
 }

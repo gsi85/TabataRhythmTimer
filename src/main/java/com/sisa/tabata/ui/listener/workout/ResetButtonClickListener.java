@@ -5,11 +5,13 @@ import android.widget.TextView;
 import com.sisa.tabata.R;
 import com.sisa.tabata.TabataApplication;
 import com.sisa.tabata.ui.timer.NotificationDisplayTimer;
+import roboguice.inject.ContextSingleton;
 import roboguice.inject.InjectView;
 
 /**
  * Created by Laca on 2015.02.28..
  */
+@ContextSingleton
 public class ResetButtonClickListener implements View.OnClickListener {
 
     private static final int DISPLAY_DURATION_MILLIS = 2000;

@@ -2,10 +2,12 @@ package com.sisa.tabata.ui.listener.workout;
 
 import android.view.View;
 import com.sisa.tabata.ui.activity.WorkoutActivity;
+import roboguice.inject.ContextSingleton;
 
 /**
  * Created by Laca on 2015.02.28..
  */
+@ContextSingleton
 public class ResetButtonLongClickListener implements View.OnLongClickListener {
 
     @Override

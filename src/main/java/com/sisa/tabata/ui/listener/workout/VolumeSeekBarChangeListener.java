@@ -2,18 +2,16 @@ package com.sisa.tabata.ui.listener.workout;
 
 import android.media.AudioManager;
 import android.widget.SeekBar;
-
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import com.sisa.tabata.TabataApplication;
 import com.sisa.tabata.media.service.EffectPlayerService;
-
 import roboguice.RoboGuice;
+import roboguice.inject.ContextSingleton;
 
 /**
  * Created by Laca on 2015.03.26..
  */
-@Singleton
+@ContextSingleton
 public class VolumeSeekBarChangeListener implements SeekBar.OnSeekBarChangeListener {
 
     @Inject

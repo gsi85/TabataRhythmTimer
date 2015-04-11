@@ -1,29 +1,23 @@
 package com.sisa.tabata.ui.provider;
 
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import com.sisa.tabata.R;
 import com.sisa.tabata.TabataApplication;
 import com.sisa.tabata.domain.WorkoutSection;
 import com.sisa.tabata.util.TimeFormatter;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import roboguice.RoboGuice;
+import roboguice.inject.ContextSingleton;
 
 /**
  * Created by Laca on 2015.03.18..
  */
-@Singleton
+@ContextSingleton
 public class WorkoutSectionLabelsProvider {
 
     @Inject
     private WorkoutTotalTimeProvider workoutTotalTimeProvider;
-
-    public WorkoutSectionLabelsProvider(){
-        RoboGuice.injectMembers(TabataApplication.getAppContext(), this);
-    }
 
     public Map<Integer, String> getTextViewLabels(WorkoutSection workoutSection){
         Map<Integer, String> textViewLabels = new HashMap<>();

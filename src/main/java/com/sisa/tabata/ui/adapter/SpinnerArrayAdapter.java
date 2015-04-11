@@ -5,13 +5,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
 import com.sisa.tabata.R;
 import com.sisa.tabata.ui.listener.workout.MainMenuOnClickListener;
+import roboguice.inject.ContextSingleton;
 
 /**
  * Created by Laca on 2015.03.04..
  */
+@ContextSingleton
 public class SpinnerArrayAdapter<T> extends ArrayAdapter<T> {
 
 

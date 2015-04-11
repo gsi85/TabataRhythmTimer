@@ -9,11 +9,12 @@ import android.graphics.drawable.Drawable;
 
 import com.google.inject.Singleton;
 import com.sisa.tabata.ui.domain.Size;
+import roboguice.inject.ContextSingleton;
 
 /**
  * Created by Laca on 2015.02.20..
  */
-@Singleton
+@ContextSingleton
 public class CircularProgressBarDrawable extends Drawable {
 
     private static final int START_ANGLE = -90;

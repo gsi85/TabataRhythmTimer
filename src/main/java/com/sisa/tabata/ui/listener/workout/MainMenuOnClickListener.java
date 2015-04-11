@@ -1,23 +1,21 @@
 package com.sisa.tabata.ui.listener.workout;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import android.content.Intent;
 import android.view.View;
-
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import com.sisa.tabata.dao.loader.EditedWorkoutProvider;
 import com.sisa.tabata.dao.loader.LoadedWorkoutProvider;
 import com.sisa.tabata.ui.activity.WorkoutActivity;
 import com.sisa.tabata.ui.activity.WorkoutEditActivity;
 import com.sisa.tabata.ui.activity.WorkoutLoadActivity;
+import java.util.HashMap;
+import java.util.Map;
+import roboguice.inject.ContextSingleton;
 
 /**
  * Created by Laca on 2015.03.23..
  */
-@Singleton
+@ContextSingleton
 public class MainMenuOnClickListener implements View.OnClickListener {
 
     private static final String NEW_WORKOUT_NAME = "newWorkout";

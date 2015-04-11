@@ -4,46 +4,38 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
-import com.sisa.tabata.TabataApplication;
-import com.sisa.tabata.domain.Workout;
+import com.sisa.tabata.R;
 import com.sisa.tabata.ui.activity.WorkoutEditActivity;
 import com.sisa.tabata.ui.dialog.DeleteWorkoutSectionDialog;
 
-import roboguice.RoboGuice;
+import roboguice.inject.ContextSingleton;
+import roboguice.inject.InjectView;
 
 /**
  * Created by Laca on 2015.03.18..
  */
-@Singleton
+@ContextSingleton
 public class SectionTextViewLongClickListener implements View.OnLongClickListener {
 
     @Inject
     private DeleteWorkoutSectionDialog deleteWorkoutSectionDialog;
-    private Workout workout;
+    @InjectView(R.id.existingSectionsLayout)
     private LinearLayout existingSectionsLayout;
-    private WorkoutEditActivity workoutEditActivity;
-
-    public SectionTextViewLongClickListener() {
-        RoboGuice.injectMembers(TabataApplication.getAppContext(), this);
-    }
 
     @Override
     public boolean onLongClick(View view) {
-        deleteWorkoutSectionDialog.showDeleteWorkoutsectionDialog(workoutEditActivity, workout, view, existingSectionsLayout);
+        WorkoutEditActivity workoutEditActivity = getCheckedContext(view);
+        deleteWorkoutSectionDialog.showDeleteWorkoutsectionDialog(workoutEditActivity, workoutEditActivity.getEditedWorkout(), view,
+                existingSectionsLayout);
         return true;
     }
 
-    public void setWorkout(Workout workout) {
-        this.workout = workout;
-    }
-
-    public void setExistingSectionsLayout(LinearLayout existingSectionsLayout) {
-        this.existingSectionsLayout = existingSectionsLayout;
-    }
-
-    public void setWorkoutEditActivity(WorkoutEditActivity workoutEditActivity) {
-        this.workoutEditActivity = workoutEditActivity;
+    private WorkoutEditActivity getCheckedContext(final View view) {
+        //TODO: assert
+        if (!(view.getContext() instanceof WorkoutEditActivity)) {
+            throw new IllegalArgumentException("View context is not a WorkoutEditActivity");
+        }
+        return (WorkoutEditActivity) view.getContext();
     }
 
 }

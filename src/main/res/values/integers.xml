@@ -3,5 +3,7 @@
 
     <integer name="database_version">1</integer>
     <integer name="new_workout_id">-1</integer>
+    <integer name="long_notification_duration">3000</integer>
+    <integer name="short_notification_duration">2000</integer>
 
 </resources>

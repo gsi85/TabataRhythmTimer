@@ -5,9 +5,7 @@ import android.text.Html;
 import android.text.Spanned;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import com.sisa.tabata.R;
 import com.sisa.tabata.TabataApplication;
 import com.sisa.tabata.domain.Workout;
@@ -15,13 +13,12 @@ import com.sisa.tabata.domain.WorkoutSection;
 import com.sisa.tabata.ui.activity.WorkoutEditActivity;
 import com.sisa.tabata.ui.listener.editor.SectionTextViewClickListener;
 import com.sisa.tabata.ui.listener.editor.SectionTextViewLongClickListener;
-
-import roboguice.RoboGuice;
+import roboguice.inject.ContextSingleton;
 
 /**
  * Created by Laca on 2015.03.17..
  */
-@Singleton
+@ContextSingleton
 public class WorkoutSectionsTextViewProvider extends AbstractTextViewProvider {
 
     private static final String TEXT_PATTERN = TabataApplication.getAppContext().getString(R.string.section_text_view_pattern);
@@ -33,10 +30,6 @@ public class WorkoutSectionsTextViewProvider extends AbstractTextViewProvider {
     private SectionTextViewClickListener sectionTextViewClickListener;
     @Inject
     private SectionTextViewLongClickListener sectionTextViewLongClickListener;
-
-    public WorkoutSectionsTextViewProvider() {
-        RoboGuice.injectMembers(TabataApplication.getAppContext(), this);
-    }
 
     public void createSectionTextViews(Workout editedWorkout, WorkoutEditActivity workoutEditActivity, Context context, LinearLayout existingSectionsLayout) {
         for (int i = 0; i < editedWorkout.getWorkoutSections().size(); i++) {

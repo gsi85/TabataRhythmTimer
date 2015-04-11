@@ -8,19 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.SeekBar;
-
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import com.sisa.tabata.R;
 import com.sisa.tabata.ui.listener.workout.VolumeSeekBarChangeListener;
-
 import roboguice.fragment.RoboDialogFragment;
 import roboguice.inject.InjectView;
 
 /**
  * Created by Laca on 2015.03.25..
  */
-@Singleton
 public class VolumeControlDialog extends RoboDialogFragment {
 
     @InjectView(R.id.volumeSeekBar)
