@@ -24,6 +24,12 @@ public class SpinnerArrayAdapterFactory {
     @Inject
     private LoadedWorkoutProvider loadedWorkoutProvider;
 
+    /**
+     * Creates a configured {@link SpinnerArrayAdapter}.
+     *
+     * @param context {@link Context}
+     * @return {@link SpinnerArrayAdapter}
+     */
     public SpinnerArrayAdapter create(final Context context) {
         CharSequence titleText = loadedWorkoutProvider.getLoadedWorkout().getName();
         String[] menuItems = applicationContextProvider.getContext().getResources().getStringArray(R.array.main_menu_items);

@@ -1,6 +1,5 @@
 package com.sisa.tabata.ui.dialog;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,15 +9,13 @@ import android.widget.LinearLayout;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.sisa.tabata.R;
-import com.sisa.tabata.TabataApplication;
 import com.sisa.tabata.dao.loader.LoadedWorkoutProvider;
 import com.sisa.tabata.dao.service.WorkoutDao;
 
-import roboguice.RoboGuice;
-import roboguice.inject.ContextSingleton;
-
 /**
- * Created by Laca on 2015.03.30..
+ * Delete workout dialog.
+ *
+ * @author Laszlo Sisa
  */
 @Singleton
 public class DeleteWorkoutDialog {
@@ -28,6 +25,13 @@ public class DeleteWorkoutDialog {
     @Inject
     private LoadedWorkoutProvider loadedWorkoutProvider;
 
+    /**
+     * Displays workout delete dialog
+     *
+     * @param context {@link Context}
+     * @param selectedWorkoutView {@link View}
+     * @param existingWorkoutLayout {@link LinearLayout}
+     */
     public void showDeleteWorkoutDialog(Context context, View selectedWorkoutView, LinearLayout existingWorkoutLayout) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context, AlertDialog.THEME_HOLO_DARK);
         dialogBuilder.setTitle(context.getString(R.string.dialog_delete_workout_title));
@@ -50,7 +54,7 @@ public class DeleteWorkoutDialog {
         return new DeleteWorkoutPositiveButtonListener(selectedWorkoutView, existingWorkoutLayout);
     }
 
-    private class DeleteWorkoutPositiveButtonListener implements DialogInterface.OnClickListener {
+    private final class DeleteWorkoutPositiveButtonListener implements DialogInterface.OnClickListener {
 
         private final View selectedWorkoutView;
         private final LinearLayout existingWorkoutLayout;

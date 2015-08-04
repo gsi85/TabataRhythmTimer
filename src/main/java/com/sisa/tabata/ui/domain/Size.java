@@ -1,13 +1,21 @@
 package com.sisa.tabata.ui.domain;
 
 /**
- * Created by Laca on 2015.02.27..
+ * Immutable domain object representing a size of two dimensions.
+ *
+ * @author Laszlo Sisa
  */
 public class Size {
 
     private final int width;
     private final int height;
 
+    /**
+     * DI constructor.
+     *
+     * @param width the width
+     * @param height the height
+     */
     public Size(int width, int height) {
         this.width = width;
         this.height = height;

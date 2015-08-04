@@ -8,7 +8,9 @@ import roboguice.inject.ContextSingleton;
 import roboguice.inject.InjectView;
 
 /**
- * Created by Laca on 2015.03.16..
+ * Round number picker value change listener.
+ *
+ * @author Laszlo Sisa
  */
 @ContextSingleton
 public class RoundNumberPickerValueChangeListener implements NumberPicker.OnValueChangeListener {

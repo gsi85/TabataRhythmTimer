@@ -10,7 +10,9 @@ import roboguice.inject.ContextSingleton;
 import roboguice.inject.InjectView;
 
 /**
- * Created by Laca on 2015.03.08..
+ * Section item click listener.
+ *
+ * @author Laszlo Sisa
  */
 @ContextSingleton
 public class SectionItemClickListener implements View.OnClickListener {

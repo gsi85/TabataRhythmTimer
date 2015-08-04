@@ -1,19 +1,27 @@
 package com.sisa.tabata.ui.listener.editor;
 
+import static com.sisa.tabata.validation.Assert.isInstanceOf;
+
 import android.content.Intent;
 import android.view.View;
+
 import com.sisa.tabata.ui.activity.SectionEditActivity;
 import com.sisa.tabata.ui.activity.WorkoutEditActivity;
+
 import roboguice.inject.ContextSingleton;
 
 /**
- * Created by Laca on 2015.03.17..
+ * Section edit action button click listener.
+ *
+ * @author Laszlo Sisa
  */
 @ContextSingleton
 public class SectionEditActionButtonClickListener implements View.OnClickListener {
 
     private static final String NEW_WORKOUT_NAME = "newWorkout";
     private static final String SAVE_ACTION = "save_action";
+    private static final String WORKOUT_SECTION_ID = "workoutSectionId";
+    private static final String WORKOUT_SECTION = "workoutSection";
 
     @Override
     public void onClick(View view) {
@@ -27,10 +35,7 @@ public class SectionEditActionButtonClickListener implements View.OnClickListene
     }
 
     private SectionEditActivity getCheckedContext(final View view) {
-        //TODO: Assert
-        if (!(view.getContext() instanceof SectionEditActivity)) {
-            throw new IllegalArgumentException("View is not a SectionEditActivity");
-        }
+        isInstanceOf(SectionEditActivity.class, view.getContext(), "view is not a SectionEditActivity");
         return (SectionEditActivity) view.getContext();
     }
 
@@ -43,8 +48,8 @@ public class SectionEditActionButtonClickListener implements View.OnClickListene
     }
 
     private void addWorkoutSectionToIntent(final SectionEditActivity sectionEditActivity, Intent workoutEditIntent) {
-        workoutEditIntent.putExtra("workoutSection", sectionEditActivity.getWorkoutSection());
-        workoutEditIntent.putExtra("workoutSectionId", sectionEditActivity.getIntent().getIntExtra("workoutSectionId", -1));
+        workoutEditIntent.putExtra(WORKOUT_SECTION, sectionEditActivity.getWorkoutSection());
+        workoutEditIntent.putExtra(WORKOUT_SECTION_ID, sectionEditActivity.getIntent().getIntExtra(WORKOUT_SECTION_ID, -1));
         workoutEditIntent.putExtra(NEW_WORKOUT_NAME, sectionEditActivity.getIntent().getBooleanExtra(NEW_WORKOUT_NAME, false));
     }
 

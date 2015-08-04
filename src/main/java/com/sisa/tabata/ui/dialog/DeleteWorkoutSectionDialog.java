@@ -9,15 +9,24 @@ import android.widget.LinearLayout;
 import com.google.inject.Singleton;
 import com.sisa.tabata.R;
 import com.sisa.tabata.domain.Workout;
-import roboguice.inject.ContextSingleton;
 
 /**
- * Created by Laca on 2015.03.30..
+ * Delete workout section dialog.
+ *
+ * @author Laszlo Sisa
  */
 @Singleton
 public class DeleteWorkoutSectionDialog {
 
-    public void showDeleteWorkoutsectionDialog(Activity context, Workout workout, View selectedSectionView, LinearLayout existingSectionsLayout) {
+    /**
+     * Displays workout delete dialog.
+     *
+     * @param context {@link Activity}
+     * @param workout {@link Workout}
+     * @param selectedSectionView {@link View}
+     * @param existingSectionsLayout {@link LinearLayout}
+     */
+    public void showDeleteWorkoutSectionDialog(Activity context, Workout workout, View selectedSectionView, LinearLayout existingSectionsLayout) {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context, AlertDialog.THEME_HOLO_DARK);
         dialogBuilder.setTitle(context.getString(R.string.dialog_delete_workout_section_title));
         dialogBuilder.setMessage(context.getString(R.string.dialog_delete_workout_section_message));
@@ -39,7 +48,7 @@ public class DeleteWorkoutSectionDialog {
         return new DeleteWorkoutSectionPositiveButtonListener(workout, selectedSectionView, existingSectionsLayout);
     }
 
-    private class DeleteWorkoutSectionPositiveButtonListener implements DialogInterface.OnClickListener {
+    private final class DeleteWorkoutSectionPositiveButtonListener implements DialogInterface.OnClickListener {
 
         private final Workout workout;
         private final View selectedSectionView;

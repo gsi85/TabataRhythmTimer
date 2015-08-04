@@ -2,9 +2,7 @@ package com.sisa.tabata.ui.listener.workout;
 
 import android.media.AudioManager;
 import android.widget.SeekBar;
-import com.google.inject.Inject;
 import com.sisa.tabata.TabataApplication;
-import com.sisa.tabata.media.service.EffectPlayerService;
 import roboguice.RoboGuice;
 import roboguice.inject.ContextSingleton;
 
@@ -14,8 +12,6 @@ import roboguice.inject.ContextSingleton;
 @ContextSingleton
 public class VolumeSeekBarChangeListener implements SeekBar.OnSeekBarChangeListener {
 
-    @Inject
-    private EffectPlayerService effectPlayerService;
     private AudioManager audioManager;
 
     public VolumeSeekBarChangeListener() {
@@ -25,7 +21,6 @@ public class VolumeSeekBarChangeListener implements SeekBar.OnSeekBarChangeListe
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, progress, 0);
-        effectPlayerService.playShortBeep();
     }
 
     @Override

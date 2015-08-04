@@ -7,12 +7,15 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 
-import com.google.inject.Singleton;
+import com.google.inject.Inject;
 import com.sisa.tabata.ui.domain.Size;
+
 import roboguice.inject.ContextSingleton;
 
 /**
- * Created by Laca on 2015.02.20..
+ * Circular progress bar drawable class.
+ *
+ * @author Laszlo Sisa
  */
 @ContextSingleton
 public class CircularProgressBarDrawable extends Drawable {
@@ -20,6 +23,8 @@ public class CircularProgressBarDrawable extends Drawable {
     private static final int START_ANGLE = -90;
     private static final int FULL_ROTATION = 360;
     private static final int STROKE_WIDTH_PERCENTAGE = 7;
+    private static final int HUNDRED_PERCENT = 100;
+    private static final double PADDING_MULTIPLIER = 0.04;
 
     private long maxValue;
     private int sweepAngle;
@@ -33,13 +38,22 @@ public class CircularProgressBarDrawable extends Drawable {
     private Paint progressPaint;
     private Paint circularPaint;
     private Paint backgroundPaint;
+    private PaintFactory paintFactory = new PaintFactory();
 
+    /**
+     * DI constructor.
+     */
     public CircularProgressBarDrawable() {
-        setUpProgressPaint();
-        setUpInnerCirclePaint();
-        setUpBackgroundPaint();
+        progressPaint = paintFactory.createPaint(true, Paint.Style.STROKE, Paint.Cap.SQUARE, Color.CYAN);
+        circularPaint = paintFactory.createPaint(true, Paint.Style.STROKE, Paint.Cap.BUTT, Color.WHITE);
+        backgroundPaint = paintFactory.createPaint(true, Paint.Style.FILL, Paint.Cap.BUTT, Color.BLACK);
     }
 
+    /**
+     * Updates the progress bar
+     *
+     * @param remaining remaining amount from countdown
+     */
     public void update(long remaining) {
         sweepAngle = calculateNewSweepAngle(remaining);
         invalidateSelf();
@@ -52,11 +66,16 @@ public class CircularProgressBarDrawable extends Drawable {
         drawBackground(canvas);
     }
 
+    /**
+     * Sets the size of container of the progress bar.
+     *
+     * @param containerSize {@link Size}
+     */
     public void setContainerSize(Size containerSize) {
         containerViewWidth = containerSize.getWidth();
         containerViewHeight = containerSize.getHeight();
-        int strokeWidth = Math.round((float) containerViewWidth / 100 * STROKE_WIDTH_PERCENTAGE);
-        int padding = Double.valueOf(Math.min(containerViewWidth, containerViewHeight) * 0.04).intValue();
+        int strokeWidth = Math.round((float) containerViewWidth / HUNDRED_PERCENT * STROKE_WIDTH_PERCENTAGE);
+        int padding = Double.valueOf(Math.min(containerViewWidth, containerViewHeight) * PADDING_MULTIPLIER).intValue();
         int halfWidth = containerViewWidth / 2;
         int halfHeight = containerViewHeight / 2;
         int radius = Math.min(containerViewWidth, containerViewHeight) / 2;
@@ -85,33 +104,16 @@ public class CircularProgressBarDrawable extends Drawable {
         canvas.drawCircle(containerViewWidth / 2, containerViewHeight / 2, innerCircleRadius - 1, backgroundPaint);
     }
 
-    private void setUpProgressPaint() {
-        progressPaint = new Paint();
-        progressPaint.setAntiAlias(true);
-        progressPaint.setStyle(Paint.Style.STROKE);
-        progressPaint.setStrokeCap(Paint.Cap.SQUARE);
-        progressPaint.setColor(Color.CYAN);
-    }
-
-    private void setUpInnerCirclePaint() {
-        circularPaint = new Paint();
-        circularPaint.setAntiAlias(true);
-        circularPaint.setStyle(Paint.Style.STROKE);
-        circularPaint.setColor(Color.WHITE);
-    }
-
-    private void setUpBackgroundPaint() {
-        backgroundPaint = new Paint();
-        backgroundPaint.setAntiAlias(true);
-        backgroundPaint.setStyle(Paint.Style.FILL);
-        backgroundPaint.setColor(Color.BLACK);
-    }
-
     public void setMaxValue(long maxValue) {
         this.maxValue = maxValue;
     }
 
-    public void setBackgroundPaintColor(int color){
+    /**
+     * Sets the background color.
+     *
+     * @param color the colors code
+     */
+    public void setBackgroundPaintColor(int color) {
         backgroundPaint.setColor(color);
     }
 
