@@ -1,33 +1,37 @@
 package com.sisa.tabata.ui.listener.workout;
 
+import static com.sisa.tabata.validation.Assert.isInstanceOf;
+
+import roboguice.inject.ContextSingleton;
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
+
 import com.google.inject.Inject;
 import com.sisa.tabata.ui.dialog.VolumeControlDialog;
-import roboguice.inject.ContextSingleton;
 
 /**
- * Created by Laca on 2015.03.26..
+ * Volume button click listener.
+ *
+ * @author Laszlo Sisa
  */
 @ContextSingleton
 public class VolumeButtonClickListener implements View.OnClickListener {
+
+    private static final String DIALOG_VOLUME_CONTROL = "dialog_volume_control";
 
     @Inject
     private VolumeControlDialog volumeControlDialog;
 
     @Override
     public void onClick(View view) {
-        volumeControlDialog.show(getCheckedFragmentManager(view), "dialog_volume_control");
+        volumeControlDialog.show(getCheckedFragmentManager(view), DIALOG_VOLUME_CONTROL);
     }
 
     private FragmentManager getCheckedFragmentManager(View view) {
         Context context = view.getContext();
-        //TODO: replace with Assert
-        if (!(context instanceof FragmentActivity)) {
-            throw new IllegalArgumentException("View context is not a FragmentActivity");
-        }
+        isInstanceOf(FragmentActivity.class, context, "View context is not a FragmentActivity");
         return ((FragmentActivity) context).getSupportFragmentManager();
     }
 

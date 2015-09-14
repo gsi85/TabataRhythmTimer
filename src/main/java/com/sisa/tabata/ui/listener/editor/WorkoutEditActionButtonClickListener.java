@@ -1,5 +1,8 @@
 package com.sisa.tabata.ui.listener.editor;
 
+import static com.sisa.tabata.validation.Assert.isInstanceOf;
+
+import roboguice.inject.ContextSingleton;
 import android.content.Intent;
 import android.view.View;
 
@@ -10,10 +13,10 @@ import com.sisa.tabata.domain.Workout;
 import com.sisa.tabata.ui.activity.WorkoutActivity;
 import com.sisa.tabata.ui.activity.WorkoutEditActivity;
 
-import roboguice.inject.ContextSingleton;
-
 /**
- * Created by Laca on 2015.03.19..
+ * Workout edit action button click listener.
+ *
+ * @author Laszlo Sisa
  */
 @ContextSingleton
 public class WorkoutEditActionButtonClickListener implements View.OnClickListener {
@@ -54,10 +57,7 @@ public class WorkoutEditActionButtonClickListener implements View.OnClickListene
     }
 
     private WorkoutEditActivity getCheckedContext(final View view) {
-        //TODO: assert
-        if (!(view.getContext() instanceof WorkoutEditActivity)) {
-            throw new IllegalArgumentException("View context is not a WorkoutEditActivity");
-        }
+        isInstanceOf(WorkoutEditActivity.class, view.getContext(), "View context is not a WorkoutEditActivity\"");
         return (WorkoutEditActivity) view.getContext();
     }
 

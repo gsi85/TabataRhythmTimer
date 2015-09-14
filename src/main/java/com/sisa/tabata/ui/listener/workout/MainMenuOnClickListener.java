@@ -1,19 +1,25 @@
 package com.sisa.tabata.ui.listener.workout;
 
+import static com.sisa.tabata.validation.Assert.isInstanceOf;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import roboguice.inject.ContextSingleton;
 import android.content.Intent;
 import android.view.View;
+
 import com.google.inject.Inject;
 import com.sisa.tabata.dao.loader.EditedWorkoutProvider;
 import com.sisa.tabata.dao.loader.LoadedWorkoutProvider;
 import com.sisa.tabata.ui.activity.WorkoutActivity;
 import com.sisa.tabata.ui.activity.WorkoutEditActivity;
 import com.sisa.tabata.ui.activity.WorkoutLoadActivity;
-import java.util.HashMap;
-import java.util.Map;
-import roboguice.inject.ContextSingleton;
 
 /**
- * Created by Laca on 2015.03.23..
+ * Main menu on click listener.
+ *
+ * @author Laszlo Sisa
  */
 @ContextSingleton
 public class MainMenuOnClickListener implements View.OnClickListener {
@@ -40,10 +46,7 @@ public class MainMenuOnClickListener implements View.OnClickListener {
     }
 
     private WorkoutActivity getCheckedActivity(final View view) {
-        //TODO: Assert
-        if (!(view.getContext() instanceof WorkoutActivity)) {
-            throw new IllegalArgumentException("View context is not WorkoutActivity");
-        }
+        isInstanceOf(WorkoutActivity.class, view.getContext(), "View context is not WorkoutActivity");
         return (WorkoutActivity) view.getContext();
     }
 

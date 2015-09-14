@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Domain objects describing a workout.
+ * Domain object describing a workout.
  *
  * @author Laszlo Sisa
  */

@@ -3,17 +3,26 @@ package com.sisa.tabata.ui.listener.editor;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+
 import com.sisa.tabata.R;
 import com.sisa.tabata.domain.Workout;
 
 /**
- * Created by Laca on 2015.03.18..
+ * Workout edit text editor watcher.
+ *
+ * @author Laszlo Sisa
  */
 public class WorkoutEditTextEditorTextWatcher implements TextWatcher {
 
     private final Workout workout;
     private final View view;
 
+    /**
+     * DI constructor.
+     *
+     * @param workout {@link Workout}
+     * @param view {@link View}
+     */
     public WorkoutEditTextEditorTextWatcher(Workout workout, View view) {
         this.workout = workout;
         this.view = view;
@@ -26,9 +35,10 @@ public class WorkoutEditTextEditorTextWatcher implements TextWatcher {
 
     @Override
     public void onTextChanged(CharSequence sequence, int start, int before, int count) {
-        if (view.getId() == R.id.workoutNameTextEditor) {
+        int viewId = view.getId();
+        if (viewId == R.id.workoutNameTextEditor) {
             workout.setName(sequence.toString());
-        } else if (view.getId() == R.id.workoutDescriptionTextEditor) {
+        } else if (viewId == R.id.workoutDescriptionTextEditor) {
             workout.setDescription(sequence.toString());
         }
     }

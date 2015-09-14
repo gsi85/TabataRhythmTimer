@@ -1,5 +1,8 @@
 package com.sisa.tabata.ui.listener.loader;
 
+import static com.sisa.tabata.validation.Assert.isInstanceOf;
+
+import roboguice.inject.ContextSingleton;
 import android.content.Intent;
 import android.view.View;
 
@@ -8,10 +11,10 @@ import com.sisa.tabata.dao.loader.LoadedWorkoutProvider;
 import com.sisa.tabata.ui.activity.WorkoutActivity;
 import com.sisa.tabata.ui.activity.WorkoutLoadActivity;
 
-import roboguice.inject.ContextSingleton;
-
 /**
- * Created by Laca on 2015.03.25..
+ * Workout text view click listener.
+ *
+ * @author Laszlo Sisa
  */
 @ContextSingleton
 public class WorkoutTextViewClickListener implements View.OnClickListener {
@@ -36,10 +39,7 @@ public class WorkoutTextViewClickListener implements View.OnClickListener {
     }
 
     private WorkoutLoadActivity getCheckedContext(final View view) {
-        //TODO: assert
-        if (!(view.getContext() instanceof WorkoutLoadActivity)) {
-            throw new IllegalArgumentException("View context is not a WorkoutLoadActivity");
-        }
+        isInstanceOf(WorkoutLoadActivity.class, view.getContext(), "View context is not a WorkoutLoadActivity");
         return (WorkoutLoadActivity) view.getContext();
     }
 

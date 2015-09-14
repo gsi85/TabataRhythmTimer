@@ -1,5 +1,8 @@
 package com.sisa.tabata.ui.listener.loader;
 
+import roboguice.inject.ContextSingleton;
+import roboguice.inject.InjectView;
+import android.content.Context;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -10,16 +13,17 @@ import com.sisa.tabata.dao.service.WorkoutDao;
 import com.sisa.tabata.ui.dialog.DeleteWorkoutDialog;
 import com.sisa.tabata.ui.timer.NotificationDisplayTimer;
 
-import roboguice.inject.ContextSingleton;
-import roboguice.inject.InjectView;
-
 /**
- * Created by Laca on 2015.03.25..
+ * Workout text view long click listener.
+ *
+ * @author Laszlo Sisa
  */
 @ContextSingleton
 public class WorkoutTextViewLongClickListener implements View.OnLongClickListener {
 
     private static final int MINIMUM_REMAINING_WORKOUTS_COUNT = 1;
+    private static final int NOTIFICATION_CANT_DELETE_LAST_WORKOUT = R.string.notification_cant_delete_last_workout;
+    private static final int SHORT_NOTIFICATION_DURATION = R.integer.short_notification_duration;
 
     @InjectView(R.id.existingWorkoutLayout)
     private LinearLayout existingWorkoutLayout;
@@ -38,21 +42,26 @@ public class WorkoutTextViewLongClickListener implements View.OnLongClickListene
     }
 
     private void deleteWorkout(View view) {
+        Context context = view.getContext();
         if (hasWorkoutLeftAfterDelete()) {
-            deleteWorkoutDialog.showDeleteWorkoutDialog(view.getContext(), view, existingWorkoutLayout);
+            showDeleteWorkoutDialog(view);
         } else {
-            showCantDeleteMessage(view);
+            showCantDeleteMessage(context);
         }
-    }
-
-    private void showCantDeleteMessage(final View view) {
-        String notificationString = view.getContext().getString(R.string.notification_cant_delete_last_workout);
-        new NotificationDisplayTimer(workoutLoadNotificationView, notificationString, view.getContext().getResources()
-                .getInteger(R.integer.short_notification_duration)).start();
     }
 
     private boolean hasWorkoutLeftAfterDelete() {
         return workoutDao.getAllWorkoutsSortedList().size() > MINIMUM_REMAINING_WORKOUTS_COUNT;
+    }
+
+    private void showDeleteWorkoutDialog(final View view) {
+        deleteWorkoutDialog.showDeleteWorkoutDialog(view.getContext(), view, existingWorkoutLayout);
+    }
+
+    private void showCantDeleteMessage(final Context context) {
+        String notificationString = context.getString(NOTIFICATION_CANT_DELETE_LAST_WORKOUT);
+        int durationMillis = context.getResources().getInteger(SHORT_NOTIFICATION_DURATION);
+        new NotificationDisplayTimer(workoutLoadNotificationView, notificationString, durationMillis).start();
     }
 
 }

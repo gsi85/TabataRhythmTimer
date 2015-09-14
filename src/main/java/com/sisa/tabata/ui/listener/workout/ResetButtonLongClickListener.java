@@ -1,11 +1,16 @@
 package com.sisa.tabata.ui.listener.workout;
 
-import android.view.View;
-import com.sisa.tabata.ui.activity.WorkoutActivity;
+import static com.sisa.tabata.validation.Assert.isInstanceOf;
+
 import roboguice.inject.ContextSingleton;
+import android.view.View;
+
+import com.sisa.tabata.ui.activity.WorkoutActivity;
 
 /**
- * Created by Laca on 2015.02.28..
+ * Reset button long click listener.
+ *
+ * @author Laszlo Sisa
  */
 @ContextSingleton
 public class ResetButtonLongClickListener implements View.OnLongClickListener {
@@ -17,10 +22,7 @@ public class ResetButtonLongClickListener implements View.OnLongClickListener {
     }
 
     private PlayButtonClickListener getCheckedPlayButtonListener(final View view) {
-        //TODO: replace with Assert
-        if(!(view.getContext() instanceof WorkoutActivity)){
-            throw new IllegalArgumentException("View context is not a WorkoutActivity");
-        }
+        isInstanceOf(WorkoutActivity.class, view.getContext(), "View context is not a WorkoutActivity");
         return ((WorkoutActivity) view.getContext()).getPlayButtonClickListener();
     }
 

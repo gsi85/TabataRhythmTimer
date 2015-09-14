@@ -1,5 +1,8 @@
 package com.sisa.tabata.ui.listener.editor;
 
+import static com.sisa.tabata.validation.Assert.isInstanceOf;
+
+import roboguice.inject.ContextSingleton;
 import android.view.View;
 import android.widget.TextView;
 
@@ -9,10 +12,10 @@ import com.sisa.tabata.ui.activity.SectionEditActivity;
 import com.sisa.tabata.ui.domain.WorkoutType;
 import com.sisa.tabata.ui.provider.WorkoutTotalTimeProvider;
 
-import roboguice.inject.ContextSingleton;
-
 /**
- * Created by Laca on 2015.03.17..
+ * Section total time change listener.
+ *
+ * @author Laszlo Sisa
  */
 @ContextSingleton
 public class SectionTotalTimeChangeListener {
@@ -20,6 +23,12 @@ public class SectionTotalTimeChangeListener {
     @Inject
     private WorkoutTotalTimeProvider workoutTotalTimeProvider;
 
+    /**
+     * Sets the number of rounds.
+     *
+     * @param totalTimeValue {@link TextView} containing total time value
+     * @param rounds number of rounds
+     */
     public void setRounds(final TextView totalTimeValue, final int rounds) {
         SectionEditActivity sectionEditActivity = getCheckedContext(totalTimeValue);
         WorkoutSection workoutSection = sectionEditActivity.getWorkoutSection();
@@ -27,6 +36,13 @@ public class SectionTotalTimeChangeListener {
         updateTotalTimeView(workoutSection, totalTimeValue);
     }
 
+    /**
+     * Set section time.
+     *
+     * @param totalTimeValue {@link TextView} containing total time value
+     * @param workoutType {@link WorkoutType}
+     * @param duration duration
+     */
     public void setTimeSection(final TextView totalTimeValue, WorkoutType workoutType, long duration) {
         SectionEditActivity sectionEditActivity = getCheckedContext(totalTimeValue);
         WorkoutSection workoutSection = sectionEditActivity.getWorkoutSection();
@@ -50,10 +66,7 @@ public class SectionTotalTimeChangeListener {
     }
 
     private SectionEditActivity getCheckedContext(final View view) {
-        //TODO: assert
-        if (!(view.getContext() instanceof SectionEditActivity)) {
-            throw new IllegalArgumentException("View context is not a WorkoutEditActivity");
-        }
+        isInstanceOf(SectionEditActivity.class, view.getContext(), "view is not a SectionEditActivity");
         return (SectionEditActivity) view.getContext();
     }
 

@@ -2,21 +2,17 @@ package com.sisa.tabata.ui.listener.workout;
 
 import android.media.AudioManager;
 import android.widget.SeekBar;
-import com.sisa.tabata.TabataApplication;
-import roboguice.RoboGuice;
 import roboguice.inject.ContextSingleton;
 
 /**
- * Created by Laca on 2015.03.26..
+ * Volume seek bar change listener.
+ *
+ * @author Laszlo Sisa
  */
 @ContextSingleton
 public class VolumeSeekBarChangeListener implements SeekBar.OnSeekBarChangeListener {
 
     private AudioManager audioManager;
-
-    public VolumeSeekBarChangeListener() {
-        RoboGuice.injectMembers(TabataApplication.getAppContext(), this);
-    }
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {

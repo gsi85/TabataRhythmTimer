@@ -3,6 +3,8 @@ package com.sisa.tabata.ui.listener.editor;
 import java.util.HashMap;
 import java.util.Map;
 
+import roboguice.inject.ContextSingleton;
+import roboguice.inject.InjectView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
@@ -11,11 +13,10 @@ import com.sisa.tabata.R;
 import com.sisa.tabata.ui.domain.WorkoutType;
 import com.sisa.tabata.util.TimeFormatter;
 
-import roboguice.inject.ContextSingleton;
-import roboguice.inject.InjectView;
-
 /**
- * Created by Laca on 2015.03.16..
+ * Time number picker value change listener.
+ *
+ * @author Laszlo Sisa
  */
 @ContextSingleton
 public class TimeNumberPickerValueChangeListener implements NumberPicker.OnValueChangeListener {
