@@ -1,20 +1,19 @@
 package com.sisa.tabata.ui.timer;
 
+import java.util.concurrent.TimeUnit;
+
 import android.widget.ImageButton;
 
 import com.sisa.tabata.R;
-import com.sisa.tabata.TabataApplication;
 import com.sisa.tabata.ui.domain.SerializedWorkout;
 import com.sisa.tabata.ui.domain.SerializedWorkoutSection;
 import com.sisa.tabata.ui.progressbar.CurrentRoundProgressBar;
 import com.sisa.tabata.ui.progressbar.TotalWorkoutProgressBar;
 
-import java.util.concurrent.TimeUnit;
-
-import roboguice.RoboGuice;
-
 /**
- * Created by Laca on 2015.02.28.
+ * Workout count down timer.
+ *
+ * @author Laszlo Sisa
  */
 public class WorkoutCountDownTimer extends CountDownTimerWithPause {
 
@@ -29,7 +28,16 @@ public class WorkoutCountDownTimer extends CountDownTimerWithPause {
     private int sectionCounter;
     private int maxSectionIndex;
 
-    public WorkoutCountDownTimer(SerializedWorkout serializedWorkout, CurrentRoundProgressBar currentRoundProgressBar, TotalWorkoutProgressBar totalWorkoutProgressBar, ImageButton playButton) {
+    /**
+     * DI constructor.
+     *
+     * @param serializedWorkout {@link SerializedWorkout}
+     * @param currentRoundProgressBar {@link CurrentRoundProgressBar}
+     * @param totalWorkoutProgressBar {@link TotalWorkoutProgressBar}
+     * @param playButton {@link ImageButton}
+     */
+    public WorkoutCountDownTimer(SerializedWorkout serializedWorkout, CurrentRoundProgressBar currentRoundProgressBar,
+            TotalWorkoutProgressBar totalWorkoutProgressBar, ImageButton playButton) {
         super(serializedWorkout.getTimeUnit().toMillis(serializedWorkout.getWorkoutDuration()), COUNT_DOWN_INTERVAL_MILLIS, false);
         this.serializedWorkout = serializedWorkout;
         this.currentRoundProgressBar = currentRoundProgressBar;

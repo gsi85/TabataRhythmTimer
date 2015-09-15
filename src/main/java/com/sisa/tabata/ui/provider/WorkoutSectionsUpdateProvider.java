@@ -7,13 +7,24 @@ import com.sisa.tabata.domain.Workout;
 import com.sisa.tabata.domain.WorkoutSection;
 
 /**
- * Created by Laca on 2015.03.17..
+ * Workout section update provider.
+ *
+ * @author Laszlo Sisa
  */
 @Singleton
 public class WorkoutSectionsUpdateProvider {
 
     public static final int NEW_SECTION_INDEX = -1;
+    private static final String WORKOUT_SECTION = "workoutSection";
+    private static final String WORKOUT_SECTION_ID = "workoutSectionId";
+    private static final int DEFAULT_VALUE = -1;
 
+    /**
+     * Updates workout with edited section.
+     *
+     * @param workout {@link Workout}
+     * @param workoutEditIntent {@link Intent}
+     */
     public void updateWorkoutWithEditedSection(Workout workout, Intent workoutEditIntent) {
         if (updateAvailable(workoutEditIntent)) {
             updateWorkoutSections(workout, workoutEditIntent);
@@ -42,11 +53,11 @@ public class WorkoutSectionsUpdateProvider {
     }
 
     private WorkoutSection getWorkoutSectionFromIntent(Intent workoutEditIntent) {
-        return workoutEditIntent.getParcelableExtra("workoutSection");
+        return workoutEditIntent.getParcelableExtra(WORKOUT_SECTION);
     }
 
     private int getWorkoutSectionIdFromIntent(Intent workoutEditIntent) {
-        return workoutEditIntent.getIntExtra("workoutSectionId", -1);
+        return workoutEditIntent.getIntExtra(WORKOUT_SECTION_ID, DEFAULT_VALUE);
     }
 
 }

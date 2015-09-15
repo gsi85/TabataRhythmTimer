@@ -14,9 +14,4 @@
             Total time: <big><strong>%s</strong></big>
         ]]>
     </string>
-    <string formatted="false" name="minutes_down_to_hundreds_sec_pattern">
-        <![CDATA[
-            <big>%02d:%02d</big><small>.%01d</small>
-        ]]>
-    </string>
 </resources>

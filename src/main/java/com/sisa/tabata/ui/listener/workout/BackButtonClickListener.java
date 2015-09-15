@@ -1,14 +1,14 @@
 package com.sisa.tabata.ui.listener.workout;
 
-import roboguice.inject.ContextSingleton;
-import roboguice.inject.InjectView;
 import android.content.Intent;
 import android.widget.TextView;
-
+import com.google.inject.Inject;
+import com.sisa.tabata.ApplicationContextProvider;
 import com.sisa.tabata.R;
-import com.sisa.tabata.TabataApplication;
 import com.sisa.tabata.ui.activity.WorkoutActivity;
 import com.sisa.tabata.ui.timer.NotificationDisplayTimer;
+import roboguice.inject.ContextSingleton;
+import roboguice.inject.InjectView;
 
 /**
  * Back button click listener.
@@ -23,6 +23,8 @@ public class BackButtonClickListener {
 
     @InjectView(R.id.workoutNotificationView)
     private TextView workoutNotificationView;
+    @Inject
+    private ApplicationContextProvider applicationContextProvider;
     private int backButtonCount;
 
     /**
@@ -51,7 +53,7 @@ public class BackButtonClickListener {
     }
 
     private void showFirstPressNotification() {
-        String notificationString = TabataApplication.getAppContext().getString(NOTIFICATION_PRESS_AGAIN_TO_EXIT);
+        String notificationString = applicationContextProvider.getStringResource(NOTIFICATION_PRESS_AGAIN_TO_EXIT);
         new NotificationDisplayTimer(workoutNotificationView, notificationString, NOTIFICATION_TIME_IN_MILLIS).start();
         backButtonCount++;
     }

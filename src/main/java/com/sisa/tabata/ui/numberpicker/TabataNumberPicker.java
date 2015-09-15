@@ -7,27 +7,48 @@ import android.util.AttributeSet;
 import android.widget.NumberPicker;
 
 /**
- * Created by Laca on 2015.03.08..
+ * Customized number picker.
+ *
+ * @author Laszlo Sisa
  */
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class TabataNumberPicker extends NumberPicker {
 
-    private static final String MIN_VALUE_ATTRIBUTE_NAME = "minValue" ;
-    private static final String MAX_VALUE_ATTRIBUTE_NAME = "maxValue" ;
+    private static final String MIN_VALUE_ATTRIBUTE_NAME = "minValue";
+    private static final String MAX_VALUE_ATTRIBUTE_NAME = "maxValue";
 
+    /**
+     * Constructor.
+     *
+     * @param context {@link Context}
+     */
     public TabataNumberPicker(Context context) {
         super(context);
     }
 
-    public TabataNumberPicker(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        processAttributeSet(attrs);
+    /**
+     * Constructor.
+     *
+     * @param context {@link Context}
+     * @param attributeSet {@link AttributeSet}
+     */
+    public TabataNumberPicker(Context context, AttributeSet attributeSet) {
+        super(context, attributeSet);
+        processAttributeSet(attributeSet);
     }
 
-    public TabataNumberPicker(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-        processAttributeSet(attrs);
+    /**
+     * Constructor.
+     *
+     * @param context {@link Context}
+     * @param attributeSet {@link AttributeSet}
+     * @param defStyle reference to style resource
+     */
+    public TabataNumberPicker(Context context, AttributeSet attributeSet, int defStyle) {
+        super(context, attributeSet, defStyle);
+        processAttributeSet(attributeSet);
     }
+
     private void processAttributeSet(AttributeSet attrs) {
         this.setMinValue(attrs.getAttributeIntValue(null, MIN_VALUE_ATTRIBUTE_NAME, 0));
         this.setMaxValue(attrs.getAttributeIntValue(null, MAX_VALUE_ATTRIBUTE_NAME, 0));

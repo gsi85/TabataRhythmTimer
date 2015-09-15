@@ -1,20 +1,18 @@
 package com.sisa.tabata.ui.progressbar;
 
+import roboguice.inject.ContextSingleton;
+import roboguice.inject.InjectView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import com.sisa.tabata.R;
-import com.sisa.tabata.TabataApplication;
 import com.sisa.tabata.util.TimeFormatter;
 
-import roboguice.RoboGuice;
-import roboguice.inject.ContextSingleton;
-import roboguice.inject.InjectView;
-
 /**
- * Created by Laca on 2015.02.23..
+ * Progress bar representing the progress of the workout in total.
+ *
+ * @author Laszlo Sisa
  */
 @ContextSingleton
 public class TotalWorkoutProgressBar {
@@ -31,15 +29,25 @@ public class TotalWorkoutProgressBar {
     private long remainingTimeInMillis;
     private long totalTimeInMillis;
 
-    public void update(long millisRemaining) {
+    /**
+     * Sets up the progress bar.
+     *
+     * @param totalTimeInMilliSeconds total time in milli seconds
+     */
+    public void setUp(final long totalTimeInMilliSeconds) {
+        totalTimeInMillis = totalTimeInMilliSeconds;
+        update(totalTimeInMilliSeconds);
+    }
+
+    /**
+     * Updates the progress bar.
+     *
+     * @param millisRemaining time remaining in milli seconds
+     */
+    public void update(final long millisRemaining) {
         remainingTimeInMillis = millisRemaining;
         updateTotalTimeRemainingText();
         updateWorkOutProgressBar();
-    }
-
-    public void setUp(long totalTimeInMilliSeconds) {
-        totalTimeInMillis = totalTimeInMilliSeconds;
-        update(totalTimeInMilliSeconds);
     }
 
     private void updateTotalTimeRemainingText() {
@@ -52,11 +60,7 @@ public class TotalWorkoutProgressBar {
 
     private int getProgressValue() {
         long elapsedTimeInMillis = totalTimeInMillis - remainingTimeInMillis;
-        return Math.round((float) (elapsedTimeInMillis) / totalTimeInMillis * MAX_PROGRESS_BAR_VALUE);
-    }
-
-    public void setWorkoutProgressBar(ProgressBar workoutProgressBar) {
-        this.workoutProgressBar = workoutProgressBar;
+        return Math.round((float) elapsedTimeInMillis / totalTimeInMillis * MAX_PROGRESS_BAR_VALUE);
     }
 
 }

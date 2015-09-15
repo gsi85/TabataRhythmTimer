@@ -1,8 +1,10 @@
 package com.sisa.tabata.workout.transformer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.sisa.tabata.TabataApplication;
 import com.sisa.tabata.domain.Workout;
 import com.sisa.tabata.domain.WorkoutSection;
 import com.sisa.tabata.ui.domain.SerializedWorkout;
@@ -11,13 +13,10 @@ import com.sisa.tabata.ui.domain.WorkoutType;
 import com.sisa.tabata.workout.factory.SerializedWorkoutFactory;
 import com.sisa.tabata.workout.factory.SerializedWorkoutSectionFactory;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import roboguice.RoboGuice;
-
 /**
- * Created by Laca on 2015.02.27..
+ * Transformer for creating a {@link SerializedWorkout} from a {@link Workout}.
+ *
+ * @author Laszlo Sisa
  */
 @Singleton
 public class SerializedWorkoutTransformer {
@@ -28,10 +27,12 @@ public class SerializedWorkoutTransformer {
     private SerializedWorkoutSectionFactory serializedWorkoutSectionFactory;
     private long totalDurationSecs;
 
-    public SerializedWorkoutTransformer() {
-        RoboGuice.injectMembers(TabataApplication.getAppContext(), this);
-    }
-
+    /**
+     * Transforms a {@link Workout} into a {@link SerializedWorkout}.
+     *
+     * @param workout {@link Workout} data source
+     * @return {@link SerializedWorkout}
+     */
     public SerializedWorkout transform(Workout workout) {
         SerializedWorkout serializedWorkout = serializedWorkoutFactory.create();
         serializedWorkout.setTimeUnit(workout.getTimeUnit());
@@ -71,10 +72,12 @@ public class SerializedWorkoutTransformer {
     }
 
     private SerializedWorkoutSection getCoolDownSection(int sectionCount, WorkoutSection workoutSection) {
-        return buildWorkoutSection(sectionCount, workoutSection.getRounds(), workoutSection.getRounds(), workoutSection.getCoolDown(), WorkoutType.COOL_DOWN);
+        return buildWorkoutSection(sectionCount, workoutSection.getRounds(), workoutSection.getRounds(), workoutSection.getCoolDown(),
+                WorkoutType.COOL_DOWN);
     }
 
-    private SerializedWorkoutSection buildWorkoutSection(int sectionCount, int roundCount, int totalRoundsInSection, long duration, WorkoutType workoutType) {
+    private SerializedWorkoutSection buildWorkoutSection(int sectionCount, int roundCount, int totalRoundsInSection, long duration,
+            WorkoutType workoutType) {
         SerializedWorkoutSection serializedWorkoutSection = serializedWorkoutSectionFactory.create();
         serializedWorkoutSection.setSectionCount(sectionCount);
         serializedWorkoutSection.setRoundCount(roundCount);

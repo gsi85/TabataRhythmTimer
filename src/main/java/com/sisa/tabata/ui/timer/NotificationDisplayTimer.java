@@ -5,12 +5,21 @@ import android.view.View;
 import android.widget.TextView;
 
 /**
- * Created by Laca on 2015.03.29..
+ * Notification display timer.
+ *
+ * @author Laszlo Sisa
  */
 public class NotificationDisplayTimer extends CountDownTimer {
 
     private final TextView notificationView;
 
+    /**
+     * DI constructor.
+     *
+     * @param notificationView {@link TextView} where the notification is displayed
+     * @param textToDisplay text to display
+     * @param durationMillis notifications duration in milli seconds
+     */
     public NotificationDisplayTimer(TextView notificationView, String textToDisplay, long durationMillis) {
         super(durationMillis, durationMillis);
         this.notificationView = notificationView;

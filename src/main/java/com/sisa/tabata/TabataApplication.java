@@ -1,17 +1,16 @@
 package com.sisa.tabata;
 
-import android.app.Application;
-import android.content.Context;
-import com.google.inject.Inject;
 import roboguice.RoboGuice;
+import android.app.Application;
+
+import com.google.inject.Inject;
 
 /**
- * Created by Laca on 2015.02.22..
+ * Base class of application to maintain global state.
+ *
+ * @author Laszlo Sisa
  */
 public class TabataApplication extends Application {
-
-    //TODO: remove this
-    private static Context context;
 
     @Inject
     private ApplicationContextProvider applicationContextProvider;
@@ -21,11 +20,6 @@ public class TabataApplication extends Application {
         super.onCreate();
         RoboGuice.injectMembers(getApplicationContext(), this);
         applicationContextProvider.setContext(getApplicationContext());
-        TabataApplication.context = getApplicationContext();
     }
 
-    @Deprecated
-    public static Context getAppContext() {
-        return TabataApplication.context;
-    }
 }

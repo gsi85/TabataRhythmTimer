@@ -4,12 +4,20 @@ import com.google.inject.Singleton;
 import com.sisa.tabata.ui.domain.SerializedWorkout;
 
 /**
- * Created by Laca on 2015.02.27..
+ * Factory for {@link SerializedWorkout}.
+ *
+ * @author Laszlo Sisa
  */
 @Singleton
 public class SerializedWorkoutFactory {
 
-    public SerializedWorkout create(){
+    /**
+     * Creates a new {@link SerializedWorkout} instance.
+     *
+     * @return {@link SerializedWorkout}
+     */
+    public SerializedWorkout create() {
         return new SerializedWorkout();
     }
+
 }

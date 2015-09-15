@@ -1,6 +1,9 @@
 package com.sisa.tabata.ui.progressbar;
 
+import roboguice.inject.ContextSingleton;
+import roboguice.inject.InjectView;
 import android.widget.TextView;
+
 import com.google.inject.Inject;
 import com.sisa.tabata.R;
 import com.sisa.tabata.media.service.EffectPlayerService;
@@ -8,11 +11,11 @@ import com.sisa.tabata.ui.domain.SerializedWorkoutSection;
 import com.sisa.tabata.ui.domain.WorkoutType;
 import com.sisa.tabata.ui.drawable.CircularProgressBarDrawable;
 import com.sisa.tabata.util.TimeFormatter;
-import roboguice.inject.ContextSingleton;
-import roboguice.inject.InjectView;
 
 /**
- * Created by Laca on 2015.02.22..
+ * Progress bar representing the progress of the current workout round.
+ *
+ * @author Laszlo sisa
  */
 @ContextSingleton
 public class CurrentRoundProgressBar {
@@ -38,6 +41,13 @@ public class CurrentRoundProgressBar {
     private EffectPlayerService effectPlayerService;
     private int nextBeepNotification;
 
+    /**
+     * Initializes the progress bar.
+     *
+     * @param maxMilliSeconds total length of round in milli seconds
+     * @param numberOfTotalSections total section in workout
+     * @param serializedWorkoutSection {@link SerializedWorkoutSection}
+     */
     public void setUp(long maxMilliSeconds, int numberOfTotalSections, SerializedWorkoutSection serializedWorkoutSection) {
         int currentSection = serializedWorkoutSection.getSectionCount();
         int currentRound = serializedWorkoutSection.getRoundCount();
@@ -51,12 +61,22 @@ public class CurrentRoundProgressBar {
         update(maxMilliSeconds);
     }
 
+    /**
+     * Updates the progress bar.
+     *
+     * @param millisUntilFinished milli seconds remaining in round
+     */
     public void update(long millisUntilFinished) {
         circularProgressBar.update(millisUntilFinished);
         currentBlockCounter.setText(TimeFormatter.formatMilliSecondsToMinuteSecondHundredSec(millisUntilFinished));
         checkPlayBeep(millisUntilFinished);
     }
 
+    /**
+     * Sets the progress bar in finished state.
+     *
+     * @param workoutOver flag indicating if the current round was the last in the workout
+     */
     public void setFinishedState(boolean workoutOver) {
         update(0);
         playRoundFinishEffect(workoutOver);
@@ -83,19 +103,4 @@ public class CurrentRoundProgressBar {
         }
     }
 
-    public void setCurrentBlockCounter(TextView currentBlockCounter) {
-        this.currentBlockCounter = currentBlockCounter;
-    }
-
-    public void setRoundCounter(TextView roundCounter) {
-        this.roundCounter = roundCounter;
-    }
-
-    public void setSectionCounter(TextView sectionCounter) {
-        this.sectionCounter = sectionCounter;
-    }
-
-    public void setWorkoutTypeText(TextView workoutTypeText) {
-        this.workoutTypeText = workoutTypeText;
-    }
 }

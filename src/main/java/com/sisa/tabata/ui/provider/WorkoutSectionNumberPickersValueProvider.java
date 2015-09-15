@@ -9,11 +9,19 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by Laca on 2015.03.19..
+ * Workout section number picker value provider.
+ *
+ * @author Laszlo sisa
  */
 @Singleton
 public class WorkoutSectionNumberPickersValueProvider {
 
+    /**
+     * Provides number picker values.
+     *
+     * @param workoutSection {@link WorkoutSection} data source
+     * @return map of number picker values
+     */
     public Map<Integer, Integer> getNumberPickerValues(WorkoutSection workoutSection) {
         Map<Integer, Integer> numberPickerValueMap = new HashMap<>();
 
