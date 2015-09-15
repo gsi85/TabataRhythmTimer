@@ -2,21 +2,36 @@ package com.sisa.tabata.ui.listener.workout;
 
 import android.content.Intent;
 import android.widget.TextView;
-
+import com.google.inject.Inject;
+import com.sisa.tabata.ApplicationContextProvider;
 import com.sisa.tabata.R;
-import com.sisa.tabata.TabataApplication;
 import com.sisa.tabata.ui.activity.WorkoutActivity;
 import com.sisa.tabata.ui.timer.NotificationDisplayTimer;
+import roboguice.inject.ContextSingleton;
+import roboguice.inject.InjectView;
 
 /**
- * Created by Laca on 2015.03.23..
+ * Back button click listener.
+ *
+ * @author Laszlo Sisa
  */
+@ContextSingleton
 public class BackButtonClickListener {
 
     private static final int NOTIFICATION_TIME_IN_MILLIS = 2000;
-    private int backButtonCount;
-    private TextView workoutNotificationView;
+    private static final int NOTIFICATION_PRESS_AGAIN_TO_EXIT = R.string.notification_press_again_to_exit;
 
+    @InjectView(R.id.workoutNotificationView)
+    private TextView workoutNotificationView;
+    @Inject
+    private ApplicationContextProvider applicationContextProvider;
+    private int backButtonCount;
+
+    /**
+     * DI constructor.
+     *
+     * @param workoutActivity {@link WorkoutActivity}
+     */
     public void onClick(WorkoutActivity workoutActivity) {
         if (isPressedTwice()) {
             exitApp(workoutActivity);
@@ -38,12 +53,9 @@ public class BackButtonClickListener {
     }
 
     private void showFirstPressNotification() {
-        String notificationString = TabataApplication.getAppContext().getString(R.string.notification_press_again_to_exit);
+        String notificationString = applicationContextProvider.getStringResource(NOTIFICATION_PRESS_AGAIN_TO_EXIT);
         new NotificationDisplayTimer(workoutNotificationView, notificationString, NOTIFICATION_TIME_IN_MILLIS).start();
         backButtonCount++;
     }
 
-    public void setWorkoutNotificationView(TextView notificationPressAgainToExit) {
-        this.workoutNotificationView = notificationPressAgainToExit;
-    }
 }

@@ -1,43 +1,46 @@
 package com.sisa.tabata.ui.listener.editor;
 
+import static com.sisa.tabata.validation.Assert.isInstanceOf;
+
+import roboguice.inject.ContextSingleton;
 import android.content.Intent;
 import android.view.View;
 
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
-import com.sisa.tabata.dao.service.DatabaseDataService;
 import com.sisa.tabata.dao.loader.LoadedWorkoutProvider;
+import com.sisa.tabata.dao.service.WorkoutDao;
 import com.sisa.tabata.domain.Workout;
 import com.sisa.tabata.ui.activity.WorkoutActivity;
 import com.sisa.tabata.ui.activity.WorkoutEditActivity;
 
 /**
- * Created by Laca on 2015.03.19..
+ * Workout edit action button click listener.
+ *
+ * @author Laszlo Sisa
  */
-@Singleton
+@ContextSingleton
 public class WorkoutEditActionButtonClickListener implements View.OnClickListener {
 
     private static final String SAVE_ACTION = "save_action";
 
     @Inject
-    private DatabaseDataService databaseDataService;
+    private WorkoutDao workoutDao;
     @Inject
     private LoadedWorkoutProvider loadedWorkoutProvider;
-    private Workout workout;
-    private WorkoutEditActivity workoutEditActivity;
 
     @Override
     public void onClick(View view) {
-        Intent workoutIntent = createIntent();
+        WorkoutEditActivity workoutEditActivity = getCheckedContext(view);
+        Intent workoutIntent = createIntent(workoutEditActivity);
         if (isSaveAction(view)) {
-            long workoutId = saveWorkoutToDb();
+            long workoutId = saveWorkoutToDb(workoutEditActivity.getEditedWorkout());
             setLoadedWorkout(workoutId);
         }
         workoutEditActivity.startActivity(workoutIntent);
         workoutEditActivity.finish();
     }
 
-    private Intent createIntent() {
+    private Intent createIntent(final WorkoutEditActivity workoutEditActivity) {
         return new Intent(workoutEditActivity, WorkoutActivity.class);
     }
 
@@ -45,19 +48,17 @@ public class WorkoutEditActionButtonClickListener implements View.OnClickListene
         return SAVE_ACTION.equals(view.getTag());
     }
 
-    private long saveWorkoutToDb() {
-        return databaseDataService.insertUpdateWorkout(workout);
+    private long saveWorkoutToDb(final Workout editedWorkout) {
+        return workoutDao.insertUpdateWorkout(editedWorkout);
     }
 
     private void setLoadedWorkout(long workoutId) {
         loadedWorkoutProvider.setLoadedWorkoutById(workoutId);
     }
 
-    public void setWorkout(Workout workout) {
-        this.workout = workout;
+    private WorkoutEditActivity getCheckedContext(final View view) {
+        isInstanceOf(WorkoutEditActivity.class, view.getContext(), "View context is not a WorkoutEditActivity\"");
+        return (WorkoutEditActivity) view.getContext();
     }
 
-    public void setWorkoutEditActivity(WorkoutEditActivity workoutEditActivity) {
-        this.workoutEditActivity = workoutEditActivity;
-    }
 }

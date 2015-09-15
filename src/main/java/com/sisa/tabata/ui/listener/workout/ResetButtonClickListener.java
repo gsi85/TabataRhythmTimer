@@ -1,29 +1,35 @@
 package com.sisa.tabata.ui.listener.workout;
 
+import roboguice.inject.ContextSingleton;
+import roboguice.inject.InjectView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.google.inject.Singleton;
+import com.google.inject.Inject;
+import com.sisa.tabata.ApplicationContextProvider;
 import com.sisa.tabata.R;
-import com.sisa.tabata.TabataApplication;
 import com.sisa.tabata.ui.timer.NotificationDisplayTimer;
 
 /**
- * Created by Laca on 2015.02.28..
+ * Reset button click listener.
+ *
+ * @author Laszlo Sisa
  */
-@Singleton
+@ContextSingleton
 public class ResetButtonClickListener implements View.OnClickListener {
 
     private static final int DISPLAY_DURATION_MILLIS = 2000;
+    private static final int NOTIFICATION_HOLD_TO_RESET = R.string.notification_hold_to_reset;
+
+    @InjectView(R.id.workoutNotificationView)
     private TextView notificationView;
+    @Inject
+    private ApplicationContextProvider applicationContextProvider;
 
     @Override
     public void onClick(View view) {
-        String notificationText = TabataApplication.getAppContext().getString(R.string.notification_hold_to_reset);
+        String notificationText = applicationContextProvider.getStringResource(NOTIFICATION_HOLD_TO_RESET);
         new NotificationDisplayTimer(notificationView, notificationText, DISPLAY_DURATION_MILLIS).start();
     }
 
-    public void setNotificationView(TextView notificationView) {
-        this.notificationView = notificationView;
-    }
 }

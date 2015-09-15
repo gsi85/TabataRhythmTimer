@@ -56,7 +56,6 @@
         <item>NEW</item>
     </string-array>
 
-    <integer name="database_version">1</integer>
     <string name="database_name">tabatarhytm.db</string>
 
 </resources>

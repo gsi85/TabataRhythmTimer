@@ -1,40 +1,39 @@
 package com.sisa.tabata.ui.listener.loader;
 
+import roboguice.inject.ContextSingleton;
+import roboguice.inject.InjectView;
+import android.content.Context;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import com.sisa.tabata.R;
-import com.sisa.tabata.TabataApplication;
-import com.sisa.tabata.dao.service.DatabaseDataService;
-import com.sisa.tabata.ui.activity.WorkoutLoadActivity;
+import com.sisa.tabata.dao.service.WorkoutDao;
 import com.sisa.tabata.ui.dialog.DeleteWorkoutDialog;
 import com.sisa.tabata.ui.timer.NotificationDisplayTimer;
 
-import roboguice.RoboGuice;
-
 /**
- * Created by Laca on 2015.03.25..
+ * Workout text view long click listener.
+ *
+ * @author Laszlo Sisa
  */
-@Singleton
+@ContextSingleton
 public class WorkoutTextViewLongClickListener implements View.OnLongClickListener {
 
     private static final int MINIMUM_REMAINING_WORKOUTS_COUNT = 1;
-    private static final int DISPLAY_TIME_IN_MILLIS = 2000;
+    private static final int NOTIFICATION_CANT_DELETE_LAST_WORKOUT = R.string.notification_cant_delete_last_workout;
+    private static final int SHORT_NOTIFICATION_DURATION = R.integer.short_notification_duration;
 
-    @Inject
-    private DatabaseDataService databaseDataService;
+    @InjectView(R.id.existingWorkoutLayout)
+    private LinearLayout existingWorkoutLayout;
+    @InjectView(R.id.workoutLoadNotificationView)
+    private TextView workoutLoadNotificationView;
+
     @Inject
     private DeleteWorkoutDialog deleteWorkoutDialog;
-    private LinearLayout existingWorkoutLayout;
-    private TextView workoutLoadNotificationView;
-    private WorkoutLoadActivity workoutLoadActivity;
-
-    public WorkoutTextViewLongClickListener() {
-        RoboGuice.injectMembers(TabataApplication.getAppContext(), this);
-    }
+    @Inject
+    private WorkoutDao workoutDao;
 
     @Override
     public boolean onLongClick(View view) {
@@ -43,31 +42,26 @@ public class WorkoutTextViewLongClickListener implements View.OnLongClickListene
     }
 
     private void deleteWorkout(View view) {
+        Context context = view.getContext();
         if (hasWorkoutLeftAfterDelete()) {
-            deleteWorkoutDialog.showDeleteWorkoutDialog(workoutLoadActivity, view, existingWorkoutLayout);
+            showDeleteWorkoutDialog(view);
         } else {
-            showCantDeleteMessage();
+            showCantDeleteMessage(context);
         }
     }
 
-    private void showCantDeleteMessage() {
-        String notificationString = TabataApplication.getAppContext().getString(R.string.notification_cant_delete_last_workout);
-        new NotificationDisplayTimer(workoutLoadNotificationView, notificationString, DISPLAY_TIME_IN_MILLIS).start();
-    }
-
     private boolean hasWorkoutLeftAfterDelete() {
-        return databaseDataService.getAllWorkoutsSortedList().size() > MINIMUM_REMAINING_WORKOUTS_COUNT;
+        return workoutDao.getAllWorkoutsSortedList().size() > MINIMUM_REMAINING_WORKOUTS_COUNT;
     }
 
-    public void setExistingWorkoutLayout(LinearLayout existingWorkoutLayout) {
-        this.existingWorkoutLayout = existingWorkoutLayout;
+    private void showDeleteWorkoutDialog(final View view) {
+        deleteWorkoutDialog.showDeleteWorkoutDialog(view.getContext(), view, existingWorkoutLayout);
     }
 
-    public void setWorkoutLoadNotificationView(TextView workoutLoadNotificationView) {
-        this.workoutLoadNotificationView = workoutLoadNotificationView;
+    private void showCantDeleteMessage(final Context context) {
+        String notificationString = context.getString(NOTIFICATION_CANT_DELETE_LAST_WORKOUT);
+        int durationMillis = context.getResources().getInteger(SHORT_NOTIFICATION_DURATION);
+        new NotificationDisplayTimer(workoutLoadNotificationView, notificationString, durationMillis).start();
     }
 
-    public void setWorkoutLoadActivity(WorkoutLoadActivity workoutLoadActivity) {
-        this.workoutLoadActivity = workoutLoadActivity;
-    }
 }

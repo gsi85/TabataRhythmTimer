@@ -1,47 +1,46 @@
 package com.sisa.tabata.ui.listener.loader;
 
+import static com.sisa.tabata.validation.Assert.isInstanceOf;
+
+import roboguice.inject.ContextSingleton;
 import android.content.Intent;
 import android.view.View;
 
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
-import com.sisa.tabata.TabataApplication;
 import com.sisa.tabata.dao.loader.LoadedWorkoutProvider;
 import com.sisa.tabata.ui.activity.WorkoutActivity;
 import com.sisa.tabata.ui.activity.WorkoutLoadActivity;
 
-import roboguice.RoboGuice;
-
 /**
- * Created by Laca on 2015.03.25..
+ * Workout text view click listener.
+ *
+ * @author Laszlo Sisa
  */
-@Singleton
+@ContextSingleton
 public class WorkoutTextViewClickListener implements View.OnClickListener {
-
-    private WorkoutLoadActivity workoutLoadActivity;
 
     @Inject
     private LoadedWorkoutProvider loadedWorkoutProvider;
 
-    public WorkoutTextViewClickListener() {
-        RoboGuice.injectMembers(TabataApplication.getAppContext(), this);
-    }
-
     @Override
     public void onClick(View view) {
         loadSelectedWorkout((int) view.getTag());
-        startWorkoutActivity();
+        startWorkoutActivity(view);
     }
 
     private void loadSelectedWorkout(int id) {
         loadedWorkoutProvider.setLoadedWorkoutById(id);
     }
 
-    private void startWorkoutActivity() {
+    private void startWorkoutActivity(final View view) {
+        WorkoutLoadActivity workoutLoadActivity = getCheckedContext(view);
         workoutLoadActivity.startActivity(new Intent(workoutLoadActivity, WorkoutActivity.class));
+        workoutLoadActivity.finish();
     }
 
-    public void setWorkoutLoadActivity(WorkoutLoadActivity workoutLoadActivity) {
-        this.workoutLoadActivity = workoutLoadActivity;
+    private WorkoutLoadActivity getCheckedContext(final View view) {
+        isInstanceOf(WorkoutLoadActivity.class, view.getContext(), "View context is not a WorkoutLoadActivity");
+        return (WorkoutLoadActivity) view.getContext();
     }
+
 }

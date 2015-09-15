@@ -4,11 +4,18 @@ import com.google.inject.Singleton;
 import com.sisa.tabata.domain.WorkoutSection;
 
 /**
- * Created by Laca on 2015.03.16..
+ * Factory for {@likn WorkoutSection}.
+ *
+ * @author Laszlo sisa
  */
 @Singleton
 public class WorkoutSectionFactory {
 
+    /**
+     * Creates a new {@link WorkoutSection}.
+     *
+     * @return {@link WorkoutSection}
+     */
     public WorkoutSection create(){
         return new WorkoutSection();
     }

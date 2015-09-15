@@ -1,48 +1,69 @@
 package com.sisa.tabata.dao.service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import android.database.Cursor;
 import android.database.sqlite.SQLiteQueryBuilder;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.sisa.tabata.TabataApplication;
+import com.sisa.tabata.ApplicationContextProvider;
 import com.sisa.tabata.domain.Workout;
 import com.sisa.tabata.domain.WorkoutSection;
 import com.sisa.tabata.factory.WorkoutFactory;
 import com.sisa.tabata.factory.WorkoutSectionFactory;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import roboguice.RoboGuice;
-
 /**
- * Created by Laca on 2015.03.24..
+ * DAO for retrieving stored {@link Workout} objects from database.
+ *
+ * @author Laszlo Sisa
  */
 @Singleton
-public class WorkoutRetrieveService extends AbstractBaseDatabaseService {
+public class WorkoutRetrieveDao extends AbstractBaseDao {
 
-    @Inject
-    private WorkoutFactory workoutFactory;
-    @Inject
-    private WorkoutSectionFactory workoutSectionFactory;
+    private final WorkoutFactory workoutFactory;
+    private final WorkoutSectionFactory workoutSectionFactory;
 
-    public WorkoutRetrieveService() {
-        super(TabataApplication.getAppContext(), DATABASE_NAME, null, DATABASE_VERSION);
-        RoboGuice.injectMembers(TabataApplication.getAppContext(), this);
+    /**
+     * DI constructor.
+     *
+     * @param applicationContextProvider {@link ApplicationContextProvider}
+     * @param workoutFactory {@link WorkoutFactory}
+     * @param workoutSectionFactory {@link WorkoutSectionFactory}
+     */
+    @Inject
+    public WorkoutRetrieveDao(final ApplicationContextProvider applicationContextProvider, final WorkoutFactory workoutFactory,
+            final WorkoutSectionFactory workoutSectionFactory) {
+        super(applicationContextProvider);
+        this.workoutFactory = workoutFactory;
+        this.workoutSectionFactory = workoutSectionFactory;
     }
 
-    protected Workout getWorkoutById(long id) {
+    /**
+     * Retrieves a specified {@link Workout} by it's id.
+     *
+     * @param id the workout's id
+     * @return {@link Workout} if workout exists in database with given id, null otherwise
+     */
+    protected Workout getWorkoutById(final long id) {
         String whereClause = WHERE_ID_EQUALS + id;
-        return getWorkoutWithSpecifiedCondition(whereClause).get(0);
+        List<Workout> workouts = getWorkoutWithSpecifiedCondition(whereClause);
+        //TODO: replace with validation
+        return workouts.size() != 0 ? workouts.get(0) : null;
     }
 
+    /**
+     * Retrieves all stored {@link Workout} from database sorted by "name" attribute.
+     *
+     * @return list of sorted {@link Workout}
+     */
     protected List<Workout> getAllWorkoutsSortedList() {
         return getWorkoutWithSpecifiedCondition(null);
     }
 
-    private List<Workout> getWorkoutWithSpecifiedCondition(String whereClause) {
+    private List<Workout> getWorkoutWithSpecifiedCondition(final String whereClause) {
         List<Workout> resultWorkoutList = new ArrayList<>();
 
         String[] columns = {COLUMN_ID, COLUMN_NAME, COLUMN_TIME_UNIT, COLUMN_DESCRIPTION};
@@ -62,7 +83,7 @@ public class WorkoutRetrieveService extends AbstractBaseDatabaseService {
         return resultWorkoutList;
     }
 
-    private List<WorkoutSection> getWorkoutSectionsByWorkoutId(int workoutId) {
+    private List<WorkoutSection> getWorkoutSectionsByWorkoutId(final int workoutId) {
         List<WorkoutSection> workoutSectionList = new ArrayList<>();
         String[] columns = {COLUMN_SECTION_ORDER, COLUMN_ROUNDS, COLUMN_WARM_UP, COLUMN_WORK, COLUMN_REST, COLUMN_COOL_DOWN};
         Cursor resultCursor = executeQuery(TABLE_WORKOUT_SECTIONS, columns, WHERE_WORKOUT_ID_EQUALS + workoutId, COLUMN_SECTION_ORDER);
@@ -80,10 +101,11 @@ public class WorkoutRetrieveService extends AbstractBaseDatabaseService {
         return workoutSectionList;
     }
 
-    private Cursor executeQuery(String tableName, String[] columnsToSelect, String whereClause, String sortOrder) {
+    private Cursor executeQuery(final String tableName, final String[] columnsToSelect, final String whereClause, final String sortOrder) {
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
         queryBuilder.setTables(tableName);
-        if (whereClause != null) queryBuilder.appendWhere(whereClause);
+        if (whereClause != null)
+            queryBuilder.appendWhere(whereClause);
         return queryBuilder.query(getDatabase(), columnsToSelect, null, null, null, null, sortOrder);
     }
 }

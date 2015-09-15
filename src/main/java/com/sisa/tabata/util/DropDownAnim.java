@@ -6,10 +6,17 @@ import android.view.animation.Transformation;
 import android.widget.LinearLayout;
 
 /**
- * Created by Laca on 2015.03.08..
+ * Drop down animation.
+ *
+ * @author Laszlo Sisa
  */
 public class DropDownAnim {
 
+    /**
+     * Expand animation.
+     *
+     * @param view {@link View} to expand
+     */
     public static void expand(final View view) {
         view.measure(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         final int targetHeight = view.getMeasuredHeight();
@@ -19,8 +26,7 @@ public class DropDownAnim {
         Animation animation = new Animation() {
             @Override
             protected void applyTransformation(float interpolatedTime, Transformation t) {
-                view.getLayoutParams().height = interpolatedTime == 1
-                        ? LinearLayout.LayoutParams.WRAP_CONTENT
+                view.getLayoutParams().height = interpolatedTime == 1 ? LinearLayout.LayoutParams.WRAP_CONTENT
                         : (int) (targetHeight * interpolatedTime);
                 view.requestLayout();
             }
@@ -31,11 +37,15 @@ public class DropDownAnim {
             }
         };
 
-        // 1dp/ms
         animation.setDuration((int) (targetHeight / view.getContext().getResources().getDisplayMetrics().density));
         view.startAnimation(animation);
     }
 
+    /**
+     * Collapse animation.
+     *
+     * @param view {@link View} to collapse
+     */
     public static void collapse(final View view) {
         final int initialHeight = view.getMeasuredHeight();
 

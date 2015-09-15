@@ -9,19 +9,37 @@ import android.widget.TextView;
 import com.sisa.tabata.R;
 
 /**
- * Created by Laca on 2015.03.25..
+ * Abstract text view provider.
+ *
+ * @author Laszlo Sisa
  */
 public abstract class AbstractTextViewProvider {
 
     private static final int TEXT_VIEW_HEIGHT_DP = 80;
+    private static final int REQUIRED_DP = 6;
+    private static final float OFFSET = 0.5f;
 
+    /**
+     * Creates a new {@link TextView} instance.
+     *
+     * @param workoutEditActivity {@link Activity}
+     * @return {@link TextView}
+     */
     protected TextView createTextView(Activity workoutEditActivity) {
         return new TextView(workoutEditActivity);
     }
 
+    /**
+     * Sets text view's style.
+     *
+     * @param activity {@link Activity}
+     * @param context {@link Context}
+     * @param sectionTextView {@link TextView}
+     */
     protected void setStyle(Activity activity, Context context, TextView sectionTextView) {
-        int margin = getDp(context, 6);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        int margin = getDp(context, REQUIRED_DP);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
         layoutParams.setMargins(margin, margin, margin, margin);
         sectionTextView.setWidth(activity.getWindowManager().getDefaultDisplay().getWidth());
         sectionTextView.setHeight(getDp(context, TEXT_VIEW_HEIGHT_DP));
@@ -33,7 +51,7 @@ public abstract class AbstractTextViewProvider {
 
     private int getDp(Context context, int requiredDp) {
         final float scale = context.getResources().getDisplayMetrics().density;
-        return (int) (requiredDp * scale + 0.5f);
+        return (int) (requiredDp * scale + OFFSET);
     }
 
 }

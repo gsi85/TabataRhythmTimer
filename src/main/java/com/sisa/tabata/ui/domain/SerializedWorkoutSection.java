@@ -1,7 +1,9 @@
 package com.sisa.tabata.ui.domain;
 
 /**
- * Created by Laca on 2015.02.27..
+ * Domain object representing a serialized workout section.
+ *
+ * @author Laszlo Sisa
  */
 public class SerializedWorkoutSection {
 

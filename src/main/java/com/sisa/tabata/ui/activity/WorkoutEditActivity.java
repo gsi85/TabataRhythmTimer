@@ -8,8 +8,7 @@ import android.widget.TextView;
 
 import com.google.inject.Inject;
 import com.sisa.tabata.R;
-import com.sisa.tabata.TabataApplication;
-import com.sisa.tabata.dao.loader.EditedWorkoutHolder;
+import com.sisa.tabata.dao.loader.EditedWorkoutProvider;
 import com.sisa.tabata.domain.Workout;
 import com.sisa.tabata.ui.listener.editor.SectionTextViewClickListener;
 import com.sisa.tabata.ui.listener.editor.SectionTextViewLongClickListener;
@@ -24,14 +23,13 @@ import roboguice.activity.RoboActivity;
 import roboguice.inject.InjectView;
 
 /**
- * Created by Laca on 2015.03.07..
+ * Workout edit form activity.
+ *
+ * @author Laszlo Sisa
  */
 public class WorkoutEditActivity extends RoboActivity {
 
-    private static final int DISPLAY_TIME_IN_MILLIS = 3000;
-    private static final int NEW_WORKOUT_ID = -1;
     private static final String NEW_WORKOUT_NAME = "newWorkout";
-    private static final String TOTAL_TIME = TabataApplication.getAppContext().getResources().getString(R.string.form_workout_total_time_label);
     private static final String TOTAL_TIME_PATTERN = "%s: %s";
 
     @InjectView(R.id.existingSectionsLayout)
@@ -66,7 +64,8 @@ public class WorkoutEditActivity extends RoboActivity {
     @Inject
     private WorkoutTotalTimeProvider workoutTotalTimeProvider;
     @Inject
-    private EditedWorkoutHolder editedWorkoutHolder;
+    private EditedWorkoutProvider editedWorkoutProvider;
+
     private Workout editedWorkout;
 
     @Override
@@ -74,8 +73,8 @@ public class WorkoutEditActivity extends RoboActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout_edit);
         setUpEditedWorkout();
-        setUpViewDependencies();
         setUpListeners();
+        setUpViewDependencies();
     }
 
     @Override
@@ -87,28 +86,24 @@ public class WorkoutEditActivity extends RoboActivity {
     protected void onResume() {
         super.onStart();
         String notificationText = getString(R.string.notification_long_press_to_delete_section);
-        new NotificationDisplayTimer(workoutEditNotificationView, notificationText, DISPLAY_TIME_IN_MILLIS).start();
+        new NotificationDisplayTimer(workoutEditNotificationView, notificationText, getResources().getInteger(R.integer.long_notification_duration))
+                .start();
     }
 
     private void setUpEditedWorkout() {
         boolean newWorkout = getIntent().getBooleanExtra(NEW_WORKOUT_NAME, false);
         workoutEditAction.setText(newWorkout ? R.string.form_workout_new_action_text : R.string.form_workout_edit_action_text);
-        editedWorkout = editedWorkoutHolder.getEditedWorkout();
+        editedWorkout = editedWorkoutProvider.getEditedWorkout();
         workoutSectionsUpdateProvider.updateWorkoutWithEditedSection(editedWorkout, getIntent());
         workoutSectionsTextViewProvider.createSectionTextViews(editedWorkout, this, getApplicationContext(), existingSectionsLayout);
         workoutNameTextEditor.setText(editedWorkout.getName());
         workoutDescriptionTextEditor.setText(editedWorkout.getDescription());
-        totalTimeHeader.setText(String.format(TOTAL_TIME_PATTERN, TOTAL_TIME, workoutTotalTimeProvider.getFormattedWorkoutTotalTime(editedWorkout)));
+        totalTimeHeader.setText(String.format(TOTAL_TIME_PATTERN, getString(R.string.form_workout_total_time_label),
+                workoutTotalTimeProvider.getFormattedWorkoutTotalTime(editedWorkout)));
     }
 
     private void setUpViewDependencies() {
-        sectionTextViewClickListener.setWorkoutEditActivity(this);
-        newSectionTextView.setTag(NEW_WORKOUT_ID);
-        sectionTextViewLongClickListener.setWorkout(editedWorkout);
-        sectionTextViewLongClickListener.setExistingSectionsLayout(existingSectionsLayout);
-        sectionTextViewLongClickListener.setWorkoutEditActivity(this);
-        workoutEditActionButtonClickListener.setWorkout(editedWorkout);
-        workoutEditActionButtonClickListener.setWorkoutEditActivity(this);
+        newSectionTextView.setTag(getResources().getInteger(R.integer.new_workout_id));
     }
 
     private void setUpListeners() {

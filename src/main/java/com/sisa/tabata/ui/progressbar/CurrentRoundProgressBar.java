@@ -1,22 +1,23 @@
 package com.sisa.tabata.ui.progressbar;
 
+import roboguice.inject.ContextSingleton;
+import roboguice.inject.InjectView;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
-import com.sisa.tabata.TabataApplication;
+import com.sisa.tabata.R;
 import com.sisa.tabata.media.service.EffectPlayerService;
 import com.sisa.tabata.ui.domain.SerializedWorkoutSection;
 import com.sisa.tabata.ui.domain.WorkoutType;
 import com.sisa.tabata.ui.drawable.CircularProgressBarDrawable;
 import com.sisa.tabata.util.TimeFormatter;
 
-import roboguice.RoboGuice;
-
 /**
- * Created by Laca on 2015.02.22..
+ * Progress bar representing the progress of the current workout round.
+ *
+ * @author Laszlo sisa
  */
-@Singleton
+@ContextSingleton
 public class CurrentRoundProgressBar {
 
     private static final String SECTION_TEXT_PATTERN = "SECTION %d of %d";
@@ -25,20 +26,28 @@ public class CurrentRoundProgressBar {
     private static final int BEEP_INTERVAL_MILLIS = 1000;
     private static final int LAST_BEEP_IN_MILLIS = 40;
 
+    @InjectView(R.id.currentBlockCounter)
+    private TextView currentBlockCounter;
+    @InjectView(R.id.roundCounter)
+    private TextView roundCounter;
+    @InjectView(R.id.sectionCounter)
+    private TextView sectionCounter;
+    @InjectView(R.id.workoutTypeText)
+    private TextView workoutTypeText;
+
     @Inject
     private CircularProgressBarDrawable circularProgressBar;
     @Inject
     private EffectPlayerService effectPlayerService;
-    private TextView currentBlockCounter;
-    private TextView roundCounter;
-    private TextView sectionCounter;
-    private TextView workoutTypeText;
     private int nextBeepNotification;
 
-    public CurrentRoundProgressBar() {
-        RoboGuice.injectMembers(TabataApplication.getAppContext(), this);
-    }
-
+    /**
+     * Initializes the progress bar.
+     *
+     * @param maxMilliSeconds total length of round in milli seconds
+     * @param numberOfTotalSections total section in workout
+     * @param serializedWorkoutSection {@link SerializedWorkoutSection}
+     */
     public void setUp(long maxMilliSeconds, int numberOfTotalSections, SerializedWorkoutSection serializedWorkoutSection) {
         int currentSection = serializedWorkoutSection.getSectionCount();
         int currentRound = serializedWorkoutSection.getRoundCount();
@@ -52,12 +61,22 @@ public class CurrentRoundProgressBar {
         update(maxMilliSeconds);
     }
 
+    /**
+     * Updates the progress bar.
+     *
+     * @param millisUntilFinished milli seconds remaining in round
+     */
     public void update(long millisUntilFinished) {
         circularProgressBar.update(millisUntilFinished);
         currentBlockCounter.setText(TimeFormatter.formatMilliSecondsToMinuteSecondHundredSec(millisUntilFinished));
         checkPlayBeep(millisUntilFinished);
     }
 
+    /**
+     * Sets the progress bar in finished state.
+     *
+     * @param workoutOver flag indicating if the current round was the last in the workout
+     */
     public void setFinishedState(boolean workoutOver) {
         update(0);
         playRoundFinishEffect(workoutOver);
@@ -84,19 +103,4 @@ public class CurrentRoundProgressBar {
         }
     }
 
-    public void setCurrentBlockCounter(TextView currentBlockCounter) {
-        this.currentBlockCounter = currentBlockCounter;
-    }
-
-    public void setRoundCounter(TextView roundCounter) {
-        this.roundCounter = roundCounter;
-    }
-
-    public void setSectionCounter(TextView sectionCounter) {
-        this.sectionCounter = sectionCounter;
-    }
-
-    public void setWorkoutTypeText(TextView workoutTypeText) {
-        this.workoutTypeText = workoutTypeText;
-    }
 }

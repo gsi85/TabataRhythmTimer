@@ -1,35 +1,29 @@
 package com.sisa.tabata.ui.listener.workout;
 
+import static com.sisa.tabata.validation.Assert.isInstanceOf;
+
+import roboguice.inject.ContextSingleton;
 import android.view.View;
-import android.widget.ImageButton;
 
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
-import com.sisa.tabata.TabataApplication;
-
-import roboguice.RoboGuice;
+import com.sisa.tabata.ui.activity.WorkoutActivity;
 
 /**
- * Created by Laca on 2015.02.28..
+ * Reset button long click listener.
+ *
+ * @author Laszlo Sisa
  */
-@Singleton
+@ContextSingleton
 public class ResetButtonLongClickListener implements View.OnLongClickListener {
-
-    @Inject
-    private PlayButtonClickListener playButtonClickListener;
-    private ImageButton playButton;
-
-    public ResetButtonLongClickListener(){
-        RoboGuice.injectMembers(TabataApplication.getAppContext(), this);
-    }
 
     @Override
     public boolean onLongClick(View view) {
-        playButtonClickListener.resetWorkout(playButton);
+        getCheckedPlayButtonListener(view).resetWorkout();
         return true;
     }
 
-    public void setPlayButton(ImageButton playButton) {
-        this.playButton = playButton;
+    private PlayButtonClickListener getCheckedPlayButtonListener(final View view) {
+        isInstanceOf(WorkoutActivity.class, view.getContext(), "View context is not a WorkoutActivity");
+        return ((WorkoutActivity) view.getContext()).getPlayButtonClickListener();
     }
+
 }

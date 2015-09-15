@@ -20,8 +20,6 @@ import roboguice.inject.InjectView;
  */
 public class WorkoutLoadActivity extends RoboActivity {
 
-    private static final int DISPLAY_TIME_IN_MILLIS = 3000;
-
     @InjectView(R.id.existingWorkoutLayout)
     private LinearLayout existingWorkoutLayout;
     @InjectView(R.id.workoutLoadNotificationView)
@@ -39,7 +37,6 @@ public class WorkoutLoadActivity extends RoboActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout_load);
-        setUpViewDependencies();
         createWorkoutList();
     }
 
@@ -47,19 +44,14 @@ public class WorkoutLoadActivity extends RoboActivity {
     protected void onResume() {
         super.onStart();
         String notificationText = getString(R.string.notification_long_press_to_delete_workout);
-        new NotificationDisplayTimer(workoutLoadNotificationView, notificationText, DISPLAY_TIME_IN_MILLIS).start();
+        new NotificationDisplayTimer(workoutLoadNotificationView, notificationText, getResources().getInteger(R.integer.long_notification_duration))
+                .start();
     }
 
     @Override
     public void onBackPressed() {
         startActivity(new Intent(this, WorkoutActivity.class));
-    }
-
-    private void setUpViewDependencies() {
-        workoutTextViewClickListener.setWorkoutLoadActivity(this);
-        workoutTextViewLongClickListener.setExistingWorkoutLayout(existingWorkoutLayout);
-        workoutTextViewLongClickListener.setWorkoutLoadNotificationView(workoutLoadNotificationView);
-        workoutTextViewLongClickListener.setWorkoutLoadActivity(this);
+        finish();
     }
 
     private void createWorkoutList() {

@@ -2,19 +2,31 @@ package com.sisa.tabata.ui.listener.editor;
 
 import android.view.View;
 import android.widget.LinearLayout;
-
-import com.google.inject.Singleton;
+import com.sisa.tabata.R;
 import com.sisa.tabata.util.DropDownAnim;
-
+import java.util.Arrays;
 import java.util.List;
+import roboguice.inject.ContextSingleton;
+import roboguice.inject.InjectView;
 
 /**
- * Created by Laca on 2015.03.08..
+ * Section item click listener.
+ *
+ * @author Laszlo Sisa
  */
-@Singleton
+@ContextSingleton
 public class SectionItemClickListener implements View.OnClickListener {
 
-    private List<LinearLayout> pickerLayouts;
+    @InjectView(R.id.warmUpPickerLayout)
+    private LinearLayout warmUpPickerLayout;
+    @InjectView(R.id.roundCountPickerLayout)
+    private LinearLayout roundCountPickerLayout;
+    @InjectView(R.id.workPickerLayout)
+    private LinearLayout workPickerLayout;
+    @InjectView(R.id.restPickerLayout)
+    private LinearLayout restPickerLayout;
+    @InjectView(R.id.coolDownPickerLayout)
+    private LinearLayout coolDownPickerLayout;
 
     @Override
     public void onClick(View view) {
@@ -22,13 +34,17 @@ public class SectionItemClickListener implements View.OnClickListener {
     }
 
     private void setSelectedPickerVisible(View view) {
-        for (LinearLayout pickerLayout : pickerLayouts) {
+        for (LinearLayout pickerLayout : buildPickerLayoutList()) {
             if (isSelectedItem(view, pickerLayout)) {
                 flipVisibility(pickerLayout);
             } else {
                 hidePicker(pickerLayout);
             }
         }
+    }
+
+    private List<LinearLayout> buildPickerLayoutList() {
+        return Arrays.asList(warmUpPickerLayout, roundCountPickerLayout, workPickerLayout, restPickerLayout, coolDownPickerLayout);
     }
 
     private boolean isSelectedItem(View view, LinearLayout pickerLayout) {
@@ -49,7 +65,4 @@ public class SectionItemClickListener implements View.OnClickListener {
         }
     }
 
-    public void setPickerLayouts(List<LinearLayout> pickerLayouts) {
-        this.pickerLayouts = pickerLayouts;
-    }
 }
