@@ -3,15 +3,16 @@ package com.sisa.tabata.ui.listener.editor;
 import java.util.HashMap;
 import java.util.Map;
 
-import roboguice.inject.ContextSingleton;
-import roboguice.inject.InjectView;
-import android.widget.NumberPicker;
-import android.widget.TextView;
-
 import com.google.inject.Inject;
 import com.sisa.tabata.R;
 import com.sisa.tabata.ui.domain.WorkoutType;
 import com.sisa.tabata.util.TimeFormatter;
+
+import android.widget.NumberPicker;
+import android.widget.TextView;
+
+import roboguice.inject.ContextSingleton;
+import roboguice.inject.InjectView;
 
 /**
  * Time number picker value change listener.

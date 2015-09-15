@@ -1,12 +1,12 @@
 package com.sisa.tabata.ui.provider;
 
-import com.google.inject.Singleton;
-import com.sisa.tabata.R;
-import com.sisa.tabata.domain.WorkoutSection;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
+
+import com.google.inject.Singleton;
+import com.sisa.tabata.R;
+import com.sisa.tabata.domain.WorkoutSection;
 
 /**
  * Workout section number picker value provider.

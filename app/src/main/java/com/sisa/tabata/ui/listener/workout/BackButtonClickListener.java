@@ -1,12 +1,14 @@
 package com.sisa.tabata.ui.listener.workout;
 
-import android.content.Intent;
-import android.widget.TextView;
 import com.google.inject.Inject;
 import com.sisa.tabata.ApplicationContextProvider;
 import com.sisa.tabata.R;
 import com.sisa.tabata.ui.activity.WorkoutActivity;
 import com.sisa.tabata.ui.timer.NotificationDisplayTimer;
+
+import android.content.Intent;
+import android.widget.TextView;
+
 import roboguice.inject.ContextSingleton;
 import roboguice.inject.InjectView;
 

@@ -20,7 +20,7 @@ public class TimeFormatter {
     private static final int SECONDS_IN_ONE_MINUTE = 60;
 
     /**
-     * Format milli seconds to the following format: mm:ss.hh
+     * Format milli seconds to the following format: mm:ss.hh.
      *
      * @param milliSeconds milli seconds to format
      * @return formatted text.
@@ -33,7 +33,7 @@ public class TimeFormatter {
     }
 
     /**
-     * Format milli seconds to the following format: hh:mm:ss
+     * Format milli seconds to the following format: hh:mm:ss.
      *
      * @param milliSeconds milli seconds to format
      * @return formatted text.
@@ -46,7 +46,7 @@ public class TimeFormatter {
     }
 
     /**
-     * Format seconds to the following format: hh:mm:ss
+     * Format seconds to the following format: hh:mm:ss.
      *
      * @param totalSeconds seconds to format
      * @return formatted text.
@@ -59,7 +59,7 @@ public class TimeFormatter {
     }
 
     /**
-     * Format seconds to the following format: mm:ss
+     * Format seconds to the following format: mm:ss.
      *
      * @param secondsTotal seconds to format
      * @return formatted text.
@@ -71,7 +71,7 @@ public class TimeFormatter {
     }
 
     /**
-     * Converts string in format of mm:ss to seconds represented as a numeric value
+     * Converts string in format of mm:ss to seconds represented as a numeric value.
      *
      * @param minuteSecond formatted text to convert
      * @return converted numeric value

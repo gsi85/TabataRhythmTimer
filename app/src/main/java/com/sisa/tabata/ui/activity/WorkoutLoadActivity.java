@@ -1,16 +1,16 @@
 package com.sisa.tabata.ui.activity;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
 import com.google.inject.Inject;
 import com.sisa.tabata.R;
 import com.sisa.tabata.ui.listener.loader.WorkoutTextViewClickListener;
 import com.sisa.tabata.ui.listener.loader.WorkoutTextViewLongClickListener;
 import com.sisa.tabata.ui.provider.WorkoutListTextViewProvider;
 import com.sisa.tabata.ui.timer.NotificationDisplayTimer;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import roboguice.activity.RoboActivity;
 import roboguice.inject.InjectView;

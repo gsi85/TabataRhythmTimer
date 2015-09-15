@@ -1,5 +1,9 @@
 package com.sisa.tabata.ui.dialog;
 
+import com.google.inject.Inject;
+import com.sisa.tabata.R;
+import com.sisa.tabata.ui.listener.workout.VolumeSeekBarChangeListener;
+
 import android.content.Context;
 import android.media.AudioManager;
 import android.os.Bundle;
@@ -8,10 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.SeekBar;
-
-import com.google.inject.Inject;
-import com.sisa.tabata.R;
-import com.sisa.tabata.ui.listener.workout.VolumeSeekBarChangeListener;
 
 import roboguice.fragment.RoboDialogFragment;
 import roboguice.inject.InjectView;

@@ -1,9 +1,5 @@
 package com.sisa.tabata.ui.progressbar;
 
-import roboguice.inject.ContextSingleton;
-import roboguice.inject.InjectView;
-import android.widget.TextView;
-
 import com.google.inject.Inject;
 import com.sisa.tabata.R;
 import com.sisa.tabata.media.service.EffectPlayerService;
@@ -11,6 +7,11 @@ import com.sisa.tabata.ui.domain.SerializedWorkoutSection;
 import com.sisa.tabata.ui.domain.WorkoutType;
 import com.sisa.tabata.ui.drawable.CircularProgressBarDrawable;
 import com.sisa.tabata.util.TimeFormatter;
+
+import android.widget.TextView;
+
+import roboguice.inject.ContextSingleton;
+import roboguice.inject.InjectView;
 
 /**
  * Progress bar representing the progress of the current workout round.

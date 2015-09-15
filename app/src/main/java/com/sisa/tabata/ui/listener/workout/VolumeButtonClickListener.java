@@ -2,14 +2,15 @@ package com.sisa.tabata.ui.listener.workout;
 
 import static com.sisa.tabata.validation.Assert.isInstanceOf;
 
-import roboguice.inject.ContextSingleton;
+import com.google.inject.Inject;
+import com.sisa.tabata.ui.dialog.VolumeControlDialog;
+
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 
-import com.google.inject.Inject;
-import com.sisa.tabata.ui.dialog.VolumeControlDialog;
+import roboguice.inject.ContextSingleton;
 
 /**
  * Volume button click listener.

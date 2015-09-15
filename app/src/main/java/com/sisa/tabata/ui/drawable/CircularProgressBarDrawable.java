@@ -1,14 +1,13 @@
 package com.sisa.tabata.ui.drawable;
 
+import com.sisa.tabata.ui.domain.Size;
+
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
-
-import com.google.inject.Inject;
-import com.sisa.tabata.ui.domain.Size;
 
 import roboguice.inject.ContextSingleton;
 
@@ -50,7 +49,7 @@ public class CircularProgressBarDrawable extends Drawable {
     }
 
     /**
-     * Updates the progress bar
+     * Updates the progress bar.
      *
      * @param remaining remaining amount from countdown
      */

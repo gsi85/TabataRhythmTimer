@@ -1,9 +1,11 @@
 package com.sisa.tabata.ui.listener.editor;
 
-import android.widget.NumberPicker;
-import android.widget.TextView;
 import com.google.inject.Inject;
 import com.sisa.tabata.R;
+
+import android.widget.NumberPicker;
+import android.widget.TextView;
+
 import roboguice.inject.ContextSingleton;
 import roboguice.inject.InjectView;
 

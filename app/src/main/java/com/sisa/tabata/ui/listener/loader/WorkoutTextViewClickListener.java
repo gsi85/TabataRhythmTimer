@@ -2,14 +2,15 @@ package com.sisa.tabata.ui.listener.loader;
 
 import static com.sisa.tabata.validation.Assert.isInstanceOf;
 
-import roboguice.inject.ContextSingleton;
-import android.content.Intent;
-import android.view.View;
-
 import com.google.inject.Inject;
 import com.sisa.tabata.dao.loader.LoadedWorkoutProvider;
 import com.sisa.tabata.ui.activity.WorkoutActivity;
 import com.sisa.tabata.ui.activity.WorkoutLoadActivity;
+
+import android.content.Intent;
+import android.view.View;
+
+import roboguice.inject.ContextSingleton;
 
 /**
  * Workout text view click listener.

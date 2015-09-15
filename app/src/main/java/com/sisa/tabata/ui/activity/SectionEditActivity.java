@@ -2,11 +2,6 @@ package com.sisa.tabata.ui.activity;
 
 import java.util.Map;
 
-import android.os.Bundle;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
 import com.google.inject.Inject;
 import com.sisa.tabata.R;
 import com.sisa.tabata.domain.WorkoutSection;
@@ -19,6 +14,11 @@ import com.sisa.tabata.ui.listener.editor.TimeNumberPickerValueChangeListener;
 import com.sisa.tabata.ui.numberpicker.TabataNumberPicker;
 import com.sisa.tabata.ui.provider.WorkoutSectionLabelsProvider;
 import com.sisa.tabata.ui.provider.WorkoutSectionNumberPickersValueProvider;
+
+import android.os.Bundle;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import roboguice.activity.RoboActivity;
 import roboguice.inject.InjectView;

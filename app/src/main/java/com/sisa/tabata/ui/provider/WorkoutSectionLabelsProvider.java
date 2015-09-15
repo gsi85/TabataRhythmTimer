@@ -3,12 +3,12 @@ package com.sisa.tabata.ui.provider;
 import java.util.HashMap;
 import java.util.Map;
 
-import roboguice.inject.ContextSingleton;
-
 import com.google.inject.Inject;
 import com.sisa.tabata.R;
 import com.sisa.tabata.domain.WorkoutSection;
 import com.sisa.tabata.util.TimeFormatter;
+
+import roboguice.inject.ContextSingleton;
 
 /**
  * Workout section label provider.

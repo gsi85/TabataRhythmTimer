@@ -1,10 +1,10 @@
 package com.sisa.tabata.ui.provider;
 
-import android.content.Intent;
-
 import com.google.inject.Singleton;
 import com.sisa.tabata.domain.Workout;
 import com.sisa.tabata.domain.WorkoutSection;
+
+import android.content.Intent;
 
 /**
  * Workout section update provider.
@@ -38,10 +38,11 @@ public class WorkoutSectionsUpdateProvider {
     private void updateWorkoutSections(Workout workout, Intent workoutEditIntent) {
         WorkoutSection editedWorkoutSection = getWorkoutSectionFromIntent(workoutEditIntent);
         int sectionIndex = getWorkoutSectionIdFromIntent(workoutEditIntent);
-        if (sectionIndex == NEW_SECTION_INDEX)
+        if (sectionIndex == NEW_SECTION_INDEX) {
             addNewSection(workout, editedWorkoutSection);
-        else
+        } else {
             updateSection(workout, editedWorkoutSection, sectionIndex);
+        }
     }
 
     private void addNewSection(Workout workout, WorkoutSection editedWorkoutSection) {

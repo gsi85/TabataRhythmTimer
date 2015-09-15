@@ -1,10 +1,5 @@
 package com.sisa.tabata.ui.listener.workout;
 
-import roboguice.inject.ContextSingleton;
-import roboguice.inject.InjectView;
-import android.view.View;
-import android.widget.ImageButton;
-
 import com.google.inject.Inject;
 import com.sisa.tabata.R;
 import com.sisa.tabata.dao.loader.LoadedWorkoutProvider;
@@ -13,6 +8,12 @@ import com.sisa.tabata.ui.progressbar.CurrentRoundProgressBar;
 import com.sisa.tabata.ui.progressbar.TotalWorkoutProgressBar;
 import com.sisa.tabata.ui.timer.CountDownTimerWithPause;
 import com.sisa.tabata.ui.timer.WorkoutCountDownTimer;
+
+import android.view.View;
+import android.widget.ImageButton;
+
+import roboguice.inject.ContextSingleton;
+import roboguice.inject.InjectView;
 
 /**
  * Play button click listener.
@@ -34,7 +35,7 @@ public class PlayButtonClickListener implements View.OnClickListener {
     private CountDownTimerWithPause workoutCountDownTimer;
 
     /**
-     * Resets the workout
+     * Resets the workout.
      */
     public void resetWorkout() {
         if (workoutCountDownTimer != null) {

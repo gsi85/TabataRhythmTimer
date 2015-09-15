@@ -1,11 +1,14 @@
 package com.sisa.tabata.ui.listener.editor;
 
-import android.view.View;
-import android.widget.LinearLayout;
-import com.sisa.tabata.R;
-import com.sisa.tabata.util.DropDownAnim;
 import java.util.Arrays;
 import java.util.List;
+
+import com.sisa.tabata.R;
+import com.sisa.tabata.util.DropDownAnim;
+
+import android.view.View;
+import android.widget.LinearLayout;
+
 import roboguice.inject.ContextSingleton;
 import roboguice.inject.InjectView;
 

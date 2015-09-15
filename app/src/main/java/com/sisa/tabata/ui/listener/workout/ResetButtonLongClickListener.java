@@ -2,10 +2,11 @@ package com.sisa.tabata.ui.listener.workout;
 
 import static com.sisa.tabata.validation.Assert.isInstanceOf;
 
-import roboguice.inject.ContextSingleton;
+import com.sisa.tabata.ui.activity.WorkoutActivity;
+
 import android.view.View;
 
-import com.sisa.tabata.ui.activity.WorkoutActivity;
+import roboguice.inject.ContextSingleton;
 
 /**
  * Reset button long click listener.

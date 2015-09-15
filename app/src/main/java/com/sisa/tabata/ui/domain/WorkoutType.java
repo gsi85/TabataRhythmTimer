@@ -18,7 +18,7 @@ public enum WorkoutType {
     private String displayText;
     private int backGroundColor;
 
-    private WorkoutType(String displayText, int backGroundColor) {
+    WorkoutType(String displayText, int backGroundColor) {
         this.displayText = displayText;
         this.backGroundColor = backGroundColor;
     }

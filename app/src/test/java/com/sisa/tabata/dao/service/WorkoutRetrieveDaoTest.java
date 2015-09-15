@@ -16,11 +16,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.robolectric.annotation.Config;
 
-import android.content.Context;
-import android.content.pm.ApplicationInfo;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-
 import com.sisa.tabata.ApplicationContextProvider;
 import com.sisa.tabata.R;
 import com.sisa.tabata.TabataTestRunner;
@@ -28,6 +23,11 @@ import com.sisa.tabata.domain.Workout;
 import com.sisa.tabata.domain.WorkoutSection;
 import com.sisa.tabata.factory.WorkoutFactory;
 import com.sisa.tabata.factory.WorkoutSectionFactory;
+
+import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
 /**
  * Unit test for {@link WorkoutRetrieveDao}.

@@ -10,7 +10,11 @@ import android.widget.LinearLayout;
  *
  * @author Laszlo Sisa
  */
-public class DropDownAnim {
+public final class DropDownAnim {
+
+    private DropDownAnim() {
+
+    }
 
     /**
      * Expand animation.

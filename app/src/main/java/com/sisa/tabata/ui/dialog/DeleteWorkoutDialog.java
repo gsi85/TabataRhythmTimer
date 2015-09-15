@@ -1,16 +1,16 @@
 package com.sisa.tabata.ui.dialog;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.view.View;
-import android.widget.LinearLayout;
-
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.sisa.tabata.R;
 import com.sisa.tabata.dao.loader.LoadedWorkoutProvider;
 import com.sisa.tabata.dao.service.WorkoutDao;
+
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.view.View;
+import android.widget.LinearLayout;
 
 /**
  * Delete workout dialog.
@@ -26,7 +26,7 @@ public class DeleteWorkoutDialog {
     private LoadedWorkoutProvider loadedWorkoutProvider;
 
     /**
-     * Displays workout delete dialog
+     * Displays workout delete dialog.
      *
      * @param context {@link Context}
      * @param selectedWorkoutView {@link View}

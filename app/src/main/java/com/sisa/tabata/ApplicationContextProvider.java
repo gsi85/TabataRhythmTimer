@@ -1,8 +1,8 @@
 package com.sisa.tabata;
 
-import android.content.Context;
-
 import com.google.inject.Singleton;
+
+import android.content.Context;
 
 /**
  * Provider of application {@link Context} and resources.
@@ -51,7 +51,7 @@ public class ApplicationContextProvider {
      * Return a localized string from the application's package's
      * default string table.
      *
-     * @param resId Resource id for the string
+     * @param id Resource id for the string
      */
     public String getStringResource(int id) {
         return context.getString(id);

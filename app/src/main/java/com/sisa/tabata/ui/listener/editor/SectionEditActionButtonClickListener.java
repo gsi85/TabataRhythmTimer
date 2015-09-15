@@ -2,11 +2,11 @@ package com.sisa.tabata.ui.listener.editor;
 
 import static com.sisa.tabata.validation.Assert.isInstanceOf;
 
-import android.content.Intent;
-import android.view.View;
-
 import com.sisa.tabata.ui.activity.SectionEditActivity;
 import com.sisa.tabata.ui.activity.WorkoutEditActivity;
+
+import android.content.Intent;
+import android.view.View;
 
 import roboguice.inject.ContextSingleton;
 

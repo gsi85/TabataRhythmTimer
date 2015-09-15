@@ -1,14 +1,14 @@
 package com.sisa.tabata.ui.adapter;
 
+import com.sisa.tabata.R;
+import com.sisa.tabata.ui.activity.WorkoutActivity;
+import com.sisa.tabata.ui.listener.workout.MainMenuOnClickListener;
+
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
-import com.sisa.tabata.R;
-import com.sisa.tabata.ui.activity.WorkoutActivity;
-import com.sisa.tabata.ui.listener.workout.MainMenuOnClickListener;
 
 import roboguice.inject.ContextSingleton;
 

@@ -1,9 +1,10 @@
 package com.sisa.tabata;
 
-import roboguice.RoboGuice;
+import com.google.inject.Inject;
+
 import android.app.Application;
 
-import com.google.inject.Inject;
+import roboguice.RoboGuice;
 
 /**
  * Base class of application to maintain global state.

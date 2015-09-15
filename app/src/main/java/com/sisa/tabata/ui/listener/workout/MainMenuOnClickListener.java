@@ -5,16 +5,17 @@ import static com.sisa.tabata.validation.Assert.isInstanceOf;
 import java.util.HashMap;
 import java.util.Map;
 
-import roboguice.inject.ContextSingleton;
-import android.content.Intent;
-import android.view.View;
-
 import com.google.inject.Inject;
 import com.sisa.tabata.dao.loader.EditedWorkoutProvider;
 import com.sisa.tabata.dao.loader.LoadedWorkoutProvider;
 import com.sisa.tabata.ui.activity.WorkoutActivity;
 import com.sisa.tabata.ui.activity.WorkoutEditActivity;
 import com.sisa.tabata.ui.activity.WorkoutLoadActivity;
+
+import android.content.Intent;
+import android.view.View;
+
+import roboguice.inject.ContextSingleton;
 
 /**
  * Main menu on click listener.

@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-import android.database.Cursor;
-import android.database.sqlite.SQLiteQueryBuilder;
-
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.sisa.tabata.ApplicationContextProvider;
@@ -14,6 +11,9 @@ import com.sisa.tabata.domain.Workout;
 import com.sisa.tabata.domain.WorkoutSection;
 import com.sisa.tabata.factory.WorkoutFactory;
 import com.sisa.tabata.factory.WorkoutSectionFactory;
+
+import android.database.Cursor;
+import android.database.sqlite.SQLiteQueryBuilder;
 
 /**
  * DAO for retrieving stored {@link Workout} objects from database.
@@ -104,8 +104,9 @@ public class WorkoutRetrieveDao extends AbstractBaseDao {
     private Cursor executeQuery(final String tableName, final String[] columnsToSelect, final String whereClause, final String sortOrder) {
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
         queryBuilder.setTables(tableName);
-        if (whereClause != null)
+        if (whereClause != null) {
             queryBuilder.appendWhere(whereClause);
+        }
         return queryBuilder.query(getDatabase(), columnsToSelect, null, null, null, null, sortOrder);
     }
 }

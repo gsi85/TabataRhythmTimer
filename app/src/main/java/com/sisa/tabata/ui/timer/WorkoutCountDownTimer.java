@@ -2,13 +2,13 @@ package com.sisa.tabata.ui.timer;
 
 import java.util.concurrent.TimeUnit;
 
-import android.widget.ImageButton;
-
 import com.sisa.tabata.R;
 import com.sisa.tabata.ui.domain.SerializedWorkout;
 import com.sisa.tabata.ui.domain.SerializedWorkoutSection;
 import com.sisa.tabata.ui.progressbar.CurrentRoundProgressBar;
 import com.sisa.tabata.ui.progressbar.TotalWorkoutProgressBar;
+
+import android.widget.ImageButton;
 
 /**
  * Workout count down timer.

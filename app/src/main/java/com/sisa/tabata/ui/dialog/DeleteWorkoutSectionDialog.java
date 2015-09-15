@@ -1,14 +1,14 @@
 package com.sisa.tabata.ui.dialog;
 
+import com.google.inject.Singleton;
+import com.sisa.tabata.R;
+import com.sisa.tabata.domain.Workout;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.view.View;
 import android.widget.LinearLayout;
-
-import com.google.inject.Singleton;
-import com.sisa.tabata.R;
-import com.sisa.tabata.domain.Workout;
 
 /**
  * Delete workout section dialog.

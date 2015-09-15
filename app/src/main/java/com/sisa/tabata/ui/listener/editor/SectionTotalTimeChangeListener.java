@@ -2,15 +2,16 @@ package com.sisa.tabata.ui.listener.editor;
 
 import static com.sisa.tabata.validation.Assert.isInstanceOf;
 
-import roboguice.inject.ContextSingleton;
-import android.view.View;
-import android.widget.TextView;
-
 import com.google.inject.Inject;
 import com.sisa.tabata.domain.WorkoutSection;
 import com.sisa.tabata.ui.activity.SectionEditActivity;
 import com.sisa.tabata.ui.domain.WorkoutType;
 import com.sisa.tabata.ui.provider.WorkoutTotalTimeProvider;
+
+import android.view.View;
+import android.widget.TextView;
+
+import roboguice.inject.ContextSingleton;
 
 /**
  * Section total time change listener.
@@ -51,14 +52,15 @@ public class SectionTotalTimeChangeListener {
     }
 
     private void updateWorkoutSection(final WorkoutSection workoutSection, WorkoutType workoutType, long duration) {
-        if (WorkoutType.WARM_UP == workoutType)
+        if (WorkoutType.WARM_UP == workoutType) {
             workoutSection.setWarmUp(duration);
-        else if (WorkoutType.WORK == workoutType)
+        } else if (WorkoutType.WORK == workoutType) {
             workoutSection.setWork(duration);
-        else if (WorkoutType.REST == workoutType)
+        } else if (WorkoutType.REST == workoutType) {
             workoutSection.setRest(duration);
-        else if (WorkoutType.COOL_DOWN == workoutType)
+        } else if (WorkoutType.COOL_DOWN == workoutType) {
             workoutSection.setCoolDown(duration);
+        }
     }
 
     private void updateTotalTimeView(final WorkoutSection workoutSection, final TextView totalTimeValue) {

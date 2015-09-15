@@ -9,13 +9,13 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import android.content.Context;
-import android.media.AudioManager;
-import android.media.SoundPool;
-
 import com.sisa.tabata.ApplicationContextProvider;
 import com.sisa.tabata.R;
 import com.sisa.tabata.media.factory.SoundPoolFactory;
+
+import android.content.Context;
+import android.media.AudioManager;
+import android.media.SoundPool;
 
 /**
  * Unit test for {@link EffectPlayerService}.

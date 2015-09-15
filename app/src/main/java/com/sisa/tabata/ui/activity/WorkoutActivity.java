@@ -1,11 +1,5 @@
 package com.sisa.tabata.ui.activity;
 
-import android.media.AudioManager;
-import android.os.Bundle;
-import android.widget.ImageButton;
-import android.widget.RelativeLayout;
-import android.widget.Spinner;
-
 import com.google.inject.Inject;
 import com.sisa.tabata.R;
 import com.sisa.tabata.ui.adapter.SpinnerArrayAdapterFactory;
@@ -15,6 +9,12 @@ import com.sisa.tabata.ui.listener.workout.ResetButtonClickListener;
 import com.sisa.tabata.ui.listener.workout.ResetButtonLongClickListener;
 import com.sisa.tabata.ui.listener.workout.TimerLayoutListener;
 import com.sisa.tabata.ui.listener.workout.VolumeButtonClickListener;
+
+import android.media.AudioManager;
+import android.os.Bundle;
+import android.widget.ImageButton;
+import android.widget.RelativeLayout;
+import android.widget.Spinner;
 
 import roboguice.activity.RoboFragmentActivity;
 import roboguice.inject.InjectView;

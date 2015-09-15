@@ -1,10 +1,10 @@
 package com.sisa.tabata.dao.service;
 
-import android.database.sqlite.SQLiteDatabase;
-
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 import com.sisa.tabata.ApplicationContextProvider;
 import com.sisa.tabata.R;
+
+import android.database.sqlite.SQLiteDatabase;
 
 /**
  * Base class for DAO classes, holding writable {@link SQLiteDatabase} and commonly used constants.

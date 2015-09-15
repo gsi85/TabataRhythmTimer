@@ -1,13 +1,13 @@
 package com.sisa.tabata.ui.adapter;
 
-import android.content.Context;
-
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.sisa.tabata.ApplicationContextProvider;
 import com.sisa.tabata.R;
 import com.sisa.tabata.dao.loader.LoadedWorkoutProvider;
 import com.sisa.tabata.ui.listener.workout.MainMenuOnClickListener;
+
+import android.content.Context;
 
 /**
  * Factory for {@link SpinnerArrayAdapter}.

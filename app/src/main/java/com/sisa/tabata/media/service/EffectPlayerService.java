@@ -1,13 +1,13 @@
 package com.sisa.tabata.media.service;
 
-import android.media.AudioManager;
-import android.media.SoundPool;
-
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.sisa.tabata.ApplicationContextProvider;
 import com.sisa.tabata.R;
 import com.sisa.tabata.media.factory.SoundPoolFactory;
+
+import android.media.AudioManager;
+import android.media.SoundPool;
 
 /**
  * Service for playing sound effects.

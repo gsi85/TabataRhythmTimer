@@ -2,16 +2,17 @@ package com.sisa.tabata.ui.listener.editor;
 
 import static com.sisa.tabata.validation.Assert.isInstanceOf;
 
-import roboguice.inject.ContextSingleton;
-import android.content.Intent;
-import android.view.View;
-
 import com.google.inject.Inject;
 import com.sisa.tabata.dao.loader.LoadedWorkoutProvider;
 import com.sisa.tabata.dao.service.WorkoutDao;
 import com.sisa.tabata.domain.Workout;
 import com.sisa.tabata.ui.activity.WorkoutActivity;
 import com.sisa.tabata.ui.activity.WorkoutEditActivity;
+
+import android.content.Intent;
+import android.view.View;
+
+import roboguice.inject.ContextSingleton;
 
 /**
  * Workout edit action button click listener.

@@ -1,12 +1,5 @@
 package com.sisa.tabata.ui.provider;
 
-import roboguice.inject.ContextSingleton;
-import android.content.Context;
-import android.text.Html;
-import android.text.Spanned;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
 import com.google.inject.Inject;
 import com.sisa.tabata.ApplicationContextProvider;
 import com.sisa.tabata.R;
@@ -15,6 +8,14 @@ import com.sisa.tabata.domain.Workout;
 import com.sisa.tabata.ui.activity.WorkoutLoadActivity;
 import com.sisa.tabata.ui.listener.loader.WorkoutTextViewClickListener;
 import com.sisa.tabata.ui.listener.loader.WorkoutTextViewLongClickListener;
+
+import android.content.Context;
+import android.text.Html;
+import android.text.Spanned;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import roboguice.inject.ContextSingleton;
 
 /**
  * Provider for workout list text view.

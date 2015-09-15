@@ -1,17 +1,18 @@
 package com.sisa.tabata.ui.listener.loader;
 
-import roboguice.inject.ContextSingleton;
-import roboguice.inject.InjectView;
-import android.content.Context;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
 import com.google.inject.Inject;
 import com.sisa.tabata.R;
 import com.sisa.tabata.dao.service.WorkoutDao;
 import com.sisa.tabata.ui.dialog.DeleteWorkoutDialog;
 import com.sisa.tabata.ui.timer.NotificationDisplayTimer;
+
+import android.content.Context;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import roboguice.inject.ContextSingleton;
+import roboguice.inject.InjectView;
 
 /**
  * Workout text view long click listener.

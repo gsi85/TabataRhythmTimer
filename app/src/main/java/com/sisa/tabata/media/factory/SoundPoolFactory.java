@@ -1,9 +1,9 @@
 package com.sisa.tabata.media.factory;
 
+import com.google.inject.Singleton;
+
 import android.media.AudioManager;
 import android.media.SoundPool;
-
-import com.google.inject.Singleton;
 
 /**
  * Factory for {@link SoundPool}.

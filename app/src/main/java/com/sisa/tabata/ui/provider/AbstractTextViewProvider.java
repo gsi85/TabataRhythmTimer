@@ -1,12 +1,12 @@
 package com.sisa.tabata.ui.provider;
 
+import com.sisa.tabata.R;
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.sisa.tabata.R;
 
 /**
  * Abstract text view provider.

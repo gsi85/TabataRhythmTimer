@@ -2,14 +2,14 @@ package com.sisa.tabata.dao.debug;
 
 import java.util.ArrayList;
 
+import com.sisa.tabata.ApplicationContextProvider;
+import com.sisa.tabata.dao.service.AbstractBaseDao;
+
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-
-import com.sisa.tabata.ApplicationContextProvider;
-import com.sisa.tabata.dao.service.AbstractBaseDao;
 
 /**
  * Created by Laca on 2015.03.25..

@@ -2,12 +2,14 @@ package com.sisa.tabata.ui.listener.editor;
 
 import static com.sisa.tabata.validation.Assert.isInstanceOf;
 
-import android.view.View;
-import android.widget.LinearLayout;
 import com.google.inject.Inject;
 import com.sisa.tabata.R;
 import com.sisa.tabata.ui.activity.WorkoutEditActivity;
 import com.sisa.tabata.ui.dialog.DeleteWorkoutSectionDialog;
+
+import android.view.View;
+import android.widget.LinearLayout;
+
 import roboguice.inject.ContextSingleton;
 import roboguice.inject.InjectView;
 

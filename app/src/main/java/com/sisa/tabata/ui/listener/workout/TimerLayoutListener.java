@@ -1,14 +1,15 @@
 package com.sisa.tabata.ui.listener.workout;
 
-import roboguice.inject.ContextSingleton;
-import roboguice.inject.InjectView;
-import android.view.ViewTreeObserver;
-import android.widget.RelativeLayout;
-
 import com.google.inject.Inject;
 import com.sisa.tabata.R;
 import com.sisa.tabata.ui.domain.Size;
 import com.sisa.tabata.ui.drawable.CircularProgressBarDrawable;
+
+import android.view.ViewTreeObserver;
+import android.widget.RelativeLayout;
+
+import roboguice.inject.ContextSingleton;
+import roboguice.inject.InjectView;
 
 /**
  * Timer layout listener.

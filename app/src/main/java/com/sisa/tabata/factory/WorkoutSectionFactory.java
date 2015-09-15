@@ -16,7 +16,7 @@ public class WorkoutSectionFactory {
      *
      * @return {@link WorkoutSection}
      */
-    public WorkoutSection create(){
+    public WorkoutSection create() {
         return new WorkoutSection();
     }
 }

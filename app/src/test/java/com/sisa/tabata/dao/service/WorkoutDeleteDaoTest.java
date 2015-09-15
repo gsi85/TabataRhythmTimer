@@ -8,12 +8,12 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import com.sisa.tabata.ApplicationContextProvider;
+import com.sisa.tabata.R;
+
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.database.sqlite.SQLiteDatabase;
-
-import com.sisa.tabata.ApplicationContextProvider;
-import com.sisa.tabata.R;
 
 /**
  * Unit test for {@link WorkoutDeleteDao}.

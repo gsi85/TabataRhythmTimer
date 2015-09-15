@@ -1,9 +1,5 @@
 package com.sisa.tabata.dao.service;
 
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteQueryBuilder;
-
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.sisa.tabata.ApplicationContextProvider;
@@ -11,6 +7,10 @@ import com.sisa.tabata.R;
 import com.sisa.tabata.domain.Workout;
 import com.sisa.tabata.domain.WorkoutSection;
 import com.sisa.tabata.factory.WorkoutSectionFactory;
+
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteQueryBuilder;
 
 /**
  * DAO for persisting new {@link Workout} objects into database.
