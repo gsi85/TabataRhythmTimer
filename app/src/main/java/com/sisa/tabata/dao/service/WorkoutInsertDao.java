@@ -1,5 +1,7 @@
 package com.sisa.tabata.dao.service;
 
+import static com.sisa.tabata.validation.Validation.empty;
+
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.sisa.tabata.ApplicationContextProvider;
@@ -81,8 +83,7 @@ public class WorkoutInsertDao extends AbstractBaseDao {
 
     private String getNullSafeWorkoutName(final String currentWorkoutName) {
         String workoutName = currentWorkoutName;
-        //TODO: replace with validation
-        if (workoutName == null) {
+        if (empty(workoutName)) {
             SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
             queryBuilder.setTables(TABLE_WORKOUT);
             queryBuilder.appendWhere(WHERE_DEFAULT_WORKOUT_NAME_CLAUSE);

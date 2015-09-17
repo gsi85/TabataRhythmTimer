@@ -10,7 +10,6 @@ import android.os.Parcelable;
  */
 public class WorkoutSection implements Parcelable {
 
-    //TODO: check if can be extracted.
     public static final Parcelable.Creator<WorkoutSection> CREATOR = new Parcelable.Creator<WorkoutSection>() {
         public WorkoutSection createFromParcel(Parcel input) {
             return new WorkoutSection(input);

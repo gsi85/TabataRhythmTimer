@@ -1,5 +1,7 @@
 package com.sisa.tabata.dao.loader;
 
+import static com.sisa.tabata.validation.Validation.empty;
+
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.sisa.tabata.dao.service.WorkoutDao;
@@ -60,8 +62,7 @@ public class LoadedWorkoutProvider {
     }
 
     private void checkLoadWorkout() {
-        //TODO: replace with validation
-        if (workout == null) {
+        if (empty(workout)) {
             loadFirstWorkoutInList();
         }
     }
