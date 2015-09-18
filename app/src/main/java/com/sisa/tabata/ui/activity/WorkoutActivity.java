@@ -66,6 +66,12 @@ public class WorkoutActivity extends RoboFragmentActivity {
         backButtonClickCountListener.onClick(this);
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        playButtonClickListener.resetWorkout();
+    }
+
     private void setUpMainMenu() {
         mainMenu.setAdapter(spinnerArrayAdapterFactory.create(this));
         mainMenu.setSelection(0);
