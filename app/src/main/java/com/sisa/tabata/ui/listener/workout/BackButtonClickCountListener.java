@@ -18,7 +18,7 @@ import roboguice.inject.InjectView;
  * @author Laszlo Sisa
  */
 @ContextSingleton
-public class BackButtonClickListener {
+public class BackButtonClickCountListener {
 
     private static final int NOTIFICATION_TIME_IN_MILLIS = 2000;
     private static final int NOTIFICATION_PRESS_AGAIN_TO_EXIT = R.string.notification_press_again_to_exit;
@@ -27,7 +27,7 @@ public class BackButtonClickListener {
     private TextView workoutNotificationView;
     @Inject
     private ApplicationContextProvider applicationContextProvider;
-    private int backButtonCount;
+    private int backButtonClickCount;
 
     /**
      * DI constructor.
@@ -42,12 +42,20 @@ public class BackButtonClickListener {
         }
     }
 
+    /**
+     * Resets back button click count.
+     * Every button' onClick event placed on the {@link WorkoutActivity} should call this.
+     */
+    public void resetClickCount() {
+        backButtonClickCount = 0;
+    }
+
     private boolean isPressedTwice() {
-        return backButtonCount >= 1;
+        return backButtonClickCount >= 1;
     }
 
     private void exitApp(WorkoutActivity workoutActivity) {
-        backButtonCount = 0;
+        backButtonClickCount = 0;
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -57,7 +65,7 @@ public class BackButtonClickListener {
     private void showFirstPressNotification() {
         String notificationString = applicationContextProvider.getStringResource(NOTIFICATION_PRESS_AGAIN_TO_EXIT);
         new NotificationDisplayTimer(workoutNotificationView, notificationString, NOTIFICATION_TIME_IN_MILLIS).start();
-        backButtonCount++;
+        backButtonClickCount++;
     }
 
 }

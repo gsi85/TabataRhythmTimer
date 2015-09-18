@@ -18,7 +18,7 @@ import roboguice.inject.ContextSingleton;
  * @author Laszlo Sisa
  */
 @ContextSingleton
-public class VolumeButtonClickListener implements View.OnClickListener {
+public class VolumeButtonClickListener extends AbstractWorkoutActivityButtonClickListener {
 
     private static final String DIALOG_VOLUME_CONTROL = "dialog_volume_control";
 
@@ -27,6 +27,7 @@ public class VolumeButtonClickListener implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
+        super.onClick(view);
         volumeControlDialog.show(getCheckedFragmentManager(view), DIALOG_VOLUME_CONTROL);
     }
 

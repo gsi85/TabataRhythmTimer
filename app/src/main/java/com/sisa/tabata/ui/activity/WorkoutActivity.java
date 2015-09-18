@@ -1,21 +1,19 @@
 package com.sisa.tabata.ui.activity;
 
-import com.google.inject.Inject;
-import com.sisa.tabata.R;
-import com.sisa.tabata.ui.adapter.SpinnerArrayAdapterFactory;
-import com.sisa.tabata.ui.listener.workout.BackButtonClickListener;
-import com.sisa.tabata.ui.listener.workout.PlayButtonClickListener;
-import com.sisa.tabata.ui.listener.workout.ResetButtonClickListener;
-import com.sisa.tabata.ui.listener.workout.ResetButtonLongClickListener;
-import com.sisa.tabata.ui.listener.workout.TimerLayoutListener;
-import com.sisa.tabata.ui.listener.workout.VolumeButtonClickListener;
-
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
-
+import com.google.inject.Inject;
+import com.sisa.tabata.R;
+import com.sisa.tabata.ui.adapter.SpinnerArrayAdapterFactory;
+import com.sisa.tabata.ui.listener.workout.BackButtonClickCountListener;
+import com.sisa.tabata.ui.listener.workout.PlayButtonClickListener;
+import com.sisa.tabata.ui.listener.workout.ResetButtonClickListener;
+import com.sisa.tabata.ui.listener.workout.ResetButtonLongClickListener;
+import com.sisa.tabata.ui.listener.workout.TimerLayoutListener;
+import com.sisa.tabata.ui.listener.workout.VolumeButtonClickListener;
 import roboguice.activity.RoboFragmentActivity;
 import roboguice.inject.InjectView;
 
@@ -51,7 +49,7 @@ public class WorkoutActivity extends RoboFragmentActivity {
     @Inject
     private VolumeButtonClickListener volumeButtonClickListener;
     @Inject
-    private BackButtonClickListener backButtonClickListener;
+    private BackButtonClickCountListener backButtonClickCountListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +63,7 @@ public class WorkoutActivity extends RoboFragmentActivity {
 
     @Override
     public void onBackPressed() {
-        backButtonClickListener.onClick(this);
+        backButtonClickCountListener.onClick(this);
     }
 
     private void setUpMainMenu() {

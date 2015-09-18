@@ -23,7 +23,7 @@ import roboguice.inject.ContextSingleton;
  * @author Laszlo Sisa
  */
 @ContextSingleton
-public class MainMenuOnClickListener implements View.OnClickListener {
+public class MainMenuOnClickListener extends AbstractWorkoutActivityButtonClickListener {
 
     private static final String NEW_WORKOUT_NAME = "newWorkout";
     private static final int NEW_WORKOUT_ID = -1;
@@ -36,6 +36,7 @@ public class MainMenuOnClickListener implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
+        super.onClick(view);
         WorkoutActivity workoutActivity = getCheckedActivity(view);
         String menuAction = view.getTag().toString();
         Intent activityToStart = getActivitiesMAp(workoutActivity).get(menuAction);
