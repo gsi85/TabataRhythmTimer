@@ -17,7 +17,7 @@ import roboguice.inject.InjectView;
  * @author Laszlo Sisa
  */
 @ContextSingleton
-public class ResetButtonClickListener implements View.OnClickListener {
+public class ResetButtonClickListener extends AbstractWorkoutActivityButtonClickListener {
 
     private static final int DISPLAY_DURATION_MILLIS = 2000;
     private static final int NOTIFICATION_HOLD_TO_RESET = R.string.notification_hold_to_reset;
@@ -29,6 +29,7 @@ public class ResetButtonClickListener implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
+        super.onClick(view);
         String notificationText = applicationContextProvider.getStringResource(NOTIFICATION_HOLD_TO_RESET);
         new NotificationDisplayTimer(notificationView, notificationText, DISPLAY_DURATION_MILLIS).start();
     }

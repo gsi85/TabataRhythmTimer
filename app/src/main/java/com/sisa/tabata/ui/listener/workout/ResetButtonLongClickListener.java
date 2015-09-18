@@ -14,10 +14,11 @@ import roboguice.inject.ContextSingleton;
  * @author Laszlo Sisa
  */
 @ContextSingleton
-public class ResetButtonLongClickListener implements View.OnLongClickListener {
+public class ResetButtonLongClickListener extends AbstractWorkoutActivityButtonClickListener implements View.OnLongClickListener {
 
     @Override
     public boolean onLongClick(View view) {
+        super.onClick(view);
         getCheckedPlayButtonListener(view).resetWorkout();
         return true;
     }

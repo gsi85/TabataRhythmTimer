@@ -8,6 +8,7 @@ import com.sisa.tabata.dao.loader.LoadedWorkoutProvider;
 import com.sisa.tabata.ui.listener.workout.MainMenuOnClickListener;
 
 import android.content.Context;
+import com.sisa.tabata.ui.listener.workout.SpinnerTextOnClickListener;
 
 /**
  * Factory for {@link SpinnerArrayAdapter}.
@@ -23,6 +24,8 @@ public class SpinnerArrayAdapterFactory {
     private ApplicationContextProvider applicationContextProvider;
     @Inject
     private LoadedWorkoutProvider loadedWorkoutProvider;
+    @Inject
+    private SpinnerTextOnClickListener spinnerTextOnClickListener;
 
     /**
      * Creates a configured {@link SpinnerArrayAdapter}.
@@ -33,7 +36,7 @@ public class SpinnerArrayAdapterFactory {
     public SpinnerArrayAdapter create(final Context context) {
         CharSequence titleText = loadedWorkoutProvider.getLoadedWorkout().getName();
         String[] menuItems = applicationContextProvider.getContext().getResources().getStringArray(R.array.main_menu_items);
-        SpinnerArrayAdapter<String> adapter = new SpinnerArrayAdapter<>(context, menuItems, titleText, mainMenuOnClickListener);
+        SpinnerArrayAdapter<String> adapter = new SpinnerArrayAdapter<>(context, menuItems, titleText, mainMenuOnClickListener, spinnerTextOnClickListener);
         adapter.setDropDownViewResource(R.layout.spinner_item_layout);
         return adapter;
     }

@@ -1,5 +1,7 @@
 package com.sisa.tabata.dao.service;
 
+import static com.sisa.tabata.validation.Validation.notEmpty;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -50,8 +52,7 @@ public class WorkoutRetrieveDao extends AbstractBaseDao {
     protected Workout getWorkoutById(final long id) {
         String whereClause = WHERE_ID_EQUALS + id;
         List<Workout> workouts = getWorkoutWithSpecifiedCondition(whereClause);
-        //TODO: replace with validation
-        return workouts.size() != 0 ? workouts.get(0) : null;
+        return notEmpty(workouts) ? workouts.get(0) : null;
     }
 
     /**

@@ -21,7 +21,7 @@ import roboguice.inject.InjectView;
  * @author Laszlo Sisa
  */
 @ContextSingleton
-public class PlayButtonClickListener implements View.OnClickListener {
+public class PlayButtonClickListener extends AbstractWorkoutActivityButtonClickListener {
 
     @Inject
     private CurrentRoundProgressBar currentRoundProgressBar;
@@ -48,6 +48,7 @@ public class PlayButtonClickListener implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
+        super.onClick(view);
         checkFinished();
         checkCreateTimer();
         pauseResumeTimer();

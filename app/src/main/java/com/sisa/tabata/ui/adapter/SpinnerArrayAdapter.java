@@ -3,6 +3,7 @@ package com.sisa.tabata.ui.adapter;
 import com.sisa.tabata.R;
 import com.sisa.tabata.ui.activity.WorkoutActivity;
 import com.sisa.tabata.ui.listener.workout.MainMenuOnClickListener;
+import com.sisa.tabata.ui.listener.workout.SpinnerTextOnClickListener;
 
 import android.content.Context;
 import android.view.View;
@@ -22,19 +23,22 @@ public class SpinnerArrayAdapter<T> extends ArrayAdapter<T> {
 
     private final CharSequence titleText;
     private final MainMenuOnClickListener mainMenuOnClickListener;
+    private final SpinnerTextOnClickListener spinnerTextOnClickListener;
 
     /**
      * DI constructor.
-     *
      * @param context {@link Context}
      * @param objects listView objects
      * @param titleText the title text
      * @param mainMenuOnClickListener {@link MainMenuOnClickListener}
+     * @param spinnerTextOnClickListener {@link SpinnerTextOnClickListener}
      */
-    public SpinnerArrayAdapter(Context context, T[] objects, CharSequence titleText, MainMenuOnClickListener mainMenuOnClickListener) {
+    public SpinnerArrayAdapter(Context context, T[] objects, CharSequence titleText, MainMenuOnClickListener mainMenuOnClickListener,
+            final SpinnerTextOnClickListener spinnerTextOnClickListener) {
         super(context, R.layout.spinner_item_layout, objects);
         this.titleText = titleText;
         this.mainMenuOnClickListener = mainMenuOnClickListener;
+        this.spinnerTextOnClickListener = spinnerTextOnClickListener;
     }
 
     @Override
@@ -53,6 +57,7 @@ public class SpinnerArrayAdapter<T> extends ArrayAdapter<T> {
         view.setClickable(true);
         view.setTag(text.getText());
         view.setOnClickListener(mainMenuOnClickListener);
+        spinnerTextOnClickListener.onClick(view);
         return view;
     }
 
