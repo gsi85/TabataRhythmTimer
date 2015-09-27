@@ -1,4 +1,4 @@
-package com.sisa.tabata.ui.provider;
+package com.sisa.tabata.ui.provider.editor;
 
 import com.google.inject.Singleton;
 import com.sisa.tabata.domain.Workout;

@@ -1,13 +1,16 @@
 package com.sisa.tabata.media.domain;
 
+import static java.util.Collections.sort;
+import static java.util.Collections.unmodifiableList;
+import static java.util.Collections.unmodifiableMap;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * Domain objects storing {@link Song} in categorized manner.
+ * Domain object, storing {@link Song} in categorized manner.
  *
  * @author Laca
  */
@@ -16,11 +19,15 @@ public final class AudioStore {
     private final Map<String, List<Song>> songsByAlbums;
     private final Map<String, List<Song>> songsByArtists;
     private final List<Song> allSongs;
+    private final List<Playlist> playlists;
 
     private AudioStore(Builder builder) {
-        songsByAlbums = Collections.unmodifiableMap(builder.songsByAlbums);
-        songsByArtists = Collections.unmodifiableMap(builder.songsByArtists);
-        allSongs = Collections.unmodifiableList(builder.allSongs);
+        sort(builder.playlists);
+        sort(builder.allSongs);
+        songsByAlbums = unmodifiableMap(builder.songsByAlbums);
+        songsByArtists = unmodifiableMap(builder.songsByArtists);
+        allSongs = unmodifiableList(builder.allSongs);
+        playlists = unmodifiableList(builder.playlists);
     }
 
     public Map<String, List<Song>> getSongsByAlbums() {
@@ -35,14 +42,19 @@ public final class AudioStore {
         return allSongs;
     }
 
+    public List<Playlist> getPlaylists() {
+        return playlists;
+    }
+
     /**
-     * Builder for {@link AudioStore}
+     * Builder for {@link AudioStore}.
      */
     public static class Builder {
 
         private Map<String, List<Song>> songsByAlbums;
         private Map<String, List<Song>> songsByArtists;
         private List<Song> allSongs;
+        private List<Playlist> playlists;
 
         /**
          * Default constructor.
@@ -54,15 +66,28 @@ public final class AudioStore {
         }
 
         /**
-         * Adds a song to the store.
+         * Adds a list of songs to the store.
          *
-         * @param song the {@link Song} to add
+         * @param songs the list of {@link Song} to add
          * @return {@link Builder}
          */
-        public Builder addSong(final Song song) {
-            addToAlbumsMap(song);
-            addToArtistsMap(song);
-            addToSongsList(song);
+        public Builder addSongs(final List<Song> songs) {
+            for (Song song : songs) {
+                addToAlbumsMap(song);
+                addToArtistsMap(song);
+                addToSongsList(song);
+            }
+            return this;
+        }
+
+        /**
+         * Sets the list of {@link Playlist}.
+         *
+         * @param playlists the list of {@link Playlist}
+         * @return {@link Builder}
+         */
+        public Builder withPlaylists(final List<Playlist> playlists) {
+            this.playlists = playlists;
             return this;
         }
 

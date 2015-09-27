@@ -8,8 +8,8 @@ import com.sisa.tabata.ui.listener.editor.SectionTextViewClickListener;
 import com.sisa.tabata.ui.listener.editor.SectionTextViewLongClickListener;
 import com.sisa.tabata.ui.listener.editor.WorkoutEditActionButtonClickListener;
 import com.sisa.tabata.ui.listener.editor.WorkoutEditTextEditorTextWatcher;
-import com.sisa.tabata.ui.provider.WorkoutSectionsTextViewProvider;
-import com.sisa.tabata.ui.provider.WorkoutSectionsUpdateProvider;
+import com.sisa.tabata.ui.provider.editor.WorkoutSectionsTextViewProvider;
+import com.sisa.tabata.ui.provider.editor.WorkoutSectionsUpdateProvider;
 import com.sisa.tabata.ui.provider.WorkoutTotalTimeProvider;
 import com.sisa.tabata.ui.timer.NotificationDisplayTimer;
 
@@ -84,7 +84,7 @@ public class WorkoutEditActivity extends RoboActivity {
 
     @Override
     protected void onResume() {
-        super.onStart();
+        super.onResume();
         String notificationText = getString(R.string.notification_long_press_to_delete_section);
         new NotificationDisplayTimer(workoutEditNotificationView, notificationText, getResources().getInteger(R.integer.long_notification_duration))
                 .start();

@@ -22,11 +22,11 @@ public abstract class AbstractTextViewProvider {
     /**
      * Creates a new {@link TextView} instance.
      *
-     * @param workoutEditActivity {@link Activity}
+     * @param activity {@link Activity}
      * @return {@link TextView}
      */
-    protected TextView createTextView(Activity workoutEditActivity) {
-        return new TextView(workoutEditActivity);
+    protected TextView createTextView(Activity activity) {
+        return new TextView(activity);
     }
 
     /**

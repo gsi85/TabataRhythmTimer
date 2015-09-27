@@ -1,4 +1,4 @@
-package com.sisa.tabata.ui.provider;
+package com.sisa.tabata.ui.provider.editor;
 
 import com.google.inject.Inject;
 import com.sisa.tabata.ApplicationContextProvider;
@@ -15,6 +15,8 @@ import android.text.Spanned;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.sisa.tabata.ui.provider.AbstractTextViewProvider;
+import com.sisa.tabata.ui.provider.WorkoutTotalTimeProvider;
 import roboguice.inject.ContextSingleton;
 
 /**

@@ -4,7 +4,7 @@ import com.google.inject.Inject;
 import com.sisa.tabata.R;
 import com.sisa.tabata.ui.listener.loader.WorkoutTextViewClickListener;
 import com.sisa.tabata.ui.listener.loader.WorkoutTextViewLongClickListener;
-import com.sisa.tabata.ui.provider.WorkoutListTextViewProvider;
+import com.sisa.tabata.ui.provider.loader.WorkoutListTextViewProvider;
 import com.sisa.tabata.ui.timer.NotificationDisplayTimer;
 
 import android.content.Intent;
@@ -42,7 +42,7 @@ public class WorkoutLoadActivity extends RoboActivity {
 
     @Override
     protected void onResume() {
-        super.onStart();
+        super.onResume();
         String notificationText = getString(R.string.notification_long_press_to_delete_workout);
         new NotificationDisplayTimer(workoutLoadNotificationView, notificationText, getResources().getInteger(R.integer.long_notification_duration))
                 .start();

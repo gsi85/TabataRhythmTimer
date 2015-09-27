@@ -1,14 +1,20 @@
 package com.sisa.tabata.media.domain;
 
+import static com.sisa.tabata.validation.Assert.isInstanceOf;
+
+import com.sisa.tabata.validation.Assert;
+
+import android.support.annotation.NonNull;
+
 /**
  * Immutable domain object representing a song.
  *
  * @author Laszlo Sisa
  */
-public final class Song {
+public final class Song implements Comparable {
 
-    private final String trackId;
-    private final String trackNumber;
+    private final long trackId;
+    private final int trackNumber;
     private final String title;
     private final String artist;
     private final String album;
@@ -23,11 +29,11 @@ public final class Song {
         dataStream = builder.dataStream;
     }
 
-    public String getTrackId() {
+    public long getTrackId() {
         return trackId;
     }
 
-    public String getTrackNumber() {
+    public int getTrackNumber() {
         return trackNumber;
     }
 
@@ -47,13 +53,19 @@ public final class Song {
         return dataStream;
     }
 
+    @Override
+    public int compareTo(@NonNull final Object another) {
+        isInstanceOf(Song.class, another, "can't compare to non Song type!");
+        return getTitle().compareTo(((Song) another).getTitle());
+    }
+
     /**
      * Builder for {@link Song}
      */
     public static class Builder {
 
-        private String trackId;
-        private String trackNumber;
+        private long trackId;
+        private int trackNumber;
         private String title;
         private String artist;
         private String album;
@@ -65,7 +77,7 @@ public final class Song {
          * @param trackId track id
          * @return {@link Builder}
          */
-        public Builder withTrackid(final String trackId) {
+        public Builder withTrackid(final long trackId) {
             this.trackId = trackId;
             return this;
         }
@@ -76,7 +88,7 @@ public final class Song {
          * @param trackNumber track number
          * @return {@link Builder}
          */
-        public Builder withTracknumber(final String trackNumber) {
+        public Builder withTracknumber(final int trackNumber) {
             this.trackNumber = trackNumber;
             return this;
         }
@@ -131,7 +143,13 @@ public final class Song {
          * @return {@link Song}
          */
         public Song build() {
+            validate();
             return new Song(this);
+        }
+
+        private void validate() {
+            Assert.notNull(album, "album in Song can not be null!");
+            Assert.notNull(artist, "artist in Song can not be null!");
         }
 
     }

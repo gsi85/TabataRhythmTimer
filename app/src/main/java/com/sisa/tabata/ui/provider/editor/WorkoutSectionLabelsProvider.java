@@ -1,5 +1,6 @@
-package com.sisa.tabata.ui.provider;
+package com.sisa.tabata.ui.provider.editor;
 
+import com.sisa.tabata.ui.provider.WorkoutTotalTimeProvider;
 import java.util.HashMap;
 import java.util.Map;
 

@@ -2,6 +2,7 @@ package com.sisa.tabata.ui.listener.workout;
 
 import static com.sisa.tabata.validation.Assert.isInstanceOf;
 
+import com.sisa.tabata.ui.activity.MusicSelectActivity;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -57,6 +58,7 @@ public class MainMenuOnClickListener extends AbstractWorkoutActivityButtonClickL
         activitiesMap.put("EDIT", createWorkoutEditIntent(workoutActivity, loadedWorkoutProvider.getLoadedWorkout().getId(), false));
         activitiesMap.put("NEW", createWorkoutEditIntent(workoutActivity, NEW_WORKOUT_ID, true));
         activitiesMap.put("LOAD", createWorkoutLoadIntent(workoutActivity));
+        activitiesMap.put("SET MUSIC", createSelectMusicIntent(workoutActivity));
         return activitiesMap;
     }
 
@@ -69,6 +71,10 @@ public class MainMenuOnClickListener extends AbstractWorkoutActivityButtonClickL
 
     private Intent createWorkoutLoadIntent(final WorkoutActivity workoutActivity) {
         return new Intent(workoutActivity, WorkoutLoadActivity.class);
+    }
+
+    private Intent createSelectMusicIntent(final WorkoutActivity workoutActivity) {
+        return new Intent(workoutActivity, MusicSelectActivity.class);
     }
 
 }

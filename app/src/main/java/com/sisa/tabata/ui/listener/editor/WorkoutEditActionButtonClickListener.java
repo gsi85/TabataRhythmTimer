@@ -58,7 +58,7 @@ public class WorkoutEditActionButtonClickListener implements View.OnClickListene
     }
 
     private WorkoutEditActivity getCheckedContext(final View view) {
-        isInstanceOf(WorkoutEditActivity.class, view.getContext(), "View context is not a WorkoutEditActivity\"");
+        isInstanceOf(WorkoutEditActivity.class, view.getContext(), "View context is not a WorkoutEditActivity");
         return (WorkoutEditActivity) view.getContext();
     }
 
