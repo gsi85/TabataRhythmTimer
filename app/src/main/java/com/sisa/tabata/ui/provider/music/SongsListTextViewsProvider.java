@@ -2,18 +2,14 @@ package com.sisa.tabata.ui.provider.music;
 
 import static android.text.Html.fromHtml;
 
-import java.util.List;
-
 import com.google.inject.Inject;
 import com.sisa.tabata.ApplicationContextProvider;
 import com.sisa.tabata.R;
 import com.sisa.tabata.media.domain.AudioStore;
 import com.sisa.tabata.media.domain.Song;
-import com.sisa.tabata.ui.activity.MusicSelectActivity;
 
 import android.text.Spanned;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import roboguice.inject.ContextSingleton;
 
@@ -35,16 +31,10 @@ public class SongsListTextViewsProvider extends AbstractMusicSelectTextViewProvi
      *
      * @param audioStore          {@link AudioStore}
      * @param songItemsContainer  {@link LinearLayout} container for songs list
-     * @param musicSelectActivity {@link MusicSelectActivity}
      */
-    public void createSongListTextViews(final AudioStore audioStore, final LinearLayout songItemsContainer,
-            final MusicSelectActivity musicSelectActivity) {
-        List<Song> songs = audioStore.getAllSongs();
-        for (Song song : songs) {
-            TextView textView = createTextView(musicSelectActivity);
-            textView.setText(getFormattedText(song));
-            setStyle(musicSelectActivity, textView);
-            songItemsContainer.addView(textView);
+    public void createSongListTextViews(final AudioStore audioStore, final LinearLayout songItemsContainer) {
+        for (Song song : audioStore.getAllSongs()) {
+            addView(songItemsContainer, getFormattedText(song));
         }
     }
 

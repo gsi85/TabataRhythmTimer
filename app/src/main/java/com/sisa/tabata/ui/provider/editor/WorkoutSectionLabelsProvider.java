@@ -1,12 +1,12 @@
 package com.sisa.tabata.ui.provider.editor;
 
-import com.sisa.tabata.ui.provider.WorkoutTotalTimeProvider;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.google.inject.Inject;
 import com.sisa.tabata.R;
 import com.sisa.tabata.domain.WorkoutSection;
+import com.sisa.tabata.ui.provider.WorkoutTotalTimeProvider;
 import com.sisa.tabata.util.TimeFormatter;
 
 import roboguice.inject.ContextSingleton;

@@ -12,11 +12,9 @@ import com.sisa.tabata.ApplicationContextProvider;
 import com.sisa.tabata.R;
 import com.sisa.tabata.media.domain.AudioStore;
 import com.sisa.tabata.media.domain.Song;
-import com.sisa.tabata.ui.activity.MusicSelectActivity;
 
 import android.text.Spanned;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import roboguice.inject.ContextSingleton;
 
@@ -39,17 +37,12 @@ public class ArtistListTextViewsProvider extends AbstractMusicSelectTextViewProv
      *
      * @param audioStore            {@link AudioStore}
      * @param artistsItemsContainer {@link LinearLayout} container for artist list
-     * @param musicSelectActivity   {@link MusicSelectActivity}
      */
-    public void createArtistsListTextViews(final AudioStore audioStore, final LinearLayout artistsItemsContainer,
-            final MusicSelectActivity musicSelectActivity) {
+    public void createArtistsListTextViews(final AudioStore audioStore, final LinearLayout artistsItemsContainer) {
         Map<String, List<Song>> songsByArtists = audioStore.getSongsByArtists();
-        SortedSet<String> albums = new TreeSet<>(songsByArtists.keySet());
-        for (String album : albums) {
-            TextView textView = createTextView(musicSelectActivity);
-            textView.setText(getFormattedText(songsByArtists.get(album)));
-            setStyle(musicSelectActivity, textView);
-            artistsItemsContainer.addView(textView);
+        SortedSet<String> artists = new TreeSet<>(songsByArtists.keySet());
+        for (String artist : artists) {
+            addView(artistsItemsContainer, getFormattedText(songsByArtists.get(artist)));
         }
     }
 

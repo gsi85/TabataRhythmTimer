@@ -60,7 +60,7 @@ public final class Song implements Comparable {
     }
 
     /**
-     * Builder for {@link Song}
+     * Builder for {@link Song}.
      */
     public static class Builder {
 

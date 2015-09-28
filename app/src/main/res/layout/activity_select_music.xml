@@ -12,7 +12,7 @@
             android:layout_height="60dp"
             android:layout_alignParentTop="true"
             android:layout_margin="0dp"
-            android:background="#CCC"
+            android:background="@android:color/holo_blue_dark"
             android:baselineAligned="false"
             android:gravity="left"
             android:orientation="horizontal"
@@ -25,11 +25,13 @@
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center"
-                android:layout_marginRight="1dp"
+                android:layout_marginRight="1px"
+                android:layout_marginBottom="4px"
                 android:layout_weight="1"
                 android:background="@drawable/bg_header_buttons"
                 android:clickable="true"
                 android:focusable="false"
+                android:tag="albums"
                 android:orientation="vertical">
 
             <ImageView
@@ -40,13 +42,15 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
                     android:adjustViewBounds="false"
-                    android:src="@android:drawable/ic_input_get" />
+                    android:src="@android:drawable/ic_input_get"
+                    android:tint="@android:color/holo_blue_bright"/>
 
             <TextView
                     android:id="@+id/albumText"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:gravity="center"
+                    android:textColor="#ffffff"
                     android:text="@string/music_select_albums"
                     android:textSize="14sp"/>
 
@@ -58,11 +62,12 @@
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center"
-                android:layout_marginRight="1dp"
+                android:layout_marginRight="1px"
                 android:layout_weight="1"
                 android:background="@drawable/bg_header_buttons"
                 android:clickable="true"
                 android:focusable="false"
+                android:tag="artists"
                 android:orientation="vertical">
 
             <ImageView
@@ -91,11 +96,12 @@
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center"
-                android:layout_marginRight="1dp"
+                android:layout_marginRight="1px"
                 android:layout_weight="1"
                 android:background="@drawable/bg_header_buttons"
                 android:clickable="true"
                 android:focusable="false"
+                android:tag="playlists"
                 android:orientation="vertical">
 
             <ImageView
@@ -124,11 +130,12 @@
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center"
-                android:layout_marginRight="1dp"
+                android:layout_marginRight="1px"
                 android:layout_weight="1"
                 android:background="@drawable/bg_header_buttons"
                 android:clickable="true"
                 android:focusable="false"
+                android:tag="songs"
                 android:orientation="vertical">
 
             <ImageView
@@ -157,7 +164,6 @@
                 android:layout_width="0dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center"
-                android:layout_marginRight="1dp"
                 android:layout_weight="1"
                 android:background="@drawable/bg_header_buttons"
                 android:clickable="true"
@@ -297,16 +303,17 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:background="#CCCCCC"
-                        android:visibility="gone"/>
+                        android:tag="albums"
+                        android:background="#333333"/>
 
-                <!-- Album entries container -->
+                <!-- Artist entries container -->
                 <LinearLayout
                         android:id="@+id/artistItemsLayout"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:background="#CCCCCC"
+                        android:tag="artists"
+                        android:background="#333333"
                         android:visibility="gone"/>
 
                 <!-- Playlist entries container -->
@@ -315,7 +322,8 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:background="#CCCCCC"
+                        android:tag="playlists"
+                        android:background="#333333"
                         android:visibility="gone"/>
 
                 <!-- Songs entries container -->
@@ -324,7 +332,9 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:background="#CCCCCC"/>
+                        android:tag="songs"
+                        android:background="#333333"
+                        android:visibility="gone"/>
 
                 </LinearLayout>
 

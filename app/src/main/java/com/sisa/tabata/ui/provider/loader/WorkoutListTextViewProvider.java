@@ -8,6 +8,8 @@ import com.sisa.tabata.domain.Workout;
 import com.sisa.tabata.ui.activity.WorkoutLoadActivity;
 import com.sisa.tabata.ui.listener.loader.WorkoutTextViewClickListener;
 import com.sisa.tabata.ui.listener.loader.WorkoutTextViewLongClickListener;
+import com.sisa.tabata.ui.provider.AbstractTextViewProvider;
+import com.sisa.tabata.ui.provider.WorkoutTotalTimeProvider;
 
 import android.content.Context;
 import android.text.Html;
@@ -15,8 +17,6 @@ import android.text.Spanned;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.sisa.tabata.ui.provider.AbstractTextViewProvider;
-import com.sisa.tabata.ui.provider.WorkoutTotalTimeProvider;
 import roboguice.inject.ContextSingleton;
 
 /**

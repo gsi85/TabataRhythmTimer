@@ -12,11 +12,9 @@ import com.sisa.tabata.ApplicationContextProvider;
 import com.sisa.tabata.R;
 import com.sisa.tabata.media.domain.AudioStore;
 import com.sisa.tabata.media.domain.Song;
-import com.sisa.tabata.ui.activity.MusicSelectActivity;
 
 import android.text.Spanned;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import roboguice.inject.ContextSingleton;
 
@@ -39,17 +37,12 @@ public class AlbumListTextViewsProvider extends AbstractMusicSelectTextViewProvi
      *
      * @param audioStore          {@link AudioStore}
      * @param albumItemsContainer {@link LinearLayout} container for album list
-     * @param musicSelectActivity {@link MusicSelectActivity}
      */
-    public void createAlbumsListTextViews(final AudioStore audioStore, final LinearLayout albumItemsContainer,
-            final MusicSelectActivity musicSelectActivity) {
+    public void createAlbumsListTextViews(final AudioStore audioStore, final LinearLayout albumItemsContainer) {
         Map<String, List<Song>> songsByAlbums = audioStore.getSongsByAlbums();
         SortedSet<String> albums = new TreeSet<>(songsByAlbums.keySet());
         for (String album : albums) {
-            TextView textView = createTextView(musicSelectActivity);
-            textView.setText(getFormattedText(songsByAlbums.get(album)));
-            setStyle(musicSelectActivity, textView);
-            albumItemsContainer.addView(textView);
+            addView(albumItemsContainer, getFormattedText(songsByAlbums.get(album)));
         }
     }
 

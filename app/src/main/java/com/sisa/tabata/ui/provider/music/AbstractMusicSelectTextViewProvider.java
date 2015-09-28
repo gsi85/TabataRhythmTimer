@@ -1,10 +1,11 @@
 package com.sisa.tabata.ui.provider.music;
 
-import com.sisa.tabata.R;
-import com.sisa.tabata.ui.activity.MusicSelectActivity;
-
-import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
+import android.text.Spanned;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -17,33 +18,46 @@ public abstract class AbstractMusicSelectTextViewProvider {
 
     private static final float OFFSET = 0.5f;
     private static final int PADDING_ING_PIXEL = 8;
+    private static final LinearLayout.LayoutParams ITEM_LAYOUT_PARAM = new LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
+    private static final LinearLayout.LayoutParams ITEM_CONTAINER_LAYOUT_PARAM = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT);
 
-    /**
-     * Creates a new {@link TextView}.
-     *
-     * @param musicSelectActivity {@link MusicSelectActivity} the context
-     * @return {@link TextView}
-     */
-    protected TextView createTextView(final MusicSelectActivity musicSelectActivity) {
-        return new TextView(musicSelectActivity);
+    static {
+        ITEM_CONTAINER_LAYOUT_PARAM.setMargins(0, 0, 0, 1);
     }
 
     /**
-     * Sets text view's style.
-     *
-     * @param activity {@link Activity}
-     * @param textView {@link TextView}
+     * Adds view to container.
+     * @param container {@link LinearLayout}
+     * @param formattedText the formatted text of the text view
      */
-    protected void setStyle(Activity activity, TextView textView) {
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT);
-        layoutParams.setMargins(0, 0, 0, 1);
-        int padding = getDp(activity, PADDING_ING_PIXEL);
-        textView.setWidth(activity.getWindowManager().getDefaultDisplay().getWidth());
-        textView.setBackgroundResource(R.drawable.bg_header_buttons);
-        textView.setLayoutParams(layoutParams);
-        textView.setPadding(padding, padding, padding, padding);
-        textView.setClickable(true);
+    protected void addView(final LinearLayout container, final Spanned formattedText) {
+        Context context = container.getContext();
+        TextView textView = new TextView(context);
+        CheckBox checkBox = new CheckBox(context);
+        LinearLayout itemLayout = createItemLayout(context);
+        setItemStyle(context, checkBox);
+        setItemStyle(context, textView);
+        checkBox.setGravity(Gravity.CENTER_VERTICAL);
+        itemLayout.addView(checkBox);
+        itemLayout.addView(textView);
+        textView.setText(formattedText);
+        container.addView(itemLayout);
+    }
+
+    private LinearLayout createItemLayout(final Context context) {
+        LinearLayout itemLayout = new LinearLayout(context);
+        itemLayout.setLayoutParams(ITEM_CONTAINER_LAYOUT_PARAM);
+        itemLayout.setBackgroundColor(Color.BLACK);
+        return itemLayout;
+    }
+
+    private void setItemStyle(Context context, View view) {
+        int padding = getDp(context, PADDING_ING_PIXEL);
+        view.setLayoutParams(ITEM_LAYOUT_PARAM);
+        view.setBackgroundColor(Color.BLACK);
+        view.setPadding(padding, padding, padding, padding);
     }
 
     private int getDp(Context context, int requiredDp) {

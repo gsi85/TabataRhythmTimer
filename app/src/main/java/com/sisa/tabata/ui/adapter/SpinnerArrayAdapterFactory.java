@@ -6,9 +6,9 @@ import com.sisa.tabata.ApplicationContextProvider;
 import com.sisa.tabata.R;
 import com.sisa.tabata.dao.loader.LoadedWorkoutProvider;
 import com.sisa.tabata.ui.listener.workout.MainMenuOnClickListener;
+import com.sisa.tabata.ui.listener.workout.SpinnerTextOnClickListener;
 
 import android.content.Context;
-import com.sisa.tabata.ui.listener.workout.SpinnerTextOnClickListener;
 
 /**
  * Factory for {@link SpinnerArrayAdapter}.

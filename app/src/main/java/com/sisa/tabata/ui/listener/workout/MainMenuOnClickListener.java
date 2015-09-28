@@ -2,13 +2,13 @@ package com.sisa.tabata.ui.listener.workout;
 
 import static com.sisa.tabata.validation.Assert.isInstanceOf;
 
-import com.sisa.tabata.ui.activity.MusicSelectActivity;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.google.inject.Inject;
 import com.sisa.tabata.dao.loader.EditedWorkoutProvider;
 import com.sisa.tabata.dao.loader.LoadedWorkoutProvider;
+import com.sisa.tabata.ui.activity.MusicSelectActivity;
 import com.sisa.tabata.ui.activity.WorkoutActivity;
 import com.sisa.tabata.ui.activity.WorkoutEditActivity;
 import com.sisa.tabata.ui.activity.WorkoutLoadActivity;
