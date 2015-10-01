@@ -20,7 +20,7 @@ import android.provider.MediaStore;
  * @author Laca
  */
 @Singleton
-public class AudioStoreDao {
+public class AudioMediaStoreDao {
 
     private static final Uri EXTERNAL_CONTENT_URI = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
     private static final String SELECTION = MediaStore.Audio.Media.IS_MUSIC + " != 0";

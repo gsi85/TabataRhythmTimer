@@ -10,12 +10,12 @@ import com.sisa.tabata.ui.domain.SerializedWorkout;
 import com.sisa.tabata.workout.transformer.SerializedWorkoutTransformer;
 
 /**
- * Provider of the currently loaded {@link Workout} instance.
+ * Loader of the currently loaded {@link Workout} instance.
  *
  * @author Laszlo Sisa
  */
 @Singleton
-public class LoadedWorkoutProvider {
+public class WorkoutManager {
 
     @Inject
     private SerializedWorkoutTransformer serializedWorkoutTransformer;

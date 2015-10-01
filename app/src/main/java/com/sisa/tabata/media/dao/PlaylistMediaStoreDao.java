@@ -20,7 +20,7 @@ import android.provider.MediaStore;
  * @author Laszlo Sisa
  */
 @Singleton
-public class PlaylistStoreDao {
+public class PlaylistMediaStoreDao {
 
     private static final Uri EXTERNAL_CONTENT_URI = MediaStore.Audio.Playlists.EXTERNAL_CONTENT_URI;
     private static final String[] PROJECTION = new String[]{MediaStore.Audio.Playlists._ID, MediaStore.Audio.Playlists.NAME,
