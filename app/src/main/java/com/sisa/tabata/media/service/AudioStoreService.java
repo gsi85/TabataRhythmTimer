@@ -2,8 +2,9 @@ package com.sisa.tabata.media.service;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.sisa.tabata.media.dao.AudioStoreDao;
-import com.sisa.tabata.media.dao.PlaylistStoreDao;
+import com.sisa.tabata.media.dao.loader.AudioStoreManager;
+import com.sisa.tabata.media.dao.AudioMediaStoreDao;
+import com.sisa.tabata.media.dao.PlaylistMediaStoreDao;
 import com.sisa.tabata.media.domain.AudioStore;
 
 import android.content.Context;
@@ -17,20 +18,19 @@ import android.content.Context;
 public class AudioStoreService {
 
     @Inject
-    private AudioStoreDao audioStoreDao;
+    private AudioMediaStoreDao audioMediaStoreDao;
     @Inject
-    private PlaylistStoreDao playlistStoreDao;
+    private PlaylistMediaStoreDao playlistMediaStoreDao;
 
     /**
-     * Builds {@link AudioStore} based on the meta information stored in media store.
+     * Creates a {@link AudioStore} based on the meta information stored in media store an loads into {@link AudioStoreManager}.
      *
      * @param context {@link Context}
-     * @return {@link AudioStore}
      */
-    public AudioStore getAudioStore(final Context context) {
+    public AudioStore getAudioStoreFromMediaStore(final Context context) {
         return new AudioStore.Builder()
-                .addSongs(audioStoreDao.getSongs(context))
-                .withPlaylists(playlistStoreDao.getPlaylists(context))
+                .addSongs(audioMediaStoreDao.getSongs(context))
+                .withPlaylists(playlistMediaStoreDao.getPlaylists(context))
                 .build();
     }
 

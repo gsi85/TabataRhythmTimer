@@ -2,20 +2,17 @@ package com.sisa.tabata.ui.provider.music;
 
 import static android.text.Html.fromHtml;
 
+import android.text.Spanned;
+import android.widget.LinearLayout;
+import com.google.inject.Inject;
+import com.sisa.tabata.ApplicationContextProvider;
+import com.sisa.tabata.R;
+import com.sisa.tabata.media.dao.loader.AudioStoreManager;
+import com.sisa.tabata.media.domain.Song;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
-
-import com.google.inject.Inject;
-import com.sisa.tabata.ApplicationContextProvider;
-import com.sisa.tabata.R;
-import com.sisa.tabata.media.domain.AudioStore;
-import com.sisa.tabata.media.domain.Song;
-
-import android.text.Spanned;
-import android.widget.LinearLayout;
-
 import roboguice.inject.ContextSingleton;
 
 /**
@@ -28,21 +25,24 @@ public class ArtistListTextViewsProvider extends AbstractMusicSelectTextViewProv
 
     private static final int ARTIST_TEXT_VIEW_PATTERN = R.string.artists_text_view_pattern;
     private static final int FIRST_ITEM_INDEX = 0;
+    private static final String CATEGORY = "artist";
 
     @Inject
     private ApplicationContextProvider applicationContextProvider;
+    @Inject
+    private AudioStoreManager audioStoreManager;
+
 
     /**
      * Creates artists items text views.
      *
-     * @param audioStore            {@link AudioStore}
      * @param artistsItemsContainer {@link LinearLayout} container for artist list
      */
-    public void createArtistsListTextViews(final AudioStore audioStore, final LinearLayout artistsItemsContainer) {
-        Map<String, List<Song>> songsByArtists = audioStore.getSongsByArtists();
+    public void createArtistsListTextViews(final LinearLayout artistsItemsContainer) {
+        Map<String, List<Song>> songsByArtists = audioStoreManager.getAudioStore().getSongsByArtists();
         SortedSet<String> artists = new TreeSet<>(songsByArtists.keySet());
         for (String artist : artists) {
-            addView(artistsItemsContainer, getFormattedText(songsByArtists.get(artist)));
+            addView(artistsItemsContainer, getFormattedText(songsByArtists.get(artist)), CATEGORY, artist);
         }
     }
 

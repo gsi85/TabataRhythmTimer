@@ -1,17 +1,18 @@
 package com.sisa.tabata.media.dao.loader;
 
+import static com.sisa.tabata.validation.Assert.notNull;
+
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.sisa.tabata.media.domain.AudioStore;
 import com.sisa.tabata.media.service.AudioStoreService;
-import com.sisa.tabata.validation.Assert;
 
 import android.content.Context;
 
 /**
  * Manager for the loaded {@link AudioStore}.
  *
- * @author Laca
+ * @author Laszlo Sisa
  */
 @Singleton
 public class AudioStoreManager {
@@ -28,7 +29,7 @@ public class AudioStoreManager {
      * @throws  IllegalArgumentException if {@code audioStore} is null
      */
     public AudioStore getAudioStore() {
-        Assert.notNull(audioStore, "audioStore must be loaded before retrieving it");
+        notNull(audioStore, "audioStore must be loaded before retrieving it");
         return audioStore;
     }
 

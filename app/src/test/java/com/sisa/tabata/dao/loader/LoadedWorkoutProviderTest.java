@@ -19,7 +19,7 @@ import com.sisa.tabata.ui.domain.SerializedWorkout;
 import com.sisa.tabata.workout.transformer.SerializedWorkoutTransformer;
 
 /**
- * Unit test for {@link LoadedWorkoutProvider}.
+ * Unit test for {@link WorkoutManager}.
  *
  * @author Laszlo Sisa
  */
@@ -28,7 +28,7 @@ public class LoadedWorkoutProviderTest {
     private static final long TEST_ID = 1;
 
     @InjectMocks
-    private LoadedWorkoutProvider underTest;
+    private WorkoutManager underTest;
     @Mock
     private SerializedWorkoutTransformer serializedWorkoutTransformer;
     @Mock

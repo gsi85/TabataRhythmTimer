@@ -10,7 +10,7 @@ import com.sisa.tabata.ui.domain.SerializedWorkout;
 import com.sisa.tabata.workout.transformer.SerializedWorkoutTransformer;
 
 /**
- * Loader of the currently loaded {@link Workout} instance.
+ * Manages the currently loaded {@link Workout} instance.
  *
  * @author Laszlo Sisa
  */

@@ -2,7 +2,7 @@ package com.sisa.tabata.ui.listener.workout;
 
 import com.google.inject.Inject;
 import com.sisa.tabata.R;
-import com.sisa.tabata.dao.loader.LoadedWorkoutProvider;
+import com.sisa.tabata.dao.loader.WorkoutManager;
 import com.sisa.tabata.ui.domain.SerializedWorkout;
 import com.sisa.tabata.ui.progressbar.CurrentRoundProgressBar;
 import com.sisa.tabata.ui.progressbar.TotalWorkoutProgressBar;
@@ -28,7 +28,7 @@ public class PlayButtonClickListener extends AbstractWorkoutActivityButtonClickL
     @Inject
     private TotalWorkoutProgressBar totalWorkoutProgressBar;
     @Inject
-    private LoadedWorkoutProvider loadedWorkoutProvider;
+    private WorkoutManager workoutManager;
     @InjectView(R.id.playButton)
     private ImageButton playButton;
 
@@ -62,7 +62,7 @@ public class PlayButtonClickListener extends AbstractWorkoutActivityButtonClickL
 
     private void checkCreateTimer() {
         if (workoutCountDownTimer == null) {
-            SerializedWorkout serializedWorkout = loadedWorkoutProvider.getLoadedSerializedWorkout();
+            SerializedWorkout serializedWorkout = workoutManager.getLoadedSerializedWorkout();
             workoutCountDownTimer = new WorkoutCountDownTimer(serializedWorkout, currentRoundProgressBar, totalWorkoutProgressBar, playButton)
                     .create();
         }

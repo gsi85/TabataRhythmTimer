@@ -11,7 +11,7 @@ import com.sisa.tabata.domain.Workout;
 import com.sisa.tabata.factory.WorkoutFactory;
 
 /**
- * Loader of the currently edited {@link Workout} instance.
+ * Manages the currently edited {@link Workout} instance.
  *
  * @author Laszlo Sisa
  */

@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.google.inject.Inject;
-import com.sisa.tabata.dao.loader.EditedWorkoutProvider;
-import com.sisa.tabata.dao.loader.LoadedWorkoutProvider;
+import com.sisa.tabata.dao.loader.EditedWorkoutManager;
+import com.sisa.tabata.dao.loader.WorkoutManager;
 import com.sisa.tabata.ui.activity.MusicSelectActivity;
 import com.sisa.tabata.ui.activity.WorkoutActivity;
 import com.sisa.tabata.ui.activity.WorkoutEditActivity;
@@ -31,9 +31,9 @@ public class MainMenuOnClickListener extends AbstractWorkoutActivityButtonClickL
     private static final String WORKOUT_ID_NAME = "workoutId";
 
     @Inject
-    private LoadedWorkoutProvider loadedWorkoutProvider;
+    private WorkoutManager workoutManager;
     @Inject
-    private EditedWorkoutProvider editedWorkoutProvider;
+    private EditedWorkoutManager editedWorkoutManager;
 
     @Override
     public void onClick(View view) {
@@ -42,7 +42,7 @@ public class MainMenuOnClickListener extends AbstractWorkoutActivityButtonClickL
         String menuAction = view.getTag().toString();
         Intent activityToStart = getActivitiesMAp(workoutActivity).get(menuAction);
         if (activityToStart != null) {
-            editedWorkoutProvider.setEditedWorkout(activityToStart.getIntExtra(WORKOUT_ID_NAME, NEW_WORKOUT_ID));
+            editedWorkoutManager.setEditedWorkout(activityToStart.getIntExtra(WORKOUT_ID_NAME, NEW_WORKOUT_ID));
             workoutActivity.startActivity(activityToStart);
             workoutActivity.finish();
         }
@@ -55,7 +55,7 @@ public class MainMenuOnClickListener extends AbstractWorkoutActivityButtonClickL
 
     private Map<String, Intent> getActivitiesMAp(final WorkoutActivity workoutActivity) {
         Map<String, Intent> activitiesMap = new HashMap<>();
-        activitiesMap.put("EDIT", createWorkoutEditIntent(workoutActivity, loadedWorkoutProvider.getLoadedWorkout().getId(), false));
+        activitiesMap.put("EDIT", createWorkoutEditIntent(workoutActivity, workoutManager.getLoadedWorkout().getId(), false));
         activitiesMap.put("NEW", createWorkoutEditIntent(workoutActivity, NEW_WORKOUT_ID, true));
         activitiesMap.put("LOAD", createWorkoutLoadIntent(workoutActivity));
         activitiesMap.put("SET MUSIC", createSelectMusicIntent(workoutActivity));

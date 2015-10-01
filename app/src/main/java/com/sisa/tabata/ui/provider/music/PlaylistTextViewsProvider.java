@@ -2,15 +2,13 @@ package com.sisa.tabata.ui.provider.music;
 
 import static android.text.Html.fromHtml;
 
+import android.text.Spanned;
+import android.widget.LinearLayout;
 import com.google.inject.Inject;
 import com.sisa.tabata.ApplicationContextProvider;
 import com.sisa.tabata.R;
-import com.sisa.tabata.media.domain.AudioStore;
+import com.sisa.tabata.media.dao.loader.AudioStoreManager;
 import com.sisa.tabata.media.domain.Playlist;
-
-import android.text.Spanned;
-import android.widget.LinearLayout;
-
 import roboguice.inject.ContextSingleton;
 
 /**
@@ -22,19 +20,22 @@ import roboguice.inject.ContextSingleton;
 public class PlaylistTextViewsProvider extends AbstractMusicSelectTextViewProvider {
 
     private static final int PLAYLIST_TEXT_VIEW_PATTERN = R.string.playlists_text_view_pattern;
+    private static final String CATEGORY = "playlist";
 
     @Inject
     private ApplicationContextProvider applicationContextProvider;
+    @Inject
+    private AudioStoreManager audioStoreManager;
+
 
     /**
      * Creates playlist items text views.
      *
-     * @param audioStore              {@link AudioStore}
      * @param playlistsItemsContainer {@link LinearLayout} container for playlists list
      */
-    public void createPlaylistListTextViews(final AudioStore audioStore, final LinearLayout playlistsItemsContainer) {
-        for (Playlist playlist : audioStore.getPlaylists()) {
-            addView(playlistsItemsContainer, getFormattedText(playlist.getName()));
+    public void createPlaylistListTextViews(final LinearLayout playlistsItemsContainer) {
+        for (Playlist playlist : audioStoreManager.getAudioStore().getPlaylists()) {
+            addView(playlistsItemsContainer, getFormattedText(playlist.getName()), CATEGORY, String.valueOf(playlist.getPlaylistId()));
         }
     }
 

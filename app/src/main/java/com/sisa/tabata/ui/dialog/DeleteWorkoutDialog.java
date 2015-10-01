@@ -3,7 +3,7 @@ package com.sisa.tabata.ui.dialog;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.sisa.tabata.R;
-import com.sisa.tabata.dao.loader.LoadedWorkoutProvider;
+import com.sisa.tabata.dao.loader.WorkoutManager;
 import com.sisa.tabata.dao.service.WorkoutDao;
 
 import android.app.AlertDialog;
@@ -23,7 +23,7 @@ public class DeleteWorkoutDialog {
     @Inject
     private WorkoutDao workoutDao;
     @Inject
-    private LoadedWorkoutProvider loadedWorkoutProvider;
+    private WorkoutManager workoutManager;
 
     /**
      * Displays workout delete dialog.
@@ -74,8 +74,8 @@ public class DeleteWorkoutDialog {
         }
 
         private void refreshLoadedWorkout(int id) {
-            if (loadedWorkoutProvider.getLoadedWorkout().getId() == id) {
-                loadedWorkoutProvider.loadFirstWorkoutInList();
+            if (workoutManager.getLoadedWorkout().getId() == id) {
+                workoutManager.loadFirstWorkoutInList();
             }
         }
 

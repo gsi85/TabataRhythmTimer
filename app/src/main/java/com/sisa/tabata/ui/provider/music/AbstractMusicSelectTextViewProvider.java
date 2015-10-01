@@ -1,8 +1,12 @@
 package com.sisa.tabata.ui.provider.music;
 
+import com.google.inject.Inject;
+import com.sisa.tabata.media.dao.loader.SelectedMusicManager;
+
 import android.content.Context;
 import android.graphics.Color;
 import android.text.Spanned;
+import android.util.Pair;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.CheckBox;
@@ -16,10 +20,11 @@ import android.widget.TextView;
  */
 public abstract class AbstractMusicSelectTextViewProvider {
 
+    private static final String CHECKBOX_TAG_FORMAT_PATTERN = "%s:%s";
     private static final float OFFSET = 0.5f;
     private static final int PADDING_ING_PIXEL = 8;
-    private static final LinearLayout.LayoutParams ITEM_LAYOUT_PARAM = new LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
+    private static final LinearLayout.LayoutParams ITEM_LAYOUT_PARAM = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+            LinearLayout.LayoutParams.MATCH_PARENT);
     private static final LinearLayout.LayoutParams ITEM_CONTAINER_LAYOUT_PARAM = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.WRAP_CONTENT);
 
@@ -27,12 +32,18 @@ public abstract class AbstractMusicSelectTextViewProvider {
         ITEM_CONTAINER_LAYOUT_PARAM.setMargins(0, 0, 0, 1);
     }
 
+    @Inject
+    private SelectedMusicManager selectedMusicManager;
+
     /**
      * Adds view to container.
-     * @param container {@link LinearLayout}
+     *
+     * @param container     {@link LinearLayout}
      * @param formattedText the formatted text of the text view
+     * @param category      audio item's category
+     * @param valueKey      audio item'S key
      */
-    protected void addView(final LinearLayout container, final Spanned formattedText) {
+    protected void addView(final LinearLayout container, final Spanned formattedText, final String category, final String valueKey) {
         Context context = container.getContext();
         TextView textView = new TextView(context);
         CheckBox checkBox = new CheckBox(context);
@@ -40,6 +51,8 @@ public abstract class AbstractMusicSelectTextViewProvider {
         setItemStyle(context, checkBox);
         setItemStyle(context, textView);
         checkBox.setGravity(Gravity.CENTER_VERTICAL);
+        checkBox.setTag(String.format(CHECKBOX_TAG_FORMAT_PATTERN, category, valueKey));
+        checkBox.setChecked(isChecked(category, valueKey));
         itemLayout.addView(checkBox);
         itemLayout.addView(textView);
         textView.setText(formattedText);
@@ -63,6 +76,10 @@ public abstract class AbstractMusicSelectTextViewProvider {
     private int getDp(Context context, int requiredDp) {
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (requiredDp * scale + OFFSET);
+    }
+
+    private boolean isChecked(final String category, final String valueKey) {
+        return selectedMusicManager.getSelectedCheckboxes().contains(new Pair<>(category, valueKey));
     }
 
 }

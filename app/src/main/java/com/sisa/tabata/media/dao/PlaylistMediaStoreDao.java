@@ -43,6 +43,7 @@ public class PlaylistMediaStoreDao {
         while (cursor.moveToNext()) {
             playlists.add(buildPlaylist(cursor));
         }
+        cursor.close();
         return playlists;
     }
 

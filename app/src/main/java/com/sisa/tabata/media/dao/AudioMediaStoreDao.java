@@ -48,6 +48,7 @@ public class AudioMediaStoreDao {
         while (cursor.moveToNext()) {
             songs.add(buildSong(cursor));
         }
+        cursor.close();
         return songs;
     }
 

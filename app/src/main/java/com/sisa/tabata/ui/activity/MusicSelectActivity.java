@@ -4,8 +4,8 @@ import java.util.Arrays;
 
 import com.google.inject.Inject;
 import com.sisa.tabata.R;
-import com.sisa.tabata.media.domain.AudioStore;
-import com.sisa.tabata.media.service.AudioStoreService;
+import com.sisa.tabata.media.dao.loader.AudioStoreManager;
+import com.sisa.tabata.media.dao.loader.SelectedMusicManager;
 import com.sisa.tabata.ui.listener.music.MusicSelectActionButtonClickListener;
 import com.sisa.tabata.ui.listener.music.MusicSelectHeaderButtonClickListener;
 import com.sisa.tabata.ui.provider.music.AlbumListTextViewsProvider;
@@ -62,14 +62,15 @@ public class MusicSelectActivity extends RoboActivity {
     @Inject
     private SongsListTextViewsProvider songsListTextViewsProvider;
     @Inject
-    private AudioStoreService audioStoreService;
-    private AudioStore audioStore;
+    private AudioStoreManager audioStoreManager;
+    @Inject
+    private SelectedMusicManager selectedMusicManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_music);
-        setUpAudioStore();
+        setUpAudioManagers();
         loadAudioItems();
         setViewDependencies();
         setUpListeners();
@@ -80,15 +81,16 @@ public class MusicSelectActivity extends RoboActivity {
         cancelButton.performClick();
     }
 
-    private void setUpAudioStore() {
-        audioStore = audioStoreService.getAudioStore(this);
+    private void setUpAudioManagers() {
+        audioStoreManager.loadAudioStoreFromMediaStore(this);
+        selectedMusicManager.loadSelectedCheckboxes();
     }
 
     private void loadAudioItems() {
-        albumListTextViewsProvider.createAlbumsListTextViews(audioStore, albumItemsLayout);
-        artistListTextViewsProvider.createArtistsListTextViews(audioStore, artistItemsLayout);
-        playlistTextViewsProvider.createPlaylistListTextViews(audioStore, playlistItemsLayout);
-        songsListTextViewsProvider.createSongListTextViews(audioStore, songsItemsLayout);
+        albumListTextViewsProvider.createAlbumsListTextViews(albumItemsLayout);
+        artistListTextViewsProvider.createArtistsListTextViews(artistItemsLayout);
+        playlistTextViewsProvider.createPlaylistListTextViews(playlistItemsLayout);
+        songsListTextViewsProvider.createSongListTextViews(songsItemsLayout);
     }
 
     private void setViewDependencies() {
