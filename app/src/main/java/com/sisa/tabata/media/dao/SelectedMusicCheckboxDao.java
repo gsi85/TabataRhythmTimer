@@ -1,6 +1,5 @@
 package com.sisa.tabata.media.dao;
 
-import android.support.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +13,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
+import android.support.annotation.NonNull;
 import android.util.Pair;
 
 /**

@@ -3,8 +3,6 @@ package com.sisa.tabata.media.transformer;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.util.Pair;
-
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.sisa.tabata.ApplicationContextProvider;
@@ -17,6 +15,8 @@ import com.sisa.tabata.ui.provider.music.AlbumListTextViewsProvider;
 import com.sisa.tabata.ui.provider.music.ArtistListTextViewsProvider;
 import com.sisa.tabata.ui.provider.music.PlaylistTextViewsProvider;
 import com.sisa.tabata.ui.provider.music.SongsListTextViewsProvider;
+
+import android.util.Pair;
 
 /**
  * Transformer for creating list of {@link Song} based on the data stored in {@link AudioStore} from the list of checkboxes selected.

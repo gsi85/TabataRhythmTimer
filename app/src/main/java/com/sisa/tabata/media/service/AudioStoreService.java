@@ -26,6 +26,7 @@ public class AudioStoreService {
      * Creates a {@link AudioStore} based on the meta information stored in media store an loads into {@link AudioStoreManager}.
      *
      * @param context {@link Context}
+     * @return {@link AudioStore}
      */
     public AudioStore getAudioStoreFromMediaStore(final Context context) {
         return new AudioStore.Builder()

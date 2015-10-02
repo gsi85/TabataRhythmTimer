@@ -2,13 +2,13 @@ package com.sisa.tabata.media.service;
 
 import java.util.List;
 
-import android.util.Pair;
-
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.sisa.tabata.media.dao.SelectedMusicCheckboxDao;
-import com.sisa.tabata.media.dao.loader.SelectedMusicDao;
+import com.sisa.tabata.media.dao.SelectedMusicDao;
 import com.sisa.tabata.media.transformer.SelectedCheckboxTransformer;
+
+import android.util.Pair;
 
 /**
  * Service for retrieving and updating the music selected by the user.

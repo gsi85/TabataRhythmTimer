@@ -1,13 +1,7 @@
-package com.sisa.tabata.media.dao.loader;
+package com.sisa.tabata.media.dao;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import android.content.ContentValues;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteQueryBuilder;
-import android.support.annotation.NonNull;
 
 import com.google.inject.Inject;
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
@@ -15,7 +9,15 @@ import com.sisa.tabata.ApplicationContextProvider;
 import com.sisa.tabata.R;
 import com.sisa.tabata.media.domain.Song;
 
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteQueryBuilder;
+import android.support.annotation.NonNull;
+
 /**
+ * DAO for storing the music selected by the user.
+ *
  * @author Laszlo_Sisa
  */
 public class SelectedMusicDao extends SQLiteAssetHelper {
@@ -64,6 +66,8 @@ public class SelectedMusicDao extends SQLiteAssetHelper {
 
     /**
      * Returns the saved songs list selected by the user.
+     *
+     * @return the list of selected songs
      */
     public List<Song> getSelectedSongs() {
         List<Song> selectedSongs = initializeSongs();
