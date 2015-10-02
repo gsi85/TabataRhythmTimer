@@ -2,13 +2,15 @@ package com.sisa.tabata.ui.provider.music;
 
 import static android.text.Html.fromHtml;
 
-import android.text.Spanned;
-import android.widget.LinearLayout;
 import com.google.inject.Inject;
 import com.sisa.tabata.ApplicationContextProvider;
 import com.sisa.tabata.R;
 import com.sisa.tabata.media.dao.loader.AudioStoreManager;
 import com.sisa.tabata.media.domain.Song;
+
+import android.text.Spanned;
+import android.widget.LinearLayout;
+
 import roboguice.inject.ContextSingleton;
 
 /**

@@ -2,17 +2,20 @@ package com.sisa.tabata.ui.provider.music;
 
 import static android.text.Html.fromHtml;
 
-import android.text.Spanned;
-import android.widget.LinearLayout;
+import java.util.List;
+import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
 import com.google.inject.Inject;
 import com.sisa.tabata.ApplicationContextProvider;
 import com.sisa.tabata.R;
 import com.sisa.tabata.media.dao.loader.AudioStoreManager;
 import com.sisa.tabata.media.domain.Song;
-import java.util.List;
-import java.util.Map;
-import java.util.SortedSet;
-import java.util.TreeSet;
+
+import android.text.Spanned;
+import android.widget.LinearLayout;
+
 import roboguice.inject.ContextSingleton;
 
 /**
