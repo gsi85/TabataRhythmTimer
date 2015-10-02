@@ -2,11 +2,13 @@ package com.sisa.tabata.media.service;
 
 import java.util.List;
 
+import android.util.Pair;
+
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.sisa.tabata.media.dao.SelectMusicCheckboxDao;
-
-import android.util.Pair;
+import com.sisa.tabata.media.dao.SelectedMusicCheckboxDao;
+import com.sisa.tabata.media.dao.loader.SelectedMusicDao;
+import com.sisa.tabata.media.transformer.SelectedCheckboxTransformer;
 
 /**
  * Service for retrieving and updating the music selected by the user.
@@ -17,7 +19,11 @@ import android.util.Pair;
 public class SelectedMusicService {
 
     @Inject
-    private SelectMusicCheckboxDao selectMusicCheckboxDao;
+    private SelectedMusicCheckboxDao selectedMusicCheckboxDao;
+    @Inject
+    private SelectedMusicDao selectedMusicDao;
+    @Inject
+    private SelectedCheckboxTransformer selectedCheckboxTransformer;
 
     /**
      * Updates and stores the music selected by user.
@@ -25,7 +31,8 @@ public class SelectedMusicService {
      * @param selectedCheckboxes list of selected checkboxes on music select activity
      */
     public void updateSelectedMusic(final List<Pair<String, String>> selectedCheckboxes) {
-        selectMusicCheckboxDao.persistCheckBoxState(selectedCheckboxes);
+        selectedMusicCheckboxDao.persistCheckBoxState(selectedCheckboxes);
+        selectedMusicDao.persistSelectedSongs(selectedCheckboxTransformer.transformCheckBoxesToSongs(selectedCheckboxes));
     }
 
     /**
@@ -34,7 +41,7 @@ public class SelectedMusicService {
      * @return the list of previously selected checkboxes
      */
     public List<Pair<String, String>> getCheckBoxState() {
-        return selectMusicCheckboxDao.getCheckBoxState();
+        return selectedMusicCheckboxDao.getCheckBoxState();
     }
 
 }

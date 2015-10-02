@@ -19,8 +19,8 @@ import roboguice.inject.ContextSingleton;
 @ContextSingleton
 public class PlaylistTextViewsProvider extends AbstractMusicSelectTextViewProvider {
 
+    public static final String CATEGORY = "playlist";
     private static final int PLAYLIST_TEXT_VIEW_PATTERN = R.string.playlists_text_view_pattern;
-    private static final String CATEGORY = "playlist";
 
     @Inject
     private ApplicationContextProvider applicationContextProvider;
