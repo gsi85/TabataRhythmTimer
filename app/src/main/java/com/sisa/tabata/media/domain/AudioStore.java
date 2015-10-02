@@ -6,6 +6,7 @@ import static java.util.Collections.unmodifiableMap;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -44,6 +45,46 @@ public final class AudioStore {
 
     public List<Playlist> getPlaylists() {
         return playlists;
+    }
+
+    /**
+     * Searches for a {@link Song} with the given {@code trackId}.
+     *
+     * @param trackId the track id to search for
+     * @return {@link Song} if song exists with the trackId, null otherwise
+     */
+    public Song getSongByTrackId(final long trackId) {
+        Song song = null;
+        boolean found = false;
+        Iterator<Song> iterator = allSongs.iterator();
+        while (!found && iterator.hasNext()) {
+            Song currentSong = iterator.next();
+            if (currentSong.getTrackId() == trackId) {
+                song = currentSong;
+                found = true;
+            }
+        }
+        return song;
+    }
+
+    /**
+     * Searches for a {@link Playlist} with the given {@code playlistId}.
+     *
+     * @param playlistId the playlist id to search for
+     * @return {@link Playlist} if playlist exists with the playlistId, null otherwise
+     */
+    public Playlist getPlaylistById(final long playlistId) {
+        Playlist playlist = null;
+        boolean found = false;
+        Iterator<Playlist> iterator = playlists.iterator();
+        while (!found && iterator.hasNext()) {
+            Playlist currentPlaylist = iterator.next();
+            if (currentPlaylist.getPlaylistId() == playlistId) {
+                playlist = currentPlaylist;
+                found = true;
+            }
+        }
+        return playlist;
     }
 
     /**

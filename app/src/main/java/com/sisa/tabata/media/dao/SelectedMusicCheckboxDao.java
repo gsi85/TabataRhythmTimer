@@ -1,5 +1,6 @@
 package com.sisa.tabata.media.dao;
 
+import android.support.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,12 +22,12 @@ import android.util.Pair;
  * @author Laszlo Sisa
  */
 @Singleton
-public class SelectMusicCheckboxDao extends SQLiteAssetHelper {
+public class SelectedMusicCheckboxDao extends SQLiteAssetHelper {
 
     private static final String MUSIC_CHECKBOX_TABLE = "tbl_music_checkbox";
     private static final String KEY_COLUMN = "key";
     private static final String VALUE_COLUMN = "value";
-    private static final String[] ALL_COLUMNS = new String[]{KEY_COLUMN, VALUE_COLUMN};
+    private static final String[] ALL_COLUMNS = {KEY_COLUMN, VALUE_COLUMN};
     private static final int KEY_COLUMN_INDEX = 0;
     private static final int VALUE_COLUMN_INDEX = 1;
 
@@ -38,7 +39,7 @@ public class SelectMusicCheckboxDao extends SQLiteAssetHelper {
      * @param applicationContextProvider {@link ApplicationContextProvider}
      */
     @Inject
-    public SelectMusicCheckboxDao(ApplicationContextProvider applicationContextProvider) {
+    public SelectedMusicCheckboxDao(ApplicationContextProvider applicationContextProvider) {
         super(applicationContextProvider.getContext(), applicationContextProvider.getStringResource(R.string.database_name), null,
                 applicationContextProvider.getIntResource(R.integer.database_version));
         database = getWritableDatabase();
@@ -63,10 +64,10 @@ public class SelectMusicCheckboxDao extends SQLiteAssetHelper {
      * @return the list of previously selected checkboxes
      */
     public List<Pair<String, String>> getCheckBoxState() {
-        List<Pair<String, String>> selectedCheckBoxes = new ArrayList<>();
+        List<Pair<String, String>> selectedCheckBoxes = initializeList();
         Cursor allRowsCursor = executeRetrieveAllRowsQuery();
         while (allRowsCursor.moveToNext()) {
-            selectedCheckBoxes.add(new Pair<>(allRowsCursor.getString(KEY_COLUMN_INDEX), allRowsCursor.getString(VALUE_COLUMN_INDEX)));
+            selectedCheckBoxes.add(getCheckbox(allRowsCursor));
         }
         allRowsCursor.close();
         return selectedCheckBoxes;
@@ -79,10 +80,20 @@ public class SelectMusicCheckboxDao extends SQLiteAssetHelper {
         return contentValues;
     }
 
+    @NonNull
+    private ArrayList<Pair<String, String>> initializeList() {
+        return new ArrayList<>();
+    }
+
     private Cursor executeRetrieveAllRowsQuery() {
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
         queryBuilder.setTables(MUSIC_CHECKBOX_TABLE);
         return queryBuilder.query(database, ALL_COLUMNS, null, null, null, null, null);
+    }
+
+    @NonNull
+    private Pair<String, String> getCheckbox(final Cursor allRowsCursor) {
+        return new Pair<>(allRowsCursor.getString(KEY_COLUMN_INDEX), allRowsCursor.getString(VALUE_COLUMN_INDEX));
     }
 
 }
