@@ -2,6 +2,7 @@ package com.sisa.tabata.ui.activity;
 
 import com.google.inject.Inject;
 import com.sisa.tabata.R;
+import com.sisa.tabata.media.service.MediaPlayerService;
 import com.sisa.tabata.ui.adapter.SpinnerArrayAdapterFactory;
 import com.sisa.tabata.ui.listener.workout.BackButtonClickCountListener;
 import com.sisa.tabata.ui.listener.workout.PlayButtonClickListener;
@@ -52,6 +53,8 @@ public class WorkoutActivity extends RoboFragmentActivity {
     private VolumeButtonClickListener volumeButtonClickListener;
     @Inject
     private BackButtonClickCountListener backButtonClickCountListener;
+    @Inject
+    private MediaPlayerService mediaPlayerService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

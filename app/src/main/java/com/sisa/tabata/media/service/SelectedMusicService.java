@@ -6,6 +6,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.sisa.tabata.media.dao.SelectedMusicCheckboxDao;
 import com.sisa.tabata.media.dao.SelectedMusicDao;
+import com.sisa.tabata.media.domain.Song;
 import com.sisa.tabata.media.transformer.SelectedCheckboxTransformer;
 
 import android.util.Pair;
@@ -42,6 +43,15 @@ public class SelectedMusicService {
      */
     public List<Pair<String, String>> getCheckBoxState() {
         return selectedMusicCheckboxDao.getCheckBoxState();
+    }
+
+    /**
+     * Returns the list of selected songs.
+     *
+     * @return list of selected songs
+     */
+    public List<Song> getSelectedSongs() {
+        return selectedMusicDao.getSelectedSongs();
     }
 
 }
