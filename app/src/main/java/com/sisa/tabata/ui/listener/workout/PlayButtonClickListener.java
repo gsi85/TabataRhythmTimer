@@ -3,6 +3,7 @@ package com.sisa.tabata.ui.listener.workout;
 import com.google.inject.Inject;
 import com.sisa.tabata.R;
 import com.sisa.tabata.dao.loader.WorkoutManager;
+import com.sisa.tabata.media.service.MediaPlayerService;
 import com.sisa.tabata.ui.domain.SerializedWorkout;
 import com.sisa.tabata.ui.progressbar.CurrentRoundProgressBar;
 import com.sisa.tabata.ui.progressbar.TotalWorkoutProgressBar;
@@ -29,6 +30,8 @@ public class PlayButtonClickListener extends AbstractWorkoutActivityButtonClickL
     private TotalWorkoutProgressBar totalWorkoutProgressBar;
     @Inject
     private WorkoutManager workoutManager;
+    @Inject
+    private MediaPlayerService mediaPlayerService;
     @InjectView(R.id.playButton)
     private ImageButton playButton;
 
@@ -77,6 +80,7 @@ public class PlayButtonClickListener extends AbstractWorkoutActivityButtonClickL
     }
 
     private void resumeTimer() {
+        mediaPlayerService.play();
         playButton.setImageResource(android.R.drawable.ic_media_pause);
         playButton.setBackgroundResource(R.drawable.bg_pause_button);
         playButton.setKeepScreenOn(true);
@@ -84,6 +88,7 @@ public class PlayButtonClickListener extends AbstractWorkoutActivityButtonClickL
     }
 
     private void pauseTimer() {
+        mediaPlayerService.pause();
         playButton.setImageResource(android.R.drawable.ic_media_play);
         playButton.setBackgroundResource(R.drawable.bg_play_button);
         playButton.setKeepScreenOn(false);

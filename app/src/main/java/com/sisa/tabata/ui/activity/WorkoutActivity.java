@@ -64,6 +64,7 @@ public class WorkoutActivity extends RoboFragmentActivity {
         setUpMainMenu();
         setUpListeners();
         initProgressBars();
+        mediaPlayerService.reset();
     }
 
     @Override

@@ -1,25 +1,30 @@
 package com.sisa.tabata.media.service;
 
+import com.sisa.tabata.validation.Validation;
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
+import com.sisa.tabata.media.domain.Song;
 
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-
-import roboguice.inject.ContextSingleton;
 
 /**
  * Service for playing media files during workout.
  *
  * @author Laszlo Sisa
  */
-@ContextSingleton
-public class MediaPlayerService implements MediaPlayer.OnPreparedListener {
+@Singleton
+public class MediaPlayerService implements MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener {
 
     private final MediaPlayer mediaPlayer;
     private final SelectedMusicService selectedMusicService;
-    private boolean prepaired;
+    private final Queue<Song> songsToPlay;
+    private boolean prepared;
+    private boolean shouldPlay;
 
     /**
      * DI constructor.
@@ -27,19 +32,69 @@ public class MediaPlayerService implements MediaPlayer.OnPreparedListener {
      * @param selectedMusicService {@link SelectedMusicService}
      */
     @Inject
-    public MediaPlayerService(final SelectedMusicService selectedMusicService) throws IOException {
+    public MediaPlayerService(final SelectedMusicService selectedMusicService) {
         this.selectedMusicService = selectedMusicService;
+        songsToPlay = new LinkedList<>();
         mediaPlayer = new MediaPlayer();
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        mediaPlayer.setDataSource(selectedMusicService.getSelectedSongs().get(0).getDataStream());
         mediaPlayer.setOnPreparedListener(this);
-        mediaPlayer.prepareAsync();
+        mediaPlayer.setOnCompletionListener(this);
+    }
+
+    /**
+     * Reset the media player, by uninitializing the media player and reloading the selected songs from database.
+     */
+    public void reset() {
+        mediaPlayer.reset();
+        prepared = false;
+        shouldPlay = false;
+        songsToPlay.clear();
+        songsToPlay.addAll(selectedMusicService.getSelectedSongs());
+        loadNextSong();
+    }
+
+    /**
+     * Starts or resumes playback.
+     */
+    public void play() {
+        shouldPlay = true;
+        if (prepared) {
+            mediaPlayer.start();
+        }
+    }
+
+    /**
+     * Pauses playback.
+     */
+    public void pause() {
+        shouldPlay = false;
+        mediaPlayer.pause();
     }
 
     @Override
     public void onPrepared(final MediaPlayer mp) {
-        prepaired = true;
-        mediaPlayer.start();
+        prepared = true;
+        if (shouldPlay) {
+            mediaPlayer.start();
+        }
     }
 
+    @Override
+    public void onCompletion(final MediaPlayer mp) {
+        prepared = false;
+        loadNextSong();
+    }
+
+    private void loadNextSong() {
+        if (Validation.notEmpty(songsToPlay)) {
+            try {
+                mediaPlayer.setDataSource(songsToPlay.remove().getDataStream());
+                mediaPlayer.prepareAsync();
+                //TODO: handle exception properly (e.g.: handle gracefully if stream not available anymore
+            } catch (IOException e) {
+                e.printStackTrace();
+                loadNextSong();
+            }
+        }
+    }
 }
