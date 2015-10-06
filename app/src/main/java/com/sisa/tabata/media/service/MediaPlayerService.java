@@ -20,6 +20,9 @@ import android.media.MediaPlayer;
 @Singleton
 public class MediaPlayerService implements MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener {
 
+    private static final float QUIET_VOLUME = 0.3F;
+    private static final int LOUD_VOLUME = 1;
+
     private final MediaPlayer mediaPlayer;
     private final SelectedMusicService selectedMusicService;
     private final Queue<Song> songsToPlay;
@@ -59,7 +62,7 @@ public class MediaPlayerService implements MediaPlayer.OnPreparedListener, Media
     public void play() {
         shouldPlay = true;
         if (prepared) {
-            mediaPlayer.start();
+            startPlayback();
         }
     }
 
@@ -71,11 +74,25 @@ public class MediaPlayerService implements MediaPlayer.OnPreparedListener, Media
         mediaPlayer.pause();
     }
 
+    /**
+     * Quietens music playback.
+     */
+    public void quieten() {
+        mediaPlayer.setVolume(QUIET_VOLUME, QUIET_VOLUME);
+    }
+
+    /**
+     * Loudens music playback.
+     */
+    public void louden() {
+        mediaPlayer.setVolume(LOUD_VOLUME, LOUD_VOLUME);
+    }
+
     @Override
     public void onPrepared(final MediaPlayer mp) {
         prepared = true;
         if (shouldPlay) {
-            mediaPlayer.start();
+            startPlayback();
         }
     }
 
@@ -96,5 +113,10 @@ public class MediaPlayerService implements MediaPlayer.OnPreparedListener, Media
                 loadNextSong();
             }
         }
+    }
+
+    private void startPlayback() {
+        louden();
+        mediaPlayer.start();
     }
 }

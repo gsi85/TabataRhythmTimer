@@ -3,6 +3,7 @@ package com.sisa.tabata.ui.progressbar;
 import com.google.inject.Inject;
 import com.sisa.tabata.R;
 import com.sisa.tabata.media.service.EffectPlayerService;
+import com.sisa.tabata.media.service.MediaPlayerService;
 import com.sisa.tabata.ui.domain.SerializedWorkoutSection;
 import com.sisa.tabata.ui.domain.WorkoutType;
 import com.sisa.tabata.ui.drawable.CircularProgressBarDrawable;
@@ -40,6 +41,8 @@ public class CurrentRoundProgressBar {
     private CircularProgressBarDrawable circularProgressBar;
     @Inject
     private EffectPlayerService effectPlayerService;
+    @Inject
+    private MediaPlayerService mediaPlayerService;
     private int nextBeepNotification;
 
     /**
@@ -87,6 +90,7 @@ public class CurrentRoundProgressBar {
 
     private void checkPlayBeep(long millisUntilFinished) {
         if (millisUntilFinished <= nextBeepNotification) {
+            mediaPlayerService.quieten();
             effectPlayerService.playShortBeep();
             nextBeepNotification = getNextBeepNotification() > LAST_BEEP_IN_MILLIS ? getNextBeepNotification() : -1;
         }
@@ -99,8 +103,10 @@ public class CurrentRoundProgressBar {
     private void playRoundFinishEffect(boolean workoutOver) {
         if (workoutOver) {
             effectPlayerService.playWorkoutOver();
+            mediaPlayerService.pause();
         } else {
             effectPlayerService.playLongBeep();
+            mediaPlayerService.louden();
         }
     }
 
