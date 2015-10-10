@@ -48,7 +48,6 @@ public class MediaPlayerService implements MediaPlayer.OnPreparedListener, Media
      * Reset the media player, by uninitializing the media player and reloading the selected songs from database.
      */
     public void reset() {
-        mediaPlayer.reset();
         prepared = false;
         shouldPlay = false;
         songsToPlay.clear();
@@ -105,6 +104,7 @@ public class MediaPlayerService implements MediaPlayer.OnPreparedListener, Media
     private void loadNextSong() {
         if (Validation.notEmpty(songsToPlay)) {
             try {
+                mediaPlayer.reset();
                 mediaPlayer.setDataSource(songsToPlay.remove().getDataStream());
                 mediaPlayer.prepareAsync();
                 //TODO: handle exception properly (e.g.: handle gracefully if stream not available anymore
