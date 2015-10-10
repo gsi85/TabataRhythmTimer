@@ -1,4 +1,4 @@
-package com.sisa.tabata.ui.provider;
+package com.sisa.tabata.ui.provider.editor;
 
 import java.util.HashMap;
 import java.util.Map;

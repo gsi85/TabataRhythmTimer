@@ -1,4 +1,4 @@
-package com.sisa.tabata.ui.provider;
+package com.sisa.tabata.ui.provider.loader;
 
 import com.google.inject.Inject;
 import com.sisa.tabata.ApplicationContextProvider;
@@ -8,6 +8,8 @@ import com.sisa.tabata.domain.Workout;
 import com.sisa.tabata.ui.activity.WorkoutLoadActivity;
 import com.sisa.tabata.ui.listener.loader.WorkoutTextViewClickListener;
 import com.sisa.tabata.ui.listener.loader.WorkoutTextViewLongClickListener;
+import com.sisa.tabata.ui.provider.AbstractTextViewProvider;
+import com.sisa.tabata.ui.provider.WorkoutTotalTimeProvider;
 
 import android.content.Context;
 import android.text.Html;

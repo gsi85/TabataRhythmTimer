@@ -3,7 +3,7 @@ package com.sisa.tabata.ui.listener.loader;
 import static com.sisa.tabata.validation.Assert.isInstanceOf;
 
 import com.google.inject.Inject;
-import com.sisa.tabata.dao.loader.LoadedWorkoutProvider;
+import com.sisa.tabata.dao.loader.WorkoutManager;
 import com.sisa.tabata.ui.activity.WorkoutActivity;
 import com.sisa.tabata.ui.activity.WorkoutLoadActivity;
 
@@ -21,7 +21,7 @@ import roboguice.inject.ContextSingleton;
 public class WorkoutTextViewClickListener implements View.OnClickListener {
 
     @Inject
-    private LoadedWorkoutProvider loadedWorkoutProvider;
+    private WorkoutManager workoutManager;
 
     @Override
     public void onClick(View view) {
@@ -30,7 +30,7 @@ public class WorkoutTextViewClickListener implements View.OnClickListener {
     }
 
     private void loadSelectedWorkout(int id) {
-        loadedWorkoutProvider.setLoadedWorkoutById(id);
+        workoutManager.setLoadedWorkoutById(id);
     }
 
     private void startWorkoutActivity(final View view) {

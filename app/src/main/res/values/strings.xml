@@ -54,8 +54,17 @@
         <item>EDIT</item>
         <item>LOAD</item>
         <item>NEW</item>
+        <item>SET MUSIC</item>
     </string-array>
+
+    <string name="music_select_albums">Albums</string>
+    <string name="music_select_artists">Artists</string>
+    <string name="music_select_playlist">Playlist</string>
+    <string name="music_select_songs">Songs</string>
+    <string name="music_select_rescan">Rescan</string>
+    <string name="music_select_rescan_in_progress">Rescanning external storage…</string>
 
     <string name="database_name">tabatarhytm.db</string>
 
 </resources>
+

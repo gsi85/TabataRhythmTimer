@@ -4,11 +4,11 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.sisa.tabata.ApplicationContextProvider;
 import com.sisa.tabata.R;
-import com.sisa.tabata.dao.loader.LoadedWorkoutProvider;
+import com.sisa.tabata.dao.loader.WorkoutManager;
 import com.sisa.tabata.ui.listener.workout.MainMenuOnClickListener;
+import com.sisa.tabata.ui.listener.workout.SpinnerTextOnClickListener;
 
 import android.content.Context;
-import com.sisa.tabata.ui.listener.workout.SpinnerTextOnClickListener;
 
 /**
  * Factory for {@link SpinnerArrayAdapter}.
@@ -23,7 +23,7 @@ public class SpinnerArrayAdapterFactory {
     @Inject
     private ApplicationContextProvider applicationContextProvider;
     @Inject
-    private LoadedWorkoutProvider loadedWorkoutProvider;
+    private WorkoutManager workoutManager;
     @Inject
     private SpinnerTextOnClickListener spinnerTextOnClickListener;
 
@@ -34,7 +34,7 @@ public class SpinnerArrayAdapterFactory {
      * @return {@link SpinnerArrayAdapter}
      */
     public SpinnerArrayAdapter create(final Context context) {
-        CharSequence titleText = loadedWorkoutProvider.getLoadedWorkout().getName();
+        CharSequence titleText = workoutManager.getLoadedWorkout().getName();
         String[] menuItems = applicationContextProvider.getContext().getResources().getStringArray(R.array.main_menu_items);
         SpinnerArrayAdapter<String> adapter = new SpinnerArrayAdapter<>(context, menuItems, titleText, mainMenuOnClickListener, spinnerTextOnClickListener);
         adapter.setDropDownViewResource(R.layout.spinner_item_layout);

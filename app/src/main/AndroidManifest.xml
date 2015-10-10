@@ -2,12 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sisa.tabata">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <application
         android:name="com.sisa.tabata.TabataApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Holo.NoActionBar">
+
         <activity
             android:name=".ui.activity.WorkoutActivity"
             android:screenOrientation="portrait"
@@ -18,19 +21,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ui.activity.WorkoutEditActivity"
             android:screenOrientation="portrait"
-            android:label="Edit workout"
-            />
+            android:label="Edit workout" />
+
         <activity
             android:name=".ui.activity.SectionEditActivity"
             android:screenOrientation="portrait"
             android:label="Edit section" />
+
         <activity
             android:name=".ui.activity.WorkoutLoadActivity"
             android:screenOrientation="portrait"
             android:label="Load workout" />
+
+        <activity
+                android:name=".ui.activity.MusicSelectActivity"
+                android:screenOrientation="portrait"
+                android:label="Select Music" />
+
+
         <activity android:name=".dao.debug.AndroidDatabaseManager" />
     </application>
 

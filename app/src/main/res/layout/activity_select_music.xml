@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#000000"
+                android:orientation="vertical">
+
+    <!-- Header -->
+    <LinearLayout
+            android:id="@+id/musicHeaderLayout"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentTop="true"
+            android:layout_margin="0dp"
+            android:background="@android:color/holo_blue_dark"
+            android:baselineAligned="false"
+            android:gravity="left"
+            android:orientation="horizontal"
+            android:paddingBottom="1dp"
+            android:weightSum="5">
+
+        <!-- Album layout -->
+        <LinearLayout
+                android:id="@+id/albumLayout"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:layout_marginRight="1px"
+                android:layout_marginBottom="4px"
+                android:layout_weight="1"
+                android:background="@drawable/bg_header_buttons"
+                android:clickable="true"
+                android:focusable="false"
+                android:tag="albums"
+                android:orientation="vertical">
+
+            <ImageView
+                    android:id="@+id/albumImage"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:adjustViewBounds="false"
+                    android:src="@android:drawable/ic_input_get"
+                    android:tint="@android:color/holo_blue_bright"/>
+
+            <TextView
+                    android:id="@+id/albumText"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="center"
+                    android:textColor="#ffffff"
+                    android:text="@string/music_select_albums"
+                    android:textSize="14sp"/>
+
+        </LinearLayout>
+
+        <!-- Artist layout -->
+        <LinearLayout
+                android:id="@+id/artistLayout"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:layout_marginRight="1px"
+                android:layout_weight="1"
+                android:background="@drawable/bg_header_buttons"
+                android:clickable="true"
+                android:focusable="false"
+                android:tag="artists"
+                android:orientation="vertical">
+
+            <ImageView
+                    android:id="@+id/artistImage"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:adjustViewBounds="false"
+                    android:src="@android:drawable/ic_btn_speak_now" />
+
+            <TextView
+                    android:id="@+id/artistText"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="center"
+                    android:text="@string/music_select_artists"
+                    android:textSize="14sp"/>
+
+        </LinearLayout>
+
+        <!-- Playlist layout -->
+        <LinearLayout
+                android:id="@+id/playlistLayout"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:layout_marginRight="1px"
+                android:layout_weight="1"
+                android:background="@drawable/bg_header_buttons"
+                android:clickable="true"
+                android:focusable="false"
+                android:tag="playlists"
+                android:orientation="vertical">
+
+            <ImageView
+                    android:id="@+id/playlistImage"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:adjustViewBounds="false"
+                    android:src="@android:drawable/ic_menu_sort_by_size" />
+
+            <TextView
+                    android:id="@+id/playlistText"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="center"
+                    android:text="@string/music_select_playlist"
+                    android:textSize="14sp"/>
+
+        </LinearLayout>
+
+        <!-- Songs layout -->
+        <LinearLayout
+                android:id="@+id/songsLayout"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:layout_marginRight="1px"
+                android:layout_weight="1"
+                android:background="@drawable/bg_header_buttons"
+                android:clickable="true"
+                android:focusable="false"
+                android:tag="songs"
+                android:orientation="vertical">
+
+            <ImageView
+                    android:id="@+id/songsImage"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:adjustViewBounds="false"
+                    android:src="@android:drawable/ic_menu_sort_alphabetically" />
+
+            <TextView
+                    android:id="@+id/songsText"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="center"
+                    android:text="@string/music_select_songs"
+                    android:textSize="14sp"/>
+
+        </LinearLayout>
+
+        <!-- Rescan layout -->
+        <LinearLayout
+                android:id="@+id/rescanLayout"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@drawable/bg_header_buttons"
+                android:clickable="true"
+                android:focusable="false"
+                android:orientation="vertical">
+
+            <ImageView
+                    android:id="@+id/rescanImage"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:adjustViewBounds="false"
+                    android:src="@android:drawable/ic_menu_rotate" />
+
+            <TextView
+                    android:id="@+id/rescanText"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="center"
+                    android:text="@string/music_select_rescan"
+                    android:textSize="14sp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Footer -->
+    <LinearLayout
+            android:id="@+id/musicFooterLayout"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_alignParentBottom="true"
+            android:baselineAligned="false"
+            android:gravity="left"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+        <!-- Cancel button -->
+        <FrameLayout
+                android:id="@+id/musicResetFrame"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:layout_margin="1dp"
+                android:layout_weight="1">
+
+            <ImageButton
+                    android:id="@+id/musicCancelButton"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_pause_button"
+                    android:src="@android:drawable/ic_menu_close_clear_cancel"
+                    android:tag="cancel_action" />
+        </FrameLayout>
+
+        <!-- Save button -->
+        <FrameLayout
+                android:id="@+id/musicPlayFrame"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:layout_margin="1dp"
+                android:layout_weight="1">
+
+            <ImageButton
+                    android:id="@+id/musicSaveButton"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_play_button"
+                    android:src="@android:drawable/ic_menu_save"
+                    android:tag="save_action" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <!-- Main content -->
+    <RelativeLayout
+            android:id="@+id/musicMainContentLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@id/musicHeaderLayout"
+            android:layout_above="@+id/musicFooterLayout"
+            android:gravity="top|center">
+
+
+        <!-- Rescanning items layout -->
+        <LinearLayout
+                android:id="@+id/itemsRescanLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:visibility="invisible">
+
+            <ProgressBar
+                    android:id="@+id/itemsRescanProgressBar"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:indeterminate="true" />
+
+            <TextView
+                    android:id="@+id/itemsRescanText"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="50dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/music_select_rescan_in_progress"
+                    android:textSize="20sp"/>
+
+        </LinearLayout>
+
+
+        <!-- Audio list -->
+        <ScrollView
+                android:id="@+id/musicScrollView"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="0dp"
+                android:paddingTop="5dp">
+
+            <!-- Audio items container layout -->
+            <LinearLayout
+                    android:id="@+id/audioItemsLayout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                <!-- Album entries container -->
+                <LinearLayout
+                        android:id="@+id/albumItemsLayout"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:tag="albums"
+                        android:background="#333333"/>
+
+                <!-- Artist entries container -->
+                <LinearLayout
+                        android:id="@+id/artistItemsLayout"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:tag="artists"
+                        android:background="#333333"
+                        android:visibility="gone"/>
+
+                <!-- Playlist entries container -->
+                <LinearLayout
+                        android:id="@+id/playlistItemsLayout"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:tag="playlists"
+                        android:background="#333333"
+                        android:visibility="gone"/>
+
+                <!-- Songs entries container -->
+                <LinearLayout
+                        android:id="@+id/songsItemsLayout"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:tag="songs"
+                        android:background="#333333"
+                        android:visibility="gone"/>
+
+                </LinearLayout>
+
+        </ScrollView>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

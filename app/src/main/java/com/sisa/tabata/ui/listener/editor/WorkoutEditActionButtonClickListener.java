@@ -3,7 +3,7 @@ package com.sisa.tabata.ui.listener.editor;
 import static com.sisa.tabata.validation.Assert.isInstanceOf;
 
 import com.google.inject.Inject;
-import com.sisa.tabata.dao.loader.LoadedWorkoutProvider;
+import com.sisa.tabata.dao.loader.WorkoutManager;
 import com.sisa.tabata.dao.service.WorkoutDao;
 import com.sisa.tabata.domain.Workout;
 import com.sisa.tabata.ui.activity.WorkoutActivity;
@@ -27,7 +27,7 @@ public class WorkoutEditActionButtonClickListener implements View.OnClickListene
     @Inject
     private WorkoutDao workoutDao;
     @Inject
-    private LoadedWorkoutProvider loadedWorkoutProvider;
+    private WorkoutManager workoutManager;
 
     @Override
     public void onClick(View view) {
@@ -54,11 +54,11 @@ public class WorkoutEditActionButtonClickListener implements View.OnClickListene
     }
 
     private void setLoadedWorkout(long workoutId) {
-        loadedWorkoutProvider.setLoadedWorkoutById(workoutId);
+        workoutManager.setLoadedWorkoutById(workoutId);
     }
 
     private WorkoutEditActivity getCheckedContext(final View view) {
-        isInstanceOf(WorkoutEditActivity.class, view.getContext(), "View context is not a WorkoutEditActivity\"");
+        isInstanceOf(WorkoutEditActivity.class, view.getContext(), "View context is not a WorkoutEditActivity");
         return (WorkoutEditActivity) view.getContext();
     }
 

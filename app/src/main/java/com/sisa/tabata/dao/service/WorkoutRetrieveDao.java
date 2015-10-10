@@ -81,6 +81,7 @@ public class WorkoutRetrieveDao extends AbstractBaseDao {
             resultWorkoutList.add(workout);
         }
 
+        resultCursor.close();
         return resultWorkoutList;
     }
 

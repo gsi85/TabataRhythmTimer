@@ -1,6 +1,5 @@
 package com.sisa.tabata.ui.progressbar;
 
-import com.google.inject.Inject;
 import com.sisa.tabata.R;
 import com.sisa.tabata.util.TimeFormatter;
 
@@ -20,8 +19,6 @@ public class TotalWorkoutProgressBar {
 
     public static final int MAX_PROGRESS_BAR_VALUE = 1000;
 
-    @Inject
-    private TimeFormatter timeFormatter;
     @InjectView(R.id.totalRemainingTimeCounter)
     private TextView totalRemainingTimeCounter;
     @InjectView(R.id.workoutProgressBar)

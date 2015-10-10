@@ -16,7 +16,7 @@
         android:layout_height="45dp"
         android:layout_alignParentTop="true"
         android:layout_margin="0dp"
-        android:background="#CCC"
+        android:background="#333333"
         android:baselineAligned="false"
         android:gravity="left"
         android:orientation="horizontal"

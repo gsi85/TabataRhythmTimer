@@ -52,6 +52,7 @@ public class ApplicationContextProvider {
      * default string table.
      *
      * @param id Resource id for the string
+     * @return the localized string
      */
     public String getStringResource(int id) {
         return context.getString(id);

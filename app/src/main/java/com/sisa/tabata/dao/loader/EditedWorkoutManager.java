@@ -11,12 +11,12 @@ import com.sisa.tabata.domain.Workout;
 import com.sisa.tabata.factory.WorkoutFactory;
 
 /**
- * Provider of the currently edited {@link Workout} instance.
+ * Manages the currently edited {@link Workout} instance.
  *
  * @author Laszlo Sisa
  */
 @Singleton
-public class EditedWorkoutProvider {
+public class EditedWorkoutManager {
 
     @Inject
     private WorkoutDao workoutDao;

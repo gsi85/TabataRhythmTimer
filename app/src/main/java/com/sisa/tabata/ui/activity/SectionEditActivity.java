@@ -12,8 +12,8 @@ import com.sisa.tabata.ui.listener.editor.SectionItemClickListener;
 import com.sisa.tabata.ui.listener.editor.SectionTotalTimeChangeListener;
 import com.sisa.tabata.ui.listener.editor.TimeNumberPickerValueChangeListener;
 import com.sisa.tabata.ui.numberpicker.TabataNumberPicker;
-import com.sisa.tabata.ui.provider.WorkoutSectionLabelsProvider;
-import com.sisa.tabata.ui.provider.WorkoutSectionNumberPickersValueProvider;
+import com.sisa.tabata.ui.provider.editor.WorkoutSectionLabelsProvider;
+import com.sisa.tabata.ui.provider.editor.WorkoutSectionNumberPickersValueProvider;
 
 import android.os.Bundle;
 import android.widget.ImageButton;

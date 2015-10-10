@@ -10,7 +10,7 @@ import android.text.Spanned;
  *
  * @author Laszlo Sisa
  */
-public class TimeFormatter {
+public final class TimeFormatter {
 
     private static final String MINUTES_DOWN_TO_HUNDREDS_SEC_PATTERN = "<big>%02d:%02d</big><small>.%01d</small>";
     private static final String HOURS_DOWN_TO_SECONDS_PATTERN = "%02d:%02d:%02d";
@@ -18,6 +18,10 @@ public class TimeFormatter {
     private static final String TIME_SECTION_DIVIDER = ":";
     private static final int MILLIS_IN_ONE_SECOND = 1000;
     private static final int SECONDS_IN_ONE_MINUTE = 60;
+    private static final int ONE_HUNDRED = 100;
+
+    private TimeFormatter() {
+    }
 
     /**
      * Format milli seconds to the following format: mm:ss.hh.
@@ -28,7 +32,7 @@ public class TimeFormatter {
     public static Spanned formatMilliSecondsToMinuteSecondHundredSec(long milliSeconds) {
         long minutes = TimeUnit.MILLISECONDS.toMinutes(milliSeconds);
         long seconds = TimeUnit.MILLISECONDS.toSeconds(milliSeconds) - TimeUnit.MINUTES.toSeconds(minutes);
-        long hundredSec = (milliSeconds % MILLIS_IN_ONE_SECOND) / 100;
+        long hundredSec = (milliSeconds % MILLIS_IN_ONE_SECOND) / ONE_HUNDRED;
         return Html.fromHtml(String.format(MINUTES_DOWN_TO_HUNDREDS_SEC_PATTERN, minutes, seconds, hundredSec));
     }
 

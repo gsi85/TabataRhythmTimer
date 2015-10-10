@@ -14,4 +14,28 @@
             Total time: <big><strong>%s</strong></big>
         ]]>
     </string>
+    <string formatted="false" name="albums_text_view_pattern">
+        <![CDATA[
+            <big>%s</big><br>
+            %s<br>
+            <small>%d song(s)</small>
+        ]]>
+    </string>
+    <string formatted="false" name="artists_text_view_pattern">
+        <![CDATA[
+            <big>%s</big><br>
+            <small>%d song(s)</small>
+        ]]>
+    </string>
+    <string formatted="false" name="playlists_text_view_pattern">
+        <![CDATA[
+            <big>%s</big><br>
+        ]]>
+    </string>
+    <string formatted="false" name="songs_text_view_pattern">
+        <![CDATA[
+            <big>%s</big><br>
+            <small>%s</small>
+        ]]>
+    </string>
 </resources>

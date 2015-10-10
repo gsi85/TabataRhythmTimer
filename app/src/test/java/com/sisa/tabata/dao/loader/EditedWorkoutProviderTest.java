@@ -20,7 +20,7 @@ import com.sisa.tabata.domain.Workout;
 import com.sisa.tabata.factory.WorkoutFactory;
 
 /**
- * Unit test for {@link EditedWorkoutProvider}.
+ * Unit test for {@link EditedWorkoutManager}.
  */
 public class EditedWorkoutProviderTest {
 
@@ -28,7 +28,7 @@ public class EditedWorkoutProviderTest {
     private static final int EXISTING_WORKOUT_ID = 1;
 
     @InjectMocks
-    private EditedWorkoutProvider underTest;
+    private EditedWorkoutManager underTest;
     @Mock
     private WorkoutDao workoutDao;
     @Mock
