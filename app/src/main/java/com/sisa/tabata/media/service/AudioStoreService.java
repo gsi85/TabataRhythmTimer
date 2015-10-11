@@ -12,7 +12,7 @@ import android.content.Context;
 /**
  * Service for retrieving {@link AudioStore} from Android's media store.
  *
- * @author Laca
+ * @author Laszlo Sisa
  */
 @Singleton
 public class AudioStoreService {

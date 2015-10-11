@@ -5,7 +5,7 @@ import roboguice.inject.ContextSingleton;
 /**
  * Spinner text on click listener.
  *
- * @author Laca
+ * @author Laszlo Sisa
  */
 @ContextSingleton
 public class SpinnerTextOnClickListener extends AbstractWorkoutActivityButtonClickListener {

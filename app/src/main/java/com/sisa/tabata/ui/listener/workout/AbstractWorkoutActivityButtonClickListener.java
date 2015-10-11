@@ -8,7 +8,7 @@ import android.view.View;
 /**
  * Abstract class used click listener for buttons placed on {@link WorkoutActivity}.
  *
- * @author Laca
+ * @author Laszlo Sisa
  */
 public abstract class AbstractWorkoutActivityButtonClickListener implements View.OnClickListener {
 
