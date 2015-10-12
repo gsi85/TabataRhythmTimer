@@ -66,5 +66,7 @@
 
     <string name="database_name">tabatarhytm.db</string>
 
+    <string name="crash_report_email_subject">[CRASH REPORT]</string>
+
 </resources>
 

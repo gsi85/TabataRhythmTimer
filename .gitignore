@@ -80,3 +80,6 @@ local.properties
  
 # PDT-specific
 .buildpath
+
+# Credentials
+client_secrets.xml

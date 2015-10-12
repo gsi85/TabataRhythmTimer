@@ -38,4 +38,16 @@
             <small>%s</small>
         ]]>
     </string>
+    <string formatted="false" name="crash_report_body_pattern">
+        <![CDATA[
+            <html><body><table cellpadding=\'4\' cellspacing=\'0\' style=\'border-collapse: collapse;\'>
+            %s
+            </table></body</html>
+        ]]>
+    </string>
+    <string formatted="false" name="crash_report_table_row_pattern">
+        <![CDATA[
+            <tr><td valign=\'top\' style=\'border: 1px solid #CCC;\'><strong>%s</strong></td><td style=\'border: 1px solid #CCC;\'>%s</td></tr>
+        ]]>
+    </string>
 </resources>

@@ -1,5 +1,6 @@
 package com.sisa.tabata;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import android.content.Context;
@@ -12,7 +13,17 @@ import android.content.Context;
 @Singleton
 public class ApplicationContextProvider {
 
-    private Context context;
+    private final Context context;
+
+    /**
+     * DI constructor.
+     *
+     * @param context {@link Context}
+     */
+    @Inject
+    public ApplicationContextProvider(final Context context) {
+        this.context = context;
+    }
 
     /**
      * Returns the application {@link Context}.
@@ -21,15 +32,6 @@ public class ApplicationContextProvider {
      */
     public Context getContext() {
         return context;
-    }
-
-    /**
-     * Set the application {@link Context}.
-     *
-     * @param context {@link Context}
-     */
-    protected void setContext(final Context context) {
-        this.context = context;
     }
 
     /**

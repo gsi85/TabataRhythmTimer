@@ -24,7 +24,6 @@ public class TabataApplication extends Application {
     public void onCreate() {
         super.onCreate();
         RoboGuice.injectMembers(getApplicationContext(), this);
-        applicationContextProvider.setContext(getApplicationContext());
         setUpCrashReport();
     }
 
