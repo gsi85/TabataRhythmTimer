@@ -15,7 +15,7 @@ import com.sisa.tabata.R;
 import com.sisa.tabata.report.crash.task.EmailCrashReportSenderTask;
 
 /**
- * Send crash report via Google Mail API.
+ * Send crash report via email using SMTP.
  *
  * @author Laszlo Sisa
  */
@@ -42,8 +42,8 @@ public class EmailCrashReportSender implements ReportSender {
     private String buildTableRows(final CrashReportData errorContent) {
         String tableRowPattern = applicationContextProvider.getStringResource(R.string.crash_report_table_row_pattern);
         StringBuilder tableRowsBuilder = new StringBuilder();
-        for (Map.Entry entry : errorContent.entrySet()) {
-            tableRowsBuilder.append(String.format(tableRowPattern, entry.getKey(), entry.getValue()));
+        for (Map.Entry errorEntry : errorContent.entrySet()) {
+            tableRowsBuilder.append(String.format(tableRowPattern, errorEntry.getKey(), errorEntry.getValue()));
         }
         return tableRowsBuilder.toString();
     }

@@ -67,6 +67,7 @@
     <string name="database_name">tabatarhytm.db</string>
 
     <string name="crash_report_email_subject">[CRASH REPORT]</string>
+    <string name="crash_toast_text">Ooooops ! I crashed, but a report has been sent to my developer to help fix the issue!</string>
 
 </resources>
 

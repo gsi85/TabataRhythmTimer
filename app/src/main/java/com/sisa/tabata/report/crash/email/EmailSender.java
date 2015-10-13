@@ -63,7 +63,7 @@ public class EmailSender extends javax.mail.Authenticator {
      * @param crashReport crash report message body
      * @throws Exception if error occurred while sending email
      */
-    public synchronized void sendMail(String crashReport) throws Exception {
+    public void sendMail(String crashReport) throws Exception {
         MimeMessage message = new MimeMessage(session);
         DataHandler handler = new DataHandler(new ByteArrayDataSource(crashReport.getBytes(), TYPE));
         message.setSender(crashReportEmailAddress);
