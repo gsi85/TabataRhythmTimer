@@ -1,18 +1,16 @@
 package com.sisa.tabata;
 
-import org.acra.ACRA;
-import org.acra.ReportingInteractionMode;
-import org.acra.annotation.ReportsCrashes;
-
-import roboguice.RoboGuice;
 import android.app.Application;
-
 import com.google.inject.Inject;
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseUser;
 import com.sisa.tabata.report.crash.EmailCrashReportSender;
 import com.sisa.tabata.report.crash.ParseCrashReportSender;
+import org.acra.ACRA;
+import org.acra.ReportingInteractionMode;
+import org.acra.annotation.ReportsCrashes;
+import roboguice.RoboGuice;
 
 /**
  * Base class of application to maintain global state.

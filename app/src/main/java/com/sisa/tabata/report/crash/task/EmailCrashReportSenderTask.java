@@ -6,6 +6,7 @@ import android.util.Log;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.sisa.tabata.report.crash.email.EmailSender;
+import com.sisa.tabata.report.parse.ParseAnalyticsAdapter;
 
 /**
  * Asynchronous task for sending emails.
@@ -19,6 +20,8 @@ public class EmailCrashReportSenderTask extends AsyncTask<String, Void, Void> {
 
     @Inject
     private EmailSender emailSender;
+    @Inject
+    private ParseAnalyticsAdapter parseAnalyticsAdapter;
 
     @Override
     protected Void doInBackground(final String... params) {
@@ -26,6 +29,7 @@ public class EmailCrashReportSenderTask extends AsyncTask<String, Void, Void> {
             String crashReport = params[CRASH_REPORT_PARAM_INDEX];
             emailSender.sendMail(crashReport);
         } catch (Exception e) {
+            parseAnalyticsAdapter.trackException(e);
             Log.e("SendMail", e.getMessage(), e);
         }
         return null;

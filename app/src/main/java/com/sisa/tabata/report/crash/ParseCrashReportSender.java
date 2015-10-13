@@ -1,6 +1,8 @@
 package com.sisa.tabata.report.crash;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.acra.ReportField;
@@ -8,11 +10,12 @@ import org.acra.collector.CrashReportData;
 import org.acra.sender.ReportSender;
 import org.acra.sender.ReportSenderException;
 
-import android.content.Context;
-
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.parse.ParseAnalytics;
 import com.parse.ParseObject;
+import com.sisa.tabata.report.parse.ParseAnalyticsAdapter;
+
+import android.content.Context;
 
 /**
  * Sends crash report to Parse.
@@ -22,8 +25,11 @@ import com.parse.ParseObject;
 @Singleton
 public class ParseCrashReportSender implements ReportSender {
 
-    private static final String CRASH_REPORT_CLASS_NAME = "TabataCrashReport";
-    private static final String APPLICATION_CRASH_EVENT = "ApplicationCrash";
+    private static final String CRASH_REPORT_CLASS_NAME = "CrashReport";
+    private static final List<ReportField> CRASH_EVENT_PROPERTIES = Arrays.asList(ReportField.REPORT_ID, ReportField.PHONE_MODEL, ReportField.BRAND);
+
+    @Inject
+    private ParseAnalyticsAdapter parseAnalyticsAdapter;
 
     @Override
     public void send(final Context context, final CrashReportData errorContent) throws ReportSenderException {
@@ -43,15 +49,18 @@ public class ParseCrashReportSender implements ReportSender {
 
     private void populateErrorData(final CrashReportData errorContent, final ParseObject parseObject, final Map<String, String> errorMap) {
         for (Map.Entry<ReportField, String> errorEntry : errorContent.entrySet()) {
-            String key = errorEntry.getKey().name();
+            String keyAsString = errorEntry.getKey().name();
             String value = errorEntry.getValue();
-            parseObject.put(key, value);
-            errorMap.put(key, value);
+            parseObject.put(keyAsString, value);
+            if (CRASH_EVENT_PROPERTIES.contains(errorEntry.getKey())) {
+                errorMap.put(keyAsString, value);
+            }
         }
+
     }
 
     private void sendParseReport(final ParseObject parseObject, final Map<String, String> errorMap) {
-        ParseAnalytics.trackEventInBackground(APPLICATION_CRASH_EVENT, errorMap);
+        parseAnalyticsAdapter.trackAppCrashedEvent(errorMap);
         parseObject.saveInBackground();
     }
 

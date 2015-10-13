@@ -1,5 +1,10 @@
 package com.sisa.tabata.ui.activity;
 
+import android.os.Bundle;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import com.google.inject.Inject;
 import com.sisa.tabata.R;
 import com.sisa.tabata.dao.loader.EditedWorkoutManager;
@@ -8,18 +13,10 @@ import com.sisa.tabata.ui.listener.editor.SectionTextViewClickListener;
 import com.sisa.tabata.ui.listener.editor.SectionTextViewLongClickListener;
 import com.sisa.tabata.ui.listener.editor.WorkoutEditActionButtonClickListener;
 import com.sisa.tabata.ui.listener.editor.WorkoutEditTextEditorTextWatcher;
+import com.sisa.tabata.ui.provider.WorkoutTotalTimeProvider;
 import com.sisa.tabata.ui.provider.editor.WorkoutSectionsTextViewProvider;
 import com.sisa.tabata.ui.provider.editor.WorkoutSectionsUpdateProvider;
-import com.sisa.tabata.ui.provider.WorkoutTotalTimeProvider;
 import com.sisa.tabata.ui.timer.NotificationDisplayTimer;
-
-import android.os.Bundle;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import roboguice.activity.RoboActivity;
 import roboguice.inject.InjectView;
 
 /**
@@ -27,7 +24,7 @@ import roboguice.inject.InjectView;
  *
  * @author Laszlo Sisa
  */
-public class WorkoutEditActivity extends RoboActivity {
+public class WorkoutEditActivity extends BaseActivity {
 
     private static final String NEW_WORKOUT_NAME = "newWorkout";
     private static final String TOTAL_TIME_PATTERN = "%s: %s";

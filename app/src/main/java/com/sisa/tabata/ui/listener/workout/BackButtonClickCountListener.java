@@ -3,6 +3,7 @@ package com.sisa.tabata.ui.listener.workout;
 import com.google.inject.Inject;
 import com.sisa.tabata.ApplicationContextProvider;
 import com.sisa.tabata.R;
+import com.sisa.tabata.report.parse.ParseAnalyticsAdapter;
 import com.sisa.tabata.ui.activity.WorkoutActivity;
 import com.sisa.tabata.ui.timer.NotificationDisplayTimer;
 
@@ -27,6 +28,8 @@ public class BackButtonClickCountListener {
     private TextView workoutNotificationView;
     @Inject
     private ApplicationContextProvider applicationContextProvider;
+    @Inject
+    private ParseAnalyticsAdapter parseAnalyticsAdapter;
     private int backButtonClickCount;
 
     /**
@@ -55,6 +58,7 @@ public class BackButtonClickCountListener {
     }
 
     private void exitApp(WorkoutActivity workoutActivity) {
+        parseAnalyticsAdapter.trackAppClosedEvent();
         backButtonClickCount = 0;
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
