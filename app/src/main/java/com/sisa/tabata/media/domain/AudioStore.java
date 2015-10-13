@@ -13,7 +13,7 @@ import java.util.Map;
 /**
  * Domain object, storing {@link Song} in categorized manner.
  *
- * @author Laca
+ * @author Laszlo Sisa
  */
 public final class AudioStore {
 

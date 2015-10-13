@@ -17,7 +17,7 @@ import android.provider.MediaStore;
 /**
  * DAO service for retrieving audio files from {@link MediaStore.Audio.Media}.
  *
- * @author Laca
+ * @author Laszlo Sisa
  */
 @Singleton
 public class AudioMediaStoreDao {

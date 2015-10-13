@@ -12,13 +12,14 @@ import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import roboguice.activity.RoboActivity;
 import roboguice.inject.InjectView;
 
 /**
- * Created by Laca on 2015.03.25..
+ * Workout load activity.
+ *
+ * @author Laszlo Sisa
  */
-public class WorkoutLoadActivity extends RoboActivity {
+public class WorkoutLoadActivity extends BaseActivity {
 
     @InjectView(R.id.existingWorkoutLayout)
     private LinearLayout existingWorkoutLayout;

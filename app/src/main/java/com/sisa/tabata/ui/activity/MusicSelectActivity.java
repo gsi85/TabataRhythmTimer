@@ -1,7 +1,9 @@
 package com.sisa.tabata.ui.activity;
 
-import java.util.Arrays;
-
+import android.os.Bundle;
+import android.util.Pair;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import com.google.inject.Inject;
 import com.sisa.tabata.R;
 import com.sisa.tabata.media.dao.loader.AudioStoreManager;
@@ -12,13 +14,7 @@ import com.sisa.tabata.ui.provider.music.AlbumListTextViewsProvider;
 import com.sisa.tabata.ui.provider.music.ArtistListTextViewsProvider;
 import com.sisa.tabata.ui.provider.music.PlaylistTextViewsProvider;
 import com.sisa.tabata.ui.provider.music.SongsListTextViewsProvider;
-
-import android.os.Bundle;
-import android.util.Pair;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-
-import roboguice.activity.RoboActivity;
+import java.util.Arrays;
 import roboguice.inject.InjectView;
 
 /**
@@ -26,7 +22,7 @@ import roboguice.inject.InjectView;
  *
  * @author Laszlo Sisa
  */
-public class MusicSelectActivity extends RoboActivity {
+public class MusicSelectActivity extends BaseActivity {
 
     @InjectView(R.id.musicSaveButton)
     private ImageButton saveButton;

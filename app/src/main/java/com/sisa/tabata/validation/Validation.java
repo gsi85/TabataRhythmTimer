@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * Validation class evaluating if the given object is not null and has content.
  *
- * @author Laca
+ * @author Laszlo Sisa
  */
 public final class Validation {
 

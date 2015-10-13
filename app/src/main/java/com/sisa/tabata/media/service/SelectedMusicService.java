@@ -14,7 +14,7 @@ import android.util.Pair;
 /**
  * Service for retrieving and updating the music selected by the user.
  *
- * @author Laca
+ * @author Laszlo Sisa
  */
 @Singleton
 public class SelectedMusicService {
