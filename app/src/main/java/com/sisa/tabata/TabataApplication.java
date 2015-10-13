@@ -2,7 +2,7 @@ package com.sisa.tabata;
 
 import android.app.Application;
 import com.google.inject.Inject;
-import com.sisa.tabata.report.crash.GmailCrashReportSender;
+import com.sisa.tabata.report.crash.EmailCrashReportSender;
 import org.acra.ACRA;
 import org.acra.annotation.ReportsCrashes;
 import roboguice.RoboGuice;
@@ -18,7 +18,7 @@ public class TabataApplication extends Application {
     @Inject
     private ApplicationContextProvider applicationContextProvider;
     @Inject
-    private GmailCrashReportSender gmailCrashReportSender;
+    private EmailCrashReportSender emailCrashReportSender;
 
     @Override
     public void onCreate() {
@@ -29,7 +29,7 @@ public class TabataApplication extends Application {
 
     private void setUpCrashReport() {
         ACRA.init(this);
-        ACRA.getErrorReporter().setReportSender(gmailCrashReportSender);
+        ACRA.getErrorReporter().setReportSender(emailCrashReportSender);
     }
 
 }

@@ -1,19 +1,18 @@
 package com.sisa.tabata.report.crash;
 
-import com.sisa.tabata.report.crash.email.GmailSender;
 import java.util.Map;
 
 import org.acra.collector.CrashReportData;
 import org.acra.sender.ReportSender;
 import org.acra.sender.ReportSenderException;
 
+import android.content.Context;
+
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.sisa.tabata.ApplicationContextProvider;
 import com.sisa.tabata.R;
-
-import android.content.Context;
-import android.util.Log;
+import com.sisa.tabata.report.crash.task.EmailCrashReportSenderTask;
 
 /**
  * Send crash report via Google Mail API.
@@ -21,10 +20,10 @@ import android.util.Log;
  * @author Laszlo Sisa
  */
 @Singleton
-public class GmailCrashReportSender implements ReportSender {
+public class EmailCrashReportSender implements ReportSender {
 
     @Inject
-    private GmailSender gmailSender;
+    private EmailCrashReportSenderTask emailCrashReportSenderTask;
     @Inject
     private ApplicationContextProvider applicationContextProvider;
 
@@ -50,11 +49,7 @@ public class GmailCrashReportSender implements ReportSender {
     }
 
     private void sendMail(final String messageBody) {
-        try {
-            gmailSender.sendMail(messageBody);
-        } catch (Exception e) {
-            Log.e("SendMail", e.getMessage(), e);
-        }
+        emailCrashReportSenderTask.execute(messageBody);
     }
 
 }

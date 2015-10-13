@@ -25,7 +25,7 @@ import com.sisa.tabata.R;
  *
  * @author Laszlo Sisa
  */
-public class GmailSender extends javax.mail.Authenticator {
+public class EmailSender extends javax.mail.Authenticator {
 
     private static final String TYPE = "text/html";
 
@@ -47,7 +47,7 @@ public class GmailSender extends javax.mail.Authenticator {
      * @throws AddressException if internet address can't be parsed
      */
     @Inject
-    public GmailSender(final ApplicationContextProvider applicationContextProvider, final SmtpEmailPropertiesFactory smtpEmailPropertiesFactory)
+    public EmailSender(final ApplicationContextProvider applicationContextProvider, final SmtpEmailPropertiesFactory smtpEmailPropertiesFactory)
         throws AddressException {
         this.applicationContextProvider = applicationContextProvider;
         crashReportEmail = applicationContextProvider.getStringResource(R.string.crash_report_email_user_name);
