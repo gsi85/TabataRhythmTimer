@@ -17,6 +17,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.sisa.tabata.ApplicationContextProvider;
 import com.sisa.tabata.R;
 
@@ -25,6 +26,7 @@ import com.sisa.tabata.R;
  *
  * @author Laszlo Sisa
  */
+@Singleton
 public class EmailSender extends javax.mail.Authenticator {
 
     private static final String TYPE = "text/html";
