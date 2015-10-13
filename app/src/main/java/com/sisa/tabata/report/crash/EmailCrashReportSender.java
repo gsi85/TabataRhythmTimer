@@ -6,13 +6,14 @@ import org.acra.collector.CrashReportData;
 import org.acra.sender.ReportSender;
 import org.acra.sender.ReportSenderException;
 
-import android.content.Context;
-
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.sisa.tabata.ApplicationContextProvider;
 import com.sisa.tabata.R;
+import com.sisa.tabata.SessionIdProvider;
 import com.sisa.tabata.report.crash.task.EmailCrashReportSenderTask;
+
+import android.content.Context;
 
 /**
  * Send crash report via email using SMTP.
@@ -21,6 +22,8 @@ import com.sisa.tabata.report.crash.task.EmailCrashReportSenderTask;
  */
 @Singleton
 public class EmailCrashReportSender implements ReportSender {
+
+    private static final String SESSION_ID_KEY = "SESSION_ID";
 
     @Inject
     private EmailCrashReportSenderTask emailCrashReportSenderTask;
@@ -42,6 +45,7 @@ public class EmailCrashReportSender implements ReportSender {
     private String buildTableRows(final CrashReportData errorContent) {
         String tableRowPattern = applicationContextProvider.getStringResource(R.string.crash_report_table_row_pattern);
         StringBuilder tableRowsBuilder = new StringBuilder();
+        tableRowsBuilder.append(String.format(tableRowPattern, SESSION_ID_KEY, SessionIdProvider.SESSION_ID));
         for (Map.Entry errorEntry : errorContent.entrySet()) {
             tableRowsBuilder.append(String.format(tableRowPattern, errorEntry.getKey(), errorEntry.getValue()));
         }
