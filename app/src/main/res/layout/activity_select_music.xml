@@ -168,6 +168,7 @@
                 android:background="@drawable/bg_header_buttons"
                 android:clickable="true"
                 android:focusable="false"
+                android:tag="rescan"
                 android:orientation="vertical">
 
             <ImageView
