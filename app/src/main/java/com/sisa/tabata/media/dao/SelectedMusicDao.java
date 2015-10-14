@@ -29,6 +29,7 @@ public class SelectedMusicDao extends SQLiteAssetHelper {
     private static final String ARTIST_COLUMN = "artist";
     private static final String ALBUM_COLUMN = "album";
     private static final String DATA_STREAM_COLUMN = "dataStream";
+    private static final String WHERE_TRACK_ID_EQUALS = "trackId=";
     private static final String[] ALL_COLUMNS = {TRACK_ID_COLUMN, TRACK_NUMBER_COLUMN, TITLE_COLUMN, ARTIST_COLUMN, ALBUM_COLUMN, DATA_STREAM_COLUMN};
     private static final int TRACK_ID_COLUMN_INDEX = 0;
     private static final int TRACK_NUMBER_COLUMN_INDEX = 1;
@@ -79,6 +80,15 @@ public class SelectedMusicDao extends SQLiteAssetHelper {
         return selectedSongs;
     }
 
+    /**
+     * Deletes a saved song by {@code trackId}.
+     *
+     * @param trackId the id of the track to be deleted
+     */
+    public void deleteSongById(final double trackId) {
+        database.delete(SONG_TABLE, WHERE_TRACK_ID_EQUALS + trackId, null);
+    }
+
     private ContentValues createContentValues(final Song song) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(TRACK_ID_COLUMN, song.getTrackId());
@@ -111,5 +121,4 @@ public class SelectedMusicDao extends SQLiteAssetHelper {
                 .withDataStream(cursor.getString(DATA_STREAM_COLUMN_INDEX))
                 .build();
     }
-
 }

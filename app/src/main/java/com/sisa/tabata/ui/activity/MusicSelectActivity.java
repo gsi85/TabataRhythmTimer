@@ -97,9 +97,9 @@ public class MusicSelectActivity extends BaseActivity {
     }
 
     private void setViewDependencies() {
-        musicSelectHeaderButtonClickListener.setAudioItemContainers(Arrays.asList(new Pair<>(albumLayout, albumItemsLayout),
-                new Pair<>(artistLayout, artistItemsLayout), new Pair<>(playlistLayout, playlistItemsLayout),
-                new Pair<>(songsLayout, songsItemsLayout), new Pair<>(rescanLayout, itemsRescanLayout)));
+        musicSelectHeaderButtonClickListener.setAudioItemContainers(Arrays.asList(Pair.create(albumLayout, albumItemsLayout),
+                Pair.create(artistLayout, artistItemsLayout), Pair.create(playlistLayout, playlistItemsLayout),
+                Pair.create(songsLayout, songsItemsLayout), Pair.create(rescanLayout, itemsRescanLayout)));
     }
 
     private void setUpListeners() {

@@ -79,7 +79,7 @@ public abstract class AbstractMusicSelectTextViewProvider {
     }
 
     private boolean isChecked(final String category, final String valueKey) {
-        return selectedMusicManager.getSelectedCheckboxes().contains(new Pair<>(category, valueKey));
+        return selectedMusicManager.getSelectedCheckboxes().contains(Pair.create(category, valueKey));
     }
 
 }

@@ -70,7 +70,7 @@ public class MusicSelectActionButtonClickListener implements View.OnClickListene
                 searchChildForSelectedCheckbox((LinearLayout) child, selectedItems);
             } else if (child instanceof CheckBox && ((CheckBox) child).isChecked()) {
                 String[] checkboxValue = String.valueOf(child.getTag()).split(CHECKBOX_KEY_VALUE_DELIMITER);
-                selectedItems.add(new Pair<>(checkboxValue[SELECTED_ITEM_KEY_INDEX], checkboxValue[SELECTED_ITEM_VALUE_INDEX]));
+                selectedItems.add(Pair.create(checkboxValue[SELECTED_ITEM_KEY_INDEX], checkboxValue[SELECTED_ITEM_VALUE_INDEX]));
             }
         }
     }
