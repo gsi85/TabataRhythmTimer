@@ -4,14 +4,13 @@ import static android.media.MediaScannerConnection.OnScanCompletedListener;
 import static android.media.MediaScannerConnection.scanFile;
 import static com.sisa.tabata.validation.Assert.isInstanceOf;
 
+import com.google.inject.Singleton;
 import com.sisa.tabata.ui.activity.MusicSelectActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
-
-import roboguice.inject.ContextSingleton;
 
 /**
  * Scanner for refreshing media store's meta data.
@@ -20,7 +19,7 @@ import roboguice.inject.ContextSingleton;
  *
  * @author Laszlo Sisa
  */
-@ContextSingleton
+@Singleton
 public class MediaScanner implements OnScanCompletedListener {
 
     private static final String[] PATHS_TO_SCAN = new String[]{Environment.getExternalStorageDirectory().toString()};
