@@ -1,5 +1,7 @@
 package com.sisa.tabata.media.service;
 
+import static com.sisa.tabata.validation.Validation.notEmpty;
+
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -8,7 +10,6 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.sisa.tabata.media.domain.Song;
 import com.sisa.tabata.report.parse.ParseAnalyticsAdapter;
-import com.sisa.tabata.validation.Validation;
 
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -106,7 +107,7 @@ public class MediaPlayerService implements MediaPlayer.OnPreparedListener, Media
     }
 
     private void loadNextSong() {
-        if (Validation.notEmpty(songsToPlay)) {
+        if (notEmpty(songsToPlay)) {
             try {
                 mediaPlayer.reset();
                 mediaPlayer.setDataSource(songsToPlay.remove().getDataStream());
@@ -115,6 +116,11 @@ public class MediaPlayerService implements MediaPlayer.OnPreparedListener, Media
             } catch (IOException e) {
                 parseAnalyticsAdapter.trackException(e);
                 e.printStackTrace();
+                loadNextSong();
+            }
+        } else {
+            songsToPlay.addAll(selectedMusicService.getSelectedSongs());
+            if (notEmpty(songsToPlay)) {
                 loadNextSong();
             }
         }
