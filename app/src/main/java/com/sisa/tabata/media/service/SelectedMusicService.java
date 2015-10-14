@@ -54,4 +54,12 @@ public class SelectedMusicService {
         return selectedMusicDao.getSelectedSongs();
     }
 
+    /**
+     * Deletes a saved song by {@code trackId}.
+     *
+     * @param trackId the id of the track to be deleted
+     */
+    public void deleteSongById(final double trackId) {
+        selectedMusicDao.deleteSongById(trackId);
+    }
 }

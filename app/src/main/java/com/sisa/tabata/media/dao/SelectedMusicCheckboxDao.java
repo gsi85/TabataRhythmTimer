@@ -93,7 +93,7 @@ public class SelectedMusicCheckboxDao extends SQLiteAssetHelper {
 
     @NonNull
     private Pair<String, String> getCheckbox(final Cursor allRowsCursor) {
-        return new Pair<>(allRowsCursor.getString(KEY_COLUMN_INDEX), allRowsCursor.getString(VALUE_COLUMN_INDEX));
+        return Pair.create(allRowsCursor.getString(KEY_COLUMN_INDEX), allRowsCursor.getString(VALUE_COLUMN_INDEX));
     }
 
 }

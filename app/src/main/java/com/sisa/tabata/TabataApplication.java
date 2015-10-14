@@ -1,15 +1,20 @@
 package com.sisa.tabata;
 
-import android.app.Application;
+import org.acra.ACRA;
+import org.acra.ReportingInteractionMode;
+import org.acra.annotation.ReportsCrashes;
+
 import com.google.inject.Inject;
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseUser;
+import com.sisa.tabata.media.service.SelectedMusicService;
+import com.sisa.tabata.media.service.SelectedMusicValidationService;
 import com.sisa.tabata.report.crash.EmailCrashReportSender;
 import com.sisa.tabata.report.crash.ParseCrashReportSender;
-import org.acra.ACRA;
-import org.acra.ReportingInteractionMode;
-import org.acra.annotation.ReportsCrashes;
+
+import android.app.Application;
+
 import roboguice.RoboGuice;
 
 /**
@@ -26,6 +31,8 @@ public class TabataApplication extends Application {
     private EmailCrashReportSender emailCrashReportSender;
     @Inject
     private ParseCrashReportSender parseCrashReportSender;
+    @Inject
+    private SelectedMusicService selectedMusicService;
 
     @Override
     public void onCreate() {
@@ -33,6 +40,7 @@ public class TabataApplication extends Application {
         RoboGuice.injectMembers(getApplicationContext(), this);
         setUpParse();
         setUpCrashReport();
+        validateSelectedSongs();
     }
 
     private void setUpParse() {
@@ -47,6 +55,10 @@ public class TabataApplication extends Application {
         ACRA.init(this);
         ACRA.getErrorReporter().addReportSender(emailCrashReportSender);
         ACRA.getErrorReporter().addReportSender(parseCrashReportSender);
+    }
+
+    private void validateSelectedSongs() {
+        new SelectedMusicValidationService(selectedMusicService, applicationContextProvider).execute();
     }
 
 }
