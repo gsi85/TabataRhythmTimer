@@ -1,9 +1,7 @@
 package com.sisa.tabata.ui.activity;
 
-import android.os.Bundle;
-import android.util.Pair;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
+import java.util.Arrays;
+
 import com.google.inject.Inject;
 import com.sisa.tabata.R;
 import com.sisa.tabata.media.dao.loader.AudioStoreManager;
@@ -14,7 +12,12 @@ import com.sisa.tabata.ui.provider.music.AlbumListTextViewsProvider;
 import com.sisa.tabata.ui.provider.music.ArtistListTextViewsProvider;
 import com.sisa.tabata.ui.provider.music.PlaylistTextViewsProvider;
 import com.sisa.tabata.ui.provider.music.SongsListTextViewsProvider;
-import java.util.Arrays;
+
+import android.os.Bundle;
+import android.util.Pair;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+
 import roboguice.inject.InjectView;
 
 /**
@@ -44,6 +47,10 @@ public class MusicSelectActivity extends BaseActivity {
     private LinearLayout playlistLayout;
     @InjectView(R.id.songsLayout)
     private LinearLayout songsLayout;
+    @InjectView(R.id.rescanLayout)
+    private LinearLayout rescanLayout;
+    @InjectView(R.id.itemsRescanLayout)
+    private LinearLayout itemsRescanLayout;
 
     @Inject
     private MusicSelectActionButtonClickListener musicSelectActionButtonClickListener;
@@ -90,9 +97,9 @@ public class MusicSelectActivity extends BaseActivity {
     }
 
     private void setViewDependencies() {
-        musicSelectHeaderButtonClickListener
-                .setAudioItemContainers(Arrays.asList(new Pair<>(albumLayout, albumItemsLayout), new Pair<>(artistLayout, artistItemsLayout),
-                        new Pair<>(playlistLayout, playlistItemsLayout), new Pair<>(songsLayout, songsItemsLayout)));
+        musicSelectHeaderButtonClickListener.setAudioItemContainers(Arrays.asList(new Pair<>(albumLayout, albumItemsLayout),
+                new Pair<>(artistLayout, artistItemsLayout), new Pair<>(playlistLayout, playlistItemsLayout),
+                new Pair<>(songsLayout, songsItemsLayout), new Pair<>(rescanLayout, itemsRescanLayout)));
     }
 
     private void setUpListeners() {
@@ -102,6 +109,7 @@ public class MusicSelectActivity extends BaseActivity {
         artistLayout.setOnClickListener(musicSelectHeaderButtonClickListener);
         playlistLayout.setOnClickListener(musicSelectHeaderButtonClickListener);
         songsLayout.setOnClickListener(musicSelectHeaderButtonClickListener);
+        rescanLayout.setOnClickListener(musicSelectHeaderButtonClickListener);
     }
 
 }

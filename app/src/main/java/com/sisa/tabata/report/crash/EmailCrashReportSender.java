@@ -11,7 +11,9 @@ import com.google.inject.Singleton;
 import com.sisa.tabata.ApplicationContextProvider;
 import com.sisa.tabata.R;
 import com.sisa.tabata.SessionIdProvider;
+import com.sisa.tabata.report.crash.email.EmailSender;
 import com.sisa.tabata.report.crash.task.EmailCrashReportSenderTask;
+import com.sisa.tabata.report.parse.ParseAnalyticsAdapter;
 
 import android.content.Context;
 
@@ -26,9 +28,11 @@ public class EmailCrashReportSender implements ReportSender {
     private static final String SESSION_ID_KEY = "SESSION_ID";
 
     @Inject
-    private EmailCrashReportSenderTask emailCrashReportSenderTask;
-    @Inject
     private ApplicationContextProvider applicationContextProvider;
+    @Inject
+    private ParseAnalyticsAdapter parseAnalyticsAdapter;
+    @Inject
+    private EmailSender emailSender;
 
     @Override
     public void send(final Context context, final CrashReportData errorContent) throws ReportSenderException {
@@ -53,6 +57,7 @@ public class EmailCrashReportSender implements ReportSender {
     }
 
     private void sendMail(final String messageBody) {
+        EmailCrashReportSenderTask emailCrashReportSenderTask = new EmailCrashReportSenderTask(emailSender, parseAnalyticsAdapter);
         emailCrashReportSenderTask.execute(messageBody);
     }
 

@@ -2,6 +2,9 @@ package com.sisa.tabata.ui.listener.music;
 
 import java.util.List;
 
+import com.google.inject.Inject;
+import com.sisa.tabata.media.scanner.MediaScanner;
+
 import android.graphics.Color;
 import android.util.Pair;
 import android.view.View;
@@ -24,8 +27,11 @@ public class MusicSelectHeaderButtonClickListener implements View.OnClickListene
     private static final String SELECTED_TEXT_COLOR = "#FFFFFF";
     private static final String SELECTED_TINT_COLOR = "#FF00DDFF";
     private static final String UNSELECTED_COLOR = "#CCCCCC";
+    private static final String RESCAN_TAG = "rescan";
 
     private List<Pair<LinearLayout, LinearLayout>> audioItemContainers;
+    @Inject
+    private MediaScanner mediaScanner;
 
     @Override
     public void onClick(final View view) {
@@ -33,6 +39,7 @@ public class MusicSelectHeaderButtonClickListener implements View.OnClickListene
         for (Pair<LinearLayout, LinearLayout> audioItemContainer : audioItemContainers) {
             setVisibility(viewTagToDisplay, audioItemContainer);
         }
+        checkRescan(viewTagToDisplay);
     }
 
     private void setVisibility(final String viewTagToDisplay, final Pair<LinearLayout, LinearLayout> audioItemContainer) {
@@ -54,6 +61,12 @@ public class MusicSelectHeaderButtonClickListener implements View.OnClickListene
             } else if (child instanceof ImageView) {
                 ((ImageView) child).setColorFilter(Color.parseColor(selected ? SELECTED_TINT_COLOR : UNSELECTED_COLOR));
             }
+        }
+    }
+
+    private void checkRescan(final String viewTagToDisplay) {
+        if (RESCAN_TAG.equals(viewTagToDisplay)) {
+            mediaScanner.scanFiles(audioItemContainers.get(0).first.getContext());
         }
     }
 
