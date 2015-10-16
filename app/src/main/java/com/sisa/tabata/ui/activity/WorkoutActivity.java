@@ -122,11 +122,9 @@ public class WorkoutActivity extends RoboFragmentActivity {
 
         @Override
         public void onCallStateChanged(final int state, final String incomingNumber) {
-            if (isIncomingCall(state)) {
-                if (shouldPauseWorkout()) {
-                    playButtonClickListener.pauseTimer();
-                    shouldResume = true;
-                }
+            if (isIncomingCall(state) && shouldPauseWorkout()) {
+                playButtonClickListener.pauseTimer();
+                shouldResume = true;
             }
         }
 

@@ -56,7 +56,8 @@ public class WorkoutCountDownTimerManager {
      * Resumes the counter.
      */
     public void resume() {
-        if (notEmpty(workoutCountDownTimer)) { workoutInProgress.set(true);
+        if (notEmpty(workoutCountDownTimer)) {
+            workoutInProgress.set(true);
             workoutCountDownTimer.resume();
         }
     }

@@ -44,11 +44,15 @@ public class MainMenuOnClickListener extends AbstractWorkoutActivityButtonClickL
     @Override
     public void onClick(View view) {
         super.onClick(view);
-        if (workoutCountDownTimerManager.isWorkoutInProgress() && !workoutCountDownTimerManager.isFinished()) {
+        if (isWorkoutInProgress()) {
             showConfirmationDialog(view);
         } else {
             startSelectedActivity(view);
         }
+    }
+
+    private boolean isWorkoutInProgress() {
+        return workoutCountDownTimerManager.isWorkoutInProgress() && !workoutCountDownTimerManager.isFinished();
     }
 
     private void showConfirmationDialog(final View view) {
