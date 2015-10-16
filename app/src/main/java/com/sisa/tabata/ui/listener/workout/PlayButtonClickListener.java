@@ -36,6 +36,14 @@ public class PlayButtonClickListener extends AbstractWorkoutActivityButtonClickL
     @InjectView(R.id.playButton)
     private ImageButton playButton;
 
+    @Override
+    public void onClick(View view) {
+        super.onClick(view);
+        checkFinished();
+        checkCreateTimer();
+        pauseResumeTimer();
+    }
+
     /**
      * Resets the workout.
      */
@@ -48,12 +56,26 @@ public class PlayButtonClickListener extends AbstractWorkoutActivityButtonClickL
         checkCreateTimer();
     }
 
-    @Override
-    public void onClick(View view) {
-        super.onClick(view);
-        checkFinished();
-        checkCreateTimer();
-        pauseResumeTimer();
+    /**
+     * Resumes the counter.
+     */
+    public void resumeTimer() {
+        mediaPlayerService.play();
+        playButton.setImageResource(android.R.drawable.ic_media_pause);
+        playButton.setBackgroundResource(R.drawable.bg_pause_button);
+        playButton.setKeepScreenOn(true);
+        workoutCountDownTimerManager.resume();
+    }
+
+    /**
+     * Pauses the counter.
+     */
+    public void pauseTimer() {
+        mediaPlayerService.pause();
+        playButton.setImageResource(android.R.drawable.ic_media_play);
+        playButton.setBackgroundResource(R.drawable.bg_play_button);
+        playButton.setKeepScreenOn(false);
+        workoutCountDownTimerManager.pause();
     }
 
     private void checkFinished() {
@@ -75,22 +97,6 @@ public class PlayButtonClickListener extends AbstractWorkoutActivityButtonClickL
         } else {
             pauseTimer();
         }
-    }
-
-    private void resumeTimer() {
-        mediaPlayerService.play();
-        playButton.setImageResource(android.R.drawable.ic_media_pause);
-        playButton.setBackgroundResource(R.drawable.bg_pause_button);
-        playButton.setKeepScreenOn(true);
-        workoutCountDownTimerManager.resume();
-    }
-
-    private void pauseTimer() {
-        mediaPlayerService.pause();
-        playButton.setImageResource(android.R.drawable.ic_media_play);
-        playButton.setBackgroundResource(R.drawable.bg_play_button);
-        playButton.setKeepScreenOn(false);
-        workoutCountDownTimerManager.pause();
     }
 
 }

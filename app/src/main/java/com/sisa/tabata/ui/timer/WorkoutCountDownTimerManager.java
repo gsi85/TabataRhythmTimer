@@ -47,15 +47,18 @@ public class WorkoutCountDownTimerManager {
      * Pauses the counter.
      */
     public void pause() {
-        workoutCountDownTimer.pause();
+        if (notEmpty(workoutCountDownTimer)) {
+            workoutCountDownTimer.pause();
+        }
     }
 
     /**
      * Resumes the counter.
      */
     public void resume() {
-        workoutInProgress.set(true);
-        workoutCountDownTimer.resume();
+        if (notEmpty(workoutCountDownTimer)) { workoutInProgress.set(true);
+            workoutCountDownTimer.resume();
+        }
     }
 
     /**
