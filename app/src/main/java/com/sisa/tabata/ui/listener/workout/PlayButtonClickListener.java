@@ -7,8 +7,7 @@ import com.sisa.tabata.media.service.MediaPlayerService;
 import com.sisa.tabata.ui.domain.SerializedWorkout;
 import com.sisa.tabata.ui.progressbar.CurrentRoundProgressBar;
 import com.sisa.tabata.ui.progressbar.TotalWorkoutProgressBar;
-import com.sisa.tabata.ui.timer.CountDownTimerWithPause;
-import com.sisa.tabata.ui.timer.WorkoutCountDownTimer;
+import com.sisa.tabata.ui.timer.WorkoutCountDownTimerManager;
 
 import android.view.View;
 import android.widget.ImageButton;
@@ -32,22 +31,10 @@ public class PlayButtonClickListener extends AbstractWorkoutActivityButtonClickL
     private WorkoutManager workoutManager;
     @Inject
     private MediaPlayerService mediaPlayerService;
+    @Inject
+    private WorkoutCountDownTimerManager workoutCountDownTimerManager;
     @InjectView(R.id.playButton)
     private ImageButton playButton;
-
-    private CountDownTimerWithPause workoutCountDownTimer;
-
-    /**
-     * Resets the workout.
-     */
-    public void resetWorkout() {
-        if (workoutCountDownTimer != null) {
-            pauseTimer();
-            workoutCountDownTimer.setFinished(true);
-            workoutCountDownTimer = null;
-        }
-        checkCreateTimer();
-    }
 
     @Override
     public void onClick(View view) {
@@ -57,42 +44,59 @@ public class PlayButtonClickListener extends AbstractWorkoutActivityButtonClickL
         pauseResumeTimer();
     }
 
-    private void checkFinished() {
-        if (workoutCountDownTimer != null && workoutCountDownTimer.isFinished()) {
-            workoutCountDownTimer = null;
-        }
-    }
-
-    private void checkCreateTimer() {
-        if (workoutCountDownTimer == null) {
-            SerializedWorkout serializedWorkout = workoutManager.getLoadedSerializedWorkout();
-            workoutCountDownTimer = new WorkoutCountDownTimer(serializedWorkout, currentRoundProgressBar, totalWorkoutProgressBar, playButton)
-                    .create();
-        }
-    }
-
-    private void pauseResumeTimer() {
-        if (workoutCountDownTimer.isPaused()) {
-            resumeTimer();
-        } else {
+    /**
+     * Resets the workout.
+     */
+    public void resetWorkout() {
+        if (workoutCountDownTimerManager.isTimerSet()) {
             pauseTimer();
+            workoutCountDownTimerManager.setFinished();
+            workoutCountDownTimerManager.unloadWorkoutCountDownTimer();
         }
+        checkCreateTimer();
     }
 
-    private void resumeTimer() {
+    /**
+     * Resumes the counter.
+     */
+    public void resumeTimer() {
         mediaPlayerService.play();
         playButton.setImageResource(android.R.drawable.ic_media_pause);
         playButton.setBackgroundResource(R.drawable.bg_pause_button);
         playButton.setKeepScreenOn(true);
-        workoutCountDownTimer.resume();
+        workoutCountDownTimerManager.resume();
     }
 
-    private void pauseTimer() {
+    /**
+     * Pauses the counter.
+     */
+    public void pauseTimer() {
         mediaPlayerService.pause();
         playButton.setImageResource(android.R.drawable.ic_media_play);
         playButton.setBackgroundResource(R.drawable.bg_play_button);
         playButton.setKeepScreenOn(false);
-        workoutCountDownTimer.pause();
+        workoutCountDownTimerManager.pause();
+    }
+
+    private void checkFinished() {
+        if (workoutCountDownTimerManager.isTimerSet() && workoutCountDownTimerManager.isFinished()) {
+            workoutCountDownTimerManager.unloadWorkoutCountDownTimer();
+        }
+    }
+
+    private void checkCreateTimer() {
+        if (!workoutCountDownTimerManager.isTimerSet()) {
+            SerializedWorkout serializedWorkout = workoutManager.getLoadedSerializedWorkout();
+            workoutCountDownTimerManager.createWorkoutCountDownTimer(serializedWorkout, currentRoundProgressBar, totalWorkoutProgressBar, playButton);
+        }
+    }
+
+    private void pauseResumeTimer() {
+        if (workoutCountDownTimerManager.isPaused()) {
+            resumeTimer();
+        } else {
+            pauseTimer();
+        }
     }
 
 }

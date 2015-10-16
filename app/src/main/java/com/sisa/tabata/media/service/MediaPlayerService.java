@@ -112,10 +112,8 @@ public class MediaPlayerService implements MediaPlayer.OnPreparedListener, Media
                 mediaPlayer.reset();
                 mediaPlayer.setDataSource(songsToPlay.remove().getDataStream());
                 mediaPlayer.prepareAsync();
-                //TODO: handle exception properly (e.g.: handle gracefully if stream not available anymore
-            } catch (IOException e) {
-                parseAnalyticsAdapter.trackException(e);
-                e.printStackTrace();
+            } catch (IOException exception) {
+                parseAnalyticsAdapter.trackException(exception);
                 loadNextSong();
             }
         } else {

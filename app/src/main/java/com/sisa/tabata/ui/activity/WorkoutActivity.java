@@ -11,9 +11,13 @@ import com.sisa.tabata.ui.listener.workout.ResetButtonClickListener;
 import com.sisa.tabata.ui.listener.workout.ResetButtonLongClickListener;
 import com.sisa.tabata.ui.listener.workout.TimerLayoutListener;
 import com.sisa.tabata.ui.listener.workout.VolumeButtonClickListener;
+import com.sisa.tabata.ui.timer.WorkoutCountDownTimerManager;
 
+import android.content.Context;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.telephony.PhoneStateListener;
+import android.telephony.TelephonyManager;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -58,6 +62,9 @@ public class WorkoutActivity extends RoboFragmentActivity {
     private MediaPlayerService mediaPlayerService;
     @Inject
     private ParseAnalyticsAdapter parseAnalyticsAdapter;
+    @Inject
+    private WorkoutCountDownTimerManager workoutCountDownTimerManager;
+    private boolean shouldResume;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +76,7 @@ public class WorkoutActivity extends RoboFragmentActivity {
         initProgressBars();
         mediaPlayerService.reset();
         parseAnalyticsAdapter.trackAppOpenedEvent();
+        setUpCallListener();
     }
 
     @Override
@@ -77,9 +85,11 @@ public class WorkoutActivity extends RoboFragmentActivity {
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-        playButtonClickListener.resetWorkout();
+    protected void onResume() {
+        super.onResume();
+        if (shouldResume) {
+            playButtonClickListener.resumeTimer();
+        }
     }
 
     private void setUpMainMenu() {
@@ -99,8 +109,32 @@ public class WorkoutActivity extends RoboFragmentActivity {
         playButtonClickListener.resetWorkout();
     }
 
+    private void setUpCallListener() {
+        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+        telephonyManager.listen(new WorkoutPhoneStateListener(), PhoneStateListener.LISTEN_CALL_STATE);
+    }
+
     public PlayButtonClickListener getPlayButtonClickListener() {
         return playButtonClickListener;
+    }
+
+    private class WorkoutPhoneStateListener extends PhoneStateListener {
+
+        @Override
+        public void onCallStateChanged(final int state, final String incomingNumber) {
+            if (isIncomingCall(state) && shouldPauseWorkout()) {
+                playButtonClickListener.pauseTimer();
+                shouldResume = true;
+            }
+        }
+
+        private boolean isIncomingCall(final int state) {
+            return TelephonyManager.CALL_STATE_RINGING == state;
+        }
+
+        private boolean shouldPauseWorkout() {
+            return workoutCountDownTimerManager.isWorkoutInProgress() && !workoutCountDownTimerManager.isPaused();
+        }
     }
 
 }
