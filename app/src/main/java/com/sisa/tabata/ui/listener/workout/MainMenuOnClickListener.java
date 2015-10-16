@@ -6,13 +6,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.google.inject.Inject;
+import com.sisa.tabata.R;
 import com.sisa.tabata.dao.loader.EditedWorkoutManager;
 import com.sisa.tabata.dao.loader.WorkoutManager;
 import com.sisa.tabata.ui.activity.MusicSelectActivity;
 import com.sisa.tabata.ui.activity.WorkoutActivity;
 import com.sisa.tabata.ui.activity.WorkoutEditActivity;
 import com.sisa.tabata.ui.activity.WorkoutLoadActivity;
+import com.sisa.tabata.ui.timer.WorkoutCountDownTimerManager;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.View;
 
@@ -34,10 +38,26 @@ public class MainMenuOnClickListener extends AbstractWorkoutActivityButtonClickL
     private WorkoutManager workoutManager;
     @Inject
     private EditedWorkoutManager editedWorkoutManager;
+    @Inject
+    private WorkoutCountDownTimerManager workoutCountDownTimerManager;
 
     @Override
     public void onClick(View view) {
         super.onClick(view);
+        if (workoutCountDownTimerManager.isWorkoutInProgress() && !workoutCountDownTimerManager.isFinished()) {
+            showConfirmationDialog(view);
+        } else {
+            startSelectedActivity(view);
+        }
+    }
+
+    private void showConfirmationDialog(final View view) {
+        new AlertDialog.Builder(view.getContext()).setTitle(R.string.workout_cancel_dialog_title).setMessage(R.string.workout_cancel_dialog_message)
+                .setIcon(android.R.drawable.ic_dialog_alert).setPositiveButton(R.string.dialog_button_yes, new AlertDialogClickListener(view))
+                .setNegativeButton(R.string.dialog_button_no, null).show();
+    }
+
+    private void startSelectedActivity(final View view) {
         WorkoutActivity workoutActivity = getCheckedActivity(view);
         String menuAction = view.getTag().toString();
         Intent activityToStart = getActivitiesMAp(workoutActivity).get(menuAction);
@@ -75,6 +95,20 @@ public class MainMenuOnClickListener extends AbstractWorkoutActivityButtonClickL
 
     private Intent createSelectMusicIntent(final WorkoutActivity workoutActivity) {
         return new Intent(workoutActivity, MusicSelectActivity.class);
+    }
+
+    private final class AlertDialogClickListener implements DialogInterface.OnClickListener {
+
+        private final View view;
+
+        private AlertDialogClickListener(final View view) {
+            this.view = view;
+        }
+
+        @Override
+        public void onClick(final DialogInterface dialog, final int which) {
+            startSelectedActivity(view);
+        }
     }
 
 }

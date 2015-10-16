@@ -7,8 +7,7 @@ import com.sisa.tabata.media.service.MediaPlayerService;
 import com.sisa.tabata.ui.domain.SerializedWorkout;
 import com.sisa.tabata.ui.progressbar.CurrentRoundProgressBar;
 import com.sisa.tabata.ui.progressbar.TotalWorkoutProgressBar;
-import com.sisa.tabata.ui.timer.CountDownTimerWithPause;
-import com.sisa.tabata.ui.timer.WorkoutCountDownTimer;
+import com.sisa.tabata.ui.timer.WorkoutCountDownTimerManager;
 
 import android.view.View;
 import android.widget.ImageButton;
@@ -32,19 +31,19 @@ public class PlayButtonClickListener extends AbstractWorkoutActivityButtonClickL
     private WorkoutManager workoutManager;
     @Inject
     private MediaPlayerService mediaPlayerService;
+    @Inject
+    private WorkoutCountDownTimerManager workoutCountDownTimerManager;
     @InjectView(R.id.playButton)
     private ImageButton playButton;
-
-    private CountDownTimerWithPause workoutCountDownTimer;
 
     /**
      * Resets the workout.
      */
     public void resetWorkout() {
-        if (workoutCountDownTimer != null) {
+        if (workoutCountDownTimerManager.isTimerSet()) {
             pauseTimer();
-            workoutCountDownTimer.setFinished(true);
-            workoutCountDownTimer = null;
+            workoutCountDownTimerManager.setFinished();
+            workoutCountDownTimerManager.unloadWorkoutCountDownTimer();
         }
         checkCreateTimer();
     }
@@ -58,21 +57,20 @@ public class PlayButtonClickListener extends AbstractWorkoutActivityButtonClickL
     }
 
     private void checkFinished() {
-        if (workoutCountDownTimer != null && workoutCountDownTimer.isFinished()) {
-            workoutCountDownTimer = null;
+        if (workoutCountDownTimerManager.isTimerSet() && workoutCountDownTimerManager.isFinished()) {
+            workoutCountDownTimerManager.unloadWorkoutCountDownTimer();
         }
     }
 
     private void checkCreateTimer() {
-        if (workoutCountDownTimer == null) {
+        if (!workoutCountDownTimerManager.isTimerSet()) {
             SerializedWorkout serializedWorkout = workoutManager.getLoadedSerializedWorkout();
-            workoutCountDownTimer = new WorkoutCountDownTimer(serializedWorkout, currentRoundProgressBar, totalWorkoutProgressBar, playButton)
-                    .create();
+            workoutCountDownTimerManager.createWorkoutCountDownTimer(serializedWorkout, currentRoundProgressBar, totalWorkoutProgressBar, playButton);
         }
     }
 
     private void pauseResumeTimer() {
-        if (workoutCountDownTimer.isPaused()) {
+        if (workoutCountDownTimerManager.isPaused()) {
             resumeTimer();
         } else {
             pauseTimer();
@@ -84,7 +82,7 @@ public class PlayButtonClickListener extends AbstractWorkoutActivityButtonClickL
         playButton.setImageResource(android.R.drawable.ic_media_pause);
         playButton.setBackgroundResource(R.drawable.bg_pause_button);
         playButton.setKeepScreenOn(true);
-        workoutCountDownTimer.resume();
+        workoutCountDownTimerManager.resume();
     }
 
     private void pauseTimer() {
@@ -92,7 +90,7 @@ public class PlayButtonClickListener extends AbstractWorkoutActivityButtonClickL
         playButton.setImageResource(android.R.drawable.ic_media_play);
         playButton.setBackgroundResource(R.drawable.bg_play_button);
         playButton.setKeepScreenOn(false);
-        workoutCountDownTimer.pause();
+        workoutCountDownTimerManager.pause();
     }
 
 }
