@@ -1,23 +1,21 @@
 package com.sisa.tabata.ui.activity;
 
-import java.util.Arrays;
-
+import android.os.Bundle;
+import android.util.Pair;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import com.google.inject.Inject;
 import com.sisa.tabata.R;
 import com.sisa.tabata.media.dao.loader.AudioStoreManager;
 import com.sisa.tabata.media.dao.loader.SelectedMusicManager;
+import com.sisa.tabata.media.scanner.MediaScanner;
 import com.sisa.tabata.ui.listener.music.MusicSelectActionButtonClickListener;
 import com.sisa.tabata.ui.listener.music.MusicSelectHeaderButtonClickListener;
 import com.sisa.tabata.ui.provider.music.AlbumListTextViewsProvider;
 import com.sisa.tabata.ui.provider.music.ArtistListTextViewsProvider;
 import com.sisa.tabata.ui.provider.music.PlaylistTextViewsProvider;
 import com.sisa.tabata.ui.provider.music.SongsListTextViewsProvider;
-
-import android.os.Bundle;
-import android.util.Pair;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-
+import java.util.Arrays;
 import roboguice.inject.InjectView;
 
 /**
@@ -68,6 +66,8 @@ public class MusicSelectActivity extends BaseActivity {
     private AudioStoreManager audioStoreManager;
     @Inject
     private SelectedMusicManager selectedMusicManager;
+    @Inject
+    private MediaScanner mediaScanner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +82,12 @@ public class MusicSelectActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         cancelButton.performClick();
+    }
+
+    @Override
+    protected void onPause() {
+        mediaScanner.setReLaunchActivity(false);
+        super.onPause();
     }
 
     private void setUpAudioManagers() {
