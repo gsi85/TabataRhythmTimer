@@ -2,6 +2,8 @@ package com.sisa.tabata.ui.listener.workout;
 
 import static com.sisa.tabata.validation.Assert.isInstanceOf;
 
+import com.google.inject.Inject;
+import com.sisa.tabata.media.service.MediaPlayerService;
 import com.sisa.tabata.ui.activity.WorkoutActivity;
 
 import android.view.View;
@@ -16,10 +18,14 @@ import roboguice.inject.ContextSingleton;
 @ContextSingleton
 public class ResetButtonLongClickListener extends AbstractWorkoutActivityButtonClickListener implements View.OnLongClickListener {
 
+    @Inject
+    private MediaPlayerService mediaPlayerService;
+
     @Override
     public boolean onLongClick(View view) {
         super.onClick(view);
         getCheckedPlayButtonListener(view).resetWorkout();
+        mediaPlayerService.reset();
         return true;
     }
 
