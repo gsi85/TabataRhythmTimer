@@ -9,6 +9,7 @@ import com.google.inject.Inject;
 import com.sisa.tabata.R;
 import com.sisa.tabata.dao.loader.EditedWorkoutManager;
 import com.sisa.tabata.dao.loader.WorkoutManager;
+import com.sisa.tabata.media.service.MediaPlayerService;
 import com.sisa.tabata.ui.activity.MusicSelectActivity;
 import com.sisa.tabata.ui.activity.WorkoutActivity;
 import com.sisa.tabata.ui.activity.WorkoutEditActivity;
@@ -40,6 +41,8 @@ public class MainMenuOnClickListener extends AbstractWorkoutActivityButtonClickL
     private EditedWorkoutManager editedWorkoutManager;
     @Inject
     private WorkoutCountDownTimerManager workoutCountDownTimerManager;
+    @Inject
+    private MediaPlayerService mediaPlayerService;
 
     @Override
     public void onClick(View view) {
@@ -66,6 +69,8 @@ public class MainMenuOnClickListener extends AbstractWorkoutActivityButtonClickL
         String menuAction = view.getTag().toString();
         Intent activityToStart = getActivitiesMAp(workoutActivity).get(menuAction);
         if (activityToStart != null) {
+            workoutCountDownTimerManager.pause();
+            mediaPlayerService.pause();
             editedWorkoutManager.setEditedWorkout(activityToStart.getIntExtra(WORKOUT_ID_NAME, NEW_WORKOUT_ID));
             workoutActivity.startActivity(activityToStart);
             workoutActivity.finish();
