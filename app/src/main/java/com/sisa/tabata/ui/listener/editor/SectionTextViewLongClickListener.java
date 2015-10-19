@@ -35,7 +35,7 @@ public class SectionTextViewLongClickListener implements View.OnLongClickListene
     }
 
     private WorkoutEditActivity getCheckedContext(final View view) {
-        isInstanceOf(WorkoutEditActivity.class, view.getContentDescription(), "View context is not a WorkoutEditActivity");
+        isInstanceOf(WorkoutEditActivity.class, view.getContext(), "View context is not a WorkoutEditActivity");
         return (WorkoutEditActivity) view.getContext();
     }
 
