@@ -16,6 +16,8 @@ import com.sisa.tabata.domain.WorkoutSection;
 @Singleton
 public class WorkoutSectionNumberPickersValueProvider {
 
+    private static final int MINIMUM_ROUND_COUNT = 1;
+
     /**
      * Provides number picker values.
      *
@@ -25,7 +27,7 @@ public class WorkoutSectionNumberPickersValueProvider {
     public Map<Integer, Integer> getNumberPickerValues(WorkoutSection workoutSection) {
         Map<Integer, Integer> numberPickerValueMap = new HashMap<>();
 
-        numberPickerValueMap.put(R.id.roundCountPicker, workoutSection.getRounds());
+        numberPickerValueMap.put(R.id.roundCountPicker, Math.max(workoutSection.getRounds(), MINIMUM_ROUND_COUNT));
 
         numberPickerValueMap.put(R.id.warmUpMinutePicker, getMinutes(workoutSection.getWarmUp()));
         numberPickerValueMap.put(R.id.warmUpSecondPicker, getRemainingSeconds(workoutSection.getWarmUp()));

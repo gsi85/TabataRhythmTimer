@@ -1,5 +1,8 @@
 package com.sisa.tabata.workout.transformer;
 
+import static com.sisa.tabata.validation.Validation.empty;
+import static com.sisa.tabata.validation.Validation.notEmpty;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,10 +50,11 @@ public class SerializedWorkoutTransformer {
         List<SerializedWorkoutSection> serializedWorkoutSections = new ArrayList<>();
         for (WorkoutSection workoutSection : workout.getWorkoutSections()) {
             sectionCount++;
-            serializedWorkoutSections.add(getWarmUpSection(sectionCount, workoutSection));
+            addNotNullSection(serializedWorkoutSections, getWarmUpSection(sectionCount, workoutSection));
             serializedWorkoutSections.addAll(getWorkSections(sectionCount, workoutSection));
-            serializedWorkoutSections.add(getCoolDownSection(sectionCount, workoutSection));
+            addNotNullSection(serializedWorkoutSections, getCoolDownSection(sectionCount, workoutSection));
         }
+        addFailSafeSection(serializedWorkoutSections);
         serializedWorkout.setSectionCount(sectionCount);
         serializedWorkout.setWorkoutSections(serializedWorkoutSections);
         serializedWorkout.setWorkoutDuration(totalDurationSecs);
@@ -65,15 +69,29 @@ public class SerializedWorkoutTransformer {
         long workDuration = workoutSection.getWork();
         long restDuration = workoutSection.getRest();
         for (int i = 1; i <= workoutSection.getRounds(); i++) {
-            serializedWorkSections.add(buildWorkoutSection(sectionCount, i, workoutSection.getRounds(), workDuration, WorkoutType.WORK));
-            serializedWorkSections.add(buildWorkoutSection(sectionCount, i, workoutSection.getRounds(), restDuration, WorkoutType.REST));
+            addNotNullSection(serializedWorkSections,
+                    buildWorkoutSection(sectionCount, i, workoutSection.getRounds(), workDuration, WorkoutType.WORK));
+            addNotNullSection(serializedWorkSections,
+                    buildWorkoutSection(sectionCount, i, workoutSection.getRounds(), restDuration, WorkoutType.REST));
         }
         return serializedWorkSections;
+    }
+
+    private void addNotNullSection(final List<SerializedWorkoutSection> serializedWorkoutSections, final SerializedWorkoutSection section) {
+        if (notEmpty(section) && section.getEndTime() - section.getStartTime() > 0) {
+            serializedWorkoutSections.add(section);
+        }
     }
 
     private SerializedWorkoutSection getCoolDownSection(int sectionCount, WorkoutSection workoutSection) {
         return buildWorkoutSection(sectionCount, workoutSection.getRounds(), workoutSection.getRounds(), workoutSection.getCoolDown(),
                 WorkoutType.COOL_DOWN);
+    }
+
+    private void addFailSafeSection(final List<SerializedWorkoutSection> serializedWorkoutSections) {
+        if (empty(serializedWorkoutSections)) {
+            serializedWorkoutSections.add(buildWorkoutSection(0, 0, 0, 0, WorkoutType.FINISHED));
+        }
     }
 
     private SerializedWorkoutSection buildWorkoutSection(int sectionCount, int roundCount, int totalRoundsInSection, long duration,

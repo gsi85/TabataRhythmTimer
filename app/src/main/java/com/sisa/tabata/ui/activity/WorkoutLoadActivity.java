@@ -9,6 +9,8 @@ import com.sisa.tabata.ui.timer.NotificationDisplayTimer;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -25,6 +27,8 @@ public class WorkoutLoadActivity extends BaseActivity {
     private LinearLayout existingWorkoutLayout;
     @InjectView(R.id.workoutLoadNotificationView)
     private TextView workoutLoadNotificationView;
+    @InjectView(R.id.cancelLoadButton)
+    private ImageButton cancelButton;
 
     @Inject
     private WorkoutTextViewClickListener workoutTextViewClickListener;
@@ -39,6 +43,7 @@ public class WorkoutLoadActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout_load);
         createWorkoutList();
+        setUpCancelButton();
     }
 
     @Override
@@ -57,5 +62,15 @@ public class WorkoutLoadActivity extends BaseActivity {
 
     private void createWorkoutList() {
         workoutListTextViewProvider.createWorkoutTextViews(this, getApplicationContext(), existingWorkoutLayout);
+    }
+
+    private void setUpCancelButton() {
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(final View v) {
+                onBackPressed();
+            }
+        });
     }
 }

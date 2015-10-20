@@ -12,7 +12,7 @@
         android:layout_height="45dp"
         android:layout_alignParentTop="true"
         android:layout_margin="0dp"
-        android:background="#CCC"
+        android:background="@android:color/holo_blue_dark"
         android:baselineAligned="false"
         android:gravity="left"
         android:orientation="horizontal"
@@ -35,12 +35,44 @@
         </FrameLayout>
     </LinearLayout>
 
+    <!-- Footer -->
+    <LinearLayout
+            android:id="@+id/footerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_alignParentBottom="true"
+            android:baselineAligned="false"
+            android:gravity="left"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+        <!-- Cancel button -->
+        <FrameLayout
+                android:id="@+id/cancelFrame"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                android:layout_margin="1dp"
+                android:layout_weight="1">
+
+                <ImageButton
+                        android:id="@+id/cancelLoadButton"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="center"
+                        android:src="@android:drawable/ic_menu_close_clear_cancel"
+                        android:background="@drawable/bg_pause_button" />
+        </FrameLayout>
+
+    </LinearLayout>
+
     <!-- Main content -->
     <RelativeLayout
         android:id="@+id/mainContentLayout"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@id/headerLayout"
+        android:layout_above="@id/footerLayout"
         android:gravity="top|center">
 
         <LinearLayout

@@ -7,6 +7,7 @@ import com.sisa.tabata.media.service.MediaPlayerService;
 import com.sisa.tabata.ui.domain.SerializedWorkoutSection;
 import com.sisa.tabata.ui.domain.WorkoutType;
 import com.sisa.tabata.ui.drawable.CircularProgressBarDrawable;
+import com.sisa.tabata.ui.timer.NotificationDisplayTimer;
 import com.sisa.tabata.util.TimeFormatter;
 
 import android.widget.TextView;
@@ -27,13 +28,14 @@ public class CurrentRoundProgressBar {
     private static final int DEFAULT_FIRST_BEEP_IN_MILLIS = 3000;
     private static final int BEEP_INTERVAL_MILLIS = 1000;
     private static final int LAST_BEEP_IN_MILLIS = 40;
+    private static final int NOTIFICATION_TIME_IN_MILLIS = 4000;
 
     @InjectView(R.id.currentBlockCounter)
     private TextView currentBlockCounter;
     @InjectView(R.id.roundCounter)
     private TextView roundCounter;
-    @InjectView(R.id.sectionCounter)
-    private TextView sectionCounter;
+    @InjectView(R.id.workoutNotificationView)
+    private TextView workoutNotificationView;
     @InjectView(R.id.workoutTypeText)
     private TextView workoutTypeText;
 
@@ -44,6 +46,7 @@ public class CurrentRoundProgressBar {
     @Inject
     private MediaPlayerService mediaPlayerService;
     private int nextBeepNotification;
+    private int notifiedSection;
 
     /**
      * Initializes the progress bar.
@@ -58,11 +61,19 @@ public class CurrentRoundProgressBar {
         int totalRoundsInSection = serializedWorkoutSection.getTotalRoundsInSection();
         circularProgressBar.setMaxValue(maxMilliSeconds);
         circularProgressBar.setBackgroundPaintColor(serializedWorkoutSection.getWorkoutType().getBackGroundColor());
-        sectionCounter.setText(String.format(SECTION_TEXT_PATTERN, currentSection, numberOfTotalSections));
+        checkShowSectionNotification(numberOfTotalSections, currentSection);
         roundCounter.setText(String.format(ROUND_TEXT_PATTERN, currentRound, totalRoundsInSection));
         workoutTypeText.setText(serializedWorkoutSection.getWorkoutType().getDisplayText());
         nextBeepNotification = DEFAULT_FIRST_BEEP_IN_MILLIS;
         update(maxMilliSeconds);
+    }
+
+    private void checkShowSectionNotification(final int numberOfTotalSections, final int currentSection) {
+        if (currentSection != notifiedSection) {
+            String sectionCounterString = String.format(SECTION_TEXT_PATTERN, currentSection, numberOfTotalSections);
+            new NotificationDisplayTimer(workoutNotificationView, sectionCounterString, NOTIFICATION_TIME_IN_MILLIS).start();
+            notifiedSection = currentSection;
+        }
     }
 
     /**
@@ -104,6 +115,7 @@ public class CurrentRoundProgressBar {
         if (workoutOver) {
             effectPlayerService.playWorkoutOver();
             mediaPlayerService.pause();
+            notifiedSection = 0;
         } else {
             effectPlayerService.playLongBeep();
             mediaPlayerService.louden();
