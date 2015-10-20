@@ -58,6 +58,7 @@ public class WorkoutCountDownTimer extends CountDownTimerWithPause {
         currentRoundProgressBar.setFinishedState(true);
         playButton.setImageResource(android.R.drawable.ic_media_play);
         playButton.setBackgroundResource(R.drawable.bg_play_button);
+        playButton.setKeepScreenOn(false);
         setFinished(true);
     }
 

@@ -30,7 +30,7 @@
     <string name="form_section_cool_down_label">COOL DOWN</string>
     <string name="form_section_default_time_value">00:00</string>
     <string name="form_section_default_long_time_value">00:00:00</string>
-    <string name="form_section_default_round_value">0</string>
+    <string name="form_section_default_round_value">1</string>
     <string name="form_section_picker_divider">:</string>
 
     <string name="load_workout_header_label">LOAD WORKOUT</string>
