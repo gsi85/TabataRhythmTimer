@@ -60,9 +60,8 @@ public class MainMenuOnClickListener extends AbstractWorkoutActivityButtonClickL
 
     private void showConfirmationDialog(final View view) {
         new AlertDialog.Builder(view.getContext(), AlertDialog.THEME_HOLO_DARK).setTitle(R.string.workout_cancel_dialog_title)
-                .setMessage(R.string.workout_cancel_dialog_message).setIcon(android.R.drawable.ic_dialog_alert)
-                .setPositiveButton(R.string.dialog_button_yes, new AlertDialogClickListener(view)).setNegativeButton(R.string.dialog_button_no, null)
-                .show();
+                .setMessage(R.string.workout_cancel_dialog_message).setPositiveButton(R.string.dialog_button_yes, new AlertDialogClickListener(view))
+                .setNegativeButton(R.string.dialog_button_no, null).show();
     }
 
     private void startSelectedActivity(final View view) {

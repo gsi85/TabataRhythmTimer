@@ -232,7 +232,7 @@
                 android:layout_height="wrap_content"
                 android:background="#000"
                 android:max="1000"
-                android:progress="700" />
+                android:progress="1000" />
 
         </LinearLayout>
 

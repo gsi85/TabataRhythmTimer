@@ -11,6 +11,7 @@
     <string name="main_default_workout_type">WORK</string>
     <string name="main_default_round_counter_text">ROUND 1 of 1</string>
     <string name="main_default_total_remaining_text">00:00:00</string>
+    <string name="main_no_time_set">No time set</string>
 
     <string name="form_workout_name_label">WORKOUT NAME</string>
     <string name="form_workout_description_label">DESCRIPTION</string>
@@ -75,7 +76,7 @@
         have been removed from your playlist.
     </string>
 
-    <string name="workout_cancel_dialog_title">Warning</string>
+    <string name="workout_cancel_dialog_title">Abort workout</string>
     <string name="workout_cancel_dialog_message">This will cancel your current workout session. Are you sure you want to continue?</string>
 
 </resources>

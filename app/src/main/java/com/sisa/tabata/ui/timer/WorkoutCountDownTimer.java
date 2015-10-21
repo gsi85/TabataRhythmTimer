@@ -59,6 +59,7 @@ public class WorkoutCountDownTimer extends CountDownTimerWithPause {
         playButton.setImageResource(android.R.drawable.ic_media_play);
         playButton.setBackgroundResource(R.drawable.bg_play_button);
         playButton.setKeepScreenOn(false);
+        totalWorkoutProgressBar.update(0);
         setFinished(true);
     }
 
@@ -103,4 +104,8 @@ public class WorkoutCountDownTimer extends CountDownTimerWithPause {
         currentRoundProgressBar.setUp(maxMilliSeconds, serializedWorkout.getSectionCount(), currentSection);
     }
 
+    @Override
+    public int getSectionCounter() {
+        return sectionCounter + 1;
+    }
 }
