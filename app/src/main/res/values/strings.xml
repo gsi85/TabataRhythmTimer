@@ -76,7 +76,7 @@
         have been removed from your playlist.
     </string>
 
-    <string name="workout_cancel_dialog_title">Warning</string>
+    <string name="workout_cancel_dialog_title">Abort workout</string>
     <string name="workout_cancel_dialog_message">This will cancel your current workout session. Are you sure you want to continue?</string>
 
 </resources>
