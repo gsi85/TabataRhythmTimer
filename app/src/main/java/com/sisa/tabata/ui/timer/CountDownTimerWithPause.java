@@ -244,4 +244,7 @@ public abstract class CountDownTimerWithPause {
     public void setFinished(boolean finished) {
         this.finished = finished;
     }
+
+    public abstract int getSectionCounter();
+
 }

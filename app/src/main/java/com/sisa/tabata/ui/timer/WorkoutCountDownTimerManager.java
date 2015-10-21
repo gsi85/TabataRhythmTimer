@@ -70,6 +70,15 @@ public class WorkoutCountDownTimerManager {
         workoutCountDownTimer.setFinished(true);
     }
 
+    /**
+     * Returns the current section count.
+     *
+     * @return section count
+     */
+    public int getSectionCount() {
+        return workoutCountDownTimer.getSectionCounter();
+    }
+
     public boolean isPaused() {
         return workoutCountDownTimer.isPaused();
     }
