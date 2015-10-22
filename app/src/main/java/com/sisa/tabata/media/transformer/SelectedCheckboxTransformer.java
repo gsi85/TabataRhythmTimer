@@ -78,12 +78,9 @@ public class SelectedCheckboxTransformer {
 
     private Song getPlaylistAsSong(final AudioStore audioStore, final String checkBoxKeyValue) {
         Playlist playlist = audioStore.getPlaylistById(Long.valueOf(checkBoxKeyValue));
-        return new Song.Builder()
-                .withTrackid(playlist.getPlaylistId())
-                .withAlbum(applicationContextProvider.getStringResource(R.string.music_select_playlist))
-                .withArtist(playlist.getName())
-                .withDataStream(playlist.getDataStream())
-                .build();
+        return new Song.Builder().withTrackid(playlist.getPlaylistId())
+                .withAlbum(applicationContextProvider.getStringResource(R.string.music_select_playlist)).withArtist(playlist.getName())
+                .withDataStream(playlist.getDataStream()).build();
     }
 
     private boolean isSong(final String checkBoxCategory) {

@@ -53,11 +53,9 @@ public class PlaylistMediaStoreDao {
     }
 
     private Playlist buildPlaylist(final Cursor cursor) {
-        return new Playlist.Builder()
-                .withPlaylistId(cursor.getLong(PLAYLIST_ID_COLUMN_INDEX))
+        return new Playlist.Builder().withPlaylistId(cursor.getLong(PLAYLIST_ID_COLUMN_INDEX))
                 .withName(getNullSafeText(cursor.getString(NAME_COLUMN_INDEX), UNKNOWN_PLAYLIST))
-                .withDataStream(cursor.getString(DATA_STREAM_COLUMN_INDEX))
-                .build();
+                .withDataStream(cursor.getString(DATA_STREAM_COLUMN_INDEX)).build();
     }
 
     private String getNullSafeText(final String text, final String defaultText) {

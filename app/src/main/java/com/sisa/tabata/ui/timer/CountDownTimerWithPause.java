@@ -18,7 +18,6 @@ package com.sisa.tabata.ui.timer;
 
 // Adapted from Android's CountDownTimer class
 
-
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
@@ -157,7 +156,8 @@ public abstract class CountDownTimerWithPause {
             millisUntilFinished = mPauseTimeRemaining;
         } else {
             millisUntilFinished = mStopTimeInFuture - SystemClock.elapsedRealtime();
-            if (millisUntilFinished < 0) millisUntilFinished = 0;
+            if (millisUntilFinished < 0)
+                millisUntilFinished = 0;
         }
         return millisUntilFinished;
     }
@@ -201,9 +201,7 @@ public abstract class CountDownTimerWithPause {
      */
     public abstract void onFinish();
 
-
     private static final int MSG = 1;
-
 
     // handles counting down
     private Handler mHandler = new Handler() {
@@ -229,7 +227,8 @@ public abstract class CountDownTimerWithPause {
 
                     // special case: user's onTick took more than mCountdownInterval to
                     // complete, skip to next interval
-                    while (delay < 0) delay += mCountdownInterval;
+                    while (delay < 0)
+                        delay += mCountdownInterval;
 
                     sendMessageDelayed(obtainMessage(MSG), delay);
                 }

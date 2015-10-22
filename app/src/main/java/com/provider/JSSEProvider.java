@@ -21,12 +21,16 @@ import java.security.Provider;
  */
 
 /**
- * .
+ * JSSE Provider.
+ *
  * @author Alexander Y. Kleymenov
  * @version $Revision$
  */
 public final class JSSEProvider extends Provider {
 
+    /**
+     * DI constructor.
+     */
     public JSSEProvider() {
         super("HarmonyJSSE", 1.0, "Harmony JSSE Provider");
         AccessController.doPrivileged(new java.security.PrivilegedAction<Void>() {

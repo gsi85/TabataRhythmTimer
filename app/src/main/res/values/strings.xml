@@ -79,5 +79,8 @@
     <string name="workout_cancel_dialog_title">Abort workout</string>
     <string name="workout_cancel_dialog_message">This will cancel your current workout session. Are you sure you want to continue?</string>
 
+    <string name="about_version">Version:</string>
+    <string name="about_contact">Any improvement ideas, identified bugs, remarks are welcome via e-mail to: tabatarhythmtimer@gmail.com</string>
+    <string name="about_copy_right_pattern">Created by: ©%d Laszlo Sisa</string>
 </resources>
 

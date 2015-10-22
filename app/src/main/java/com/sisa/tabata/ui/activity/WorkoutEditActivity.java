@@ -1,10 +1,5 @@
 package com.sisa.tabata.ui.activity;
 
-import android.os.Bundle;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import com.google.inject.Inject;
 import com.sisa.tabata.R;
 import com.sisa.tabata.dao.loader.EditedWorkoutManager;
@@ -17,6 +12,13 @@ import com.sisa.tabata.ui.provider.WorkoutTotalTimeProvider;
 import com.sisa.tabata.ui.provider.editor.WorkoutSectionsTextViewProvider;
 import com.sisa.tabata.ui.provider.editor.WorkoutSectionsUpdateProvider;
 import com.sisa.tabata.ui.timer.NotificationDisplayTimer;
+
+import android.os.Bundle;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import roboguice.inject.InjectView;
 
 /**

@@ -42,7 +42,7 @@ public abstract class AbstractTextViewProvider {
                 LinearLayout.LayoutParams.WRAP_CONTENT);
         layoutParams.setMargins(margin, margin, margin, margin);
         sectionTextView.setWidth(activity.getWindowManager().getDefaultDisplay().getWidth());
-        sectionTextView.setHeight(getDp(context, TEXT_VIEW_HEIGHT_DP));
+        sectionTextView.setMinHeight(getDp(context, TEXT_VIEW_HEIGHT_DP));
         sectionTextView.setBackgroundResource(R.drawable.bg_section_list);
         sectionTextView.setLayoutParams(layoutParams);
         sectionTextView.setTextColor(Color.WHITE);
