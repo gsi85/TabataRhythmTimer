@@ -43,6 +43,8 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:adjustViewBounds="false"
+                android:background="@drawable/bg_header_buttons"
+                android:clickable="true"
                 android:src="@drawable/ic_launcher" />
 
             <Spinner

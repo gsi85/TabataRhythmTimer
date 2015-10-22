@@ -50,4 +50,11 @@
             <tr><td valign=\'top\' style=\'border: 1px solid #CCC;\'><strong>%s</strong></td><td style=\'border: 1px solid #CCC;\'>%s</td></tr>
         ]]>
     </string>
+    <string formatted="false" name="about_description">
+        <![CDATA[
+        Tabata Rhythm Timer is an interval timer for all training methods applying
+        intervals or other timed repetition such as<br>&nbsp;&nbsp;&nbsp;&nbsp;&#x2713; Classic Tabata<br>&nbsp;&nbsp;&nbsp;&nbsp;&#x2713; HIIT<br>&nbsp;&nbsp;&nbsp;&nbsp;&#x2713; Crossfit<br>&nbsp;&nbsp;&nbsp;&nbsp;&#x2713; kettlebells<br>&nbsp;&nbsp;&nbsp;&nbsp;&#x2713; pyramid training<br>&nbsp;&nbsp;&nbsp;&nbsp;&#x2713; apnea
+        training and so on…
+        ]]>
+    </string>
 </resources>
