@@ -36,7 +36,8 @@ public class SpinnerArrayAdapterFactory {
     public SpinnerArrayAdapter create(final Context context) {
         CharSequence titleText = workoutManager.getLoadedWorkout().getName();
         String[] menuItems = applicationContextProvider.getContext().getResources().getStringArray(R.array.main_menu_items);
-        SpinnerArrayAdapter<String> adapter = new SpinnerArrayAdapter<>(context, menuItems, titleText, mainMenuOnClickListener, spinnerTextOnClickListener);
+        SpinnerArrayAdapter<String> adapter = new SpinnerArrayAdapter<>(context, menuItems, titleText, mainMenuOnClickListener,
+                spinnerTextOnClickListener);
         adapter.setDropDownViewResource(R.layout.spinner_item_layout);
         return adapter;
     }

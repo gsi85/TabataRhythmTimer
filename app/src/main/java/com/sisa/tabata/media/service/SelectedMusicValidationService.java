@@ -29,7 +29,7 @@ public class SelectedMusicValidationService extends AsyncTask<Void, Void, Boolea
      * @param applicationContextProvider {@link ApplicationContextProvider}
      */
     public SelectedMusicValidationService(final SelectedMusicService selectedMusicService,
-                                          final ApplicationContextProvider applicationContextProvider) {
+            final ApplicationContextProvider applicationContextProvider) {
         this.applicationContextProvider = applicationContextProvider;
         this.selectedMusicService = selectedMusicService;
     }

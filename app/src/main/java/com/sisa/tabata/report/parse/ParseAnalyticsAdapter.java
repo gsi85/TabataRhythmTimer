@@ -37,7 +37,7 @@ public class ParseAnalyticsAdapter {
     }
 
     /**
-     * Track application closed event;
+     * Track application closed event.
      */
     public void trackAppClosedEvent() {
         trackEvent(TrackingEvents.APP_CLOSED, null);

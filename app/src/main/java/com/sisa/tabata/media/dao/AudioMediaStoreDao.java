@@ -58,14 +58,10 @@ public class AudioMediaStoreDao {
     }
 
     private Song buildSong(final Cursor cursor) {
-        return new Song.Builder()
-                .withTrackid(cursor.getLong(TRACK_ID_COLUMN_INDEX))
-                .withTracknumber(cursor.getInt(TRACK_NUMBER_COLUMN_INDEX))
-                .withTitle(cursor.getString(TITLE_COLUMN_INDEX))
-                .withArtist(getNullSafeText(cursor.getString(ARTIST_COLUMN_INDEX), UNKNOWN_ARTIST))
+        return new Song.Builder().withTrackid(cursor.getLong(TRACK_ID_COLUMN_INDEX)).withTracknumber(cursor.getInt(TRACK_NUMBER_COLUMN_INDEX))
+                .withTitle(cursor.getString(TITLE_COLUMN_INDEX)).withArtist(getNullSafeText(cursor.getString(ARTIST_COLUMN_INDEX), UNKNOWN_ARTIST))
                 .withAlbum(getNullSafeText(cursor.getString(ALBUM_COLUMN_INDEX), UNKNOWN_ALBUM))
-                .withDataStream(cursor.getString(DATA_STREAM_COLUMN_INDEX))
-                .build();
+                .withDataStream(cursor.getString(DATA_STREAM_COLUMN_INDEX)).build();
     }
 
     private String getNullSafeText(final String text, final String defaultText) {

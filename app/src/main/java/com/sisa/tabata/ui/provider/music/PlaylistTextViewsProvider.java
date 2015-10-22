@@ -29,7 +29,6 @@ public class PlaylistTextViewsProvider extends AbstractMusicSelectTextViewProvid
     @Inject
     private AudioStoreManager audioStoreManager;
 
-
     /**
      * Creates playlist items text views.
      *

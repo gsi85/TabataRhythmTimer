@@ -1,18 +1,19 @@
 package com.sisa.tabata.media.scanner;
 
-import static android.media.MediaScannerConnection.OnScanCompletedListener;
-import static android.media.MediaScannerConnection.scanFile;
 import static com.sisa.tabata.validation.Assert.isInstanceOf;
 
+import static android.media.MediaScannerConnection.OnScanCompletedListener;
+import static android.media.MediaScannerConnection.scanFile;
+
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import com.google.inject.Singleton;
+import com.sisa.tabata.ui.activity.MusicSelectActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
-
-import com.google.inject.Singleton;
-import com.sisa.tabata.ui.activity.MusicSelectActivity;
 
 /**
  * Scanner for refreshing media store's meta data.

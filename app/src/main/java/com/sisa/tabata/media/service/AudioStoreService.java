@@ -29,9 +29,7 @@ public class AudioStoreService {
      * @return {@link AudioStore}
      */
     public AudioStore getAudioStoreFromMediaStore(final Context context) {
-        return new AudioStore.Builder()
-                .addSongs(audioMediaStoreDao.getSongs(context))
-                .withPlaylists(playlistMediaStoreDao.getPlaylists(context))
+        return new AudioStore.Builder().addSongs(audioMediaStoreDao.getSongs(context)).withPlaylists(playlistMediaStoreDao.getPlaylists(context))
                 .build();
     }
 

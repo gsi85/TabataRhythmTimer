@@ -44,7 +44,8 @@ public class DeleteWorkoutSectionDialog {
         };
     }
 
-    private DialogInterface.OnClickListener getPositiveButtonListener(Workout workout, View selectedSectionView, LinearLayout existingSectionsLayout) {
+    private DialogInterface.OnClickListener getPositiveButtonListener(Workout workout, View selectedSectionView,
+            LinearLayout existingSectionsLayout) {
         return new DeleteWorkoutSectionPositiveButtonListener(workout, selectedSectionView, existingSectionsLayout);
     }
 

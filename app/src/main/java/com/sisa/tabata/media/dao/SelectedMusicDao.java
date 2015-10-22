@@ -112,13 +112,8 @@ public class SelectedMusicDao extends SQLiteAssetHelper {
     }
 
     private Song buildSong(final Cursor cursor) {
-        return new Song.Builder()
-                .withTrackid(cursor.getLong(TRACK_ID_COLUMN_INDEX))
-                .withTracknumber(cursor.getInt(TRACK_NUMBER_COLUMN_INDEX))
-                .withTitle(cursor.getString(TITLE_COLUMN_INDEX))
-                .withArtist(cursor.getString(ARTIST_COLUMN_INDEX))
-                .withAlbum(cursor.getString(ALBUM_COLUMN_INDEX))
-                .withDataStream(cursor.getString(DATA_STREAM_COLUMN_INDEX))
-                .build();
+        return new Song.Builder().withTrackid(cursor.getLong(TRACK_ID_COLUMN_INDEX)).withTracknumber(cursor.getInt(TRACK_NUMBER_COLUMN_INDEX))
+                .withTitle(cursor.getString(TITLE_COLUMN_INDEX)).withArtist(cursor.getString(ARTIST_COLUMN_INDEX))
+                .withAlbum(cursor.getString(ALBUM_COLUMN_INDEX)).withDataStream(cursor.getString(DATA_STREAM_COLUMN_INDEX)).build();
     }
 }

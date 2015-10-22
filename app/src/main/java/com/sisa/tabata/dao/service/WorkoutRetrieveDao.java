@@ -25,6 +25,16 @@ import android.database.sqlite.SQLiteQueryBuilder;
 @Singleton
 public class WorkoutRetrieveDao extends AbstractBaseDao {
 
+    private static final int ID_COLUMN_INDEX = 0;
+    private static final int NAME_COLUMN_INDEX = 1;
+    private static final int TIME_UNIT_COLUMN_INDEX = 2;
+    private static final int DESCRIPTION_COLUMN_INDEX = 3;
+    private static final int ROUNDS_COLUMN_INDEX = 1;
+    private static final int WARM_UP_COLUMN_INDEX = 2;
+    private static final int WORK_COLUMN_INDEX = 3;
+    private static final int REST_COLUMN_INDEX = 4;
+    private static final int COOL_DOWN_COLUMN_INDEX = 5;
+
     private final WorkoutFactory workoutFactory;
     private final WorkoutSectionFactory workoutSectionFactory;
 
@@ -72,11 +82,11 @@ public class WorkoutRetrieveDao extends AbstractBaseDao {
 
         while (resultCursor.moveToNext()) {
             Workout workout = workoutFactory.createWithTimeUnit(null);
-            int workoutId = resultCursor.getInt(0);
+            int workoutId = resultCursor.getInt(ID_COLUMN_INDEX);
             workout.setId(workoutId);
-            workout.setName(resultCursor.getString(1));
-            workout.setTimeUnit(TimeUnit.valueOf(resultCursor.getString(2)));
-            workout.setDescription(resultCursor.getString(3));
+            workout.setName(resultCursor.getString(NAME_COLUMN_INDEX));
+            workout.setTimeUnit(TimeUnit.valueOf(resultCursor.getString(TIME_UNIT_COLUMN_INDEX)));
+            workout.setDescription(resultCursor.getString(DESCRIPTION_COLUMN_INDEX));
             workout.setWorkoutSections(getWorkoutSectionsByWorkoutId(workoutId));
             resultWorkoutList.add(workout);
         }
@@ -92,11 +102,11 @@ public class WorkoutRetrieveDao extends AbstractBaseDao {
 
         while (resultCursor.moveToNext()) {
             WorkoutSection currentWorkoutSection = workoutSectionFactory.create();
-            currentWorkoutSection.setRounds(resultCursor.getInt(1));
-            currentWorkoutSection.setWarmUp(resultCursor.getLong(2));
-            currentWorkoutSection.setWork(resultCursor.getLong(3));
-            currentWorkoutSection.setRest(resultCursor.getLong(4));
-            currentWorkoutSection.setCoolDown(resultCursor.getLong(5));
+            currentWorkoutSection.setRounds(resultCursor.getInt(ROUNDS_COLUMN_INDEX));
+            currentWorkoutSection.setWarmUp(resultCursor.getLong(WARM_UP_COLUMN_INDEX));
+            currentWorkoutSection.setWork(resultCursor.getLong(WORK_COLUMN_INDEX));
+            currentWorkoutSection.setRest(resultCursor.getLong(REST_COLUMN_INDEX));
+            currentWorkoutSection.setCoolDown(resultCursor.getLong(COOL_DOWN_COLUMN_INDEX));
             workoutSectionList.add(currentWorkoutSection);
 
         }
