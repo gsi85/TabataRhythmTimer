@@ -57,7 +57,7 @@
 
     <style name="notificationTextView">
         <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_height">fill_parent</item>
         <item name="android:textSize">18sp</item>
         <item name="android:background">#ffcc9900</item>
         <item name="android:gravity">center</item>

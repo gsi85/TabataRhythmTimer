@@ -4,27 +4,27 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:background="#FF444444"
-              android:padding="15dp">
+              android:padding="10dp">
 
     <LinearLayout android:id="@+id/aboutVersionLayout"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:orientation="horizontal"
-                  android:layout_marginBottom="25dp">
+                  android:layout_marginBottom="13dp">
 
         <TextView android:id="@+id/aboutVersionText"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:text="@string/about_version"
-                  android:textSize="16sp"
+                  android:textSize="14sp"
                   android:textStyle="bold|italic"
-                  android:layout_marginRight="6dp"/>
+                  android:layout_marginRight="4dp"/>
 
         <TextView android:id="@+id/aboutVersionName"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:textStyle="bold|italic"
-                  android:textSize="14sp"/>
+                  android:textSize="12sp"/>
 
     </LinearLayout>
 
@@ -32,24 +32,24 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:text="@string/about_description"
-                                            android:textSize="14sp"
-                                            android:layout_marginBottom="30dp"/>
+                                            android:textSize="10sp"
+                                            android:layout_marginBottom="15dp"/>
 
     <TextView android:id="@+id/aboutContact"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:text="@string/about_contact"
-              android:textSize="14sp"
+              android:textSize="10sp"
               android:autoLink="all"
-              android:layout_marginBottom="30dp"/>
+              android:layout_marginBottom="15dp"/>
 
     <TextView android:id="@+id/aboutCopyRight"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:text="@string/about_copy_right_pattern"
-              android:textSize="14sp"
+              android:textSize="10sp"
               android:textStyle="bold"
-              android:layout_marginBottom="20dp"/>
+              android:layout_marginBottom="8dp"/>
 
     <ImageButton android:id="@+id/aboutCloseButton"
                  android:layout_width="wrap_content"

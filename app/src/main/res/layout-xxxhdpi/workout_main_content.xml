@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/mainContentLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_above="@id/footerLayout"
+                android:layout_below="@id/headerLayout"
+                android:gravity="center">
+
+    <!-- Inner header -->
+    <RelativeLayout
+            android:id="@+id/innerHeaderLayout"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_alignParentTop="true"
+            android:gravity="left">
+
+        <!-- Notification text view -->
+        <TextView
+                android:id="@+id/workoutNotificationView"
+                style="@style/notificationTextView"/>
+
+    </RelativeLayout>
+
+    <!-- Inner footer -->
+    <LinearLayout
+            android:id="@+id/innerFooterLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="#000"
+            android:gravity="left"
+            android:orientation="vertical"
+            android:paddingBottom="4dp">
+
+        <!-- Workout progress label -->
+        <LinearLayout
+                android:id="@+id/workoutProgressLabelLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+            <FrameLayout
+                    android:id="@+id/workoutProgressLabelFrame"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:background="#000">
+
+                <TextView
+                        android:id="@+id/workoutProgressLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:gravity="bottom"
+                        android:layout_marginLeft="5dp"
+                        android:text="@string/main_workout_progress"
+                        android:textColor="#EEE"
+                        android:textSize="20sp"/>
+            </FrameLayout>
+
+            <FrameLayout
+                    android:id="@+id/totalRemaininigTimeFrame"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:background="#000">
+
+                <TextView
+                        android:id="@+id/totalRemainingTimeCounter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="5dp"
+                        android:text="@string/main_default_total_remaining_text"
+                        android:textColor="#EEE"
+                        android:textSize="35sp"/>
+
+            </FrameLayout>
+        </LinearLayout>
+
+        <!-- Workout progress bar -->
+        <ProgressBar
+                android:id="@+id/workoutProgressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="#000"
+                android:max="1000"
+                android:progress="1000"/>
+
+    </LinearLayout>
+
+    <!-- Timer Layout -->
+    <RelativeLayout
+            android:id="@+id/timerLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_above="@id/innerFooterLayout"
+            android:layout_below="@id/innerHeaderLayout"
+            android:background="#000"
+            android:gravity="center">
+
+        <LinearLayout
+                android:id="@+id/timerCounterLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:orientation="vertical">
+
+            <TextView
+                    android:id="@+id/currentBlockCounter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/main_default_current_round_timer_text"
+                    android:textColor="#EEE"
+                    android:textSize="55sp"/>
+
+            <TextView
+                    android:id="@+id/workoutTypeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/main_default_workout_type"
+                    android:textColor="#EEE"
+                    android:textSize="48sp"/>
+
+            <TextView
+                    android:id="@+id/roundCounter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/main_default_round_counter_text"
+                    android:textColor="#EEE"
+                    android:textSize="30sp"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>
