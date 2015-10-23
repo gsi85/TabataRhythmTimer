@@ -1,95 +1,95 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="#000"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".WorkoutActivity">
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#000"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                tools:context=".WorkoutActivity">
 
     <!-- Header -->
     <LinearLayout
-        android:id="@+id/headerLayout"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_alignParentTop="true"
-        android:layout_margin="0dp"
-        android:background="@android:color/holo_blue_dark"
-        android:baselineAligned="false"
-        android:gravity="left"
-        android:orientation="horizontal"
-        android:paddingBottom="1dp"
-        android:weightSum="4">
+            android:id="@+id/headerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_alignParentTop="true"
+            android:layout_margin="0dp"
+            android:background="@android:color/holo_blue_dark"
+            android:baselineAligned="false"
+            android:gravity="left"
+            android:orientation="horizontal"
+            android:paddingBottom="1dp"
+            android:weightSum="4">
 
         <!-- Workout summary -->
         <RelativeLayout
-            android:id="@+id/workoutSummaryFrame"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_gravity="left|center_horizontal"
-            android:layout_marginRight="1dp"
-            android:layout_weight="3"
-            android:background="#000"
-            android:clickable="true"
-            android:focusable="false">
+                android:id="@+id/workoutSummaryFrame"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_gravity="left|center_horizontal"
+                android:layout_marginRight="1dp"
+                android:layout_weight="3"
+                android:background="#000"
+                android:clickable="true"
+                android:focusable="false">
 
             <ImageView
-                android:id="@+id/iconImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:adjustViewBounds="false"
-                android:background="@drawable/bg_header_buttons"
-                android:clickable="true"
-                android:src="@drawable/ic_launcher" />
+                    android:id="@+id/iconImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:adjustViewBounds="false"
+                    android:background="@drawable/bg_header_buttons"
+                    android:clickable="true"
+                    android:src="@drawable/ic_launcher"/>
 
             <Spinner
-                android:id="@+id/mainMenuSpinner"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_alignTop="@+id/iconImage"
-                android:layout_toEndOf="@+id/iconImage"
-                android:layout_toRightOf="@+id/iconImage"
-                android:background="@drawable/bg_spinner_menu_header"
-                android:paddingRight="30dp"
-                android:popupBackground="#000000"
-                android:spinnerMode="dropdown" />
+                    android:id="@+id/mainMenuSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_alignTop="@+id/iconImage"
+                    android:layout_toEndOf="@+id/iconImage"
+                    android:layout_toRightOf="@+id/iconImage"
+                    android:background="@drawable/bg_spinner_menu_header"
+                    android:paddingRight="30dp"
+                    android:popupBackground="#000000"
+                    android:spinnerMode="dropdown"/>
 
         </RelativeLayout>
 
         <LinearLayout
-            android:id="@+id/headerButtonLayout"
-            android:layout_width="0dp"
-            android:layout_height="fill_parent"
-            android:layout_margin="0dp"
-            android:layout_weight="1"
-            android:baselineAligned="false"
-            android:orientation="horizontal"
-            android:padding="0dp">
+                android:id="@+id/headerButtonLayout"
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_margin="0dp"
+                android:layout_weight="1"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:padding="0dp">
 
             <!-- Volume -->
             <FrameLayout
-                android:id="@+id/volumeFrame"
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center"
-                android:layout_margin="0dp"
-                android:layout_weight="1"
-                android:padding="0dp">
-
-                <ImageButton
-                    android:id="@+id/volumeButton"
-                    android:layout_width="fill_parent"
+                    android:id="@+id/volumeFrame"
+                    android:layout_width="0dp"
                     android:layout_height="fill_parent"
                     android:layout_gravity="center"
                     android:layout_margin="0dp"
-                    android:background="@drawable/bg_header_buttons"
-                    android:padding="0dp"
-                    android:src="@android:drawable/ic_lock_silent_mode_off" />
+                    android:layout_weight="1"
+                    android:padding="0dp">
+
+                <ImageButton
+                        android:id="@+id/volumeButton"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="center"
+                        android:layout_margin="0dp"
+                        android:background="@drawable/bg_header_buttons"
+                        android:padding="0dp"
+                        android:src="@android:drawable/ic_lock_silent_mode_off"/>
             </FrameLayout>
         </LinearLayout>
 
@@ -97,194 +97,55 @@
 
     <!-- Footer -->
     <LinearLayout
-        android:id="@+id/footerLayout"
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:layout_alignParentBottom="true"
-        android:baselineAligned="false"
-        android:gravity="left"
-        android:orientation="horizontal"
-        android:weightSum="2">
+            android:id="@+id/footerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_alignParentBottom="true"
+            android:baselineAligned="false"
+            android:gravity="left"
+            android:orientation="horizontal"
+            android:weightSum="2">
 
         <!-- Reset button -->
         <FrameLayout
-            android:id="@+id/resetFrame"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_gravity="center"
-            android:layout_margin="1dp"
-            android:layout_weight="1">
-
-            <ImageButton
-                android:id="@+id/resetButton"
+                android:id="@+id/resetFrame"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center"
-                android:background="@drawable/bg_reset_button"
-                android:src="@android:drawable/ic_media_previous" />
+                android:layout_margin="1dp"
+                android:layout_weight="1">
+
+            <ImageButton
+                    android:id="@+id/resetButton"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_reset_button"
+                    android:src="@android:drawable/ic_media_previous"/>
         </FrameLayout>
 
         <!-- Play button -->
         <FrameLayout
-            android:id="@+id/playFrame"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_gravity="center"
-            android:layout_margin="1dp"
-            android:layout_weight="1">
-
-            <ImageButton
-                android:id="@+id/playButton"
+                android:id="@+id/playFrame"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_gravity="center"
-                android:background="@drawable/bg_play_button"
-                android:src="@android:drawable/ic_media_play" />
+                android:layout_margin="1dp"
+                android:layout_weight="1">
+
+            <ImageButton
+                    android:id="@+id/playButton"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bg_play_button"
+                    android:src="@android:drawable/ic_media_play"/>
         </FrameLayout>
 
 
     </LinearLayout>
 
     <!-- Main content -->
-    <RelativeLayout
-        android:id="@+id/mainContentLayout"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_above="@id/footerLayout"
-        android:layout_below="@id/headerLayout"
-        android:gravity="center">
+    <include layout="@layout/workout_main_content"/>
 
-        <!-- Inner header -->
-        <RelativeLayout
-            android:id="@+id/innerHeaderLayout"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_alignParentTop="true"
-            android:gravity="left">
-
-            <!-- Notification text view -->
-            <TextView
-                android:id="@+id/workoutNotificationView"
-                style="@style/notificationTextView"/>
-
-        </RelativeLayout>
-
-        <!-- Inner footer -->
-        <LinearLayout
-            android:id="@+id/innerFooterLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="#000"
-            android:gravity="left"
-            android:orientation="vertical"
-                android:paddingBottom="4dp">
-
-            <!-- Workout progress label -->
-            <LinearLayout
-                android:id="@+id/workoutProgressLabelLayout"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2">
-
-                <FrameLayout
-                    android:id="@+id/workoutProgressLabelFrame"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1"
-                    android:background="#000">
-
-                    <TextView
-                        android:id="@+id/workoutProgressLabel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="fill_parent"
-                        android:gravity="bottom"
-                        android:layout_marginLeft="5dp"
-                        android:text="@string/main_workout_progress"
-                        android:textColor="#EEE"
-                        android:textSize="20sp" />
-                </FrameLayout>
-
-                <FrameLayout
-                    android:id="@+id/totalRemaininigTimeFrame"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1"
-                    android:background="#000">
-
-                    <TextView
-                        android:id="@+id/totalRemainingTimeCounter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:layout_marginRight="5dp"
-                        android:text="@string/main_default_total_remaining_text"
-                        android:textColor="#EEE"
-                        android:textSize="35sp" />
-
-                </FrameLayout>
-            </LinearLayout>
-
-            <!-- Workout progress bar -->
-            <ProgressBar
-                android:id="@+id/workoutProgressBar"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:background="#000"
-                android:max="1000"
-                android:progress="1000" />
-
-        </LinearLayout>
-
-        <!-- Timer layout -->
-        <RelativeLayout
-            android:id="@+id/timerLayout"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:layout_above="@id/innerFooterLayout"
-            android:layout_below="@id/innerHeaderLayout"
-            android:background="#000"
-            android:gravity="center">
-
-            <LinearLayout
-                android:id="@+id/timerCounterLayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:orientation="vertical">
-
-                <TextView
-                        android:id="@+id/currentBlockCounter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:text="@string/main_default_current_round_timer_text"
-                        android:textColor="#EEE"
-                        android:textSize="55sp" />
-
-                <TextView
-                    android:id="@+id/workoutTypeText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="@string/main_default_workout_type"
-                    android:textColor="#EEE"
-                    android:textSize="48sp" />
-
-                <TextView
-                    android:id="@+id/roundCounter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="@string/main_default_round_counter_text"
-                    android:textColor="#EEE"
-                    android:textSize="30sp" />
-            </LinearLayout>
-        </RelativeLayout>
-
-
-    </RelativeLayout>
 </RelativeLayout>
