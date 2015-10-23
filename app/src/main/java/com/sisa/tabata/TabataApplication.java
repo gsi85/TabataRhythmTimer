@@ -8,12 +8,15 @@ import com.google.inject.Inject;
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseUser;
+import com.sisa.tabata.dao.loader.WorkoutManager;
 import com.sisa.tabata.media.service.SelectedMusicService;
 import com.sisa.tabata.media.service.SelectedMusicValidationService;
+import com.sisa.tabata.preferences.PreferencesType;
 import com.sisa.tabata.report.crash.EmailCrashReportSender;
 import com.sisa.tabata.report.crash.ParseCrashReportSender;
 
 import android.app.Application;
+import android.content.SharedPreferences;
 
 import roboguice.RoboGuice;
 
@@ -25,6 +28,9 @@ import roboguice.RoboGuice;
 @ReportsCrashes(mode = ReportingInteractionMode.TOAST, resToastText = R.string.crash_toast_text)
 public class TabataApplication extends Application {
 
+    private static final String PREFERENCES_FILE_NAME = "TabataPreferences";
+    private static final long NO_LOADED_WORKOUT_ID = -1;
+
     @Inject
     private ApplicationContextProvider applicationContextProvider;
     @Inject
@@ -33,6 +39,8 @@ public class TabataApplication extends Application {
     private ParseCrashReportSender parseCrashReportSender;
     @Inject
     private SelectedMusicService selectedMusicService;
+    @Inject
+    private WorkoutManager workoutManager;
 
     @Override
     public void onCreate() {
@@ -41,6 +49,7 @@ public class TabataApplication extends Application {
         setUpParse();
         setUpCrashReport();
         validateSelectedSongs();
+        setLoadedWorkout();
     }
 
     private void setUpParse() {
@@ -59,6 +68,18 @@ public class TabataApplication extends Application {
 
     private void validateSelectedSongs() {
         new SelectedMusicValidationService(selectedMusicService, applicationContextProvider).execute();
+    }
+
+    private void setLoadedWorkout() {
+        if (getPreviouslyLoadedWorkoutId() == NO_LOADED_WORKOUT_ID) {
+            workoutManager.setLoadedWorkoutById(0);
+        }
+    }
+
+    //TODO: move this a common preference manager.
+    private long getPreviouslyLoadedWorkoutId() {
+        SharedPreferences settings = applicationContextProvider.getContext().getSharedPreferences(PREFERENCES_FILE_NAME, 0);
+        return settings.getLong(PreferencesType.LOADED_WORKOUT_ID.name(), NO_LOADED_WORKOUT_ID);
     }
 
 }
