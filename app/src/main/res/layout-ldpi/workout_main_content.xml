@@ -116,8 +116,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/main_default_current_round_timer_text"
-                    android:textColor="#EEE"
-                    android:textSize="35sp"/>
+                    android:textColor="#EEE"/>
 
             <TextView
                     android:id="@+id/workoutTypeText"
@@ -125,8 +124,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/main_default_workout_type"
-                    android:textColor="#EEE"
-                    android:textSize="28sp"/>
+                    android:textColor="#EEE"/>
 
             <TextView
                     android:id="@+id/roundCounter"
@@ -134,8 +132,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="@string/main_default_round_counter_text"
-                    android:textColor="#EEE"
-                    android:textSize="14sp"/>
+                    android:textColor="#EEE"/>
         </LinearLayout>
     </RelativeLayout>
 
