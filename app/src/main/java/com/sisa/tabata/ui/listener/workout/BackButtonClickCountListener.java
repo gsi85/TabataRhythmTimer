@@ -30,6 +30,8 @@ public class BackButtonClickCountListener {
     private ApplicationContextProvider applicationContextProvider;
     @Inject
     private ParseAnalyticsAdapter parseAnalyticsAdapter;
+    @Inject
+    private PlayButtonClickListener playButtonClickListener;
     private int backButtonClickCount;
 
     /**
@@ -59,6 +61,7 @@ public class BackButtonClickCountListener {
 
     private void exitApp(WorkoutActivity workoutActivity) {
         parseAnalyticsAdapter.trackAppClosedEvent();
+        playButtonClickListener.pauseTimer();
         backButtonClickCount = 0;
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.addCategory(Intent.CATEGORY_HOME);
