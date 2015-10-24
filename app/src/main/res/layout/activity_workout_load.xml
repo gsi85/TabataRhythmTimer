@@ -78,14 +78,15 @@
         <LinearLayout
             android:id="@+id/notificationContainer"
             android:layout_width="fill_parent"
-            android:layout_height="30dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <!-- Notification text view -->
             <TextView
                 android:id="@+id/workoutLoadNotificationView"
                 style="@style/notificationTextView"
-                android:text="@string/notification_cant_delete_last_workout" />
+                android:text="@string/notification_cant_delete_last_workout"
+                android:height="30dp"/>
 
         </LinearLayout>
 
