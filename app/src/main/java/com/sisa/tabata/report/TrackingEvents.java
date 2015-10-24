@@ -7,6 +7,7 @@ package com.sisa.tabata.report;
  */
 public enum TrackingEvents {
 
+    APP_OPENED_FIRST_TIME("First Time Opened"),
     APP_OPENED("Application Opened"),
     APP_CLOSED("Application Closed"),
     APP_CRASHED("Application Crashed"),

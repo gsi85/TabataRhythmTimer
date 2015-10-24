@@ -7,11 +7,10 @@ import com.google.inject.Singleton;
 import com.sisa.tabata.ApplicationContextProvider;
 import com.sisa.tabata.dao.service.WorkoutDao;
 import com.sisa.tabata.domain.Workout;
-import com.sisa.tabata.preferences.PreferencesType;
+import com.sisa.tabata.preferences.PreferenceKeys;
+import com.sisa.tabata.preferences.PreferencesSource;
 import com.sisa.tabata.ui.domain.SerializedWorkout;
 import com.sisa.tabata.workout.transformer.SerializedWorkoutTransformer;
-
-import android.content.SharedPreferences;
 
 /**
  * Manages the currently loaded {@link Workout} instance.
@@ -21,15 +20,15 @@ import android.content.SharedPreferences;
 @Singleton
 public class WorkoutManager {
 
-    private static final String PREFERENCES_FILE_NAME = "TabataPreferences";
-    private static final long NO_LOADED_WORKOUT_ID = -1;
-
+    private static final int FIRST_WORKOUT_INDEX = 0;
     @Inject
     private ApplicationContextProvider applicationContextProvider;
     @Inject
     private SerializedWorkoutTransformer serializedWorkoutTransformer;
     @Inject
     private WorkoutDao workoutDao;
+    @Inject
+    private PreferencesSource preferencesSource;
     private Workout workout;
 
     /**
@@ -58,12 +57,8 @@ public class WorkoutManager {
      * Loads and sets the first {@link Workout} returned by {@link WorkoutDao}.
      */
     public void loadFirstWorkoutInList() {
-        workout = workoutDao.getAllWorkoutsSortedList().get(0);
-        //TODO: move this a common preference manager.
-        SharedPreferences settings = applicationContextProvider.getContext().getSharedPreferences(PREFERENCES_FILE_NAME, 0);
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putLong(PreferencesType.LOADED_WORKOUT_ID.name(), 0);
-        editor.apply();
+        workout = workoutDao.getAllWorkoutsSortedList().get(FIRST_WORKOUT_INDEX);
+        preferencesSource.setLong(PreferenceKeys.LOADED_WORKOUT_ID, workout.getId());
     }
 
     /**
@@ -73,11 +68,7 @@ public class WorkoutManager {
      */
     public void setLoadedWorkoutById(long id) {
         workout = workoutDao.getWorkoutById(id);
-        //TODO: move this a common preference manager.
-        SharedPreferences settings = applicationContextProvider.getContext().getSharedPreferences(PREFERENCES_FILE_NAME, 0);
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putLong(PreferencesType.LOADED_WORKOUT_ID.name(), id);
-        editor.apply();
+        preferencesSource.setLong(PreferenceKeys.LOADED_WORKOUT_ID, id);
     }
 
     private void checkLoadWorkout() {
@@ -91,17 +82,11 @@ public class WorkoutManager {
     }
 
     private boolean hasPreviouslyLoadedWorkout() {
-        return getPreviouslyLoadedWorkoutId() != NO_LOADED_WORKOUT_ID;
+        return preferencesSource.isLongSet(PreferenceKeys.LOADED_WORKOUT_ID);
     }
 
     private void loadPreviouslySavedWorkout() {
-        workout = workoutDao.getWorkoutById(getPreviouslyLoadedWorkoutId());
-    }
-
-    //TODO: move this a common preference manager.
-    private long getPreviouslyLoadedWorkoutId() {
-        SharedPreferences settings = applicationContextProvider.getContext().getSharedPreferences(PREFERENCES_FILE_NAME, 0);
-        return settings.getLong(PreferencesType.LOADED_WORKOUT_ID.name(), NO_LOADED_WORKOUT_ID);
+        workout = workoutDao.getWorkoutById(preferencesSource.getLong(PreferenceKeys.LOADED_WORKOUT_ID));
     }
 
 }
