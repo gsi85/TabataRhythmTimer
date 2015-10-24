@@ -129,7 +129,7 @@
                 android:maxLength="30"
                 android:singleLine="true"
                 android:tag="name"
-                android:textColor="#FFFFFF"
+                android:textColor="@android:color/holo_blue_dark"
                 android:textSize="15sp" />
 
             <TextView
@@ -150,7 +150,7 @@
                 android:maxLength="150"
                 android:singleLine="true"
                 android:tag="description"
-                android:textColor="#ffffab08"
+                android:textColor="#FFFFFF"
                 android:textSize="15sp"
                 android:inputType="text" />
 

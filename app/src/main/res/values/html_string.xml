@@ -9,8 +9,8 @@
     </string>
     <string formatted="false" name="workout_text_view_pattern">
         <![CDATA[
-            <big><strong>%s</strong></big><br>
-            <font color="yellow"><small>%s</small></font><br>
+            <font color="#0099cc"><big><strong>%s</strong></big></font><br>
+            <small>%s</small><br>
             Total time: <big><strong>%s</strong></big>
         ]]>
     </string>
