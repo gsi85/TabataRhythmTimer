@@ -45,8 +45,6 @@
                 android:screenOrientation="portrait"
                 android:label="Select Music" />
 
-
-        <activity android:name=".dao.debug.AndroidDatabaseManager" />
     </application>
 
 </manifest>
