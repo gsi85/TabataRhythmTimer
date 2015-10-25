@@ -4,14 +4,17 @@ import static com.parse.ParseAnalytics.trackEventInBackground;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.sisa.tabata.ApplicationContextProvider;
 import com.sisa.tabata.SessionIdProvider;
 import com.sisa.tabata.report.TrackingEvents;
 import com.sisa.tabata.validation.Validation;
+
+import android.util.DisplayMetrics;
 
 /**
  * Adapter for reporting events towards Parse.
@@ -22,8 +25,13 @@ import com.sisa.tabata.validation.Validation;
 public class ParseAnalyticsAdapter {
 
     private static final String SESSION_ID_KEY = "Session Id";
-    private static final Map<String, String> SESSION_ID_MAP = Collections.singletonMap(SESSION_ID_KEY, SessionIdProvider.SESSION_ID);
     private static final String STACK_TRACE_KEY = "Stack trace";
+    private static final String DENSITY_KEY = "Density dpi";
+    private static final String SCREEN_WIDTH = "Screen width px";
+    private static final String SCREEN_HEIGHT = "Screen height px";
+
+    @Inject
+    private ApplicationContextProvider applicationContextProvider;
     private boolean appOpenedReported;
 
     /**
@@ -71,15 +79,19 @@ public class ParseAnalyticsAdapter {
      * @param dimensions map of custom values to be reported.
      */
     public void trackEvent(final TrackingEvents trackingEvent, final Map<String, String> dimensions) {
-        trackEventInBackground(trackingEvent.getName(), augmentSessionId(dimensions));
+        trackEventInBackground(trackingEvent.getName(), augmentCommonData(dimensions));
     }
 
-    private Map<String, String> augmentSessionId(final Map<String, String> dimensions) {
-        return Validation.notEmpty(dimensions) ? addSessionId(dimensions) : SESSION_ID_MAP;
+    private Map<String, String> augmentCommonData(final Map<String, String> dimensions) {
+        return Validation.notEmpty(dimensions) ? addCommonData(dimensions) : addCommonData(new HashMap<String, String>());
     }
 
-    private Map<String, String> addSessionId(final Map<String, String> dimensions) {
+    private Map<String, String> addCommonData(final Map<String, String> dimensions) {
+        DisplayMetrics displayMetrics = applicationContextProvider.getContext().getResources().getDisplayMetrics();
         dimensions.put(SESSION_ID_KEY, SessionIdProvider.SESSION_ID);
+        dimensions.put(DENSITY_KEY, String.valueOf(displayMetrics.densityDpi));
+        dimensions.put(SCREEN_HEIGHT, String.valueOf(displayMetrics.heightPixels));
+        dimensions.put(SCREEN_WIDTH, String.valueOf(displayMetrics.widthPixels));
         return dimensions;
     }
 
