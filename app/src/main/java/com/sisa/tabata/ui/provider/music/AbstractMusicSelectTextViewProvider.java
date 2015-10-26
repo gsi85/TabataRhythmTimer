@@ -27,6 +27,7 @@ public abstract class AbstractMusicSelectTextViewProvider {
             LinearLayout.LayoutParams.MATCH_PARENT);
     private static final LinearLayout.LayoutParams ITEM_CONTAINER_LAYOUT_PARAM = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.WRAP_CONTENT);
+    private static final int CHECKBOX_WIDTH_DP = 30;
 
     static {
         ITEM_CONTAINER_LAYOUT_PARAM.setMargins(0, 0, 0, 1);
@@ -53,6 +54,7 @@ public abstract class AbstractMusicSelectTextViewProvider {
         checkBox.setGravity(Gravity.CENTER_VERTICAL);
         checkBox.setTag(String.format(CHECKBOX_TAG_FORMAT_PATTERN, category, valueKey));
         checkBox.setChecked(isChecked(category, valueKey));
+        checkBox.setWidth(getDp(context, CHECKBOX_WIDTH_DP));
         itemLayout.addView(checkBox);
         itemLayout.addView(textView);
         textView.setText(formattedText);
