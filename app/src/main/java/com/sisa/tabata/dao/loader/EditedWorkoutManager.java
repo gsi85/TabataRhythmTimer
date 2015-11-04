@@ -1,5 +1,7 @@
 package com.sisa.tabata.dao.loader;
 
+import static com.sisa.tabata.validation.Validation.notEmpty;
+
 import java.util.concurrent.TimeUnit;
 
 import com.google.inject.Inject;
@@ -24,15 +26,17 @@ public class EditedWorkoutManager {
     private WorkoutFactory workoutFactory;
     @Inject
     private ApplicationContextProvider applicationContextProvider;
+    @Inject
+    private WorkoutManager workoutManager;
     private Workout editedWorkout;
 
     /**
-     * Returns the currently edited {@link Workout}.
+     * Returns the currently edited {@link Workout}, if it's null it fallbacks to the currently loaded workout.
      *
      * @return the currently edited {@link Workout} if set, null otherwise
      */
     public Workout getEditedWorkout() {
-        return editedWorkout;
+        return notEmpty(editedWorkout) ? editedWorkout : workoutManager.getLoadedWorkout();
     }
 
     /**
