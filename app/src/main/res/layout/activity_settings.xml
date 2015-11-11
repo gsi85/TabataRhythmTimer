@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#000000">
+
+    <!-- Header -->
+    <LinearLayout
+            android:id="@+id/headerLayout"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_alignParentTop="true"
+            android:layout_margin="0dp"
+            android:baselineAligned="false"
+            android:gravity="left"
+            android:orientation="horizontal"
+            android:background="#333333"
+            android:paddingLeft="10dp">
+
+        <ImageView
+                android:id="@+id/settingsIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_menu_preferences"
+                android:layout_gravity="center"
+                android:paddingRight="10dp"/>
+
+
+        <TextView
+                android:id="@+id/settingsHeaderLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center"
+                android:text="@string/settings_header_label"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"/>
+
+    </LinearLayout>
+
+    <!-- Main content -->
+    <RelativeLayout
+            android:id="@+id/mainContentLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@id/headerLayout"
+            android:gravity="top|center">
+
+        <!-- Settings list -->
+        <ScrollView
+                android:id="@+id/settingsScrollView"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_margin="5dp"
+                android:paddingTop="5dp">
+
+            <!-- Settings container layout -->
+            <LinearLayout
+                    android:id="@+id/settingsLayout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                <!-- Power saving options -->
+                <LinearLayout
+                        android:id="@+id/powerSavingLayout"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:background="#333333">
+
+                    <LinearLayout
+                            android:id="@+id/powerSavingHeaderLayout"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:background="#000000"
+                            android:layout_marginBottom="2dp">
+
+                        <ImageView
+                                android:id="@+id/powerSavingIcon"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@android:drawable/ic_lock_idle_low_battery"
+                                android:layout_gravity="center"
+                                android:paddingRight="10dp"/>
+
+                        <TextView
+                                android:id="@+id/powerSavingHeaderTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="@string/settings_power_saving_header_label"
+                                android:gravity="center"
+                                android:textSize="18sp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:background="#000000">
+
+                        <CheckBox
+                                android:id="@+id/lowRefreshRateCheckbox"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:width="35dp"/>
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="16sp"
+                                android:text="@string/settings_low_refresh_rate"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:background="#000000">
+
+                        <CheckBox
+                                android:id="@+id/wakeLockDisabledCheckbox"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:width="35dp"/>
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="16sp"
+                                android:text="@string/settings_wake_lock"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -8,6 +8,8 @@ package com.sisa.tabata.preferences;
 public enum PreferenceKeys {
 
     FIRST_TIME_OPENED,
-    LOADED_WORKOUT_ID
+    LOADED_WORKOUT_ID,
+    WORKOUT_LOW_REFRESH_RATE,
+    WAKE_LOCK_DISABLED
 
 }

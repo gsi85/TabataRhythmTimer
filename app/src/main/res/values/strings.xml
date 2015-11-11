@@ -56,6 +56,7 @@
         <item>LOAD</item>
         <item>NEW</item>
         <item>SET MUSIC</item>
+        <item>SETTINGS</item>
     </string-array>
 
     <string name="music_select_albums">Albums</string>
@@ -82,5 +83,10 @@
     <string name="about_version">Version:</string>
     <string name="about_contact">Any improvement ideas, identified bugs, remarks are welcome via e-mail to: tabatarhythmtimer@gmail.com</string>
     <string name="about_copy_right_pattern">Created by: Laszlo Sisa, ©%d</string>
-</resources>
 
+    <string name="settings_header_label">Settings</string>
+    <string name="settings_power_saving_header_label">POWER SAVING OPTIONS</string>
+    <string name="settings_low_refresh_rate">Low refresh rate of countdown timer</string>
+    <string name="settings_wake_lock">Allow screen to sleep during workout</string>
+
+</resources>

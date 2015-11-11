@@ -4,10 +4,13 @@ import static com.sisa.tabata.validation.Validation.notEmpty;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.sisa.tabata.ui.domain.SerializedWorkout;
 import com.sisa.tabata.ui.progressbar.CurrentRoundProgressBar;
 import com.sisa.tabata.ui.progressbar.TotalWorkoutProgressBar;
+import com.sisa.tabata.ui.timer.domain.CountDownTimerInitializingContext;
+import com.sisa.tabata.ui.timer.domain.CountDownTimerInitializingContextFactory;
 
 import android.widget.ImageButton;
 
@@ -18,6 +21,9 @@ import android.widget.ImageButton;
  */
 @Singleton
 public class WorkoutCountDownTimerManager {
+
+    @Inject
+    private CountDownTimerInitializingContextFactory contextFactory;
 
     private AtomicBoolean workoutInProgress = new AtomicBoolean(false);
     private CountDownTimerWithPause workoutCountDownTimer;
@@ -32,7 +38,8 @@ public class WorkoutCountDownTimerManager {
      */
     public void createWorkoutCountDownTimer(final SerializedWorkout serializedWorkout, final CurrentRoundProgressBar currentRoundProgressBar,
             final TotalWorkoutProgressBar totalWorkoutProgressBar, final ImageButton playButton) {
-        workoutCountDownTimer = new WorkoutCountDownTimer(serializedWorkout, currentRoundProgressBar, totalWorkoutProgressBar, playButton).create();
+        workoutCountDownTimer = new WorkoutCountDownTimer(
+                createInitContext(serializedWorkout, currentRoundProgressBar, totalWorkoutProgressBar, playButton)).create();
         workoutInProgress.set(false);
     }
 
@@ -77,6 +84,12 @@ public class WorkoutCountDownTimerManager {
      */
     public int getSectionCount() {
         return workoutCountDownTimer.getSectionCounter();
+    }
+
+    private CountDownTimerInitializingContext createInitContext(final SerializedWorkout serializedWorkout,
+            final CurrentRoundProgressBar currentRoundProgressBar, final TotalWorkoutProgressBar totalWorkoutProgressBar,
+            final ImageButton playButton) {
+        return contextFactory.creteContext(serializedWorkout, currentRoundProgressBar, totalWorkoutProgressBar, playButton);
     }
 
     public boolean isPaused() {

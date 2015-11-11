@@ -11,6 +11,7 @@ import com.sisa.tabata.dao.loader.EditedWorkoutManager;
 import com.sisa.tabata.dao.loader.WorkoutManager;
 import com.sisa.tabata.media.service.MediaPlayerService;
 import com.sisa.tabata.ui.activity.MusicSelectActivity;
+import com.sisa.tabata.ui.activity.SettingsActivity;
 import com.sisa.tabata.ui.activity.WorkoutActivity;
 import com.sisa.tabata.ui.activity.WorkoutEditActivity;
 import com.sisa.tabata.ui.activity.WorkoutLoadActivity;
@@ -88,6 +89,7 @@ public class MainMenuOnClickListener extends AbstractWorkoutActivityButtonClickL
         activitiesMap.put("NEW", createWorkoutEditIntent(workoutActivity, NEW_WORKOUT_ID, true));
         activitiesMap.put("LOAD", createWorkoutLoadIntent(workoutActivity));
         activitiesMap.put("SET MUSIC", createSelectMusicIntent(workoutActivity));
+        activitiesMap.put("SETTINGS", createSettingsIntent(workoutActivity));
         return activitiesMap;
     }
 
@@ -104,6 +106,10 @@ public class MainMenuOnClickListener extends AbstractWorkoutActivityButtonClickL
 
     private Intent createSelectMusicIntent(final WorkoutActivity workoutActivity) {
         return new Intent(workoutActivity, MusicSelectActivity.class);
+    }
+
+    private Intent createSettingsIntent(final WorkoutActivity workoutActivity) {
+        return new Intent(workoutActivity, SettingsActivity.class);
     }
 
     private final class AlertDialogClickListener implements DialogInterface.OnClickListener {
