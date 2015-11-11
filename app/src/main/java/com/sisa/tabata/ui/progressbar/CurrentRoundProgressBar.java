@@ -1,15 +1,20 @@
 package com.sisa.tabata.ui.progressbar;
 
+import static com.sisa.tabata.util.TimeFormatter.formatMilliSecondsToMinuteSecondHundredSec;
+import static com.sisa.tabata.util.TimeFormatter.formatMilliSecondsToMinuteSecond;
+
 import com.google.inject.Inject;
 import com.sisa.tabata.R;
 import com.sisa.tabata.media.service.EffectPlayerService;
 import com.sisa.tabata.media.service.MediaPlayerService;
+import com.sisa.tabata.preferences.PreferenceKeys;
+import com.sisa.tabata.preferences.PreferencesSource;
 import com.sisa.tabata.ui.domain.SerializedWorkoutSection;
 import com.sisa.tabata.ui.domain.WorkoutType;
 import com.sisa.tabata.ui.drawable.CircularProgressBarDrawable;
 import com.sisa.tabata.ui.timer.NotificationDisplayTimer;
-import com.sisa.tabata.util.TimeFormatter;
 
+import android.text.Spanned;
 import android.widget.TextView;
 
 import roboguice.inject.ContextSingleton;
@@ -45,8 +50,11 @@ public class CurrentRoundProgressBar {
     private EffectPlayerService effectPlayerService;
     @Inject
     private MediaPlayerService mediaPlayerService;
+    @Inject
+    private PreferencesSource preferencesSource;
     private int nextBeepNotification;
     private int notifiedSection;
+    private boolean lowRefreshRate;
 
     /**
      * Initializes the progress bar.
@@ -65,6 +73,7 @@ public class CurrentRoundProgressBar {
         roundCounter.setText(String.format(ROUND_TEXT_PATTERN, currentRound, totalRoundsInSection));
         workoutTypeText.setText(serializedWorkoutSection.getWorkoutType().getDisplayText());
         nextBeepNotification = DEFAULT_FIRST_BEEP_IN_MILLIS;
+        lowRefreshRate = preferencesSource.is(PreferenceKeys.WORKOUT_LOW_REFRESH_RATE);
         update(maxMilliSeconds);
     }
 
@@ -83,7 +92,7 @@ public class CurrentRoundProgressBar {
      */
     public void update(long millisUntilFinished) {
         circularProgressBar.update(millisUntilFinished);
-        currentBlockCounter.setText(TimeFormatter.formatMilliSecondsToMinuteSecondHundredSec(millisUntilFinished));
+        currentBlockCounter.setText(getFormattedText(millisUntilFinished));
         checkPlayBeep(millisUntilFinished);
     }
 
@@ -97,6 +106,11 @@ public class CurrentRoundProgressBar {
         playRoundFinishEffect(workoutOver);
         workoutTypeText.setText(WorkoutType.FINISHED.getDisplayText());
         circularProgressBar.setBackgroundPaintColor(WorkoutType.FINISHED.getBackGroundColor());
+    }
+
+    private Spanned getFormattedText(final long millisUntilFinished) {
+        return lowRefreshRate ? formatMilliSecondsToMinuteSecond(millisUntilFinished)
+                : formatMilliSecondsToMinuteSecondHundredSec(millisUntilFinished);
     }
 
     private void checkPlayBeep(long millisUntilFinished) {

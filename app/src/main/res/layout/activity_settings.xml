@@ -104,7 +104,7 @@
                             android:background="#000000">
 
                         <CheckBox
-                                android:id="@+id/refreshRateCheckbox"
+                                android:id="@+id/lowRefreshRateCheckbox"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:width="35dp"/>
@@ -124,7 +124,7 @@
                             android:background="#000000">
 
                         <CheckBox
-                                android:id="@+id/wakeLockCheckbox"
+                                android:id="@+id/wakeLockDisabledCheckbox"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:width="35dp"/>

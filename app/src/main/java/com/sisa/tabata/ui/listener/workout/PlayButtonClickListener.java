@@ -5,6 +5,8 @@ import com.sisa.tabata.ApplicationContextProvider;
 import com.sisa.tabata.R;
 import com.sisa.tabata.dao.loader.WorkoutManager;
 import com.sisa.tabata.media.service.MediaPlayerService;
+import com.sisa.tabata.preferences.PreferenceKeys;
+import com.sisa.tabata.preferences.PreferencesSource;
 import com.sisa.tabata.ui.domain.SerializedWorkout;
 import com.sisa.tabata.ui.progressbar.CurrentRoundProgressBar;
 import com.sisa.tabata.ui.progressbar.TotalWorkoutProgressBar;
@@ -41,6 +43,8 @@ public class PlayButtonClickListener extends AbstractWorkoutActivityButtonClickL
     private WorkoutCountDownTimerManager workoutCountDownTimerManager;
     @Inject
     private ApplicationContextProvider applicationContextProvider;
+    @Inject
+    private PreferencesSource preferencesSource;
     @InjectView(R.id.workoutNotificationView)
     private TextView workoutNotificationView;
     @InjectView(R.id.playButton)
@@ -80,7 +84,7 @@ public class PlayButtonClickListener extends AbstractWorkoutActivityButtonClickL
         mediaPlayerService.play();
         playButton.setImageResource(android.R.drawable.ic_media_pause);
         playButton.setBackgroundResource(R.drawable.bg_pause_button);
-        playButton.setKeepScreenOn(true);
+        playButton.setKeepScreenOn(wakeLockEnabled());
         String sectionCounterString = String.format(SECTION_TEXT_PATTERN, workoutCountDownTimerManager.getSectionCount(),
                 workoutManager.getLoadedSerializedWorkout().getSectionCount());
         showNotification(sectionCounterString);
@@ -125,6 +129,10 @@ public class PlayButtonClickListener extends AbstractWorkoutActivityButtonClickL
 
     private void showNotification(final String textToDisplay) {
         new NotificationDisplayTimer(workoutNotificationView, textToDisplay, NOTIFICATION_TIME_IN_MILLIS).start();
+    }
+
+    private boolean wakeLockEnabled() {
+        return !preferencesSource.is(PreferenceKeys.WAKE_LOCK_DISABLED);
     }
 
 }

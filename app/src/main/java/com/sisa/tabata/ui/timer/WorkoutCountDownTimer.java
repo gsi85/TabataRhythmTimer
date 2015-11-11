@@ -7,6 +7,7 @@ import com.sisa.tabata.ui.domain.SerializedWorkout;
 import com.sisa.tabata.ui.domain.SerializedWorkoutSection;
 import com.sisa.tabata.ui.progressbar.CurrentRoundProgressBar;
 import com.sisa.tabata.ui.progressbar.TotalWorkoutProgressBar;
+import com.sisa.tabata.ui.timer.domain.CountDownTimerInitializingContext;
 
 import android.widget.ImageButton;
 
@@ -16,8 +17,6 @@ import android.widget.ImageButton;
  * @author Laszlo Sisa
  */
 public class WorkoutCountDownTimer extends CountDownTimerWithPause {
-
-    public static final int COUNT_DOWN_INTERVAL_MILLIS = 50;
 
     private final TimeUnit timeUnit;
     private final CurrentRoundProgressBar currentRoundProgressBar;
@@ -31,18 +30,15 @@ public class WorkoutCountDownTimer extends CountDownTimerWithPause {
     /**
      * DI constructor.
      *
-     * @param serializedWorkout {@link SerializedWorkout}
-     * @param currentRoundProgressBar {@link CurrentRoundProgressBar}
-     * @param totalWorkoutProgressBar {@link TotalWorkoutProgressBar}
-     * @param playButton {@link ImageButton}
+     * @param initContext {@link CountDownTimerInitializingContext}
      */
-    public WorkoutCountDownTimer(SerializedWorkout serializedWorkout, CurrentRoundProgressBar currentRoundProgressBar,
-            TotalWorkoutProgressBar totalWorkoutProgressBar, ImageButton playButton) {
-        super(serializedWorkout.getTimeUnit().toMillis(serializedWorkout.getWorkoutDuration()), COUNT_DOWN_INTERVAL_MILLIS, false);
-        this.serializedWorkout = serializedWorkout;
-        this.currentRoundProgressBar = currentRoundProgressBar;
-        this.totalWorkoutProgressBar = totalWorkoutProgressBar;
-        this.playButton = playButton;
+    public WorkoutCountDownTimer(final CountDownTimerInitializingContext initContext) {
+        super(initContext.getSerializedWorkout().getTimeUnit().toMillis(initContext.getSerializedWorkout().getWorkoutDuration()),
+                initContext.getRefreshRateInMillis(), false);
+        this.serializedWorkout = initContext.getSerializedWorkout();
+        this.currentRoundProgressBar = initContext.getCurrentRoundProgressBar();
+        this.totalWorkoutProgressBar = initContext.getTotalWorkoutProgressBar();
+        this.playButton = initContext.getPlayButton();
         timeUnit = serializedWorkout.getTimeUnit();
         maxSectionIndex = Math.max(0, serializedWorkout.getWorkoutSections().size() - 1);
         resetProgressBars();

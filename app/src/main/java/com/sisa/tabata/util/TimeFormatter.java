@@ -15,6 +15,7 @@ public final class TimeFormatter {
     private static final String MINUTES_DOWN_TO_HUNDREDS_SEC_PATTERN = "<big>%02d:%02d</big><small>.%01d</small>";
     private static final String HOURS_DOWN_TO_SECONDS_PATTERN = "%02d:%02d:%02d";
     private static final String MINUTEST_DOWN_TO_SECOND_PATTERN = "%02d:%02d";
+    private static final String MINUTEST_DOWN_TO_SECOND_SPANNED_PATTERN = "<big>%02d:%02d</big>";
     private static final String TIME_SECTION_DIVIDER = ":";
     private static final int MILLIS_IN_ONE_SECOND = 1000;
     private static final int SECONDS_IN_ONE_MINUTE = 60;
@@ -34,6 +35,19 @@ public final class TimeFormatter {
         long seconds = TimeUnit.MILLISECONDS.toSeconds(milliSeconds) - TimeUnit.MINUTES.toSeconds(minutes);
         long hundredSec = (milliSeconds % MILLIS_IN_ONE_SECOND) / ONE_HUNDRED;
         return Html.fromHtml(String.format(MINUTES_DOWN_TO_HUNDREDS_SEC_PATTERN, minutes, seconds, hundredSec));
+    }
+
+    /**
+     * Format milli seconds to the following format: mm:ss.
+     *
+     * @param milliSeconds seconds to format
+     * @return formatted text.
+     */
+    public static Spanned formatMilliSecondsToMinuteSecond(long milliSeconds) {
+        long roundedMillis = Math.round((float) milliSeconds / MILLIS_IN_ONE_SECOND) * MILLIS_IN_ONE_SECOND;
+        long minutes = TimeUnit.MILLISECONDS.toMinutes(roundedMillis);
+        long seconds = TimeUnit.MILLISECONDS.toSeconds(roundedMillis) - TimeUnit.MINUTES.toSeconds(minutes);
+        return Html.fromHtml(String.format(MINUTEST_DOWN_TO_SECOND_SPANNED_PATTERN, minutes, seconds));
     }
 
     /**
