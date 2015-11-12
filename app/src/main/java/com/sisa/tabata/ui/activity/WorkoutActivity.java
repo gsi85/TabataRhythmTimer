@@ -3,6 +3,8 @@ package com.sisa.tabata.ui.activity;
 import com.google.inject.Inject;
 import com.sisa.tabata.R;
 import com.sisa.tabata.media.service.MediaPlayerService;
+import com.sisa.tabata.preferences.PreferenceKeys;
+import com.sisa.tabata.preferences.PreferencesSource;
 import com.sisa.tabata.report.parse.ParseAnalyticsAdapter;
 import com.sisa.tabata.ui.adapter.SpinnerArrayAdapterFactory;
 import com.sisa.tabata.ui.listener.workout.AboutButtonClickListener;
@@ -70,6 +72,8 @@ public class WorkoutActivity extends RoboFragmentActivity {
     private ParseAnalyticsAdapter parseAnalyticsAdapter;
     @Inject
     private WorkoutCountDownTimerManager workoutCountDownTimerManager;
+    @Inject
+    private PreferencesSource preferencesSource;
     private boolean shouldResume;
 
     @Override
@@ -140,7 +144,19 @@ public class WorkoutActivity extends RoboFragmentActivity {
         }
 
         private boolean shouldPauseWorkout() {
-            return workoutCountDownTimerManager.isWorkoutInProgress() && !workoutCountDownTimerManager.isPaused();
+            return isAutoPauseAllowed() && isWorkoutInProgress() && isNotPaused();
+        }
+
+        private boolean isAutoPauseAllowed() {
+            return preferencesSource.is(PreferenceKeys.AUTO_PAUSE_ON_CALL);
+        }
+
+        private boolean isNotPaused() {
+            return !workoutCountDownTimerManager.isPaused();
+        }
+
+        private boolean isWorkoutInProgress() {
+            return workoutCountDownTimerManager.isWorkoutInProgress();
         }
     }
 
