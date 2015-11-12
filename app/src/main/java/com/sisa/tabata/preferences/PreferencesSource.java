@@ -44,17 +44,6 @@ public class PreferencesSource {
     }
 
     /**
-     * Returns a boolean value related to the given preference key.
-     *
-     * @param preferenceKeys {@link PreferenceKeys} as the key to retrieve
-     * @param defaultValue the default value if preference does not exist
-     * @return the preference value
-     */
-    public boolean is(final PreferenceKeys preferenceKeys, final boolean defaultValue) {
-        return settings.getBoolean(preferenceKeys.name(), defaultValue);
-    }
-
-    /**
      * Returns a long value related to the given preference key.
      *
      * @param preferenceKeys {@link PreferenceKeys} as the key to retrieve
@@ -87,13 +76,13 @@ public class PreferencesSource {
     }
 
     /**
-     * Check if long type preference is set for the given key.
+     * Check if preference is set for the given key.
      *
      * @param preferenceKeys {@link PreferenceKeys} the key to check
-     * @return if key is set (e.g.: current value defers from default value)
+     * @return true if key is set
      */
-    public boolean isLongSet(final PreferenceKeys preferenceKeys) {
-        return getLong(preferenceKeys) != DEFAULT_NUMERIC_PREFERENCE_VALUE;
+    public boolean isSet(final PreferenceKeys preferenceKeys) {
+        return settings.contains(preferenceKeys.name());
     }
 
 }

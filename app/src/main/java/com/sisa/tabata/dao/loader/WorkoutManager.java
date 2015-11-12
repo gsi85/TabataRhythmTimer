@@ -82,7 +82,7 @@ public class WorkoutManager {
     }
 
     private boolean hasPreviouslyLoadedWorkout() {
-        return preferencesSource.isLongSet(PreferenceKeys.LOADED_WORKOUT_ID);
+        return preferencesSource.isSet(PreferenceKeys.LOADED_WORKOUT_ID);
     }
 
     private void loadPreviouslySavedWorkout() {

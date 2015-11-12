@@ -63,6 +63,62 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
+                <!-- Workout options -->
+                <LinearLayout
+                        android:id="@+id/workoutOptionsLayout"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:background="#333333">
+
+                    <LinearLayout
+                            android:id="@+id/workoutOptionsHeaderLayout"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:background="#000000"
+                            android:layout_marginBottom="2dp">
+
+                        <ImageView
+                                android:id="@+id/workoutOptionIscon"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@android:drawable/ic_menu_recent_history"
+                                android:layout_gravity="center"
+                                android:paddingRight="10dp"/>
+
+                        <TextView
+                                android:id="@+id/workoutOptionsHeaderTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="fill_parent"
+                                android:text="@string/settings_options_saving_header_label"
+                                android:gravity="center"
+                                android:textSize="18sp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:background="#000000">
+
+                        <CheckBox
+                                android:id="@+id/autoPauseOnCallCheckbox"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:width="35dp"/>
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="16sp"
+                                android:text="@string/settings_pause_on_call"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
                 <!-- Power saving options -->
                 <LinearLayout
                         android:id="@+id/powerSavingLayout"
@@ -77,7 +133,8 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             android:background="#000000"
-                            android:layout_marginBottom="2dp">
+                            android:layout_marginBottom="2dp"
+                            android:paddingTop="20dp">
 
                         <ImageView
                                 android:id="@+id/powerSavingIcon"

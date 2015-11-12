@@ -28,6 +28,8 @@ public class SettingsCheckBoxMapProvider {
     private CheckBox lowRefreshRate;
     @InjectView(R.id.wakeLockDisabledCheckbox)
     private CheckBox wakeLockDisabled;
+    @InjectView(R.id.autoPauseOnCallCheckbox)
+    private CheckBox autoPauseOnCallCheckbox;
 
     /**
      * Returns checkbox mapping where {@link PreferenceKeys} are association with their representative {@link CheckBox}.
@@ -51,6 +53,7 @@ public class SettingsCheckBoxMapProvider {
         checkBoxMapping = HashBiMap.create();
         checkBoxMapping.put(PreferenceKeys.WORKOUT_LOW_REFRESH_RATE, lowRefreshRate);
         checkBoxMapping.put(PreferenceKeys.WAKE_LOCK_DISABLED, wakeLockDisabled);
+        checkBoxMapping.put(PreferenceKeys.AUTO_PAUSE_ON_CALL, autoPauseOnCallCheckbox);
         return checkBoxMapping;
     }
 

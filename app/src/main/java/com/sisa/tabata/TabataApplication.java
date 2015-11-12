@@ -1,5 +1,7 @@
 package com.sisa.tabata;
 
+import static roboguice.RoboGuice.injectMembers;
+
 import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
@@ -11,6 +13,7 @@ import com.parse.ParseUser;
 import com.sisa.tabata.dao.loader.WorkoutManager;
 import com.sisa.tabata.media.service.SelectedMusicService;
 import com.sisa.tabata.media.service.SelectedMusicValidationService;
+import com.sisa.tabata.preferences.DefaultPreferenceValuesProvider;
 import com.sisa.tabata.preferences.PreferenceKeys;
 import com.sisa.tabata.preferences.PreferencesSource;
 import com.sisa.tabata.report.TrackingEvents;
@@ -19,8 +22,6 @@ import com.sisa.tabata.report.crash.ParseCrashReportSender;
 import com.sisa.tabata.report.parse.ParseAnalyticsAdapter;
 
 import android.app.Application;
-
-import roboguice.RoboGuice;
 
 /**
  * Base class of application to maintain global state.
@@ -46,15 +47,22 @@ public class TabataApplication extends Application {
     private PreferencesSource preferencesSource;
     @Inject
     private WorkoutManager workoutManager;
+    @Inject
+    private DefaultPreferenceValuesProvider defaultPreferenceValuesProvider;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        RoboGuice.injectMembers(getApplicationContext(), this);
+        injectMembers(getApplicationContext(), this);
+        setDefaultPreferences();
         setUpParse();
         setUpCrashReport();
         validateSelectedSongs();
         performFirstTimeOpenedAction();
+    }
+
+    private void setDefaultPreferences() {
+        defaultPreferenceValuesProvider.checkSetDefaultValues();
     }
 
     private void setUpParse() {
@@ -76,7 +84,7 @@ public class TabataApplication extends Application {
     }
 
     private void performFirstTimeOpenedAction() {
-        if (preferencesSource.is(PreferenceKeys.FIRST_TIME_OPENED, true)) {
+        if (preferencesSource.is(PreferenceKeys.FIRST_TIME_OPENED)) {
             workoutManager.setLoadedWorkoutById(DEFAULT_WORKOUT_ID);
             parseAnalyticsAdapter.trackEvent(TrackingEvents.APP_OPENED_FIRST_TIME, null);
             preferencesSource.setBoolean(PreferenceKeys.FIRST_TIME_OPENED, false);

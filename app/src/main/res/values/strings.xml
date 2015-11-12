@@ -88,5 +88,7 @@
     <string name="settings_power_saving_header_label">POWER SAVING OPTIONS</string>
     <string name="settings_low_refresh_rate">Low refresh rate of countdown timer</string>
     <string name="settings_wake_lock">Allow screen to sleep during workout</string>
+    <string name="settings_options_saving_header_label">WORKOUT SETTINGS</string>
+    <string name="settings_pause_on_call">Auto pause on incoming call</string>
 
 </resources>
