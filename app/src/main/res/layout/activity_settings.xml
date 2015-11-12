@@ -12,30 +12,28 @@
             android:layout_height="45dp"
             android:layout_alignParentTop="true"
             android:layout_margin="0dp"
+            android:background="@android:color/holo_blue_dark"
             android:baselineAligned="false"
             android:gravity="left"
             android:orientation="horizontal"
-            android:background="#333333"
-            android:paddingLeft="10dp">
+            android:paddingBottom="1dp">
 
-        <ImageView
-                android:id="@+id/settingsIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_menu_preferences"
-                android:layout_gravity="center"
-                android:paddingRight="10dp"/>
+        <FrameLayout
+                android:id="@+id/headerFrame"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#000000">
 
 
-        <TextView
-                android:id="@+id/settingsHeaderLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left|center"
-                android:text="@string/settings_header_label"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"/>
-
+            <TextView
+                    android:id="@+id/settingsHeaderLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/settings_header_label"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"/>
+        </FrameLayout>
     </LinearLayout>
 
     <!-- Main content -->
