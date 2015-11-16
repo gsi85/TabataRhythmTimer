@@ -1,54 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sisa.tabata">
+          package="com.sisa.tabata">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
     <application
-        android:name="com.sisa.tabata.TabataApplication"
-        android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@android:style/Theme.Holo.NoActionBar">
+            android:name="com.sisa.tabata.TabataApplication"
+            android:allowBackup="true"
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Holo.NoActionBar">
+
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
 
         <activity
-            android:name=".ui.activity.WorkoutActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name">
+                android:name=".ui.activity.WorkoutActivity"
+                android:screenOrientation="portrait"
+                android:label="@string/app_name">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
         <activity
-            android:name=".ui.activity.WorkoutEditActivity"
-            android:screenOrientation="portrait"
-            android:label="Edit workout" />
+                android:name=".ui.activity.WorkoutEditActivity"
+                android:screenOrientation="portrait"
+                android:label="Edit workout"/>
 
         <activity
-            android:name=".ui.activity.SectionEditActivity"
-            android:screenOrientation="portrait"
-            android:label="Edit section" />
+                android:name=".ui.activity.SectionEditActivity"
+                android:screenOrientation="portrait"
+                android:label="Edit section"/>
 
         <activity
-            android:name=".ui.activity.WorkoutLoadActivity"
-            android:screenOrientation="portrait"
-            android:label="Load workout" />
+                android:name=".ui.activity.WorkoutLoadActivity"
+                android:screenOrientation="portrait"
+                android:label="Load workout"/>
 
         <activity
                 android:name=".ui.activity.MusicSelectActivity"
                 android:screenOrientation="portrait"
-                android:label="Select Music" />
+                android:label="Select Music"/>
 
         <activity
                 android:name=".ui.activity.SettingsActivity"
                 android:screenOrientation="portrait"
-                android:label="Settings" />
+                android:label="Settings"/>
+
+        <activity android:name="com.facebook.FacebookActivity"
+                  android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+                  android:theme="@android:style/Theme.Translucent.NoTitleBar"
+                  android:label="@string/app_name"/>
+
+        <provider android:authorities="com.facebook.app.FacebookContentProvider552032718277688"
+                  android:name="com.facebook.FacebookContentProvider"
+                  android:exported="true"/>
 
     </application>
 

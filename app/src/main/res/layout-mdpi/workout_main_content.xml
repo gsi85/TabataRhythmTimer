@@ -133,6 +133,9 @@
                     android:layout_gravity="center_horizontal"
                     android:text="@string/main_default_round_counter_text"
                     android:textColor="#EEE"/>
+
+            <include layout="@layout/workout_social_share" />
+
         </LinearLayout>
     </RelativeLayout>
 

@@ -1,20 +1,24 @@
 package com.sisa.tabata.ui.progressbar;
 
-import static com.sisa.tabata.util.TimeFormatter.formatMilliSecondsToMinuteSecondHundredSec;
 import static com.sisa.tabata.util.TimeFormatter.formatMilliSecondsToMinuteSecond;
+import static com.sisa.tabata.util.TimeFormatter.formatMilliSecondsToMinuteSecondHundredSec;
 
+import com.facebook.share.widget.ShareButton;
 import com.google.inject.Inject;
 import com.sisa.tabata.R;
 import com.sisa.tabata.media.service.EffectPlayerService;
 import com.sisa.tabata.media.service.MediaPlayerService;
 import com.sisa.tabata.preferences.PreferenceKeys;
 import com.sisa.tabata.preferences.PreferencesSource;
+import com.sisa.tabata.socialshare.facebook.provider.FacebookShareLinkContentProvider;
 import com.sisa.tabata.ui.domain.SerializedWorkoutSection;
 import com.sisa.tabata.ui.domain.WorkoutType;
 import com.sisa.tabata.ui.drawable.CircularProgressBarDrawable;
 import com.sisa.tabata.ui.timer.NotificationDisplayTimer;
 
 import android.text.Spanned;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import roboguice.inject.ContextSingleton;
@@ -43,6 +47,10 @@ public class CurrentRoundProgressBar {
     private TextView workoutNotificationView;
     @InjectView(R.id.workoutTypeText)
     private TextView workoutTypeText;
+    @InjectView(R.id.socialShareWorkout)
+    private LinearLayout socialShareLayout;
+    @InjectView(R.id.facebookShareWorkout)
+    private ShareButton facebookShareButton;
 
     @Inject
     private CircularProgressBarDrawable circularProgressBar;
@@ -52,6 +60,8 @@ public class CurrentRoundProgressBar {
     private MediaPlayerService mediaPlayerService;
     @Inject
     private PreferencesSource preferencesSource;
+    @Inject
+    private FacebookShareLinkContentProvider facebookShareLinkContentProvider;
     private int nextBeepNotification;
     private int notifiedSection;
     private boolean lowRefreshRate;
@@ -75,6 +85,8 @@ public class CurrentRoundProgressBar {
         nextBeepNotification = DEFAULT_FIRST_BEEP_IN_MILLIS;
         lowRefreshRate = preferencesSource.is(PreferenceKeys.WORKOUT_LOW_REFRESH_RATE);
         update(maxMilliSeconds);
+        roundCounter.setVisibility(View.VISIBLE);
+        socialShareLayout.setVisibility(View.GONE);
     }
 
     private void checkShowSectionNotification(final int numberOfTotalSections, final int currentSection) {
@@ -106,6 +118,9 @@ public class CurrentRoundProgressBar {
         playRoundFinishEffect(workoutOver);
         workoutTypeText.setText(WorkoutType.FINISHED.getDisplayText());
         circularProgressBar.setBackgroundPaintColor(WorkoutType.FINISHED.getBackGroundColor());
+        roundCounter.setVisibility(View.GONE);
+        socialShareLayout.setVisibility(View.VISIBLE);
+        facebookShareButton.setShareContent(facebookShareLinkContentProvider.getShareLinkContent());
     }
 
     private Spanned getFormattedText(final long millisUntilFinished) {

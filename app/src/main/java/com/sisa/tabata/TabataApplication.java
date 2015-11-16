@@ -6,6 +6,7 @@ import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
 
+import com.facebook.FacebookSdk;
 import com.google.inject.Inject;
 import com.parse.Parse;
 import com.parse.ParseACL;
@@ -57,6 +58,7 @@ public class TabataApplication extends Application {
         setDefaultPreferences();
         setUpParse();
         setUpCrashReport();
+        setUpFaceBook();
         validateSelectedSongs();
         performFirstTimeOpenedAction();
     }
@@ -77,6 +79,10 @@ public class TabataApplication extends Application {
         ACRA.init(this);
         ACRA.getErrorReporter().addReportSender(emailCrashReportSender);
         ACRA.getErrorReporter().addReportSender(parseCrashReportSender);
+    }
+
+    private void setUpFaceBook() {
+        FacebookSdk.sdkInitialize(this);
     }
 
     private void validateSelectedSongs() {
