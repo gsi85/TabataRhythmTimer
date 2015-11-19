@@ -5,12 +5,19 @@
               android:layout_height="wrap_content"
               android:layout_gravity="center"
               android:orientation="horizontal"
-              android:visibility="gone">
-
+              android:visibility="visible">
 
     <com.facebook.share.widget.ShareButton
             android:id="@+id/facebookShareWorkout"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginRight="2dp"/>
+
+    <Button
+            android:id="@+id/twitterTweetButton"
+            android:layout_height="30dp"
+            android:layout_width="wrap_content"
+            style="@style/tw__ComposerTweetButton"
+            android:layout_marginLeft="2dp"/>
 
 </LinearLayout>

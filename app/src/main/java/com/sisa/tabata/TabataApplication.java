@@ -21,6 +21,11 @@ import com.sisa.tabata.report.TrackingEvents;
 import com.sisa.tabata.report.crash.EmailCrashReportSender;
 import com.sisa.tabata.report.crash.ParseCrashReportSender;
 import com.sisa.tabata.report.parse.ParseAnalyticsAdapter;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.twitter.sdk.android.core.TwitterCore;
+import com.twitter.sdk.android.tweetcomposer.TweetComposer;
+
+import io.fabric.sdk.android.Fabric;
 
 import android.app.Application;
 
@@ -59,6 +64,7 @@ public class TabataApplication extends Application {
         setUpParse();
         setUpCrashReport();
         setUpFaceBook();
+        setUpTwitter();
         validateSelectedSongs();
         performFirstTimeOpenedAction();
     }
@@ -83,6 +89,11 @@ public class TabataApplication extends Application {
 
     private void setUpFaceBook() {
         FacebookSdk.sdkInitialize(this);
+    }
+
+    private void setUpTwitter() {
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(getString(R.string.twitter_consumer_key), getString(R.string.twitter_api_secret));
+        Fabric.with(this, new TwitterCore(authConfig), new TweetComposer());
     }
 
     private void validateSelectedSongs() {

@@ -1,11 +1,13 @@
 package com.sisa.tabata.ui.activity;
 
+import com.facebook.share.widget.ShareButton;
 import com.google.inject.Inject;
 import com.sisa.tabata.R;
 import com.sisa.tabata.media.service.MediaPlayerService;
 import com.sisa.tabata.preferences.PreferenceKeys;
 import com.sisa.tabata.preferences.PreferencesSource;
 import com.sisa.tabata.report.parse.ParseAnalyticsAdapter;
+import com.sisa.tabata.socialshare.facebook.provider.FacebookShareLinkContentProvider;
 import com.sisa.tabata.ui.adapter.SpinnerArrayAdapterFactory;
 import com.sisa.tabata.ui.listener.workout.AboutButtonClickListener;
 import com.sisa.tabata.ui.listener.workout.BackButtonClickCountListener;
@@ -13,6 +15,7 @@ import com.sisa.tabata.ui.listener.workout.PlayButtonClickListener;
 import com.sisa.tabata.ui.listener.workout.ResetButtonClickListener;
 import com.sisa.tabata.ui.listener.workout.ResetButtonLongClickListener;
 import com.sisa.tabata.ui.listener.workout.TimerLayoutListener;
+import com.sisa.tabata.ui.listener.workout.TweetButtonClickListener;
 import com.sisa.tabata.ui.listener.workout.VolumeButtonClickListener;
 import com.sisa.tabata.ui.timer.WorkoutCountDownTimerManager;
 
@@ -21,6 +24,7 @@ import android.media.AudioManager;
 import android.os.Bundle;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -42,6 +46,10 @@ public class WorkoutActivity extends RoboFragmentActivity {
     private ImageButton playButton;
     @InjectView(R.id.resetButton)
     private ImageButton resetButton;
+    @InjectView(R.id.facebookShareWorkout)
+    private ShareButton facebookShareButton;
+    @InjectView(R.id.twitterTweetButton)
+    private Button twitterTweetButton;
 
     @InjectView(R.id.mainMenuSpinner)
     private Spinner mainMenu;
@@ -74,6 +82,10 @@ public class WorkoutActivity extends RoboFragmentActivity {
     private WorkoutCountDownTimerManager workoutCountDownTimerManager;
     @Inject
     private PreferencesSource preferencesSource;
+    @Inject
+    private FacebookShareLinkContentProvider facebookShareLinkContentProvider;
+    @Inject
+    private TweetButtonClickListener tweetButtonClickListener;
     private boolean shouldResume;
 
     @Override
@@ -86,6 +98,7 @@ public class WorkoutActivity extends RoboFragmentActivity {
         initProgressBars();
         mediaPlayerService.reset();
         parseAnalyticsAdapter.trackAppOpenedEvent();
+        setUpSocialShare();
         setUpCallListener();
     }
 
@@ -118,6 +131,11 @@ public class WorkoutActivity extends RoboFragmentActivity {
 
     private void initProgressBars() {
         playButtonClickListener.resetWorkout();
+    }
+
+    private void setUpSocialShare() {
+        facebookShareButton.setShareContent(facebookShareLinkContentProvider.getShareLinkContent());
+        twitterTweetButton.setOnClickListener(tweetButtonClickListener);
     }
 
     private void setUpCallListener() {
