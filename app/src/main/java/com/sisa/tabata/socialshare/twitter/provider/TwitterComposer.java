@@ -2,14 +2,15 @@ package com.sisa.tabata.socialshare.twitter.provider;
 
 import static java.lang.String.format;
 
-import android.content.Context;
-import android.net.Uri;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.sisa.tabata.ApplicationContextProvider;
 import com.sisa.tabata.R;
 import com.sisa.tabata.domain.Workout;
 import com.twitter.sdk.android.tweetcomposer.TweetComposer;
+
+import android.content.Context;
+import android.net.Uri;
 
 /**
  * Composer for Tweeter tweets.
@@ -39,16 +40,36 @@ public class TwitterComposer {
 
     }
 
+    /**
+     * Composes a generic tweet about the application.
+     *
+     * @param activity {@link Context}
+     */
+    public void composeGenericTweet(final Context activity) {
+        new TweetComposer.Builder(activity)
+                .text(buildGenericTweetText())
+                .image(buildFeatureGraphicsImage())
+                .show();
+    }
+
     private String buildWorkoutTweetText(final Workout workout) {
-        return getHeadline(workout) + NEW_LINE + getString(R.string.app_play_url_short);
+        return getHeadline(workout) + NEW_LINE + getShortUrl();
     }
 
     private String getHeadline(final Workout workout) {
         return format(getString(R.string.workout_finished_tweet), workout.getName());
     }
 
+    private String buildGenericTweetText() {
+        return getString(R.string.generic_tweet) + NEW_LINE + getShortUrl();
+    }
+
     private Uri buildFeatureGraphicsImage() {
         return Uri.parse(format(INTERNAL_RESOURCE_PATTERN, getString(R.string.package_name), R.drawable.feature_grapchics));
+    }
+
+    private String getShortUrl() {
+        return getString(R.string.app_play_url_short);
     }
 
     private String getString(final int id) {

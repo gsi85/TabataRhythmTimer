@@ -46,7 +46,7 @@ public class WorkoutActivity extends RoboFragmentActivity {
     private ImageButton playButton;
     @InjectView(R.id.resetButton)
     private ImageButton resetButton;
-    @InjectView(R.id.facebookShareWorkout)
+    @InjectView(R.id.facebookShareButton)
     private ShareButton facebookShareButton;
     @InjectView(R.id.twitterTweetButton)
     private Button twitterTweetButton;

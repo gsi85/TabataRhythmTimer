@@ -45,7 +45,7 @@ public class CurrentRoundProgressBar {
     private TextView workoutNotificationView;
     @InjectView(R.id.workoutTypeText)
     private TextView workoutTypeText;
-    @InjectView(R.id.socialShareWorkout)
+    @InjectView(R.id.socialShareLayout)
     private LinearLayout socialShareLayout;
 
     @Inject

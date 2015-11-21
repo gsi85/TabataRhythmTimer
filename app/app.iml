@@ -110,8 +110,8 @@
     <orderEntry type="library" exported="" name="tweet-ui-1.7.0" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-21.0.3" level="project" />
     <orderEntry type="library" exported="" name="facebook-android-sdk-4.7.0" level="project" />
-    <orderEntry type="library" exported="" name="roboguice-3.0.1" level="project" />
     <orderEntry type="library" exported="" name="twitter-text-1.13.0" level="project" />
+    <orderEntry type="library" exported="" name="roboguice-3.0.1" level="project" />
     <orderEntry type="library" exported="" name="tweet-composer-1.0.1" level="project" />
     <orderEntry type="library" exported="" name="twitter-core-1.6.1" level="project" />
     <orderEntry type="library" exported="" name="activation" level="project" />

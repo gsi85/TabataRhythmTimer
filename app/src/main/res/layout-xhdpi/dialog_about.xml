@@ -10,7 +10,7 @@
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:orientation="horizontal"
-                  android:layout_marginBottom="25dp">
+                  android:layout_marginBottom="18dp">
 
         <TextView android:id="@+id/aboutVersionText"
                   android:layout_width="wrap_content"
@@ -33,7 +33,7 @@
                                             android:layout_height="wrap_content"
                                             android:text="@string/about_description"
                                             android:textSize="14sp"
-                                            android:layout_marginBottom="30dp"/>
+                                            android:layout_marginBottom="20dp"/>
 
     <TextView android:id="@+id/aboutContact"
               android:layout_width="wrap_content"
@@ -41,7 +41,23 @@
               android:text="@string/about_contact"
               android:textSize="14sp"
               android:autoLink="all"
-              android:layout_marginBottom="30dp"/>
+              android:layout_marginBottom="5dp"/>
+
+    <TextView android:id="@+id/aboutRate"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/about_rate_app"
+              android:textSize="14sp"
+              android:layout_marginBottom="5dp"/>
+
+    <ImageButton android:id="@+id/rateAppButton"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_gravity="center"
+                 android:background="#FF444444"
+                 android:src="@drawable/play_store_icon"
+                 android:layout_marginBottom="10dp"/>
+
 
     <TextView android:id="@+id/aboutCopyRight"
               android:layout_width="wrap_content"
@@ -51,11 +67,14 @@
               android:textStyle="bold"
               android:layout_marginBottom="20dp"/>
 
+    <include layout="@layout/social_share"/>
+
     <ImageButton android:id="@+id/aboutCloseButton"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:src="@android:drawable/ic_menu_close_clear_cancel"
                  android:background="#FF444444"
-                 android:layout_gravity="center"/>
+                 android:layout_gravity="center"
+                 android:layout_marginTop="15dp"/>
 
 </LinearLayout>
