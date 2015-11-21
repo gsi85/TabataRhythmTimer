@@ -6,6 +6,7 @@ import org.acra.ACRA;
 import org.acra.ReportingInteractionMode;
 import org.acra.annotation.ReportsCrashes;
 
+import com.facebook.FacebookSdk;
 import com.google.inject.Inject;
 import com.parse.Parse;
 import com.parse.ParseACL;
@@ -20,6 +21,11 @@ import com.sisa.tabata.report.TrackingEvents;
 import com.sisa.tabata.report.crash.EmailCrashReportSender;
 import com.sisa.tabata.report.crash.ParseCrashReportSender;
 import com.sisa.tabata.report.parse.ParseAnalyticsAdapter;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.twitter.sdk.android.core.TwitterCore;
+import com.twitter.sdk.android.tweetcomposer.TweetComposer;
+
+import io.fabric.sdk.android.Fabric;
 
 import android.app.Application;
 
@@ -57,6 +63,8 @@ public class TabataApplication extends Application {
         setDefaultPreferences();
         setUpParse();
         setUpCrashReport();
+        setUpFaceBook();
+        setUpTwitter();
         validateSelectedSongs();
         performFirstTimeOpenedAction();
     }
@@ -77,6 +85,15 @@ public class TabataApplication extends Application {
         ACRA.init(this);
         ACRA.getErrorReporter().addReportSender(emailCrashReportSender);
         ACRA.getErrorReporter().addReportSender(parseCrashReportSender);
+    }
+
+    private void setUpFaceBook() {
+        FacebookSdk.sdkInitialize(this);
+    }
+
+    private void setUpTwitter() {
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(getString(R.string.twitter_consumer_key), getString(R.string.twitter_api_secret));
+        Fabric.with(this, new TwitterCore(authConfig), new TweetComposer());
     }
 
     private void validateSelectedSongs() {

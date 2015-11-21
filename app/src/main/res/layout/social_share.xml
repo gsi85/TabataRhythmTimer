@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/socialShareLayout"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center"
+              android:orientation="horizontal"
+              android:visibility="visible">
+
+    <com.facebook.share.widget.ShareButton
+            android:id="@+id/facebookShareButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="2dp"
+            android:background="@drawable/bg_facebook_share"/>
+
+    <Button
+            android:id="@+id/twitterTweetButton"
+            android:layout_height="30dp"
+            android:layout_width="wrap_content"
+            style="@style/tw__ComposerTweetButton"
+            android:layout_marginLeft="2dp"/>
+
+</LinearLayout>
