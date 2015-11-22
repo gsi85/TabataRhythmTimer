@@ -1,5 +1,6 @@
 package com.sisa.tabata.ui.activity;
 
+import com.facebook.CallbackManager;
 import com.facebook.share.widget.ShareButton;
 import com.google.inject.Inject;
 import com.sisa.tabata.R;
@@ -7,6 +8,7 @@ import com.sisa.tabata.media.service.MediaPlayerService;
 import com.sisa.tabata.preferences.PreferenceKeys;
 import com.sisa.tabata.preferences.PreferencesSource;
 import com.sisa.tabata.report.parse.ParseAnalyticsAdapter;
+import com.sisa.tabata.socialshare.facebook.callback.FacebookAnalyticsCallback;
 import com.sisa.tabata.socialshare.facebook.provider.FacebookShareLinkContentProvider;
 import com.sisa.tabata.ui.adapter.SpinnerArrayAdapterFactory;
 import com.sisa.tabata.ui.listener.workout.AboutButtonClickListener;
@@ -20,6 +22,7 @@ import com.sisa.tabata.ui.listener.workout.VolumeButtonClickListener;
 import com.sisa.tabata.ui.timer.WorkoutCountDownTimerManager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.telephony.PhoneStateListener;
@@ -86,6 +89,9 @@ public class WorkoutActivity extends RoboFragmentActivity {
     private FacebookShareLinkContentProvider facebookShareLinkContentProvider;
     @Inject
     private TweetButtonClickListener tweetButtonClickListener;
+    @Inject
+    private FacebookAnalyticsCallback facebookAnalyticsCallback;
+    private CallbackManager callbackManager;
     private boolean shouldResume;
 
     @Override
@@ -115,6 +121,12 @@ public class WorkoutActivity extends RoboFragmentActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
     private void setUpMainMenu() {
         mainMenu.setAdapter(spinnerArrayAdapterFactory.create(this));
         mainMenu.setSelection(0);
@@ -134,7 +146,9 @@ public class WorkoutActivity extends RoboFragmentActivity {
     }
 
     private void setUpSocialShare() {
+        callbackManager = CallbackManager.Factory.create();
         facebookShareButton.setShareContent(facebookShareLinkContentProvider.getShareLinkContent());
+        facebookShareButton.registerCallback(callbackManager, facebookAnalyticsCallback);
         twitterTweetButton.setOnClickListener(tweetButtonClickListener);
     }
 

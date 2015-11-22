@@ -8,7 +8,7 @@ import com.sisa.tabata.ApplicationContextProvider;
 import com.sisa.tabata.BuildConfig;
 import com.sisa.tabata.R;
 import com.sisa.tabata.socialshare.facebook.provider.FacebookShareLinkContentProvider;
-import com.sisa.tabata.socialshare.twitter.provider.TwitterComposer;
+import com.sisa.tabata.socialshare.twitter.provider.AnalyticsDecoratorTwitterComposer;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -48,7 +48,7 @@ public class AboutDialog extends RoboDialogFragment {
     @Inject
     private FacebookShareLinkContentProvider facebookShareLinkContentProvider;
     @Inject
-    private TwitterComposer twitterComposer;
+    private AnalyticsDecoratorTwitterComposer twitterComposer;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

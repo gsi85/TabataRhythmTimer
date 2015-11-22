@@ -2,7 +2,7 @@ package com.sisa.tabata.ui.listener.workout;
 
 import com.google.inject.Inject;
 import com.sisa.tabata.dao.loader.WorkoutManager;
-import com.sisa.tabata.socialshare.twitter.provider.TwitterComposer;
+import com.sisa.tabata.socialshare.twitter.provider.AnalyticsDecoratorTwitterComposer;
 
 import android.view.View;
 
@@ -17,7 +17,7 @@ import roboguice.inject.ContextSingleton;
 public class TweetButtonClickListener implements View.OnClickListener {
 
     @Inject
-    private TwitterComposer twitterComposer;
+    private AnalyticsDecoratorTwitterComposer twitterComposer;
     @Inject
     private WorkoutManager workoutManager;
 
