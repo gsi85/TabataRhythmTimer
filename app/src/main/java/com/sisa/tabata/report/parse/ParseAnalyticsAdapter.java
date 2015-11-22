@@ -11,6 +11,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.sisa.tabata.ApplicationContextProvider;
 import com.sisa.tabata.SessionIdProvider;
+import com.sisa.tabata.report.AnalyticsDimensions;
 import com.sisa.tabata.report.TrackingEvents;
 import com.sisa.tabata.validation.Validation;
 
@@ -23,12 +24,6 @@ import android.util.DisplayMetrics;
  */
 @Singleton
 public class ParseAnalyticsAdapter {
-
-    private static final String SESSION_ID_KEY = "Session Id";
-    private static final String STACK_TRACE_KEY = "Stack trace";
-    private static final String DENSITY_KEY = "Density dpi";
-    private static final String SCREEN_WIDTH = "Screen width px";
-    private static final String SCREEN_HEIGHT = "Screen height px";
 
     @Inject
     private ApplicationContextProvider applicationContextProvider;
@@ -68,7 +63,7 @@ public class ParseAnalyticsAdapter {
     public void trackException(final Exception exception) {
         Map<String, String> dimensions = new HashMap<>();
         String stackTrace = getStackTrace(exception);
-        dimensions.put(STACK_TRACE_KEY, stackTrace);
+        dimensions.put(AnalyticsDimensions.STACK_TRACE.getName(), stackTrace);
         trackEvent(TrackingEvents.CAUGHT_EXCEPTION, dimensions);
     }
 
@@ -88,10 +83,10 @@ public class ParseAnalyticsAdapter {
 
     private Map<String, String> addCommonData(final Map<String, String> dimensions) {
         DisplayMetrics displayMetrics = applicationContextProvider.getContext().getResources().getDisplayMetrics();
-        dimensions.put(SESSION_ID_KEY, SessionIdProvider.SESSION_ID);
-        dimensions.put(DENSITY_KEY, String.valueOf(displayMetrics.densityDpi));
-        dimensions.put(SCREEN_HEIGHT, String.valueOf(displayMetrics.heightPixels));
-        dimensions.put(SCREEN_WIDTH, String.valueOf(displayMetrics.widthPixels));
+        dimensions.put(AnalyticsDimensions.SESSION_ID.getName(), SessionIdProvider.SESSION_ID);
+        dimensions.put(AnalyticsDimensions.DENSITY.getName(), String.valueOf(displayMetrics.densityDpi));
+        dimensions.put(AnalyticsDimensions.SCREEN_HEIGHT.getName(), String.valueOf(displayMetrics.heightPixels));
+        dimensions.put(AnalyticsDimensions.SCREEN_WIDTH.getName(), String.valueOf(displayMetrics.widthPixels));
         return dimensions;
     }
 
