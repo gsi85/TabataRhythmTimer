@@ -8,6 +8,7 @@ import com.facebook.FacebookException;
 import com.facebook.share.Sharer;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.sisa.tabata.report.AnalyticsDimensions;
 import com.sisa.tabata.report.TrackingEvents;
 import com.sisa.tabata.report.parse.ParseAnalyticsAdapter;
 
@@ -25,8 +26,7 @@ public class FacebookAnalyticsCallback implements FacebookCallback<Sharer.Result
     @Override
     public void onSuccess(final Sharer.Result result) {
         Map<String, String> dimensions = new HashMap<>();
-        //TODO: factor out to dimension enums
-        dimensions.put("Post Id", result.getPostId());
+        dimensions.put(AnalyticsDimensions.POST_ID.getName(), result.getPostId());
         parseAnalyticsAdapter.trackEvent(TrackingEvents.FACEBOOK_SHARE_SUCCESS, dimensions);
     }
 
@@ -38,8 +38,7 @@ public class FacebookAnalyticsCallback implements FacebookCallback<Sharer.Result
     @Override
     public void onError(final FacebookException error) {
         Map<String, String> dimensions = new HashMap<>();
-        //TODO: factor out to dimension enums
-        dimensions.put("Facebook Error", error.getMessage());
+        dimensions.put(AnalyticsDimensions.FACEBOOK_ERROR.getName(), error.getMessage());
         parseAnalyticsAdapter.trackEvent(TrackingEvents.FACEBOOK_SHARE_ERROR, dimensions);
     }
 }
