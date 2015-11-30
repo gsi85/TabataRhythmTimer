@@ -17,7 +17,7 @@ import com.sisa.tabata.media.service.SelectedMusicValidationService;
 import com.sisa.tabata.preferences.DefaultPreferenceValuesProvider;
 import com.sisa.tabata.preferences.PreferenceKeys;
 import com.sisa.tabata.preferences.PreferencesSource;
-import com.sisa.tabata.report.TrackingEvents;
+import com.sisa.tabata.report.domain.TrackingEvents;
 import com.sisa.tabata.report.crash.EmailCrashReportSender;
 import com.sisa.tabata.report.crash.ParseCrashReportSender;
 import com.sisa.tabata.report.parse.ParseAnalyticsAdapter;

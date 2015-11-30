@@ -1,21 +1,20 @@
 package com.sisa.tabata.report.parse;
 
-import static com.parse.ParseAnalytics.trackEventInBackground;
-
+import android.util.DisplayMetrics;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+import com.parse.ParseObject;
+import com.sisa.tabata.ApplicationContextProvider;
+import com.sisa.tabata.SessionIdProvider;
+import com.sisa.tabata.report.domain.AnalyticsDimensions;
+import com.sisa.tabata.report.domain.AnalyticsEntity;
+import com.sisa.tabata.report.domain.TrackingEvents;
+import com.sisa.tabata.report.factory.AnalyticsEntityFactory;
+import com.sisa.tabata.validation.Validation;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
-
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
-import com.sisa.tabata.ApplicationContextProvider;
-import com.sisa.tabata.SessionIdProvider;
-import com.sisa.tabata.report.AnalyticsDimensions;
-import com.sisa.tabata.report.TrackingEvents;
-import com.sisa.tabata.validation.Validation;
-
-import android.util.DisplayMetrics;
 
 /**
  * Adapter for reporting events towards Parse.
@@ -27,6 +26,10 @@ public class ParseAnalyticsAdapter {
 
     @Inject
     private ApplicationContextProvider applicationContextProvider;
+    @Inject
+    private AnalyticsEntityFactory analyticsEntityFactory;
+    @Inject
+    private AnalyticsEntityTransformer analyticsEntityTransformer;
     private boolean appOpenedReported;
 
     /**
@@ -74,7 +77,9 @@ public class ParseAnalyticsAdapter {
      * @param dimensions map of custom values to be reported.
      */
     public void trackEvent(final TrackingEvents trackingEvent, final Map<String, String> dimensions) {
-        trackEventInBackground(trackingEvent.getName(), augmentCommonData(dimensions));
+        AnalyticsEntity analyticsEntity = analyticsEntityFactory.createEntity(trackingEvent, augmentCommonData(dimensions));
+        ParseObject parseObject = analyticsEntityTransformer.transform(analyticsEntity);
+        parseObject.saveInBackground();
     }
 
     private Map<String, String> augmentCommonData(final Map<String, String> dimensions) {

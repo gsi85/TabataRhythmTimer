@@ -42,6 +42,8 @@ public class DefaultPreferenceValuesProvider {
             preferencesSource.setBoolean(key, (Boolean) value);
         } else if (value instanceof Long) {
             preferencesSource.setLong(key, (Long) value);
+        } else if (value instanceof String) {
+            preferencesSource.setString(key, (String) value);
         }
     }
 }

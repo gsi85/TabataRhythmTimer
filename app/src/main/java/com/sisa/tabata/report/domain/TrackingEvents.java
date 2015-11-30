@@ -1,4 +1,4 @@
-package com.sisa.tabata.report;
+package com.sisa.tabata.report.domain;
 
 /**
  * Enumeration of tracking events.
