@@ -8,8 +8,8 @@ import com.facebook.FacebookException;
 import com.facebook.share.Sharer;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.sisa.tabata.report.AnalyticsDimensions;
-import com.sisa.tabata.report.TrackingEvents;
+import com.sisa.tabata.report.domain.AnalyticsDimensions;
+import com.sisa.tabata.report.domain.TrackingEvents;
 import com.sisa.tabata.report.parse.ParseAnalyticsAdapter;
 
 /**

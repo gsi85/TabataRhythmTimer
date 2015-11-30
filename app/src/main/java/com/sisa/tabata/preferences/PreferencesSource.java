@@ -17,6 +17,7 @@ public class PreferencesSource {
     private static final int PRIVATE_MODE = 0;
     private static final int DEFAULT_NUMERIC_PREFERENCE_VALUE = -1;
     private static final boolean DEFAULT_BOOLEAN_VALUE = false;
+    private static final String DEFAULT_STRING_PREFERENCE_VALUE = "";
     private static final String PREFERENCES_FILE_NAME = "TabataPreferences";
 
     private final SharedPreferences settings;
@@ -54,6 +55,16 @@ public class PreferencesSource {
     }
 
     /**
+     * Return a string value related to the give preference key.
+     *
+     * @param preferenceKeys {@link PreferenceKeys} as the key to retrieve
+     * @return the preference value
+     */
+    public String getString(final PreferenceKeys preferenceKeys) {
+        return settings.getString(preferenceKeys.name(), DEFAULT_STRING_PREFERENCE_VALUE);
+    }
+
+    /**
      * Sets the boolean value of the given key.
      *
      * @param preferenceKeys {@link PreferenceKeys} the key to set
@@ -72,6 +83,17 @@ public class PreferencesSource {
      */
     public void setLong(final PreferenceKeys preferenceKeys, final long value) {
         settingsEditor.putLong(preferenceKeys.name(), value);
+        settingsEditor.apply();
+    }
+
+    /**
+     * Sets the string value of the given key.
+     *
+     * @param preferenceKeys {@link PreferenceKeys} the key to set
+     * @param value the value of the key
+     */
+    public void setString(final PreferenceKeys preferenceKeys, final String value) {
+        settingsEditor.putString(preferenceKeys.name(), value);
         settingsEditor.apply();
     }
 
