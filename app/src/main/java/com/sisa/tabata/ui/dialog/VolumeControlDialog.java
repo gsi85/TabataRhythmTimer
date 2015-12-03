@@ -1,8 +1,11 @@
 package com.sisa.tabata.ui.dialog;
 
+import java.util.Collections;
+
 import com.google.inject.Inject;
 import com.sisa.tabata.R;
 import com.sisa.tabata.ui.listener.workout.VolumeSeekBarChangeListener;
+import com.sisa.tabata.ui.provider.VolumeButtonImageResourceProvider;
 
 import android.content.Context;
 import android.media.AudioManager;
@@ -11,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ImageButton;
 import android.widget.SeekBar;
 
 import roboguice.fragment.RoboDialogFragment;
@@ -25,6 +29,11 @@ public class VolumeControlDialog extends RoboDialogFragment {
 
     @InjectView(R.id.volumeSeekBar)
     private SeekBar volumeSeekBar;
+    @Inject
+    private VolumeButtonImageResourceProvider volumeButtonImageResourceProvider;
+    @InjectView(R.id.dialogVolumeButton)
+    private ImageButton dialogVolumeButton;
+    private ImageButton volumeButton;
     @Inject
     private VolumeSeekBarChangeListener volumeSeekBarChangeListener;
     private AudioManager audioManager;
@@ -42,6 +51,7 @@ public class VolumeControlDialog extends RoboDialogFragment {
         setUpSeekBar();
         setUpViewDependencies();
         setUpListeners();
+        initVolumeImage();
     }
 
     private void setUpAudioManager() {
@@ -59,10 +69,19 @@ public class VolumeControlDialog extends RoboDialogFragment {
 
     private void setUpViewDependencies() {
         volumeSeekBarChangeListener.setAudioManager(audioManager);
+        volumeSeekBarChangeListener.addMusicVolumeIcon(dialogVolumeButton);
+        volumeSeekBarChangeListener.addMusicVolumeIcon(volumeButton);
     }
 
     private void setUpListeners() {
         volumeSeekBar.setOnSeekBarChangeListener(volumeSeekBarChangeListener);
     }
 
+    private void initVolumeImage() {
+        volumeButtonImageResourceProvider.setVolumeImageResource(Collections.singletonList(dialogVolumeButton));
+    }
+
+    public void setVolumeButton(final ImageButton volumeButton) {
+        this.volumeButton = volumeButton;
+    }
 }

@@ -3,14 +3,17 @@ package com.sisa.tabata.ui.listener.workout;
 import static com.sisa.tabata.validation.Assert.isInstanceOf;
 
 import com.google.inject.Inject;
+import com.sisa.tabata.R;
 import com.sisa.tabata.ui.dialog.VolumeControlDialog;
 
 import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
+import android.widget.ImageButton;
 
 import roboguice.inject.ContextSingleton;
+import roboguice.inject.InjectView;
 
 /**
  * Volume button click listener.
@@ -24,10 +27,13 @@ public class VolumeButtonClickListener extends AbstractWorkoutActivityButtonClic
 
     @Inject
     private VolumeControlDialog volumeControlDialog;
+    @InjectView(R.id.volumeButton)
+    private ImageButton volumeButton;
 
     @Override
     public void onClick(View view) {
         super.onClick(view);
+        volumeControlDialog.setVolumeButton(volumeButton);
         volumeControlDialog.show(getCheckedFragmentManager(view), DIALOG_VOLUME_CONTROL);
     }
 

@@ -1,5 +1,7 @@
 package com.sisa.tabata.ui.activity;
 
+import java.util.Collections;
+
 import com.facebook.CallbackManager;
 import com.facebook.share.widget.ShareButton;
 import com.google.inject.Inject;
@@ -19,6 +21,7 @@ import com.sisa.tabata.ui.listener.workout.ResetButtonLongClickListener;
 import com.sisa.tabata.ui.listener.workout.TimerLayoutListener;
 import com.sisa.tabata.ui.listener.workout.TweetButtonClickListener;
 import com.sisa.tabata.ui.listener.workout.VolumeButtonClickListener;
+import com.sisa.tabata.ui.provider.VolumeButtonImageResourceProvider;
 import com.sisa.tabata.ui.timer.WorkoutCountDownTimerManager;
 
 import android.content.Context;
@@ -91,6 +94,8 @@ public class WorkoutActivity extends RoboFragmentActivity {
     private TweetButtonClickListener tweetButtonClickListener;
     @Inject
     private FacebookAnalyticsCallback facebookAnalyticsCallback;
+    @Inject
+    private VolumeButtonImageResourceProvider volumeButtonImageResourceProvider;
     private CallbackManager callbackManager;
     private boolean shouldResume;
 
@@ -106,6 +111,7 @@ public class WorkoutActivity extends RoboFragmentActivity {
         parseAnalyticsAdapter.trackAppOpenedEvent();
         setUpSocialShare();
         setUpCallListener();
+        initVolumeIcon();
     }
 
     @Override
@@ -155,6 +161,10 @@ public class WorkoutActivity extends RoboFragmentActivity {
     private void setUpCallListener() {
         TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         telephonyManager.listen(new WorkoutPhoneStateListener(), PhoneStateListener.LISTEN_CALL_STATE);
+    }
+
+    private void initVolumeIcon() {
+        volumeButtonImageResourceProvider.setVolumeImageResource(Collections.singletonList(volumeButton));
     }
 
     public PlayButtonClickListener getPlayButtonClickListener() {

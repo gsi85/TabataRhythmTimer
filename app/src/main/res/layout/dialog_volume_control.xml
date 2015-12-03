@@ -4,7 +4,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="#FF444444"
-    android:padding="15dp">
+    android:padding="5dp">
 
     <LinearLayout
         android:gravity="center"
@@ -13,12 +13,12 @@
         android:layout_height="wrap_content">
 
         <ImageButton
-            android:id="@+id/musicVolumeIcon"
+            android:id="@+id/dialogVolumeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="false"
             android:background="#FF444444"
-            android:src="@android:drawable/ic_lock_silent_mode_off"
+            android:src="@drawable/ic_volume_bar_max"
             android:layout_marginRight="5dp"/>
 
         <SeekBar
