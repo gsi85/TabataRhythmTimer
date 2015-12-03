@@ -89,7 +89,7 @@
                         android:layout_margin="0dp"
                         android:background="@drawable/bg_header_buttons"
                         android:padding="0dp"
-                        android:src="@android:drawable/ic_lock_silent_mode_off"/>
+                        android:src="@drawable/ic_volume_bar_max"/>
             </FrameLayout>
         </LinearLayout>
 
