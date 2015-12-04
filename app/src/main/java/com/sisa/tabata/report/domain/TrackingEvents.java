@@ -3,7 +3,7 @@ package com.sisa.tabata.report.domain;
 /**
  * Enumeration of tracking events.
  *
- * @author Laca
+ * @author Laszlo Sisa
  */
 public enum TrackingEvents {
 
@@ -17,7 +17,6 @@ public enum TrackingEvents {
     FACEBOOK_SHARE_ERROR("Facebook Share Error"),
     TWITTER_WORKOUT_TWEET_OPENED("Twitter Workout Tweet Opened"),
     TWITTER_GENERIC_TWEET_OPENED("Twitter Generic Tweet Opened");
-
 
     private final String name;
 

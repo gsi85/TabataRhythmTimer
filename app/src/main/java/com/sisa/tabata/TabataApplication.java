@@ -14,12 +14,13 @@ import com.parse.ParseUser;
 import com.sisa.tabata.dao.loader.WorkoutManager;
 import com.sisa.tabata.media.service.SelectedMusicService;
 import com.sisa.tabata.media.service.SelectedMusicValidationService;
+import com.sisa.tabata.observer.VolumeChangeContentObserver;
 import com.sisa.tabata.preferences.DefaultPreferenceValuesProvider;
 import com.sisa.tabata.preferences.PreferenceKeys;
 import com.sisa.tabata.preferences.PreferencesSource;
-import com.sisa.tabata.report.domain.TrackingEvents;
 import com.sisa.tabata.report.crash.EmailCrashReportSender;
 import com.sisa.tabata.report.crash.ParseCrashReportSender;
+import com.sisa.tabata.report.domain.TrackingEvents;
 import com.sisa.tabata.report.parse.ParseAnalyticsAdapter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterCore;
@@ -55,6 +56,8 @@ public class TabataApplication extends Application {
     private WorkoutManager workoutManager;
     @Inject
     private DefaultPreferenceValuesProvider defaultPreferenceValuesProvider;
+    @Inject
+    private VolumeChangeContentObserver volumeChangeContentObserver;
 
     @Override
     public void onCreate() {
@@ -67,6 +70,7 @@ public class TabataApplication extends Application {
         setUpTwitter();
         validateSelectedSongs();
         performFirstTimeOpenedAction();
+        registerVolumeChangeObserver();
     }
 
     private void setDefaultPreferences() {
@@ -106,6 +110,10 @@ public class TabataApplication extends Application {
             parseAnalyticsAdapter.trackEvent(TrackingEvents.APP_OPENED_FIRST_TIME, null);
             preferencesSource.setBoolean(PreferenceKeys.FIRST_TIME_OPENED, false);
         }
+    }
+
+    private void registerVolumeChangeObserver() {
+        getContentResolver().registerContentObserver(android.provider.Settings.System.CONTENT_URI, true, volumeChangeContentObserver);
     }
 
 }
