@@ -1,9 +1,8 @@
 package com.sisa.tabata.ui.provider;
 
-import java.util.List;
-
 import com.google.inject.Singleton;
 import com.sisa.tabata.R;
+import com.sisa.tabata.validation.Validation;
 
 import android.content.Context;
 import android.media.AudioManager;
@@ -24,10 +23,10 @@ public class VolumeButtonImageResourceProvider {
     /**
      * Sets the {@link ImageButton} drawable resource according to the current volume level of the music stream.
      *
-     * @param volumeButtons list of {@link ImageButton}
+     * @param volumeButton {@link ImageButton}
      */
-    public void setVolumeImageResource(final List<ImageButton> volumeButtons) {
-        for (ImageButton volumeButton : volumeButtons) {
+    public void setVolumeImageResource(final ImageButton volumeButton) {
+        if (Validation.notEmpty(volumeButton)) {
             float currentVolumeLevel = getCurrentVolumeLevel(volumeButton.getContext());
             volumeButton.setImageResource(getIconId(currentVolumeLevel));
         }

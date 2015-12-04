@@ -1,6 +1,10 @@
 package com.sisa.tabata.report.parse;
 
-import android.util.DisplayMetrics;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.parse.ParseObject;
@@ -11,10 +15,8 @@ import com.sisa.tabata.report.domain.AnalyticsEntity;
 import com.sisa.tabata.report.domain.TrackingEvents;
 import com.sisa.tabata.report.factory.AnalyticsEntityFactory;
 import com.sisa.tabata.validation.Validation;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.util.HashMap;
-import java.util.Map;
+
+import android.util.DisplayMetrics;
 
 /**
  * Adapter for reporting events towards Parse.
