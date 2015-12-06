@@ -5,13 +5,14 @@ import com.facebook.share.widget.ShareButton;
 import com.google.inject.Inject;
 import com.sisa.tabata.R;
 import com.sisa.tabata.media.service.MediaPlayerService;
+import com.sisa.tabata.observer.VolumeChangeContentObserver;
 import com.sisa.tabata.preferences.PreferenceKeys;
 import com.sisa.tabata.preferences.PreferencesSource;
-import com.sisa.tabata.observer.VolumeChangeContentObserver;
 import com.sisa.tabata.report.parse.ParseAnalyticsAdapter;
 import com.sisa.tabata.socialshare.facebook.callback.FacebookAnalyticsCallback;
 import com.sisa.tabata.socialshare.facebook.provider.FacebookShareLinkContentProvider;
 import com.sisa.tabata.ui.adapter.SpinnerArrayAdapterFactory;
+import com.sisa.tabata.ui.dialog.ChangeLogDialog;
 import com.sisa.tabata.ui.listener.workout.AboutButtonClickListener;
 import com.sisa.tabata.ui.listener.workout.BackButtonClickCountListener;
 import com.sisa.tabata.ui.listener.workout.PlayButtonClickListener;
@@ -97,6 +98,8 @@ public class WorkoutActivity extends RoboFragmentActivity {
     private VolumeChangeContentObserver volumeChangeContentObserver;
     @Inject
     private VolumeButtonImageResourceProvider volumeButtonImageResourceProvider;
+    @Inject
+    private ChangeLogDialog changeLogDialog;
     private CallbackManager callbackManager;
     private boolean shouldResume;
 
@@ -113,6 +116,7 @@ public class WorkoutActivity extends RoboFragmentActivity {
         setUpSocialShare();
         setUpCallListener();
         initVolumeButton();
+        changeLogDialog.show(getSupportFragmentManager(), "dialog_changelog");
     }
 
     @Override
