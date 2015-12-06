@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:background="#FF444444"
+              android:padding="15dp">
+
+    <LinearLayout android:id="@+id/changeLogLayout"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:layout_marginBottom="15dp">
+
+        <TextView android:id="@+id/whatsNewTextView"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="@string/change_log_whats_new"
+                  android:textSize="16sp"
+                  android:textStyle="bold|italic"
+                  android:layout_marginRight="6dp"/>
+
+        <TextView android:id="@+id/changeLogVersionName"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:textStyle="bold|italic"
+                  android:textSize="16sp"/>
+
+    </LinearLayout>
+
+    <com.sisa.tabata.ui.widget.HtmlTextView android:id="@+id/changesTextView"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="@string/about_description"
+                                            android:textSize="14sp"
+                                            android:layout_marginBottom="15dp"/>
+
+    <ImageButton android:id="@+id/changeLogCloseButton"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:src="@android:drawable/ic_menu_close_clear_cancel"
+                 android:background="#FF444444"
+                 android:layout_gravity="center"/>
+
+</LinearLayout>

@@ -98,4 +98,6 @@
     <string name="settings_options_saving_header_label">WORKOUT SETTINGS</string>
     <string name="settings_pause_on_call">Auto pause on incoming call</string>
 
+    <string name="change_log_whats_new">What's new in version</string>
+
 </resources>
