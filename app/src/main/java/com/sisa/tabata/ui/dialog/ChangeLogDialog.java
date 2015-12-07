@@ -1,10 +1,13 @@
 package com.sisa.tabata.ui.dialog;
 
+import android.widget.ImageButton;
 import com.google.inject.Inject;
 import com.sisa.tabata.ApplicationContextProvider;
 import com.sisa.tabata.BuildConfig;
 import com.sisa.tabata.R;
 import com.sisa.tabata.changelog.dao.ChangeLogJsonDao;
+import com.sisa.tabata.preferences.PreferenceKeys;
+import com.sisa.tabata.preferences.PreferencesSource;
 
 import android.os.Bundle;
 import android.text.Html;
@@ -27,8 +30,12 @@ public class ChangeLogDialog extends RoboDialogFragment {
     private ApplicationContextProvider applicationContextProvider;
     @Inject
     private ChangeLogJsonDao changeLogDao;
+    @Inject
+    private PreferencesSource preferencesSource;
     @InjectView(R.id.changesTextView)
     private TextView changesTextView;
+    @InjectView(R.id.changeLogCloseButton)
+    private ImageButton closeImageButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,6 +47,8 @@ public class ChangeLogDialog extends RoboDialogFragment {
         super.onViewCreated(view, savedInstanceState);
         setTitle();
         setText();
+        markThisVersionAsShown();
+        setCloseButtonListener();
     }
 
     private void setTitle() {
@@ -51,6 +60,19 @@ public class ChangeLogDialog extends RoboDialogFragment {
     private void setText() {
         String changesText = changeLogDao.getChangeLogForVersionName(BuildConfig.VERSION_NAME);
         changesTextView.setText(Html.fromHtml(changesText));
+    }
+
+    private void markThisVersionAsShown() {
+        preferencesSource.setLong(PreferenceKeys.CHANGE_LOG_SHOWN_FOR_VERSION, BuildConfig.VERSION_CODE);
+    }
+
+    private void setCloseButtonListener() {
+        closeImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+                dismiss();
+            }
+        });
     }
 
 }

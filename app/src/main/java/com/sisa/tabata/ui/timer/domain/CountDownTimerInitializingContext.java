@@ -1,5 +1,6 @@
 package com.sisa.tabata.ui.timer.domain;
 
+import com.sisa.tabata.report.parse.ParseAnalyticsAdapter;
 import com.sisa.tabata.ui.domain.SerializedWorkout;
 import com.sisa.tabata.ui.progressbar.CurrentRoundProgressBar;
 import com.sisa.tabata.ui.progressbar.TotalWorkoutProgressBar;
@@ -19,6 +20,7 @@ public final class CountDownTimerInitializingContext {
     private final TotalWorkoutProgressBar totalWorkoutProgressBar;
     private final ImageButton playButton;
     private final int refreshRateInMillis;
+    private final ParseAnalyticsAdapter parseAnalyticsAdapter;
 
     private CountDownTimerInitializingContext(final Builder builder) {
         serializedWorkout = builder.serializedWorkout;
@@ -26,6 +28,7 @@ public final class CountDownTimerInitializingContext {
         totalWorkoutProgressBar = builder.totalWorkoutProgressBar;
         playButton = builder.playButton;
         refreshRateInMillis = builder.refreshRateInMillis;
+        parseAnalyticsAdapter = builder.parseAnalyticsAdapter;
     }
 
     public SerializedWorkout getSerializedWorkout() {
@@ -48,6 +51,10 @@ public final class CountDownTimerInitializingContext {
         return refreshRateInMillis;
     }
 
+    public ParseAnalyticsAdapter getParseAnalyticsAdapter() {
+        return parseAnalyticsAdapter;
+    }
+
     /**
      * Builder for {@link CountDownTimerInitializingContext}.
      */
@@ -58,6 +65,7 @@ public final class CountDownTimerInitializingContext {
         private TotalWorkoutProgressBar totalWorkoutProgressBar;
         private ImageButton playButton;
         private int refreshRateInMillis;
+        private ParseAnalyticsAdapter parseAnalyticsAdapter;
 
         /**
          * Set the {@code serializedWorkout}.
@@ -109,8 +117,19 @@ public final class CountDownTimerInitializingContext {
          * @param refreshRateInMillis refresh rate in millis
          * @return {@link Builder}
          */
-        public Builder withRefreshRateInMilis(final int refreshRateInMillis) {
+        public Builder withRefreshRateInMillis(final int refreshRateInMillis) {
             this.refreshRateInMillis = refreshRateInMillis;
+            return this;
+        }
+
+        /**
+         * Sets the {@code parseAnalyticsAdapter}.
+         *
+         * @param parseAnalyticsAdapter {@link ParseAnalyticsAdapter}
+         * @return {@link Builder}
+         */
+        public Builder withParseAnalyticsAdapter(final ParseAnalyticsAdapter parseAnalyticsAdapter) {
+            this.parseAnalyticsAdapter = parseAnalyticsAdapter;
             return this;
         }
 

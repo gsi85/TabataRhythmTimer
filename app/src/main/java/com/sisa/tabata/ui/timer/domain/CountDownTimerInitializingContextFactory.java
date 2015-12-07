@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.sisa.tabata.preferences.PreferenceKeys;
 import com.sisa.tabata.preferences.PreferencesSource;
+import com.sisa.tabata.report.parse.ParseAnalyticsAdapter;
 import com.sisa.tabata.ui.domain.SerializedWorkout;
 import com.sisa.tabata.ui.progressbar.CurrentRoundProgressBar;
 import com.sisa.tabata.ui.progressbar.TotalWorkoutProgressBar;
@@ -23,6 +24,8 @@ public class CountDownTimerInitializingContextFactory {
 
     @Inject
     private PreferencesSource preferencesSource;
+    @Inject
+    private ParseAnalyticsAdapter parseAnalyticsAdapter;
 
     /**
      * Creates a configured {@link CountDownTimerInitializingContext} instance.
@@ -34,13 +37,14 @@ public class CountDownTimerInitializingContextFactory {
      * @return {@link CountDownTimerInitializingContext}
      */
     public CountDownTimerInitializingContext creteContext(SerializedWorkout serializedWorkout, CurrentRoundProgressBar currentRoundProgressBar,
-                                                          TotalWorkoutProgressBar totalWorkoutProgressBar, ImageButton playButton) {
+            TotalWorkoutProgressBar totalWorkoutProgressBar, ImageButton playButton) {
         return new CountDownTimerInitializingContext.Builder()
                 .withCurrentRoundProgressBar(currentRoundProgressBar)
                 .withPlayButton(playButton)
-                .withRefreshRateInMilis(getRefreshRate())
+                .withRefreshRateInMillis(getRefreshRate())
                 .withSerializedWorkout(serializedWorkout)
                 .withTotalWorkoutProgressBar(totalWorkoutProgressBar)
+                .withParseAnalyticsAdapter(parseAnalyticsAdapter)
                 .build();
 
     }
