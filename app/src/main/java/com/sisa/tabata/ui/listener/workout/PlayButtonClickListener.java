@@ -1,8 +1,5 @@
 package com.sisa.tabata.ui.listener.workout;
 
-import android.view.View;
-import android.widget.ImageButton;
-import android.widget.TextView;
 import com.google.inject.Inject;
 import com.sisa.tabata.ApplicationContextProvider;
 import com.sisa.tabata.R;
@@ -15,6 +12,11 @@ import com.sisa.tabata.ui.progressbar.CurrentRoundProgressBar;
 import com.sisa.tabata.ui.progressbar.TotalWorkoutProgressBar;
 import com.sisa.tabata.ui.timer.NotificationDisplayTimer;
 import com.sisa.tabata.ui.timer.WorkoutCountDownTimerManager;
+
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
+
 import roboguice.inject.ContextSingleton;
 import roboguice.inject.InjectView;
 

@@ -1,6 +1,5 @@
 package com.sisa.tabata.ui.dialog;
 
-import android.widget.ImageButton;
 import com.google.inject.Inject;
 import com.sisa.tabata.ApplicationContextProvider;
 import com.sisa.tabata.BuildConfig;
@@ -14,6 +13,7 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import roboguice.fragment.RoboDialogFragment;
