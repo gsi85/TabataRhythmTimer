@@ -13,7 +13,8 @@ public enum AnalyticsDimensions {
     SCREEN_HEIGHT("Screen height px"),
     SCREEN_WIDTH("Screen width px"),
     POST_ID("Post Id"),
-    FACEBOOK_ERROR("Facebook Error");
+    FACEBOOK_ERROR("Facebook Error"),
+    UPDATE_TO_VERSION("Updated to version");
 
     private final String name;
 

@@ -45,6 +45,8 @@ public class HtmlTextView extends TextView {
         init();
     }
 
+
+
     private void init() {
         setText(Html.fromHtml(getText().toString()));
     }

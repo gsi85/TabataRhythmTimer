@@ -3,6 +3,8 @@ package com.sisa.tabata.ui.timer;
 import java.util.concurrent.TimeUnit;
 
 import com.sisa.tabata.R;
+import com.sisa.tabata.report.domain.TrackingEvents;
+import com.sisa.tabata.report.parse.ParseAnalyticsAdapter;
 import com.sisa.tabata.ui.domain.SerializedWorkout;
 import com.sisa.tabata.ui.domain.SerializedWorkoutSection;
 import com.sisa.tabata.ui.progressbar.CurrentRoundProgressBar;
@@ -23,6 +25,7 @@ public class WorkoutCountDownTimer extends CountDownTimerWithPause {
     private final TotalWorkoutProgressBar totalWorkoutProgressBar;
     private final SerializedWorkout serializedWorkout;
     private final ImageButton playButton;
+    private final ParseAnalyticsAdapter parseAnalyticsAdapter;
     private SerializedWorkoutSection currentSection;
     private int sectionCounter;
     private int maxSectionIndex;
@@ -39,9 +42,11 @@ public class WorkoutCountDownTimer extends CountDownTimerWithPause {
         this.currentRoundProgressBar = initContext.getCurrentRoundProgressBar();
         this.totalWorkoutProgressBar = initContext.getTotalWorkoutProgressBar();
         this.playButton = initContext.getPlayButton();
+        this.parseAnalyticsAdapter = initContext.getParseAnalyticsAdapter();
         timeUnit = serializedWorkout.getTimeUnit();
         maxSectionIndex = Math.max(0, serializedWorkout.getWorkoutSections().size() - 1);
         resetProgressBars();
+        parseAnalyticsAdapter.trackEvent(TrackingEvents.WORKOUT_STARTED, null);
     }
 
     @Override
@@ -56,6 +61,7 @@ public class WorkoutCountDownTimer extends CountDownTimerWithPause {
         playButton.setBackgroundResource(R.drawable.bg_play_button);
         playButton.setKeepScreenOn(false);
         totalWorkoutProgressBar.update(0);
+        parseAnalyticsAdapter.trackEvent(TrackingEvents.WORKOUT_FINISHED, null);
         setFinished(true);
     }
 
