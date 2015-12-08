@@ -13,6 +13,7 @@ import com.sisa.tabata.report.parse.ParseAnalyticsAdapter;
 import com.sisa.tabata.socialshare.facebook.callback.FacebookAnalyticsCallback;
 import com.sisa.tabata.socialshare.facebook.provider.FacebookShareLinkContentProvider;
 import com.sisa.tabata.ui.adapter.SpinnerArrayAdapterFactory;
+import com.sisa.tabata.ui.interceptor.WorkoutActivityKeyDownInterceptor;
 import com.sisa.tabata.ui.listener.workout.AboutButtonClickListener;
 import com.sisa.tabata.ui.listener.workout.BackButtonClickCountListener;
 import com.sisa.tabata.ui.listener.workout.PlayButtonClickListener;
@@ -30,6 +31,7 @@ import android.media.AudioManager;
 import android.os.Bundle;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
+import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -100,6 +102,8 @@ public class WorkoutActivity extends RoboFragmentActivity {
     private VolumeButtonImageResourceProvider volumeButtonImageResourceProvider;
     @Inject
     private ChangeLogDialogProvider changeLogDialogProvider;
+    @Inject
+    private WorkoutActivityKeyDownInterceptor workoutActivityKeyDownInterceptor;
     private CallbackManager callbackManager;
     private boolean shouldResume;
 
@@ -122,6 +126,12 @@ public class WorkoutActivity extends RoboFragmentActivity {
     @Override
     public void onBackPressed() {
         backButtonClickCountListener.onClick(this);
+    }
+
+    @Override
+    public boolean onKeyDown(final int keyCode, final KeyEvent event) {
+        workoutActivityKeyDownInterceptor.handle(keyCode);
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override
