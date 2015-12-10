@@ -31,7 +31,7 @@
     <com.sisa.tabata.ui.widget.HtmlTextView android:id="@+id/aboutDescription"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="@string/about_description"
+                                            android:text="@string/about_description_ldpi"
                                             android:textSize="10sp"
                                             android:layout_marginBottom="8dp"/>
 

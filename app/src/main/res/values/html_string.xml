@@ -57,4 +57,11 @@
         training<br>&nbsp;&nbsp;&nbsp;&nbsp;&#x2713; and so on…
         ]]>
     </string>
+    <string formatted="false" name="about_description_ldpi">
+        <![CDATA[
+        Tabata Rhythm Timer is an interval timer for all training methods applying
+        intervals or other timed repetition such as:<br><br>Classic Tabata, HIIT, Crossfit, kettlebells, pyramid training, apnea
+        training, and so on…
+        ]]>
+    </string>
 </resources>
