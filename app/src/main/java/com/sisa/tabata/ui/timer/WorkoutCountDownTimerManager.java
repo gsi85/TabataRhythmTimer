@@ -92,6 +92,11 @@ public class WorkoutCountDownTimerManager {
         return contextFactory.creteContext(serializedWorkout, currentRoundProgressBar, totalWorkoutProgressBar, playButton);
     }
 
+    /**
+     * Checks whether the timer is paused.
+     *
+     * @return true if the timer is currently paused, false otherwise.
+     */
     public boolean isPaused() {
         return workoutCountDownTimer.isPaused();
     }
